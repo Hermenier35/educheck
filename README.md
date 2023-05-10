@@ -3,7 +3,7 @@
 ## Participant:
 - Pierre-Edouard Hermenier
 - Asmaa Nazih
-- Vahih Tourang
+- Vahid Tourang
 - Yasser El Mellali
 - Meryem Berkaoui
 - Boumediene Islem Kara Ali
