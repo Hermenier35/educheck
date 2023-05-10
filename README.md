@@ -1,6 +1,6 @@
 # Nom du projet: EduCheck
 
-## Participant:
+## Participants:
 - Pierre-Edouard Hermenier
 - Asmaa Nazih
 - Vahid Tourang
