@@ -1,12 +1,12 @@
 # Nom du projet: EduCheck
 
 ## Participant:
--            Pierre-Edouard Hermenier
--           Asmaa Nazih
--            Vahih Tourang
--            Yasser El Mellali
--            Meryem Berkaoui
--           Boumediene Islem Kara Ali
+- Pierre-Edouard Hermenier
+- Asmaa Nazih
+- Vahih Tourang
+- Yasser El Mellali
+- Meryem Berkaoui
+- Boumediene Islem Kara Ali
 
 ## Description:
             EduCheck est une application android destinée aux étudiants et enseignants souhaitant regrouper
@@ -15,13 +15,13 @@
 
 
 ## Fonctionnalités:
--           Administrateur: 
-                Peut ajouter des enseignants, des étudiants et des matières.
--           Enseignants:
-                Peut enregistrer des absences, enregistrer des notes, consulter l'emploi du temps, envoyer des messages aux étudiants, 
-                écrire des annotations dans l'emploi du temps.
--            Etudiants: 
-                Peut justifier leur absences, consulter l'emploi du temps et leurs notes, envoyer des messages aux enseignants.
+- Administrateur: 
+     Peut ajouter des enseignants, des étudiants et des matières.
+- Enseignants:
+     Peut enregistrer des absences, enregistrer des notes, consulter l'emploi du temps, envoyer des messages aux étudiants, 
+     écrire des annotations dans l'emploi du temps.
+- Etudiants: 
+     Peut justifier leur absences, consulter l'emploi du temps et leurs notes, envoyer des messages aux enseignants.
 
 Serveur: NodeJs(API REST)
 BDD: MySQL
