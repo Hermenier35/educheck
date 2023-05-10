@@ -23,7 +23,7 @@
 - Etudiants: 
      Peut justifier leur absences, consulter l'emploi du temps et leurs notes, envoyer des messages aux enseignants.
 
-Serveur: NodeJs(API REST)
-BDD: MySQL
-Application: Java
-IDE: Android Studio
+Serveur: NodeJs(API REST) </br>
+BDD: MySQL </br>
+Application: Java </br>
+IDE: Android Studio </br>
