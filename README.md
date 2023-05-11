@@ -1,6 +1,6 @@
 # Nom du projet: EduCheck
 
-## Participant:
+## Participants:
 - Pierre-Edouard Hermenier
 - Asmaa Nazih
 - Vahid Tourang
@@ -25,6 +25,6 @@
 
 
 Serveur: NodeJs(API REST)</br>
-BDD: MySQL </br>
+BDD: MongoDB/ NoSQL </br>
 Application: Java </br>
 IDE: Android Studio </br>
