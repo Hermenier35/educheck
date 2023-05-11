@@ -1,4 +1,4 @@
-package com.example.educheck.Vue;
+package com.example.educheck.Controleur;
 
 import androidx.appcompat.app.AppCompatActivity;
 
