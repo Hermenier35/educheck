@@ -18,13 +18,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         login_activity = new  Intent(MainActivity.this,login.class);
-        Button login = findViewById(R.id.button);
+        lunch_login();
+
+    }
+    protected void lunch_login(){
+        Button login = findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(login_activity);
             }
         });
-    }
 
+    }
 }
