@@ -1,47 +1,67 @@
 package com.example.educheck.Controleur;
-
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
-import android.util.AttributeSet;
-import android.view.View;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.educheck.Modele.Login;
 import com.example.educheck.R;
 
-/**
- * TODO: document your custom view class.
- */
-public class login extends View {
 
-    public login(Context context) {
-        super(context);
-    }
-
+public class login extends AppCompatActivity {
+    Button login;
+    EditText email;
+    EditText password;
+    Login model_login;
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    protected void onCreate(Bundle save) {
 
-        // TODO: consider storing these as member variables to reduce
-        // allocations per draw cycle.
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
+        super.onCreate(save);
+        setContentView(R.layout.activity_login);
+        login = findViewById(R.id.sign_in);
+        email = findViewById(R.id.username);
+        password = findViewById(R.id.password);
 
-        int contentWidth = getWidth() - paddingLeft - paddingRight;
-        int contentHeight = getHeight() - paddingTop - paddingBottom;
-        Button login = findViewById(R.id.login);
-        login.callOnClick();
+        login.setOnClickListener(v -> login_verification());
 
+        email.addTextChangedListener(emailWatcher);
+        password.addTextChangedListener(emailWatcher);
 
-    }
+        }
+    private final TextWatcher emailWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            System.out.println(email.getText().toString());
+            System.out.println(password.getText().toString());
+        login.setEnabled(password.getText().length()>8
+                && email.getText().toString().endsWith(".com")
+                && email.getText().toString().contains("@")
+        );
+        }
+    };
+
     protected void login_verification(){
-        System.out.println("login cliked");
+       String status =  model_login.connexion(email.getText().toString(),password.getText().toString());
+       if(status.equals("true")){
+
+       }
+
+
+
     }
 
 
