@@ -5,14 +5,20 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.educheck.Modele.AsyncTaskcallback;
 import com.example.educheck.Modele.Login;
 import com.example.educheck.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class login extends AppCompatActivity {
+
+public class login extends AppCompatActivity implements AsyncTaskcallback {
     Button login;
     EditText email;
     EditText password;
@@ -55,15 +61,24 @@ public class login extends AppCompatActivity {
     };
 
     protected void login_verification(){
-       String status =  model_login.connexion(email.getText().toString(),password.getText().toString());
-       if(status.equals("true")){
-
-       }
-
-
-
+     model_login.connexion(email.getText().toString(),password.getText().toString());
     }
 
 
-
+    @Override
+    public void onTaskCompleted(JSONArray items)  {
+        JSONObject response = null;
+        try {
+            response = items.getJSONObject(0);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            if(response.getBoolean("status")){
+                Toast.makeText(getApplicationContext(),"Invalid email or password", Toast.LENGTH_SHORT).show();
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
