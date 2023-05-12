@@ -19,17 +19,20 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
 
     @Override
     public void getAllAcademicBackgrounds() {
-
+        Request request = new Request(this);
+        request.execute(HttpUrl.UrlGetAcademicBackground);
     }
 
     @Override
     public void registerUniversity(University university) {
-
+        Request request = new Request(this);
+        request.execute(HttpUrl.UrlPostUniversity + "/" + university);
     }
 
     @Override
     public void registerAcademicBackground(AcademicBackground academicBackground) {
-
+        Request request = new Request(this);
+        request.execute(HttpUrl.UrlPostAcademicBackground + "/" + academicBackground);
     }
 
     @Override
