@@ -59,10 +59,11 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
     protected void onPostExecute(JSONObject jsonObject) {
         try{
             res = jsonObject.getJSONArray("items");
+            asyncTaskcallback.onTaskCompleted(res);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        asyncTaskcallback.onTaskCompleted(res);
+
     }
 
     private String readStream(InputStream is) throws IOException {
