@@ -2,6 +2,7 @@ package com.example.educheck.Modele;
 import com.example.educheck.Utils.HttpUrl;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 
 public class InscriptionImplementation implements Inscription, AsyncTaskcallback{
@@ -37,6 +38,10 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
 
     @Override
     public void onTaskCompleted(JSONArray items) {
-        itemsReady.onTaskCompleted(items);
+        try {
+            itemsReady.onTaskCompleted(items);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
