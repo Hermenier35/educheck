@@ -34,7 +34,7 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
             url = new URL(strings[0]);
             urlConnection = (HttpURLConnection) url.openConnection(); // Open
             InputStream in = new BufferedInputStream(urlConnection.getInputStream()); // Stream
-
+            System.out.println(url);
             result = readStream(in); // Read stream
         }
         catch (MalformedURLException e) { e.printStackTrace(); }
