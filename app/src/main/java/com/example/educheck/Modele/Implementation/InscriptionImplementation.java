@@ -33,7 +33,7 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
     @Override
     public void registerOnUniversity(University university, Student student) {
         Request request = new Request(this);
-        request.execute(HttpUrl.UrlPostUniversity + "/" + university);
+        request.execute(HttpUrl.UrlPostOnUniversity + "/" + university);
     }
 
     @Override
