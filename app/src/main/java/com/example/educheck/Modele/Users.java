@@ -1,6 +1,11 @@
 package com.example.educheck.Modele;
 
-public abstract class Users {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+
+public abstract class Users implements Serializable {
     private String firstName;
     private String lastName;
     private String mail;
@@ -13,6 +18,20 @@ public abstract class Users {
         this.mail = mail;
         this.ine = ine;
         this.status = status;
+    }
+
+    public JSONObject convertToJSONObject(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("firstName", getFirstName());
+            jsonObject.put("lastName", getLastName());
+            jsonObject.put("mail", getMail());
+            jsonObject.put("ine", getIne());
+            jsonObject.put("status", getStatus());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     public String getFirstName() {
