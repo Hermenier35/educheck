@@ -68,12 +68,12 @@
                 android:text="Your Status"
                 android:textColor="@color/black"
                 android:textSize="21sp" />
+
             <Spinner
                 android:id="@+id/status_spinner"
-                android:layout_width="match_parent"
+                android:layout_width="208dp"
                 android:layout_height="wrap_content"
-                android:entries="@array/status_choices"/>
-
+                android:entries="@array/status_choices" />
 
 
         </LinearLayout>
