@@ -43,7 +43,8 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
     private University university;
     private InscriptionImplementation inscription;
     private Spinner spinner;
-    private List exempleList;
+    private List ChoiceList;
+    private Intent intentParcours_choice;
 
 
     @Override
@@ -51,16 +52,15 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration2);
         spinner =findViewById(R.id.status_spinner);
-        exempleList = new ArrayList();
-        exempleList.add("Student");
-        exempleList.add("Teacher");
+        ChoiceList = new ArrayList();
+        ChoiceList.add("Student");
+        ChoiceList.add("Teacher");
         ArrayAdapter adapter = new ArrayAdapter(
                 this,
                 android.R.layout.simple_spinner_item,
-                exempleList
+                ChoiceList
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Enfin on passe l'adapter au Spinner et c'est tout
         spinner.setAdapter(adapter);
 
 
@@ -72,6 +72,7 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
         TextView_status = findViewById(R.id.main_TextViewStatus);
         Button_Submit = findViewById(R.id.main_button_Submit);
         Button_Submit.setEnabled(false);
+        intentParcours_choice = new Intent(getApplicationContext(), parcours_choice.class);
 
         EditText_INE.addTextChangedListener(emailIneStatusWatcher);
         EditText_email.addTextChangedListener(emailIneStatusWatcher);
@@ -84,7 +85,10 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
            student.setIne( EditText_INE.getText().toString());
            student.setStatus(TextView_status.getText().toString());
            student.setMail(EditText_email.getText().toString());
+            intentParcours_choice.putExtra("student", student);
+            intentParcours_choice.putExtra("university",university);
            inscription.registerOnUniversity(university,student);
+            startActivity(intentParcours_choice);
 
         });
     }
@@ -101,7 +105,7 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
 
             @Override
             public void afterTextChanged(Editable editable) {
-                Button_Submit.setEnabled(EditText_INE.getText().length() > 9
+                Button_Submit.setEnabled(EditText_INE.getText().length() > 8
                         && Patterns.EMAIL_ADDRESS.matcher(EditText_email.getText()).matches()
                 );
             }

@@ -2,6 +2,7 @@ package com.example.educheck.Controleur;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.educheck.Modele.University;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UniversityInscription extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
