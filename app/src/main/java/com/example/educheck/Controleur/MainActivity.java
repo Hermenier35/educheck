@@ -8,48 +8,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.educheck.Modele.University;
 import com.example.educheck.R;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Intent login_activity;
+    Intent registration_activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        login_activity = new  Intent(MainActivity.this,login.class);
-        lunch_login();
+        setContentView(R.layout.activity_home_page);
+        login_activity = new  Intent(getApplicationContext(),login.class);
+        registration_activity = new Intent(getApplicationContext(), registration1.class);
+        Button login = findViewById(R.id.sign_in);
+        Button sign_up = findViewById(R.id.sign_up);
+        login.setOnClickListener(v -> startActivity(login_activity));
+        sign_up.setOnClickListener(v -> startActivity(registration_activity));
+
 
     }
-    protected void lunch_login(){
-        Button login = findViewById(R.id.login);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(login_activity);
-            }
-        });
-
-    }
-
-
 
 }

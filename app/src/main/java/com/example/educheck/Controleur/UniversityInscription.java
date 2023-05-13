@@ -38,13 +38,13 @@ public class UniversityInscription extends AppCompatActivity {
 
         Gson gson = new Gson();
         Type type = new TypeToken<List<University>>(){}.getType();
-        JSONObject jsonObject;
-        List<University> Listuniversities = gson.fromJson(jsonObject.getJSONArray("universities").toString(), type);
+        JSONObject jsonObject = null;
+        //List<University> Listuniversities = gson.fromJson(jsonObject.getJSONArray("universities").toString(), type);
 
-        List<String> names = new ArrayList<>();
-        for (University university : Listuniversities) {
-            names.add(university.getName());
-        }
+        //List<String> names = new ArrayList<>();
+        //for (University university : Listuniversities) {
+          //  names.add(university.getName());
+        //}
     }
 
 
