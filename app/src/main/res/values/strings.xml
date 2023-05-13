@@ -1,4 +1,8 @@
 <resources>
+    <string-array name="status_choices">
+        <item>Student</item>
+        <item>Teacher</item>
+    </string-array>
     <string name="app_name">EduCheck</string>
     <string name="title_activity_connection">connection</string>
     <!-- Strings used for fragments for navigation -->

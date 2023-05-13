@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.educheck.Modele.Student;
+import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
 public class registration1 extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class registration1 extends AppCompatActivity {
     private Button nextButton;
 
     private Intent intentRegistration2;
+    private University university;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +39,15 @@ public class registration1 extends AppCompatActivity {
         intentRegistration2 = new Intent(getApplicationContext(), Registration2.class);
         firstNameEditText.addTextChangedListener(NameWatcher);
         lastNameEditText.addTextChangedListener(NameWatcher);
+
+        university = (University) getIntent().getSerializableExtra("university") ;
         Student student =new Student("","","","","");
+
         nextButton.setOnClickListener(v -> {
             student.setFirstName(firstNameEditText.getText().toString());
             student.setLastName(lastNameEditText.getText().toString());
             intentRegistration2.putExtra("student", student);
+            intentRegistration2.putExtra("university",university);
             startActivity(intentRegistration2);
         });
 
