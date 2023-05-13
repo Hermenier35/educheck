@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_main);
         login_activity = new  Intent(getApplicationContext(),login.class);
         registration_activity = new Intent(getApplicationContext(), registration1.class);
         Button login = findViewById(R.id.sign_in);

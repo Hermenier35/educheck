@@ -1,32 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controleur.MainActivity">
+    android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/sign_in"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Sign in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.275" />
+    <TextView
+        android:id="@+id/main_textview_Name"
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Welcome to Educheck"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/sign_up"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Create account"
-        app:layout_constraintEnd_toEndOf="@+id/sign_in"
-        app:layout_constraintStart_toStartOf="@+id/sign_in"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in" />
+    <ImageView
+        android:id="@+id/logo_view"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Login"
+            android:textSize="21sp" />
+
+        <Button
+            android:id="@+id/sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="2dp"
+            android:gravity="center"
+            android:text="Sign up"
+            android:textSize="21sp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
