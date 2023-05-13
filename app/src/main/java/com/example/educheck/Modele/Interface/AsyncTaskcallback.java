@@ -1,4 +1,4 @@
-package com.example.educheck.Modele;
+package com.example.educheck.Modele.Interface;
 
 import org.json.JSONArray;
 import org.json.JSONException;

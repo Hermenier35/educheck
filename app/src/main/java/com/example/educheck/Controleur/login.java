@@ -5,20 +5,17 @@ import android.text.TextWatcher;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.educheck.Modele.AsyncTaskcallback;
-import com.example.educheck.Modele.Login;
+import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.Interface.Login;
 import com.example.educheck.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.regex.Pattern;
 
 
 public class login extends AppCompatActivity implements AsyncTaskcallback {

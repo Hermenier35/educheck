@@ -2,6 +2,8 @@ package com.example.educheck.Modele;
 
 import android.os.AsyncTask;
 
+import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
