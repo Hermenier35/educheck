@@ -1,5 +1,8 @@
-package com.example.educheck.Modele;
+package com.example.educheck.Modele.Implementation;
 
+import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.Interface.Login;
+import com.example.educheck.Modele.Request;
 import com.example.educheck.Utils.HttpUrl;
 
 import org.json.JSONArray;
