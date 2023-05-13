@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.educheck.R;
 
-public class university_choice extends AppCompatActivity {
+public class parcours_choice extends AppCompatActivity {
 
     String [] universities = new String[101];
     AutoCompleteTextView autoComplete;
@@ -23,7 +23,7 @@ public class university_choice extends AppCompatActivity {
             universities[i] = "parcours " +i;
         }
         autoComplete = findViewById(R.id.autoComplete);
-        arrayAdapter = new ArrayAdapter(this,R.layout.university_list_item);
+        arrayAdapter = new ArrayAdapter(this,R.layout.university_list_item,universities);
         autoComplete.setAdapter(arrayAdapter);
 
     }
