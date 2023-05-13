@@ -1,5 +1,8 @@
 package com.example.educheck.Modele;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public abstract class Users {
     private String firstName;
     private String lastName;
@@ -13,6 +16,20 @@ public abstract class Users {
         this.mail = mail;
         this.ine = ine;
         this.status = status;
+    }
+
+    public JSONObject convertToJSONObject(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("firstName", getFirstName());
+            jsonObject.put("lastName", getLastName());
+            jsonObject.put("mail", getMail());
+            jsonObject.put("ine", getIne());
+            jsonObject.put("status", getStatus());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     public String getFirstName() {
