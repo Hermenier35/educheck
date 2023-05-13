@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.educheck.Modele.AsyncTaskcallback;
+import com.example.educheck.Modele.Student;
 import com.example.educheck.R;
 
 public class registration1 extends AppCompatActivity {
@@ -24,61 +25,43 @@ public class registration1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration1);
-        TextView_Name =findViewById(R.id.main_textview_Name);
-        TextViewLandFName =findViewById(R.id.main_textviewLandFName);
-        firstNameEditText =findViewById(R.id.main_textviewFirstName);
-        lastNameEditText=findViewById(R.id.main_textviewLastName);
-        nextButton=findViewById(R.id.main_button_Inscription);
+        TextView_Name = findViewById(R.id.main_textview_Name);
+        TextViewLandFName = findViewById(R.id.main_textviewLandFName);
+        firstNameEditText = findViewById(R.id.main_textviewFirstName);
+        lastNameEditText = findViewById(R.id.main_textviewLastName);
+        nextButton = findViewById(R.id.main_button_Inscription);
         nextButton.setEnabled(false);
-        firstNameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(s.length()>3)
-               nextButton.setEnabled(!s.toString().isEmpty());
-            }
-        }
-        );
-        lastNameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(s.length()>3)
-                    nextButton.setEnabled(!s.toString().isEmpty());
-
-            }
-        }
-        );
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // The user just clicked
-            }
+        firstNameEditText.addTextChangedListener(NameWatcher);
+        lastNameEditText.addTextChangedListener(NameWatcher);
+        Student student =new Student("","","","","");
+        nextButton.setOnClickListener(v -> {
+            student.setFirstName(firstNameEditText.getText().toString());
+            student.setLastName(lastNameEditText.getText().toString());
         });
 
 
 
     }
+        private final TextWatcher  NameWatcher= new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                nextButton.setEnabled(firstNameEditText.getText().length() > 3
+                        && lastNameEditText.getText().length()>3
+                );
+            }
+        };
 
 
+    }
 
 
-}
