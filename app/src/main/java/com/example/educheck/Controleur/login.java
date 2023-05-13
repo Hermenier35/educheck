@@ -1,4 +1,5 @@
 package com.example.educheck.Controleur;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,6 +37,7 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
 
         email.addTextChangedListener(emailWatcher);
         password.addTextChangedListener(emailWatcher);
+
 
         }
     private final TextWatcher emailWatcher = new TextWatcher() {

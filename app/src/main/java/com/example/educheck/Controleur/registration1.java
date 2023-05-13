@@ -2,6 +2,7 @@ package com.example.educheck.Controleur;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +22,8 @@ public class registration1 extends AppCompatActivity {
     private EditText lastNameEditText;
     private Button nextButton;
 
+    private Intent intentRegistration2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +34,15 @@ public class registration1 extends AppCompatActivity {
         lastNameEditText = findViewById(R.id.main_textviewLastName);
         nextButton = findViewById(R.id.main_button_Inscription);
         nextButton.setEnabled(false);
+        intentRegistration2 = new Intent(getApplicationContext(), Registration2.class);
         firstNameEditText.addTextChangedListener(NameWatcher);
         lastNameEditText.addTextChangedListener(NameWatcher);
         Student student =new Student("","","","","");
         nextButton.setOnClickListener(v -> {
             student.setFirstName(firstNameEditText.getText().toString());
             student.setLastName(lastNameEditText.getText().toString());
+            intentRegistration2.putExtra("student", student);
+            startActivity(intentRegistration2);
         });
 
 
