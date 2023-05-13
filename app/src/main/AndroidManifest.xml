@@ -17,6 +17,10 @@
             android:exported="false"
             android:label="registration1" />
         <activity
+            android:name=".Controleur.Registration2"
+            android:exported="false"
+            android:label="Registration2"/>
+        <activity
             android:name=".Controleur.login"
             android:exported="true"
             android:label="Login Activity" >
