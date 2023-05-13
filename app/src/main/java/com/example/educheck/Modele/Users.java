@@ -3,7 +3,9 @@ package com.example.educheck.Modele;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class Users {
+import java.io.Serializable;
+
+public abstract class Users implements Serializable {
     private String firstName;
     private String lastName;
     private String mail;
