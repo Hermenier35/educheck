@@ -2,6 +2,7 @@ package com.example.educheck.Controleur;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import com.example.educheck.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.regex.Pattern;
 
 
 public class login extends AppCompatActivity implements AsyncTaskcallback {
@@ -51,34 +54,20 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            System.out.println(email.getText().toString());
-            System.out.println(password.getText().toString());
         login.setEnabled(password.getText().length()>8
-                && email.getText().toString().endsWith(".com")
-                && email.getText().toString().contains("@")
+                && Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches()
         );
         }
     };
 
     protected void login_verification(){
-     model_login.connexion(email.getText().toString(),password.getText().toString());
+        model_login.connexion(email.getText().toString(),password.getText().toString());
     }
-
-
     @Override
-    public void onTaskCompleted(JSONArray items)  {
-        JSONObject response = null;
-        try {
-            response = items.getJSONObject(0);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            if(response.getBoolean("status")){
-                Toast.makeText(getApplicationContext(),"Invalid email or password", Toast.LENGTH_SHORT).show();
-            }
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
+    public void onTaskCompleted(JSONArray items) throws JSONException {
+        JSONObject response = items.getJSONObject(0);
+        if(!response.getBoolean("status")){
+            Toast.makeText(this,"Invalid email or password", Toast.LENGTH_SHORT).show();
         }
     }
 }

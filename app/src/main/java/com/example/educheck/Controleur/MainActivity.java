@@ -12,14 +12,19 @@ import com.example.educheck.R;
 
 public class MainActivity extends AppCompatActivity {
     Intent login_activity;
+    Intent registration_activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         login_activity = new  Intent(getApplicationContext(),login.class);
-        Button login = findViewById(R.id.button);
+        registration_activity = new Intent(getApplicationContext(), registration1.class);
+        Button login = findViewById(R.id.sign_in);
+        Button sign_up = findViewById(R.id.sign_up);
         login.setOnClickListener(v -> startActivity(login_activity));
+        sign_up.setOnClickListener(v -> startActivity(registration_activity));
+
 
     }
 
