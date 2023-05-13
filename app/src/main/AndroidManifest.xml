@@ -13,18 +13,18 @@
         android:theme="@style/Theme.EduCheck"
         tools:targetApi="31">
         <activity
+            android:name=".Controleur.UniversityInscription"
+            android:exported="false" />
+        <activity
             android:name=".Controleur.login"
-            android:label="Login Activity"
             android:exported="true"
-
-            >
+            android:label="Login Activity">
             <intent-filter>
-                <action android:name="android.intent.action.login"/>
+                <action android:name="android.intent.action.login" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>>
-
-
+        </activity>
         <activity
             android:name=".Controleur.MainActivity"
             android:exported="true">

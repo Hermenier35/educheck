@@ -6,12 +6,15 @@
 
 
     <Button
-        android:id="@+id/activity_button_1"
         android:layout_width="334dp"
         android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="23dp"
         android:text="Univ1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>
