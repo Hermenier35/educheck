@@ -24,7 +24,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/main_textviewLandEmailIneStatus"
+            android:id="@+id/main_textviewEmailIneStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -42,21 +42,21 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/main_textviewemail"
+            android:id="@+id/main_EditTextemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Your email"
             android:textSize="21sp" />
 
         <EditText
-            android:id="@+id/main_textviewIne"
+            android:id="@+id/main_EditTextIne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Your INE"
             android:textSize="21sp" />
         <EditText
-            android:id="@+id/main_textviewStatus"
+            android:id="@+id/main_EditTextStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Your Status"
@@ -71,13 +71,13 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/main_button_Inscription"
+            android:id="@+id/main_button_Submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
             android:gravity="center"
-            android:text="Inscription"
+            android:text="Submit"
             android:textSize="21sp" />
 
 

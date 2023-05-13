@@ -10,11 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.educheck.Modele.AsyncTaskcallback;
 import com.example.educheck.R;
 
 public class registration1 extends AppCompatActivity {
-    private TextView TextView1;
-    private TextView TextView2;
+    private TextView TextView_Name;
+    private TextView TextViewLandFName;
     private EditText firstNameEditText;
     private EditText lastNameEditText;
     private Button nextButton;
@@ -23,8 +24,8 @@ public class registration1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration1);
-        TextView1 =findViewById(R.id.main_textview_Name);
-        TextView2 =findViewById(R.id.main_textviewLandFName);
+        TextView_Name =findViewById(R.id.main_textview_Name);
+        TextViewLandFName =findViewById(R.id.main_textviewLandFName);
         firstNameEditText =findViewById(R.id.main_textviewFirstName);
         lastNameEditText=findViewById(R.id.main_textviewLastName);
         nextButton=findViewById(R.id.main_button_Inscription);
@@ -42,7 +43,8 @@ public class registration1 extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if(s.length()>3)
+               nextButton.setEnabled(!s.toString().isEmpty());
             }
         }
         );
@@ -59,10 +61,20 @@ public class registration1 extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(s.length()>3)
+                    nextButton.setEnabled(!s.toString().isEmpty());
 
             }
         }
         );
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // The user just clicked
+            }
+        });
+
+
 
     }
 
