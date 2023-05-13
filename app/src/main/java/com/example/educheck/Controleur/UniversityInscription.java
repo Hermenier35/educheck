@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
@@ -36,6 +37,7 @@ public class UniversityInscription extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_inscription);
+        intentRegistration1 = new Intent(getApplicationContext(),registration1.class);
 
 
         JSONArray universities = new JSONArray();
@@ -55,21 +57,26 @@ public class UniversityInscription extends AppCompatActivity {
         JSONObject jsonObject = null;
         //List<University> Listuniversities = gson.fromJson(jsonObject.getJSONArray("universities").toString(), type);
 
-        List<University> Listuniversities = new ArrayList<>();
-        Listuniversities.add(new University("univ1"));
-        Listuniversities.add(new University("univ2"));
+        List<University> univs = new ArrayList<>();
+        univs.add(new University("univ1"));
+        univs.add(new University("univ2"));
 
-        List<String> names = new ArrayList<>();
-        for (University university : Listuniversities) {
-            names.add(university.getName());
-        }
+
 
         LinearLayout layout = findViewById(R.id.list_button);
 
 
-        for (String string : names) {
+
+        for (University university : univs) {
             Button button = new Button(this);
-            button.setText(string);
+            button.setText(university.getName());
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    intentRegistration1.putExtra("university",university);
+                    startActivity(intentRegistration1);
+                }
+            });
             layout.addView(button);
         }
 

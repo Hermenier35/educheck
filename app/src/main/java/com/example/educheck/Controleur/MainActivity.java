@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         login_activity = new  Intent(getApplicationContext(),login.class);
-        registration_activity = new Intent(getApplicationContext(), university_choic.class);
+        registration_activity = new Intent(getApplicationContext(), university_choice.class);
         Button login = findViewById(R.id.sign_in);
         Button sign_up = findViewById(R.id.sign_up);
         login.setOnClickListener(v -> startActivity(login_activity));
