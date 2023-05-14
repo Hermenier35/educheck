@@ -6,9 +6,11 @@ import com.example.educheck.Modele.Request;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
 import com.example.educheck.Utils.HttpUrl;
+import com.example.educheck.Utils.JsonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class InscriptionImplementation implements Inscription, AsyncTaskcallback {
@@ -20,25 +22,27 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
 
     @Override
     public void getAllUniversities() {
-        Request request = new Request(this);
+        Request request = new Request(this, "GET");
         request.execute(HttpUrl.UrlGetUniversity);
     }
 
     @Override
     public void getAllAcademicBackgrounds() {
-        Request request = new Request(this);
+        Request request = new Request(this, "GET");
         request.execute(HttpUrl.UrlGetAcademicBackground);
     }
 
     @Override
     public void registerOnUniversity(University university, Student student) {
-        Request request = new Request(this);
-        request.execute(HttpUrl.UrlPostOnUniversity + "/" + university);
+        Request request = new Request(this, "POST");
+        JSONObject body = JsonUtils.mergeJSONObjects(university.convertToJSONObject(), student.convertToJSONObject());
+        request.setBody(body);
+        request.execute(HttpUrl.UrlPostOnUniversity);
     }
 
     @Override
     public void registerAcademicBackground(AcademicBackground academicBackground) {
-        Request request = new Request(this);
+        Request request = new Request(this, "POST");
         request.execute(HttpUrl.UrlPostAcademicBackground + "/" + academicBackground);
     }
 

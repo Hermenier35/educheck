@@ -11,19 +11,27 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 public class Request extends AsyncTask<String, Void, JSONObject> {
     private JSONArray res;
     private AsyncTaskcallback asyncTaskcallback;
+    private String type;
+    private JSONObject body;
 
-    public Request(AsyncTaskcallback asyncTaskcallback) {
+    public Request(AsyncTaskcallback asyncTaskcallback, String type) {
         this.asyncTaskcallback = asyncTaskcallback;
+        this.type = type;
     }
 
     @Override
@@ -31,11 +39,39 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
         URL url = null;
         HttpURLConnection urlConnection = null;
         String result = null;
+
         try {
             url = new URL(strings[0]);
             urlConnection = (HttpURLConnection) url.openConnection(); // Open
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+       if(type.equals("POST")){
+                try {
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setRequestProperty("Accept", "application/json");
+                    urlConnection.setDoOutput(true);
+                    urlConnection.setDoInput(true);
+                    OutputStream outputStream = urlConnection.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    writer.write(body.toString());
+                    writer.flush();
+                    writer.close();
+                    outputStream.close();
+                } catch (ProtocolException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
+        try {
             InputStream in = new BufferedInputStream(urlConnection.getInputStream()); // Stream
-            System.out.println(url);
             result = readStream(in); // Read stream
         }
         catch (MalformedURLException e) { e.printStackTrace(); }
@@ -81,5 +117,9 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
 
     public JSONArray getRes() {
         return res;
+    }
+
+    public void setBody(JSONObject body) {
+        this.body = body;
     }
 }

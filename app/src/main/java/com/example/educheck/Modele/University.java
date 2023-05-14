@@ -8,8 +8,10 @@ import java.io.Serializable;
 public class University implements Serializable {
 
     private String name;
-    public University(String name){
+    private String suffixe;
+    public University(String name, String suffixe){
         this.name = name;
+        this.suffixe = suffixe;
     }
 
     public String getName(){

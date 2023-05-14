@@ -81,8 +81,10 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
         university = (University) getIntent().getSerializableExtra("university") ;
 
         Button_Submit.setOnClickListener(v -> {
+            //pour test la requête :
+            University university = new University("Rennes1", "@etudiant.univ-rennes1.fr");
            student.setIne( EditText_INE.getText().toString());
-           student.setStatus(TextView_status.getText().toString());
+           student.setStatus(spinner.getSelectedItem().toString());
            student.setMail(EditText_email.getText().toString());
            inscription.registerOnUniversity(university,student);
 
