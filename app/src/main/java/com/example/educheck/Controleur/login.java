@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 
 public class login extends AppCompatActivity implements AsyncTaskcallback {
     Button login;
@@ -65,6 +67,7 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
     }
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
+        Objects.requireNonNull(items); //items ne doit pas être null
         JSONObject response = items.getJSONObject(0);
         if(!response.getBoolean("status")){
             Toast.makeText(this,"Invalid email or password", Toast.LENGTH_SHORT).show();
