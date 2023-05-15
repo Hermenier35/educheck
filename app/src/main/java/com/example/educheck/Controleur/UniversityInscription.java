@@ -58,8 +58,8 @@ public class UniversityInscription extends AppCompatActivity {
         //List<University> Listuniversities = gson.fromJson(jsonObject.getJSONArray("universities").toString(), type);
 
         List<University> univs = new ArrayList<>();
-        univs.add(new University("univ1"));
-        univs.add(new University("univ2"));
+        univs.add(new University("Rennes 1","etudiant.univ-rennes1.fr"));
+        univs.add(new University("Rennes 2","etudiant.univ-rennes2.fr"));
 
 
 
