@@ -38,7 +38,7 @@ public class UniversityInscription extends AppCompatActivity {
         setContentView(R.layout.activity_university_inscription);
         intentRegistration1 = new Intent(getApplicationContext(),registration1.class);
 
-
+/*
         JSONArray universities = new JSONArray();
         try {
             universities.put(new JSONObject().put("name", "rennes1"));
@@ -57,8 +57,9 @@ public class UniversityInscription extends AppCompatActivity {
         //List<University> Listuniversities = gson.fromJson(jsonObject.getJSONArray("universities").toString(), type);
 */
         List<University> univs = new ArrayList<>();
-        univs.add(new University("univ1"));
-        univs.add(new University("univ2"));
+       // univs.add(new University("univ1"));
+      //  univs.add(new University("univ2"));
+
 
 
 
@@ -69,14 +70,13 @@ public class UniversityInscription extends AppCompatActivity {
         for (University university : univs) {
             Button button = new Button(this);
             button.setText(university.getName());
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            layout.addView(button);
+            button.setOnClickListener(v->{
                     intentRegistration1.putExtra("university",university);
                     startActivity(intentRegistration1);
                 }
-            });
-            layout.addView(button);
+            );
+
         }
 
     }
