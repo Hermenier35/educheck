@@ -15,8 +15,7 @@ import android.widget.Toast;
 
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,12 +50,12 @@ public class UniversityInscription extends AppCompatActivity {
 
         //Chargez le fichier JSON et convertissez-le en une liste de noms
 
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<University>>() {
+       // Gson gson = new Gson();
+       /* Type type = new TypeToken<List<University>>() {
         }.getType();
         JSONObject jsonObject = null;
         //List<University> Listuniversities = gson.fromJson(jsonObject.getJSONArray("universities").toString(), type);
-
+*/
         List<University> univs = new ArrayList<>();
         univs.add(new University("univ1"));
         univs.add(new University("univ2"));
