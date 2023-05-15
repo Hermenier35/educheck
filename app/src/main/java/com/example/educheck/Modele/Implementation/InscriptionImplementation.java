@@ -14,16 +14,16 @@ import org.json.JSONObject;
 
 
 public class InscriptionImplementation implements Inscription, AsyncTaskcallback {
-    private AsyncTaskcallback itemsReady;
+    private AsyncTaskcallback callBack;
 
-    public InscriptionImplementation(AsyncTaskcallback itemsReady) {
-        this.itemsReady = itemsReady;
+    public InscriptionImplementation(AsyncTaskcallback callBack) {
+        this.callBack = callBack;
     }
 
     @Override
     public void getAllUniversities() {
         Request request = new Request(this, "GET");
-        request.execute(HttpUrl.UrlGetUniversity);
+        request.execute(HttpUrl.UrlGetUniversities);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
     @Override
     public void onTaskCompleted(JSONArray items) {
         try {
-            itemsReady.onTaskCompleted(items);
+            callBack.onTaskCompleted(items);
         } catch (JSONException e) {
             e.printStackTrace();
         }
