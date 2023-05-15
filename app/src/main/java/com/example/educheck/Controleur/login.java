@@ -84,4 +84,10 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
             //allez chez vahid
         }
     }
+
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
 }

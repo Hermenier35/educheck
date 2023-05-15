@@ -31,11 +31,12 @@ public class parcours_choice extends AppCompatActivity implements AsyncTaskcallb
     ArrayAdapter<String> arrayAdapter;
     Button nextPageButton;
 
-    Intent nextIntent;
+  //  Intent nextIntent;
     String parcours ="";
     Inscription inscription;
     University university;
 
+    Intent logging_page;
     @Override
     protected void onCreate(Bundle save) {
 
@@ -50,6 +51,7 @@ public class parcours_choice extends AppCompatActivity implements AsyncTaskcallb
         System.out.println(university.getSuffixe() + "iciciciciciiciciciciciciccikkkkkkkzzzz");
         inscription.getAllAcademicBackgrounds(university.getSuffixe());
         autoComplete = findViewById(R.id.autoComplete);
+        logging_page = new Intent(this, login.class);
 
 
         nextPageButton = findViewById(R.id.nextPage);
@@ -59,10 +61,7 @@ public class parcours_choice extends AppCompatActivity implements AsyncTaskcallb
     }
     private void onNextPageClick(){
         Logger.getGlobal().info("Parcours choisi: "+parcours);
-        nextIntent.putExtra("university",(University)getIntent().getSerializableExtra("university"));
-        nextIntent.putExtra("student",(Student)getIntent().getSerializableExtra("student"));
-        nextIntent.putExtra("parcours",parcours);
-        startActivity(nextIntent);
+        startActivity(logging_page);
 
     }
 
