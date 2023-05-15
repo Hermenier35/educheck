@@ -16,6 +16,13 @@
         android:textStyle="bold"
         android:text="French universities :"/>
 
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search View"
+        android:iconifiedByDefault="false" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
