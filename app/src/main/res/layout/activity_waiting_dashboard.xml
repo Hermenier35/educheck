@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sorry! \n you have to wait. \n we confirm your profile very soon. "
+        android:textAlignment="textStart"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:textSize="15dp"
+        android:textColor="@color/design_default_color_error"
+
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>
