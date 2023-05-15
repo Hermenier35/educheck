@@ -26,6 +26,10 @@
             android:exported="false"
             android:label="Registration2"/>
         <activity
+            android:name=".Controleur.UniversityInscription"
+            android:exported="false"
+            android:label="UniversityInscription"/>
+        <activity
             android:name=".Controleur.login"
             android:exported="true"
             android:label="Login Activity" />
