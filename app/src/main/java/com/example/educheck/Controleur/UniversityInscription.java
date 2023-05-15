@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.educheck.Modele.Implementation.InscriptionImplementation;
+import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 import com.google.gson.Gson;
@@ -29,9 +31,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class UniversityInscription extends AppCompatActivity {
+public class UniversityInscription extends AppCompatActivity implements AsyncTaskcallback {
 
     private Intent intentRegistration1;
+    private InscriptionImplementation inscriptionImplementation;
+    private LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,46 +43,25 @@ public class UniversityInscription extends AppCompatActivity {
         setContentView(R.layout.activity_university_inscription);
         intentRegistration1 = new Intent(getApplicationContext(),registration1.class);
 
+        inscriptionImplementation = new InscriptionImplementation(this);
+        inscriptionImplementation.getAllUniversities();
 
-        JSONArray universities = new JSONArray();
-        try {
-            universities.put(new JSONObject().put("name", "rennes1"));
-            universities.put(new JSONObject().put("name", "rennes2"));
+        layout = findViewById(R.id.list_button);
 
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+    }
 
-        //Chargez le fichier JSON et convertissez-le en une liste de noms
-
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<University>>() {
-        }.getType();
-        JSONObject jsonObject = null;
-        //List<University> Listuniversities = gson.fromJson(jsonObject.getJSONArray("universities").toString(), type);
-
-        List<University> univs = new ArrayList<>();
-        univs.add(new University("Rennes 1","etudiant.univ-rennes1.fr"));
-        univs.add(new University("Rennes 2","etudiant.univ-rennes2.fr"));
-
-
-
-        LinearLayout layout = findViewById(R.id.list_button);
-
-
-
-        for (University university : univs) {
+    @Override
+    public void onTaskCompleted(JSONArray items) throws JSONException {
+        for(int i = 0; i < items.length(); i++){
+            JSONObject uniJson = items.getJSONObject(i);
+            University university = new University(uniJson.getString("name"), "suffixe");
             Button button = new Button(this);
             button.setText(university.getName());
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    intentRegistration1.putExtra("university",university);
-                    startActivity(intentRegistration1);
-                }
-            });
             layout.addView(button);
+            button.setOnClickListener(v-> {
+                intentRegistration1.putExtra("university",university);
+                startActivity(intentRegistration1);
+            });
         }
-
     }
 }
