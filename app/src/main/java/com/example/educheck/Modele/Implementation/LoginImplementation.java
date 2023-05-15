@@ -17,13 +17,13 @@ public class LoginImplementation implements Login, AsyncTaskcallback {
 
     @Override
     public void forgetPassword(String mail) {
-        Request request = new Request(this);
+        Request request = new Request(this, "GET");
         request.execute(HttpUrl.UrlForgetPassword + "/" + mail);
     }
 
     @Override
     public void connexion(String mail, String password) {
-        Request request = new Request(this);
+        Request request = new Request(this, "GET");
         request.execute(HttpUrl.UrlConnexion + "/" + mail + "/" + password);
     }
 
