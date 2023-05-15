@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 
 
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
@@ -21,12 +23,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 
 public class UniversityInscription extends AppCompatActivity implements AsyncTaskcallback {
 
     private Intent intentRegistration1;
     private InscriptionImplementation inscriptionImplementation;
     private LinearLayout layout;
+
+    private SearchView searchView;
+
+    private List<Button> buttons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,12 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
         inscriptionImplementation.getAllUniversities();
 
         layout = findViewById(R.id.list_button);
+        searchView = findViewById(R.id.searchView);
+
+        // Configurer les listeners pour la barre de recherche
+        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setIconifiedByDefault(false);
 
     }
 
@@ -54,6 +68,23 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
                 intentRegistration1.putExtra("university",university);
                 startActivity(intentRegistration1);
             });
+            buttons.add(button);
         }
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        // Réagir aux modifications de texte dans la barre de recherche
+        // Filtrer les boutons pour afficher uniquement ceux qui correspondent au texte de recherche
+        for (Button button : buttons) {
+            String buttonText = button.getText().toString();
+
+            if (buttonText.toLowerCase().contains(newText.toLowerCase())) {
+                button.setVisibility(View.VISIBLE);
+            } else {
+                button.setVisibility(View.GONE);
+            }
+        }
+        return true;
     }
 }
