@@ -54,7 +54,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
     public void onTaskCompleted(JSONArray items) throws JSONException {
         for(int i = 0; i < items.length(); i++){
             JSONObject uniJson = items.getJSONObject(i);
-            University university = new University(uniJson.getString("name"));
+            University university = new University(uniJson.getString("name"), "suffixe");
             Button button = new Button(this);
             button.setText(university.getName());
             layout.addView(button);
