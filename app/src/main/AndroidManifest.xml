@@ -29,16 +29,7 @@
             android:name=".Controleur.login"
             android:exported="true"
             android:label="Login Activity" />
-        <activity
-            android:name=".Controleur.university_choice"
-            android:exported="true"
-            android:label="university_choice" >
-            <intent-filter>
-                <action android:name="android.intent.action.login" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Controleur.MainActivity"
             android:exported="true" >
