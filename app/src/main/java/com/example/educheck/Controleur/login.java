@@ -80,6 +80,8 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
         JSONObject response = items.getJSONObject(0);
         if(!response.getBoolean("status")){
             Toast.makeText(this,"Invalid email or password", Toast.LENGTH_SHORT).show();
+        }else{
+            //allez chez vahid
         }
     }
 }

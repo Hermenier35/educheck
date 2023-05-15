@@ -29,7 +29,7 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
     @Override
     public void getAllAcademicBackgrounds(String suffixe) {
         Request request = new Request(this, "GET");
-        request.execute(HttpUrl.UrlGetAcademicBackground);
+        request.execute(HttpUrl.UrlGetAcademicBackground + "/" + suffixe);
     }
 
     @Override

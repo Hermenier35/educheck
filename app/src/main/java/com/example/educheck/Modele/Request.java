@@ -70,9 +70,14 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
                     e.printStackTrace();
                 }
         }
+
         try {
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream()); // Stream
-            result = readStream(in); // Read stream
+            int responseCode = urlConnection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK ||
+                responseCode == 201) {
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream()); // Stream
+                result = readStream(in); // Read stream
+            }
         }
         catch (MalformedURLException e) { e.printStackTrace(); }
         catch (IOException e) {
@@ -85,8 +90,12 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
 
         JSONObject json = null;
         try {
-            json = new JSONObject(result);
+            if (urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK ||
+                urlConnection.getResponseCode()==201)
+                json = new JSONObject(result);
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -97,8 +106,10 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
         try{
-            res = jsonObject.getJSONArray("items");
-            asyncTaskcallback.onTaskCompleted(res);
+            if (jsonObject != null) {
+                res = jsonObject.getJSONArray("items");
+                asyncTaskcallback.onTaskCompleted(res);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

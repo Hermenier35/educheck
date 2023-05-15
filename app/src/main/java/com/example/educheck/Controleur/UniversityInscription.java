@@ -46,6 +46,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
         for(int i = 0; i < items.length(); i++){
             JSONObject uniJson = items.getJSONObject(i);
             University university = new University(uniJson.getString("name"), uniJson.getString("suffixe"));
+            System.out.println(uniJson.getString("suffixe") + "regarde icicicicici");
             Button button = new Button(this);
             button.setText(university.getName());
             layout.addView(button);
