@@ -1,19 +1,26 @@
 package com.example.educheck.Controleur;
+
+
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.widget.Button;
 import android.widget.LinearLayout;
+
 
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 public class UniversityInscription extends AppCompatActivity implements AsyncTaskcallback {
 
@@ -38,7 +45,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
     public void onTaskCompleted(JSONArray items) throws JSONException {
         for(int i = 0; i < items.length(); i++){
             JSONObject uniJson = items.getJSONObject(i);
-            University university = new University(uniJson.getString("name"), "suffixe");
+            University university = new University(uniJson.getString("name"), uniJson.getString("suffixe"));
             Button button = new Button(this);
             button.setText(university.getName());
             layout.addView(button);
