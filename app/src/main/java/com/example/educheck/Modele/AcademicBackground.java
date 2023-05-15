@@ -3,7 +3,9 @@ package com.example.educheck.Modele;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class AcademicBackground {
+import java.io.Serializable;
+
+public class AcademicBackground implements Serializable {
     private String name;
 
     public AcademicBackground(String name) {
