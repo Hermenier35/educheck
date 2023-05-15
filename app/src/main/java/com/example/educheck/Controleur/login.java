@@ -6,13 +6,13 @@ import android.text.TextWatcher;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.educheck.Modele.Implementation.LoginImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
-import com.example.educheck.Modele.Interface.Login;
 import com.example.educheck.R;
 
 import org.json.JSONArray;
@@ -27,6 +27,9 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
     EditText email;
     EditText password;
     LoginImplementation model_login;
+
+    TextView forgottenPassword;
+    Intent forgottenPasswordActivity;
     @Override
     protected void onCreate(Bundle save) {
 
@@ -35,11 +38,17 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
         login = findViewById(R.id.sign_in);
         email = findViewById(R.id.username);
         password = findViewById(R.id.password);
+        forgottenPasswordActivity = new Intent(this,forgot_password.class);
+        forgottenPassword = findViewById(R.id.forgetten);
         model_login = new LoginImplementation(this);
         login.setOnClickListener(v -> login_verification());
 
         email.addTextChangedListener(emailWatcher);
         password.addTextChangedListener(emailWatcher);
+
+        forgottenPassword.setOnClickListener(v -> {
+            startActivity(forgottenPasswordActivity);
+        });
 
 
         }

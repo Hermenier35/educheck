@@ -27,4 +27,8 @@ public class University implements Serializable {
         }
         return jsonObject;
     }
+
+    public String getSuffixe() {
+        return suffixe;
+    }
 }
