@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Registration;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 
+import com.example.educheck.Controleur.Registration.registration1;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -23,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,18 +42,38 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_inscription);
-        intentRegistration1 = new Intent(getApplicationContext(),registration1.class);
+        intentRegistration1 = new Intent(getApplicationContext(), registration1.class);
 
         inscriptionImplementation = new InscriptionImplementation(this);
         inscriptionImplementation.getAllUniversities();
 
         layout = findViewById(R.id.list_button);
-      //  searchView = findViewById(R.id.searchView);
+        searchView = findViewById(R.id.searchView);
+        buttons = new ArrayList<>();
 
-        // Configurer les listeners pour la barre de recherche
-      //  searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
-      //  searchView.setSubmitButtonEnabled(true);
-      //  searchView.setIconifiedByDefault(false);
+        //Configurer les listeners pour la barre de recherche
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                for (Button button : buttons) {
+                    String buttonText = button.getText().toString();
+
+                    if (buttonText.toLowerCase().contains(s.toLowerCase())) {
+                        button.setVisibility(View.VISIBLE);
+                    } else {
+                        button.setVisibility(View.GONE);
+                    }
+                }
+                return true;
+            }
+        });
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setIconifiedByDefault(false);
 
     }
 
@@ -68,23 +90,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
                 intentRegistration1.putExtra("university",university);
                 startActivity(intentRegistration1);
             });
-           // buttons.add(button);
+            buttons.add(button);
         }
     }
-
-    /*@Override
-    public boolean onQueryTextChange(String newText) {
-        // Réagir aux modifications de texte dans la barre de recherche
-        // Filtrer les boutons pour afficher uniquement ceux qui correspondent au texte de recherche
-        for (Button button : buttons) {
-            String buttonText = button.getText().toString();
-
-            if (buttonText.toLowerCase().contains(newText.toLowerCase())) {
-                button.setVisibility(View.VISIBLE);
-            } else {
-                button.setVisibility(View.GONE);
-            }
-        }
-        return true;
-    }*/
 }
