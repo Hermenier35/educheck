@@ -85,7 +85,6 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
             intentParcours_choice.putExtra("university",university);
             inscription.registerOnUniversity(university,student);
             startActivity(intentParcours_choice);
-
         });
     }
         private final TextWatcher  emailIneStatusWatcher= new TextWatcher() {
