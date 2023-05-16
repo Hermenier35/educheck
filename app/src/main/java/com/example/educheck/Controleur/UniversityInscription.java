@@ -46,12 +46,12 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
         inscriptionImplementation.getAllUniversities();
 
         layout = findViewById(R.id.list_button);
-        searchView = findViewById(R.id.searchView);
+      //  searchView = findViewById(R.id.searchView);
 
         // Configurer les listeners pour la barre de recherche
-        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setIconifiedByDefault(false);
+      //  searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
+      //  searchView.setSubmitButtonEnabled(true);
+      //  searchView.setIconifiedByDefault(false);
 
     }
 
@@ -68,11 +68,11 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
                 intentRegistration1.putExtra("university",university);
                 startActivity(intentRegistration1);
             });
-            buttons.add(button);
+           // buttons.add(button);
         }
     }
 
-    @Override
+    /*@Override
     public boolean onQueryTextChange(String newText) {
         // Réagir aux modifications de texte dans la barre de recherche
         // Filtrer les boutons pour afficher uniquement ceux qui correspondent au texte de recherche
@@ -86,5 +86,5 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
             }
         }
         return true;
-    }
+    }*/
 }
