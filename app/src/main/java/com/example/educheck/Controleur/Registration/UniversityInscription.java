@@ -2,6 +2,8 @@ package com.example.educheck.Controleur.Registration;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.content.Intent;
@@ -38,6 +40,8 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
 
     private List<Button> buttons;
 
+    private List<University> univs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
         layout = findViewById(R.id.list_button);
         searchView = findViewById(R.id.searchView);
         buttons = new ArrayList<>();
+        univs = new ArrayList<>();
 
         //Configurer les listeners pour la barre de recherche
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -82,6 +87,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
         for(int i = 0; i < items.length(); i++){
             JSONObject uniJson = items.getJSONObject(i);
             University university = new University(uniJson.getString("name"), uniJson.getString("suffixe"));
+            /*
             System.out.println(uniJson.getString("suffixe") + "regarde icicicicici");
             Button button = new Button(this);
             button.setText(university.getName());
@@ -91,6 +97,12 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
                 startActivity(intentRegistration1);
             });
             buttons.add(button);
+            */
+             univs.add(university);
         }
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new UnivAdapter(univs));
     }
 }
