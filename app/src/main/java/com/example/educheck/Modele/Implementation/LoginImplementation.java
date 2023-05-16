@@ -35,4 +35,9 @@ public class LoginImplementation implements Login, AsyncTaskcallback {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
 }

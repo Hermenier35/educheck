@@ -41,6 +41,7 @@ public class forgot_password extends AppCompatActivity implements AsyncTaskcallb
         }
 
     private final TextWatcher emailWatcher = new TextWatcher() {
+        //Un TextWatcher est une interface qui écoute les changements de texte dans un champ de texte.
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -54,12 +55,14 @@ public class forgot_password extends AppCompatActivity implements AsyncTaskcallb
         @Override
         public void afterTextChanged(Editable editable) {
             reset.setEnabled(Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches());
-        }
+        }       // setEnabled active ou désactive le bouton reset
     };
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
 
     }
+
+
 }
 
 

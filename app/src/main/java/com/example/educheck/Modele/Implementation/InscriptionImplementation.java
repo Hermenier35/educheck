@@ -54,4 +54,9 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
 }
