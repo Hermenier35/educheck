@@ -1,29 +1,24 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Registration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.educheck.Controleur.Registration.parcours_choice;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
-import com.example.educheck.Modele.Interface.Inscription;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
@@ -82,8 +77,6 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
         university = (University) getIntent().getSerializableExtra("university") ;
 
         Button_Submit.setOnClickListener(v -> {
-            //pour test la requête :
-            University university = new University("Rennes1", "@etudiant.univ-rennes1.fr");
            student.setIne( EditText_INE.getText().toString());
            student.setStatus(spinner.getSelectedItem().toString());
            student.setMail(EditText_email.getText().toString());

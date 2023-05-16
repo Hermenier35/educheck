@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
