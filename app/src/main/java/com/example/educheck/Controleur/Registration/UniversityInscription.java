@@ -9,13 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.SearchView;
 
 
-import com.example.educheck.Controleur.Registration.registration1;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -28,58 +24,50 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 public class UniversityInscription extends AppCompatActivity implements AsyncTaskcallback {
 
     private Intent intentRegistration1;
     private InscriptionImplementation inscriptionImplementation;
-    private LinearLayout layout;
 
-    private SearchView searchView;
 
     private List<Button> buttons;
 
-    private List<University> univs;
+
+    RecyclerView recyclerView;
+    private univ_adapter_card adpater_card;
+    private ArrayList<University> univs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Logger.getGlobal().info("University itent init");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_inscription);
+
         intentRegistration1 = new Intent(getApplicationContext(), registration1.class);
 
         inscriptionImplementation = new InscriptionImplementation(this);
-        inscriptionImplementation.getAllUniversities();
+       InitializeCardView();
+    }
+    private  void InitializeCardView(){
+        Logger.getGlobal().info("InitializeCardView");
 
-        layout = findViewById(R.id.list_button);
-        searchView = findViewById(R.id.searchView);
-        buttons = new ArrayList<>();
+        recyclerView = findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         univs = new ArrayList<>();
+        adpater_card = new univ_adapter_card(this,univs);
+        recyclerView.setAdapter(adpater_card);
+        setUniv();
+    }
 
-        //Configurer les listeners pour la barre de recherche
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
+    private void setUniv(){
+        Logger.getGlobal().info("setUniv");
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                for (Button button : buttons) {
-                    String buttonText = button.getText().toString();
-
-                    if (buttonText.toLowerCase().contains(s.toLowerCase())) {
-                        button.setVisibility(View.VISIBLE);
-                    } else {
-                        button.setVisibility(View.GONE);
-                    }
-                }
-                return true;
-            }
-        });
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setIconifiedByDefault(false);
-
+        for (int  i= 0; i < 99;i ++) {
+            univs.add(new University("université" + i, "suffixe"+i));
+        }
     }
 
     @Override
@@ -98,11 +86,10 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
             });
             buttons.add(button);
             */
-             univs.add(university);
+            // univs.add(university);
+          //  Logger.getGlobal().info(university.toString() + "iccicicicicicicicicicicicicicici");
+
         }
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new UnivAdapter(univs));
     }
 }
