@@ -49,6 +49,10 @@
             android:exported="false"
             android:label="Registration2" />
         <activity
+            android:name=".Controleur.DashBoard_Etudiant"
+            android:exported="false"
+            android:label="DashBoard_Etudiant" />
+        <activity
             android:name=".Controleur.UniversityInscription"
             android:exported="false"
             android:label="UniversityInscription"/>
