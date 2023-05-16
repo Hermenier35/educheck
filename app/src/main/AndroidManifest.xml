@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,58 +14,57 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EduCheck"
-        tools:targetApi="31">
+        tools:targetApi="31" >
         <activity
-            android:name=".Controleur.Dashboard.waiting_Dashoard"
-            android:exported="false">
+            android:name=".Controleur.Parcours_choices"
+            android:exported="false" />
+        <activity
+            android:name=".Controleur.waiting_Dashoard"
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Controleur.Dashboard.Courses"
-            android:exported="false">
+            android:name=".Controleur.Courses"
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Controleur.Dashboard.Messages"
-            android:exported="false">
+            android:name=".Controleur.Messages"
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Controleur.Registration.registration1"
+            android:name=".Controleur.registration1"
             android:exported="false"
             android:label="registration1" />
         <activity
-            android:name=".Controleur.Registration.parcours_choice"
+            android:name=".Controleur.parcours_choice"
             android:exported="false"
             android:label="university_choice" />
         <activity
-            android:name=".Controleur.Registration.Registration2"
+            android:name=".Controleur.Registration2"
             android:exported="false"
             android:label="Registration2" />
         <activity
-            android:name=".Controleur.Dashboard.DashBoard_Etudiant"
+            android:name=".Controleur.UniversityInscription"
             android:exported="false"
-            android:label="DashBoard_Etudiant" />
+            android:label="UniversityInscription" />
         <activity
-            android:name=".Controleur.Registration.UniversityInscription"
-            android:exported="false"
-            android:label="UniversityInscription"/>
-        <activity
-            android:name=".Controleur.Login.login"
+            android:name=".Controleur.login"
             android:exported="true"
             android:label="Login Activity" />
         <activity
-            android:name=".Controleur.Login.MainActivity"
+            android:name=".Controleur.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".Controleur.Login.loading"
-            android:exported="true">
+            android:name=".Controleur.loading"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
