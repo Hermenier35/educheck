@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 

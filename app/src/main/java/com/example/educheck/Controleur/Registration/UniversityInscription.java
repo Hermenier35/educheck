@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Registration;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 
+import com.example.educheck.Controleur.Registration.registration1;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -41,7 +42,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_inscription);
-        intentRegistration1 = new Intent(getApplicationContext(),registration1.class);
+        intentRegistration1 = new Intent(getApplicationContext(), registration1.class);
 
         inscriptionImplementation = new InscriptionImplementation(this);
         inscriptionImplementation.getAllUniversities();

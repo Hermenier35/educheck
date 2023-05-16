@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Registration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +10,10 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.educheck.Controleur.Login.login;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Interface.Inscription;
-import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
