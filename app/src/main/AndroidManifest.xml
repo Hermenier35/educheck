@@ -16,55 +16,55 @@
         android:theme="@style/Theme.EduCheck"
         tools:targetApi="31">
         <activity
-            android:name=".Controleur.waiting_Dashoard"
+            android:name=".Controleur.Dashboard.waiting_Dashoard"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Controleur.Courses"
+            android:name=".Controleur.Dashboard.Courses"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Controleur.Messages"
+            android:name=".Controleur.Dashboard.Messages"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Controleur.registration1"
+            android:name=".Controleur.Registration.registration1"
             android:exported="false"
             android:label="registration1" />
         <activity
-            android:name=".Controleur.parcours_choice"
+            android:name=".Controleur.Registration.parcours_choice"
             android:exported="false"
             android:label="university_choice" />
         <activity
-            android:name=".Controleur.Registration2"
+            android:name=".Controleur.Registration.Registration2"
             android:exported="false"
             android:label="Registration2" />
         <activity
-            android:name=".Controleur.DashBoard_Etudiant"
+            android:name=".Controleur.Dashboard.DashBoard_Etudiant"
             android:exported="false"
             android:label="DashBoard_Etudiant" />
         <activity
-            android:name=".Controleur.UniversityInscription"
+            android:name=".Controleur.Registration.UniversityInscription"
             android:exported="false"
             android:label="UniversityInscription"/>
         <activity
-            android:name=".Controleur.login"
+            android:name=".Controleur.Login.login"
             android:exported="true"
             android:label="Login Activity" />
         <activity
-            android:name=".Controleur.MainActivity"
+            android:name=".Controleur.Login.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".Controleur.loading"
+            android:name=".Controleur.Login.loading"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
@@ -7,7 +7,6 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.educheck.Modele.Student;
 import com.example.educheck.R;
@@ -41,11 +40,11 @@ public class DashBoard_Etudiant extends AppCompatActivity {
     }
 
     void clickCourse(){
-        click = new Intent(DashBoard_Etudiant.this,Courses.class);
+        click = new Intent(DashBoard_Etudiant.this, Courses.class);
         startActivity(click);
     }
     void clickMsg (){
-        click = new Intent(DashBoard_Etudiant.this,Messages.class);
+        click = new Intent(DashBoard_Etudiant.this, Messages.class);
                 startActivity(click);
     }
 

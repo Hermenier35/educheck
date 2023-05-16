@@ -11,6 +11,7 @@ public abstract class Users implements Serializable {
     private String mail;
     private String ine;
     private String status;
+    private String token;
 
     public Users(String firstName, String lastName, String mail, String ine, String status) {
         this.firstName = firstName;
@@ -72,5 +73,13 @@ public abstract class Users implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
