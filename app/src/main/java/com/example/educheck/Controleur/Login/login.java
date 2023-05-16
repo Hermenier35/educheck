@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.educheck.Controleur.Dashboard.DashBoard_Etudiant;
+import com.example.educheck.Controleur.Login.forgot_password;
 import com.example.educheck.Modele.Implementation.LoginImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.R;
@@ -30,6 +32,7 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
 
     TextView forgottenPassword;
     Intent forgottenPasswordActivity;
+    Intent dashboardStudent;
     @Override
     protected void onCreate(Bundle save) {
 
@@ -38,7 +41,8 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
         login = findViewById(R.id.sign_in);
         email = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        forgottenPasswordActivity = new Intent(this,forgot_password.class);
+        forgottenPasswordActivity = new Intent(this, forgot_password.class);
+        dashboardStudent = new Intent(this, DashBoard_Etudiant.class);
         forgottenPassword = findViewById(R.id.forgetten);
         model_login = new LoginImplementation(this);
         login.setOnClickListener(v -> login_verification());
@@ -65,7 +69,7 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
 
         @Override
         public void afterTextChanged(Editable editable) {
-        login.setEnabled(password.getText().length()>8
+        login.setEnabled(password.getText().length()>=8
                 && Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches()
         );
         }
@@ -81,7 +85,10 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
         if(!response.getBoolean("status")){
             Toast.makeText(this,"Invalid email or password", Toast.LENGTH_SHORT).show();
         }else{
-            //allez chez vahid
+            if(!response.getBoolean("valide"))
+                Toast.makeText(this, "please wait teacher's confirmation", Toast.LENGTH_SHORT).show();
+            else
+                startActivity(dashboardStudent);
         }
     }
 
