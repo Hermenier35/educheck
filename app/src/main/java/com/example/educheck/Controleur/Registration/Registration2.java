@@ -82,7 +82,7 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
            student.setMail(EditText_email.getText().toString());
             intentParcours_choice.putExtra("student", student);
             intentParcours_choice.putExtra("university",university);
-           inscription.registerOnUniversity(university,student);
+            inscription.registerOnUniversity(university,student);
             startActivity(intentParcours_choice);
 
         });
