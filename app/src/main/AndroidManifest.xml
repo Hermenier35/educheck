@@ -16,6 +16,9 @@
         android:theme="@style/Theme.EduCheck"
         tools:targetApi="31">
         <activity
+            android:name=".Controleur.DashboardAdmin.dashboard_admin"
+            android:exported="false" />
+        <activity
             android:name=".Controleur.Dashboard.waiting_Dashoard"
             android:exported="false">
             <meta-data
@@ -55,7 +58,7 @@
         <activity
             android:name=".Controleur.Registration.UniversityInscription"
             android:exported="false"
-            android:label="UniversityInscription"/>
+            android:label="UniversityInscription" />
         <activity
             android:name=".Controleur.Login.login"
             android:exported="true"
