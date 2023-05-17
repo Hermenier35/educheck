@@ -9,12 +9,12 @@ import java.io.Serializable;
 
 public class AcademicBackground implements Serializable {
     private String name;
-    private String details;
+    private String type;
     private int image;
 
-    public AcademicBackground(String name) {
+    public AcademicBackground(String name, String type) {
         this.name = name;
-        this.details = "";
+        this.type = type;
         this.image=0;
     }
 
@@ -36,12 +36,12 @@ public class AcademicBackground implements Serializable {
         this.name = name;
     }
 
-    public String getDetails() {
-        return details;
+    public String getType() {
+        return type;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getImage() {

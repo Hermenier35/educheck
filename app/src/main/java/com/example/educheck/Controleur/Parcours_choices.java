@@ -50,10 +50,9 @@ public class Parcours_choices extends AppCompatActivity implements AsyncTaskcall
         ArrayList<AcademicBackground> academicBackgrounds = new ArrayList<>();
         for (int i = 0; i< items.length(); i++){
             JSONObject json = items.getJSONObject(i);
-            AcademicBackground parcour = new AcademicBackground(json.getString("name"));
+            AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"));
             System.out.println(parcour.getName());
             parcour.setImage(R.drawable.logo);
-            parcour.setDetails("detail");
             academicBackgrounds.add(parcour);
         }
         System.out.println(academicBackgrounds.size() + " : iciciciciciiciciciciciciccikkkkkkkzzzz");

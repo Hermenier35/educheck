@@ -45,7 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.itemTitle.setText(academicBackgrounds.get(i).getName());
-        viewHolder.itemDetail.setText(academicBackgrounds.get(i).getDetails());
+        viewHolder.itemDetail.setText(academicBackgrounds.get(i).getType());
         viewHolder.itemImage.setImageResource(academicBackgrounds.get(i).getImage());
     }
     @Override
