@@ -16,6 +16,7 @@ import android.widget.SearchView;
 
 
 import com.example.educheck.Controleur.Registration.registration1;
+import com.example.educheck.Controleur.UnivAdapter;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -80,6 +81,10 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
         searchView.setSubmitButtonEnabled(true);
         searchView.setIconifiedByDefault(false);
 
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new UnivAdapter(univs));
+
     }
 
     @Override
@@ -101,8 +106,6 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
              univs.add(university);
         }
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new UnivAdapter(univs));
+
     }
 }
