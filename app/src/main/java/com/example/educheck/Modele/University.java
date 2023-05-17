@@ -1,5 +1,12 @@
 package com.example.educheck.Modele;
 
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,6 +16,7 @@ public class University implements Serializable {
 
     private String name;
     private String suffixe;
+
     public University(String name, String suffixe){
         this.name = name;
         this.suffixe = suffixe;
