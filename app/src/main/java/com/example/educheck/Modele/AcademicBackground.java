@@ -10,12 +10,12 @@ import java.io.Serializable;
 public class AcademicBackground implements Serializable {
     private String name;
     private String type;
-    private int image;
+    private byte[] image;
 
     public AcademicBackground(String name, String type) {
         this.name = name;
         this.type = type;
-        this.image=0;
+        this.image=new byte[20];
     }
 
 
@@ -44,11 +44,11 @@ public class AcademicBackground implements Serializable {
         this.type = type;
     }
 
-    public int getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 }

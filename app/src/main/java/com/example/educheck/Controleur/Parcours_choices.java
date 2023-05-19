@@ -11,6 +11,7 @@ import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Interface.Inscription;
+import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
@@ -30,6 +31,8 @@ public class Parcours_choices extends AppCompatActivity implements AsyncTaskcall
     private View.OnClickListener myOnClickListener;
     private InscriptionImplementation inscription;
     private University university;
+    private Student student;
+    private  ArrayList<AcademicBackground> academicBackgrounds;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,21 +44,20 @@ public class Parcours_choices extends AppCompatActivity implements AsyncTaskcall
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         university = (University) getIntent().getSerializableExtra("university") ;
+        student = (Student) getIntent().getSerializableExtra("student");
         inscription.getAllAcademicBackgrounds(university.getSuffixe());
-        System.out.println(university.getSuffixe());
     }
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
-        ArrayList<AcademicBackground> academicBackgrounds = new ArrayList<>();
+        academicBackgrounds = new ArrayList<>();
         for (int i = 0; i< items.length(); i++){
             JSONObject json = items.getJSONObject(i);
             AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"));
             System.out.println(parcour.getName());
-            parcour.setImage(R.drawable.logo);
+            //parcour.setImage(R.drawable.logo);
             academicBackgrounds.add(parcour);
         }
-        System.out.println(academicBackgrounds.size() + " : iciciciciciiciciciciciciccikkkkkkkzzzz");
         adapter = new RecyclerAdapter(academicBackgrounds);
         recyclerView.setAdapter(adapter);
     }
@@ -67,7 +69,7 @@ public class Parcours_choices extends AppCompatActivity implements AsyncTaskcall
         }
         @Override
         public void onClick(View v) {
-
+            AcademicBackground academic = academicBackgrounds.get(v.getVerticalScrollbarPosition());
         }
     }
 

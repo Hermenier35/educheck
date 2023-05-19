@@ -41,8 +41,9 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
     }
 
     @Override
-    public void registerAcademicBackground(AcademicBackground academicBackground) {
+    public void registerAcademicBackground(AcademicBackground academicBackground, Student student) {
         Request request = new Request(this, "POST");
+        JSONObject body = JsonUtils.mergeJSONObjects(academicBackground.convertToJSONObject(), student.convertToJSONObject());
         request.execute(HttpUrl.UrlPostAcademicBackground + "/" + academicBackground);
     }
 
