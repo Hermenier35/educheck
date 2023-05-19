@@ -1,6 +1,11 @@
 package com.example.educheck.Controleur.Dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -12,9 +17,10 @@ import com.example.educheck.Modele.Student;
 import com.example.educheck.R;
 
 public class DashBoard_Etudiant extends AppCompatActivity {
-    Button main_button_Course;
-    Button main_button_Planning;
-    Button main_button_Messages;
+    Button btn1;
+    Button btn2;
+    Button btn3;
+    Button btn4;
     TextView textView;
     Intent click;
     @Override
@@ -28,15 +34,55 @@ public class DashBoard_Etudiant extends AppCompatActivity {
         String myString = "Hello ";
         textView.setText(myString + name);
 
+        btn1 = findViewById(R.id.menu1);
+        btn2 = findViewById(R.id.menu2);
+        btn3 = findViewById(R.id.menu3);
+        btn4 = findViewById(R.id.menu4);
 
-        main_button_Course = findViewById(R.id.main_button_Course);
-        main_button_Planning = findViewById(R.id.main_button_Planning);
-        main_button_Messages = findViewById(R.id.main_button_messages);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new frag1());
+            }
+        }
+        );
 
-        main_button_Course.setOnClickListener(v->{clickCourse();});
-        main_button_Messages.setOnClickListener(v->{clickMsg();});
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new frag2());
+            }
+        }
+        );
 
+        btn3.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        replaceFragment(new frag3());
+                                    }
+                                }
+        );
 
+        btn4.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        replaceFragment(new frag4());
+                                    }
+                                }
+        );
+    }
+
+    private void replaceFragment(Fragment fragment){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame1,fragment);
+            fragmentTransaction.commit();
+    }
+}
+
+    /**
+        btn1.setOnClickListener(v->{clickCourse();});
+        btn2.setOnClickListener(v->{clickMsg();});
     }
 
     void clickCourse(){
@@ -47,5 +93,4 @@ public class DashBoard_Etudiant extends AppCompatActivity {
         click = new Intent(DashBoard_Etudiant.this, Messages.class);
                 startActivity(click);
     }
-
-}
+     */
