@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Toolbar;
 
 import com.example.educheck.Modele.AcademicBackground;
+import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.Interface.Inscription;
+import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,20 +25,24 @@ import java.util.ArrayList;
 
 public class Parcours_choices extends AppCompatActivity implements AsyncTaskcallback {
     private RecyclerView recyclerView;
-    private  RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
     private View.OnClickListener myOnClickListener;
+    private InscriptionImplementation inscription;
+    private University university;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parcours_choices);
 
         myOnClickListener = new MyOnClickListener(this);
-        recyclerView = findViewById(R.id.card_view);
-
+        recyclerView = findViewById(R.id.my_recycler_view);
+        inscription = new InscriptionImplementation(this);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
+        university = (University) getIntent().getSerializableExtra("university") ;
+        inscription.getAllAcademicBackgrounds(university.getSuffixe());
+        System.out.println(university.getSuffixe());
     }
 
     @Override
@@ -43,11 +50,12 @@ public class Parcours_choices extends AppCompatActivity implements AsyncTaskcall
         ArrayList<AcademicBackground> academicBackgrounds = new ArrayList<>();
         for (int i = 0; i< items.length(); i++){
             JSONObject json = items.getJSONObject(i);
-            AcademicBackground parcour = new AcademicBackground(json.getString("name"));
+            AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"));
+            System.out.println(parcour.getName());
             parcour.setImage(R.drawable.logo);
-            parcour.setDetails("detail");
             academicBackgrounds.add(parcour);
         }
+        System.out.println(academicBackgrounds.size() + " : iciciciciciiciciciciciciccikkkkkkkzzzz");
         adapter = new RecyclerAdapter(academicBackgrounds);
         recyclerView.setAdapter(adapter);
     }

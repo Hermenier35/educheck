@@ -27,25 +27,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-           /* itemImage =
+            itemImage =
                     (ImageView)itemView.findViewById(R.id.item_image);
             itemTitle =
                     (TextView)itemView.findViewById(R.id.item_title);
             itemDetail =
-                    (TextView)itemView.findViewById(R.id.item_detail);*/
+                    (TextView)itemView.findViewById(R.id.item_detail);
         }
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.activity_parcours_choices, viewGroup, false);
+                .inflate(R.layout.card_parcour_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.itemTitle.setText(academicBackgrounds.get(i).getName());
-        viewHolder.itemDetail.setText(academicBackgrounds.get(i).getDetails());
+        viewHolder.itemDetail.setText(academicBackgrounds.get(i).getType());
         viewHolder.itemImage.setImageResource(academicBackgrounds.get(i).getImage());
     }
     @Override
