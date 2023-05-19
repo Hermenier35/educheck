@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.educheck.Controleur.Parcours_choices;
 import com.example.educheck.Controleur.Registration.parcours_choice;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
@@ -67,7 +68,7 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
         TextView_status = findViewById(R.id.main_TextViewStatus);
         Button_Submit = findViewById(R.id.main_button_Submit);
         Button_Submit.setEnabled(false);
-        intentParcours_choice = new Intent(getApplicationContext(), parcours_choice.class);
+        intentParcours_choice = new Intent(getApplicationContext(), Parcours_choices.class);
 
         EditText_INE.addTextChangedListener(emailIneStatusWatcher);
         EditText_email.addTextChangedListener(emailIneStatusWatcher);
@@ -82,9 +83,8 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
            student.setMail(EditText_email.getText().toString());
             intentParcours_choice.putExtra("student", student);
             intentParcours_choice.putExtra("university",university);
-           inscription.registerOnUniversity(university,student);
+            inscription.registerOnUniversity(university,student);
             startActivity(intentParcours_choice);
-
         });
     }
         private final TextWatcher  emailIneStatusWatcher= new TextWatcher() {
@@ -100,7 +100,7 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
 
             @Override
             public void afterTextChanged(Editable editable) {
-                Button_Submit.setEnabled(EditText_INE.getText().length() > 8
+                Button_Submit.setEnabled(EditText_INE.getText().length() == 11
                         && Patterns.EMAIL_ADDRESS.matcher(EditText_email.getText()).matches()
                 );
             }

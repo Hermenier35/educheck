@@ -28,11 +28,13 @@ public class registration1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration1);
+
         TextView_Name = findViewById(R.id.main_textview_Name);
         TextViewLandFName = findViewById(R.id.main_textviewLandFName);
         firstNameEditText = findViewById(R.id.main_textviewFirstName);
         lastNameEditText = findViewById(R.id.main_textviewLastName);
         nextButton = findViewById(R.id.main_button_Inscription);
+
         nextButton.setEnabled(false);
         intentRegistration2 = new Intent(getApplicationContext(), Registration2.class);
         firstNameEditText.addTextChangedListener(NameWatcher);
