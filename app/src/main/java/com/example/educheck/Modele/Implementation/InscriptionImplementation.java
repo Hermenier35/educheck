@@ -55,8 +55,5 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
         }
     }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
+
 }

@@ -85,8 +85,5 @@ public class parcours_choice extends AppCompatActivity implements AsyncTaskcallb
 
     }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
+
 }

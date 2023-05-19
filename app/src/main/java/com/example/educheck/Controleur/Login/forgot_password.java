@@ -33,7 +33,6 @@ public class forgot_password extends AppCompatActivity implements AsyncTaskcallb
         reset.setOnClickListener(v -> email_verification());
 
         email.addTextChangedListener(emailWatcher);
-
     }
 
     protected void email_verification(){
@@ -51,7 +50,6 @@ public class forgot_password extends AppCompatActivity implements AsyncTaskcallb
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
         }
-
         @Override
         public void afterTextChanged(Editable editable) {
             reset.setEnabled(Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches());
@@ -61,8 +59,6 @@ public class forgot_password extends AppCompatActivity implements AsyncTaskcallb
     public void onTaskCompleted(JSONArray items) throws JSONException {
 
     }
-
-
 }
 
 

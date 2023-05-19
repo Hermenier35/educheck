@@ -36,8 +36,5 @@ public class LoginImplementation implements Login, AsyncTaskcallback {
         }
     }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
+
 }

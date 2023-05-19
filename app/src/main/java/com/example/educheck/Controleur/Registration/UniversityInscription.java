@@ -16,6 +16,7 @@ import android.widget.SearchView;
 
 
 import com.example.educheck.Controleur.Registration.registration1;
+import com.example.educheck.Controleur.UnivAdapter;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
