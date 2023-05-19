@@ -20,6 +20,10 @@
             android:exported="false"
             android:label="parcours_choice"/>
         <activity
+            android:name=".Controleur.Login.forgotPassword"
+            android:exported="false"
+            android:label="forgotPassword"/>
+        <activity
             android:name=".Controleur.DashboardAdmin.dashboard_admin"
             android:exported="false" />
         <activity
