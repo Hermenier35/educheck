@@ -48,7 +48,6 @@ public class parcours_choice extends AppCompatActivity implements AsyncTaskcallb
         }
         inscription = new InscriptionImplementation(this);
         university = (University) getIntent().getSerializableExtra("university") ;
-        System.out.println(university.getSuffixe() + "iciciciciciiciciciciciciccikkkkkkkzzzz");
         inscription.getAllAcademicBackgrounds(university.getSuffixe());
         autoComplete = findViewById(R.id.autoComplete);
         logging_page = new Intent(this, login.class);

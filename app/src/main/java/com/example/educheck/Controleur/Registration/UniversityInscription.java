@@ -11,10 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
-import android.widget.Button;
-
-
-import com.example.educheck.Controleur.Parcours_choices;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -26,7 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 
@@ -60,7 +55,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
     public void onTaskCompleted(JSONArray items) throws JSONException {
         for(int i = 0; i < items.length(); i++){
             JSONObject uniJson = items.getJSONObject(i);
-            University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_teacher"));
+            University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_teacher"), new byte[20]);
             univs.add(university);
         }
             adpater_card = new univ_adapter_card(univs);
@@ -77,7 +72,6 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
         @Override
         public void onClick(View v) {
             University university = univs.get(v.getVerticalScrollbarPosition());
-            System.out.println("test ici : " +  v.getVerticalScrollbarPosition());
             intentRegistration1.putExtra("university",university);
             startActivity(intentRegistration1);
         }
