@@ -1,5 +1,6 @@
 package com.example.educheck.Controleur;
 
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,11 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
     private ArrayList<AcademicBackground> academicBackgrounds;
+    private int pos;
 
     public RecyclerAdapter(ArrayList academicBackgrounds){
         this.academicBackgrounds = academicBackgrounds;
+        this.pos = 0;
     }
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -33,6 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     (TextView)itemView.findViewById(R.id.item_title);
             itemDetail =
                     (TextView)itemView.findViewById(R.id.item_detail);
+            itemView.setVerticalScrollbarPosition(pos++);
         }
     }
     @Override
@@ -46,7 +50,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.itemTitle.setText(academicBackgrounds.get(i).getName());
         viewHolder.itemDetail.setText(academicBackgrounds.get(i).getType());
-        viewHolder.itemImage.setImageResource(academicBackgrounds.get(i).getImage());
+        byte[] image = academicBackgrounds.get(i).getImage();
+        viewHolder.itemImage.setImageBitmap(BitmapFactory.decodeByteArray(image, 0, image.length));
     }
     @Override
     public int getItemCount() {
