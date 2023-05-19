@@ -48,10 +48,6 @@
             android:exported="false"
             android:label="registration1" />
         <activity
-            android:name=".Controleur.Registration.parcours_choice"
-            android:exported="false"
-            android:label="university_choice" />
-        <activity
             android:name=".Controleur.Registration.Registration2"
             android:exported="false"
             android:label="Registration2" />
