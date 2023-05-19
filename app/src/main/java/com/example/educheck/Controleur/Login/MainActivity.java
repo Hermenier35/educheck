@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.educheck.Controleur.Registration.UniversityInscription;
+import com.example.educheck.Controleur.Registration.registration1;
 import com.example.educheck.R;
 
 public class MainActivity extends AppCompatActivity {
