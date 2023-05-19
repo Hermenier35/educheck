@@ -44,6 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.card_parcour_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
+        v.setOnClickListener(Parcours_choices.myOnClickListener);
         return viewHolder;
     }
     @Override

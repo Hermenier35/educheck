@@ -49,9 +49,9 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
             e.printStackTrace();
         }
 
-       if(type.equals("POST")){
+       if(type.equals("POST") || type.equals("PUT")){
                 try {
-                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestMethod(type);
                     urlConnection.setRequestProperty("Content-Type", "application/json");
                     urlConnection.setRequestProperty("Accept", "application/json");
                     urlConnection.setDoOutput(true);
