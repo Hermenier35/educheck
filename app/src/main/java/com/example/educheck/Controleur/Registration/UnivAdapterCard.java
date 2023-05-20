@@ -15,12 +15,12 @@ import com.example.educheck.R;
 import java.util.ArrayList;
 import android.graphics.BitmapFactory;
 
-public class univ_adapter_card extends RecyclerView.Adapter<univ_adapter_card.UniversityHolder> {
+public class UnivAdapterCard extends RecyclerView.Adapter<UnivAdapterCard.UniversityHolder> {
 
     private ArrayList<University> universities;
     private int pos;
 
-    public univ_adapter_card(ArrayList<University> universities) {
+    public UnivAdapterCard(ArrayList<University> universities) {
         this.universities = universities;
         this.pos=0;
     }

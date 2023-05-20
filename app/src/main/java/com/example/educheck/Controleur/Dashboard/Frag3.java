@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.educheck.R;
 
-public class frag3 extends Fragment {
+public class Frag3 extends Fragment {
 
     View view;
 

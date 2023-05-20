@@ -14,7 +14,7 @@ import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
-public class registration1 extends AppCompatActivity {
+public class Registration1 extends AppCompatActivity {
     private TextView TextView_Name;
     private TextView TextViewLandFName;
     private EditText firstNameEditText;

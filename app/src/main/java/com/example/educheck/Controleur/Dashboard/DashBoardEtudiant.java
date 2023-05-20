@@ -16,7 +16,7 @@ import android.widget.Button;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.R;
 
-public class DashBoard_Etudiant extends AppCompatActivity {
+public class DashBoardEtudiant extends AppCompatActivity {
     Button btn1;
     Button btn2;
     Button btn3;
@@ -42,7 +42,7 @@ public class DashBoard_Etudiant extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new frag1());
+                replaceFragment(new Frag1());
             }
         }
         );
@@ -50,7 +50,7 @@ public class DashBoard_Etudiant extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new frag2());
+                replaceFragment(new Frag2());
             }
         }
         );
@@ -58,7 +58,7 @@ public class DashBoard_Etudiant extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new frag3());
+                                        replaceFragment(new Frag3());
                                     }
                                 }
         );
@@ -66,7 +66,7 @@ public class DashBoard_Etudiant extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new frag4());
+                                        replaceFragment(new Frag4());
                                     }
                                 }
         );
