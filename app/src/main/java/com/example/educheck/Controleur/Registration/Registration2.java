@@ -109,6 +109,7 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
     public void onTaskCompleted(JSONArray items) throws JSONException {
 
     }
+
 }
 
 

@@ -20,24 +20,14 @@
             android:exported="false"
             android:label="parcours_choice"/>
         <activity
+            android:name=".Controleur.Login.forgotPassword"
+            android:exported="false"
+            android:label="forgotPassword"/>
+        <activity
             android:name=".Controleur.DashboardAdmin.dashboard_admin"
             android:exported="false" />
         <activity
             android:name=".Controleur.Dashboard.waiting_Dashoard"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Controleur.Dashboard.Courses"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Controleur.Dashboard.Messages"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -61,6 +51,21 @@
             android:label="Login Activity" />
         <activity
             android:name=".Controleur.Login.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Dashboard.DashBoard_Etudiant"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Dashboard.frag1"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Dashboard.frag2"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Dashboard.frag3"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Dashboard.frag4"
             android:exported="true" />
         <activity
             android:name=".Controleur.Login.loading"

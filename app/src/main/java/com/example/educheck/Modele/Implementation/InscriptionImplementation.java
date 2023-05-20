@@ -57,4 +57,6 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
             e.printStackTrace();
         }
     }
+
+
 }
