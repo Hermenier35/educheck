@@ -9,4 +9,6 @@ public class HttpUrl {
     public static String UrlGetAcademicBackground = ip + "getPaths";
     public static String UrlConnexion = ip + "findUser";
     public static String UrlForgetPassword = ip + "resetPassword";
+    public static String UrlSendMessageTo = ip + "";
+    public static String UrlRetrieveMessages = ip + "";
 }
