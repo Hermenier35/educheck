@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.educheck.R;
 
-public class loading extends AppCompatActivity {
+public class Loading extends AppCompatActivity {
     Handler handler;
     @Override
     protected void onCreate(Bundle save) {

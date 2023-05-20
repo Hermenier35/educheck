@@ -27,9 +27,9 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
     }
 
     @Override
-    public void getAllAcademicBackgrounds() {
+    public void getAllAcademicBackgrounds(String suffixe) {
         Request request = new Request(this, "GET");
-        request.execute(HttpUrl.UrlGetAcademicBackground);
+        request.execute(HttpUrl.UrlGetAcademicBackground + "/" + suffixe);
     }
 
     @Override
@@ -41,9 +41,12 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
     }
 
     @Override
-    public void registerAcademicBackground(AcademicBackground academicBackground) {
-        Request request = new Request(this, "POST");
-        request.execute(HttpUrl.UrlPostAcademicBackground + "/" + academicBackground);
+    public void registerAcademicBackground(AcademicBackground academicBackground, Student student, University university) {
+        Request request = new Request(this, "PUT");
+        JSONObject merge = JsonUtils.mergeJSONObjects(academicBackground.convertToJSONObject(), student.convertToJSONObject());
+        JSONObject body = JsonUtils.mergeJSONObjects(merge, university.convertToJSONObject());
+        request.setBody(body);
+        request.execute(HttpUrl.UrlPostAcademicBackground);
     }
 
     @Override
@@ -54,4 +57,6 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
             e.printStackTrace();
         }
     }
+
+
 }

@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface Inscription {
     public void getAllUniversities();
-    public void getAllAcademicBackgrounds();
+    public void getAllAcademicBackgrounds(String suffixe);
     public void registerOnUniversity(University university, Student student);
-    public void registerAcademicBackground(AcademicBackground academicBackground);
+    public void registerAcademicBackground(AcademicBackground academicBackground, Student student, University university);
     public void onTaskCompleted(JSONArray items);
 }
