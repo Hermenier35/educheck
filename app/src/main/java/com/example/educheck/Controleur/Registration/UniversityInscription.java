@@ -53,6 +53,8 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
+        if(items.getJSONObject(0).has("code_retour"))
+            System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
         for(int i = 0; i < items.length(); i++){
             JSONObject uniJson = items.getJSONObject(i);
             University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_teacher"), new byte[20]);

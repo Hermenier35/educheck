@@ -57,17 +57,21 @@ public class Parcours_choices extends AppCompatActivity implements AsyncTaskcall
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
-        if(!items.getJSONObject(0).has("status")) {
-            academicBackgrounds = new ArrayList<>();
+        academicBackgrounds = new ArrayList<>();
+        if(items.length()>0 && !items.getJSONObject(0).has("status")) {
             for (int i = 0; i < items.length(); i++) {
                 JSONObject json = items.getJSONObject(i);
                 AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"));
                 //parcour.setImage(R.drawable.logo);
                 academicBackgrounds.add(parcour);
             }
-            adapter = new RecyclerAdapter(academicBackgrounds);
-            recyclerView.setAdapter(adapter);
+        }else{
+            AcademicBackground parcour = new AcademicBackground("Not Academic Backgrounds find","contact your " +
+                    "university for more information");
+            academicBackgrounds.add(parcour);
         }
+        adapter = new RecyclerAdapter(academicBackgrounds);
+        recyclerView.setAdapter(adapter);
     }
 
     private class MyOnClickListener implements View.OnClickListener{
