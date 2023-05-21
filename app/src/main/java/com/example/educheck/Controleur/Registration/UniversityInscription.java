@@ -11,10 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
-import android.widget.Button;
 
 
-import com.example.educheck.Controleur.Parcours_choices;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -26,7 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 
