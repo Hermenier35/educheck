@@ -11,8 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.educheck.Controleur.Dashboard.DashBoard_Etudiant;
-import com.example.educheck.Controleur.Login.forgot_password;
+import com.example.educheck.Controleur.Dashboard.DashBoardEtudiant;
 import com.example.educheck.Modele.Implementation.LoginImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.R;
@@ -24,7 +23,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 
-public class login extends AppCompatActivity implements AsyncTaskcallback {
+public class Login extends AppCompatActivity implements AsyncTaskcallback {
     Button login;
     EditText email;
     EditText password;
@@ -41,8 +40,8 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
         login = findViewById(R.id.sign_in);
         email = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        forgottenPasswordActivity = new Intent(this, forgot_password.class);
-        dashboardStudent = new Intent(this, DashBoard_Etudiant.class);
+        forgottenPasswordActivity = new Intent(this, ForgotPassword.class);
+        dashboardStudent = new Intent(this, DashBoardEtudiant.class);
         forgottenPassword = findViewById(R.id.forgetten);
         model_login = new LoginImplementation(this);
         login.setOnClickListener(v -> login_verification());
@@ -59,7 +58,6 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
     private final TextWatcher emailWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
         }
 
         @Override
@@ -91,6 +89,8 @@ public class login extends AppCompatActivity implements AsyncTaskcallback {
                 startActivity(dashboardStudent);
         }
     }
+
+
 
 
     @Override

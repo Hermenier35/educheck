@@ -1,12 +1,5 @@
 package com.example.educheck.Modele;
 
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,22 +7,24 @@ import java.io.Serializable;
 
 public class University implements Serializable {
 
-    private String name;
+    private String uniName;
     private String suffixe;
+    private byte[] image;
 
-    public University(String name, String suffixe){
-        this.name = name;
+    public University(String name, String suffixe, byte[] image){
+        this.uniName = name;
         this.suffixe = suffixe;
+        this.image = image;
     }
 
     public String getName(){
-        return this.name;
+        return this.uniName;
     }
 
     public JSONObject convertToJSONObject(){
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("name", getName());
+            jsonObject.put("uniName", getName());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -38,5 +33,21 @@ public class University implements Serializable {
 
     public String getSuffixe() {
         return suffixe;
+    }
+
+    public void setName(String name) {
+        this.uniName = name;
+    }
+
+    public void setSuffixe(String suffixe) {
+        this.suffixe = suffixe;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

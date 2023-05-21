@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -28,6 +29,7 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
     private AsyncTaskcallback asyncTaskcallback;
     private String type;
     private JSONObject body;
+    private int code_retour;
 
     public Request(AsyncTaskcallback asyncTaskcallback, String type) {
         this.asyncTaskcallback = asyncTaskcallback;
@@ -49,9 +51,9 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
             e.printStackTrace();
         }
 
-       if(type.equals("POST")){
+       if(type.equals("POST") || type.equals("PUT")){
                 try {
-                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestMethod(type);
                     urlConnection.setRequestProperty("Content-Type", "application/json");
                     urlConnection.setRequestProperty("Accept", "application/json");
                     urlConnection.setDoOutput(true);
@@ -79,11 +81,10 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
                 result = readStream(in); // Read stream
             }
         }
-        catch (MalformedURLException e) { e.printStackTrace(); }
+        catch (MalformedURLException e ) { e.printStackTrace(); }
         catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             if (urlConnection != null)
                 urlConnection.disconnect();
         }
@@ -99,16 +100,25 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
             e.printStackTrace();
         }
 
-
+        try {
+            code_retour = urlConnection.getResponseCode();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return json; // returns the result
     }
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
+        System.out.println("requete fini :" +  this.code_retour);
         try{
             if (jsonObject != null) {
                 res = jsonObject.getJSONArray("items");
                 asyncTaskcallback.onTaskCompleted(res);
+            }else{
+                System.out.println("code retour error :" + this.code_retour);
+                JSONObject response_request = new JSONObject().put("code_retour", this.code_retour);
+                res = (JSONArray) response_request.get("code_retour");
             }
         } catch (JSONException e) {
             e.printStackTrace();

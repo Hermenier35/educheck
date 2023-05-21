@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.educheck.R;
 
-public class dashboard_admin extends AppCompatActivity {
+public class DashboardAdmin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

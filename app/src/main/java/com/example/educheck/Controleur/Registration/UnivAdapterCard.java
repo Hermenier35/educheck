@@ -1,6 +1,5 @@
 package com.example.educheck.Controleur.Registration;
 
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +13,16 @@ import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
 import java.util.ArrayList;
+import android.graphics.BitmapFactory;
 
-public class univ_adapter_card extends RecyclerView.Adapter<univ_adapter_card.UniversityHolder> {
+public class UnivAdapterCard extends RecyclerView.Adapter<UnivAdapterCard.UniversityHolder> {
 
     private ArrayList<University> universities;
-    private int pos = 0;
+    private int pos;
 
-    public univ_adapter_card(ArrayList<University> universities) {
+    public UnivAdapterCard(ArrayList<University> universities) {
         this.universities = universities;
+        this.pos=0;
     }
 
     @NonNull
@@ -38,6 +39,8 @@ public class univ_adapter_card extends RecyclerView.Adapter<univ_adapter_card.Un
         TextView textViewUniv_Name= holder.Univ_Name;
         ImageView imageView = holder.imageView;
         textViewUniv_Name.setText(universities.get(position).getName());
+        byte[] image = universities.get(position).getImage();
+        imageView.setImageBitmap(BitmapFactory.decodeByteArray(image, 0, image.length));
     }
 
     @Override

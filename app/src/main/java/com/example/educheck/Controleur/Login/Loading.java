@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.educheck.R;
 
-public class loading extends AppCompatActivity {
+public class Loading extends AppCompatActivity {
     Handler handler;
     @Override
     protected void onCreate(Bundle save) {
