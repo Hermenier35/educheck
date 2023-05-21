@@ -25,6 +25,8 @@ public class University implements Serializable {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("uniName", getName());
+            jsonObject.put("suffixe", getSuffixe());
+            jsonObject.put("image", getImage());
         } catch (JSONException e) {
             e.printStackTrace();
         }

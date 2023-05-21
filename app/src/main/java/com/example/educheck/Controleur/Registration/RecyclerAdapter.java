@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Registration;
 
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;

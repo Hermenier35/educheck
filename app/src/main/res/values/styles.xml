@@ -4,4 +4,18 @@
         <item name="android:background">@color/gray_400</item>
         <item name="exampleColor">@color/light_blue_400</item>
     </style>
+
+    <style name="TextAppearance.Randoomz.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="ThemeOverlay.Randoomz.Toolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@android:color/holo_blue_light</item>
+        <item name="actionMenuTextColor">@android:color/holo_green_light</item>
+        <item name="colorAccent">@android:color/holo_orange_dark</item>
+        <item name="colorControlNormal">@android:color/holo_purple</item>
+        <item name="colorControlActivated">@android:color/holo_red_dark</item>
+        <item name="colorControlHighlight">@android:color/holo_red_dark</item>
+    </style>
 </resources>
