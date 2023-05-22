@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.educheck.Controleur.DashboardAdmin.DashboardAdmin;
 import com.example.educheck.Controleur.Registration.UniversityInscription;
 import com.example.educheck.R;
-import com.example.educheck.Controleur.Dashboard.DashBoardEtudiant;
 
 public class MainActivity extends AppCompatActivity {
     Intent login_activity;
