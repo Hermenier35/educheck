@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -16,41 +17,27 @@
         android:theme="@style/Theme.EduCheck"
         tools:targetApi="31" >
         <activity
-            android:name=".Controleur.Parcours_choices"
+            android:name=".Controleur.Registration.ParcoursChoices"
             android:exported="false"
-            android:label="parcours_choice"/>
+            android:label="ParcoursChoice"/>
         <activity
-            android:name=".Controleur.Login.forgotPassword"
+            android:name=".Controleur.Login.ForgotPassword"
             android:exported="false"
-            android:label="forgotPassword"/>
+            android:label="ForgotPassword"/>
         <activity
-            android:name=".Controleur.DashboardAdmin.dashboard_admin"
+            android:name=".Controleur.DashboardAdmin.DashboardAdmin"
             android:exported="false" />
         <activity
-            android:name=".Controleur.Dashboard.waiting_Dashoard"
+            android:name=".Controleur.Dashboard.WaitingDashoard"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Controleur.Dashboard.Courses"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Controleur.Dashboard.Messages"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Controleur.Registration.registration1"
+            android:name=".Controleur.Registration.Registration1"
             android:exported="false"
-            android:label="registration1" />
+            android:label="Registration1" />
         <activity
             android:name=".Controleur.Registration.Registration2"
             android:exported="false"
@@ -60,14 +47,29 @@
             android:exported="false"
             android:label="UniversityInscription" />
         <activity
-            android:name=".Controleur.Login.login"
+            android:name=".Controleur.Login.Login"
             android:exported="true"
             android:label="Login Activity" />
         <activity
             android:name=".Controleur.Login.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".Controleur.Login.loading"
+            android:name=".Controleur.Dashboard.DashBoardEtudiant"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Dashboard.Frag1"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Dashboard.Frag2"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Dashboard.Frag3"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Dashboard.Frag4"
+            android:exported="true" />
+        <activity
+            android:name=".Controleur.Login.Loading"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Registration;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,13 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toolbar;
 
-import com.example.educheck.Controleur.Login.login;
+import com.example.educheck.Controleur.Login.Login;
 import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
-import com.example.educheck.Modele.Interface.Inscription;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
@@ -26,7 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Parcours_choices extends AppCompatActivity implements AsyncTaskcallback {
+public class ParcoursChoices extends AppCompatActivity implements AsyncTaskcallback {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
@@ -50,24 +48,28 @@ public class Parcours_choices extends AppCompatActivity implements AsyncTaskcall
         recyclerView.setLayoutManager(layoutManager);
         university = (University) getIntent().getSerializableExtra("university") ;
         student = (Student) getIntent().getSerializableExtra("student");
-        logging_page = new Intent(this, login.class);
+        logging_page = new Intent(this, Login.class);
         inscription.getAllAcademicBackgrounds(university.getSuffixe());
         inscriptionImplementation = new InscriptionImplementation(this);
     }
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
-        if(!items.getJSONObject(0).has("status")) {
-            academicBackgrounds = new ArrayList<>();
+        academicBackgrounds = new ArrayList<>();
+        if(items.length()>0 && !items.getJSONObject(0).has("status")) {
             for (int i = 0; i < items.length(); i++) {
                 JSONObject json = items.getJSONObject(i);
                 AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"));
                 //parcour.setImage(R.drawable.logo);
                 academicBackgrounds.add(parcour);
             }
-            adapter = new RecyclerAdapter(academicBackgrounds);
-            recyclerView.setAdapter(adapter);
+        }else{
+            AcademicBackground parcour = new AcademicBackground("Not Academic Backgrounds find","contact your " +
+                    "university for more information");
+            academicBackgrounds.add(parcour);
         }
+        adapter = new RecyclerAdapter(academicBackgrounds);
+        recyclerView.setAdapter(adapter);
     }
 
     private class MyOnClickListener implements View.OnClickListener{

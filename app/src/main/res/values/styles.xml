@@ -4,4 +4,34 @@
         <item name="android:background">@color/gray_400</item>
         <item name="exampleColor">@color/light_blue_400</item>
     </style>
+
+    <style name="TextAppearance.Randoomz.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="ThemeOverlay.Randoomz.Toolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@android:color/holo_blue_light</item>
+        <item name="actionMenuTextColor">@android:color/holo_green_light</item>
+        <item name="colorAccent">@android:color/holo_orange_dark</item>
+        <item name="colorControlNormal">@android:color/holo_purple</item>
+        <item name="colorControlActivated">@android:color/holo_red_dark</item>
+        <item name="colorControlHighlight">@android:color/holo_red_dark</item>
+    </style>
+
+    <style name="TextAppearance.Randoomz.Tab" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.Randoomz.TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Randoomz.Tab</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
 </resources>

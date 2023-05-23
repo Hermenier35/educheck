@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class forgotPassword extends AppCompatActivity implements AsyncTaskcallback {
+public class ForgotPassword extends AppCompatActivity implements AsyncTaskcallback {
 
     Button reset;
     Button my_button;

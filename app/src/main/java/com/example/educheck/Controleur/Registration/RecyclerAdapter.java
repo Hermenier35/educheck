@@ -1,4 +1,4 @@
-package com.example.educheck.Controleur;
+package com.example.educheck.Controleur.Registration;
 
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -44,7 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.card_parcour_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
-        v.setOnClickListener(Parcours_choices.myOnClickListener);
+        v.setOnClickListener(ParcoursChoices.myOnClickListener);
         return viewHolder;
     }
     @Override

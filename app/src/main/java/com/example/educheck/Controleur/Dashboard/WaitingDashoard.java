@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.educheck.R;
 
-public class Courses extends AppCompatActivity {
+public class WaitingDashoard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
+        setContentView(R.layout.activity_waiting_dashboard);
     }
 }
