@@ -49,7 +49,7 @@ public class ParcoursChoices extends AppCompatActivity implements AsyncTaskcallb
         university = (University) getIntent().getSerializableExtra("university") ;
         student = (Student) getIntent().getSerializableExtra("student");
         logging_page = new Intent(this, Login.class);
-        inscription.getAllAcademicBackgrounds(university.getSuffixe());
+        inscription.getAllAcademicBackgrounds(university.getSuffixeStudent());
         inscriptionImplementation = new InscriptionImplementation(this);
     }
 

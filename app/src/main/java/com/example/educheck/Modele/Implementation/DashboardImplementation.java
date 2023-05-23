@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     private AsyncTaskcallback callBack;
 
-        public DashboardImplementation(AsyncTaskcallback callback) {
+    public DashboardImplementation(AsyncTaskcallback callback) {
         this.callBack = callBack;
     }
 
