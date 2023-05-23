@@ -15,6 +15,7 @@ import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
+import com.example.educheck.Utils.JsonUtils;
 
 
 import org.json.JSONArray;
@@ -57,7 +58,8 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
             System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
         for(int i = 0; i < items.length(); i++){
             JSONObject uniJson = items.getJSONObject(i);
-            University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_teacher"), new byte[20]);
+            University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_student"),
+                    JsonUtils.jsonObjectToArrayString(uniJson.getJSONObject("suffixe_teacher")),new byte[20]);
             univs.add(university);
         }
             adpater_card = new UnivAdapterCard(univs);

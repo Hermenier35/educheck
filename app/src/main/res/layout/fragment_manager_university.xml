@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Controleur.DashboardAdmin.ManagerUniversityFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="First_fragment" />
+        android:gravity="top"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:text="Add University" />
 
-</FrameLayout>
+
+    <EditText
+        android:id="@+id/name_univ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your first name"
+        android:textSize="21sp" />
+
+    <EditText
+        android:id="@+id/suffixe_student"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Your last name"
+        android:textSize="21sp" />
+
+    <EditText
+        android:id="@+id/suffixe_teacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Your last name"
+        android:textSize="21sp" />
+
+    <ImageView
+        android:layout_width="20sp"
+        android:layout_height="20sp">
+
+    </ImageView>
+
+
+</LinearLayout>

@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     private AsyncTaskcallback callBack;
 
-        public DashboardImplementation(AsyncTaskcallback callback) {
+    public DashboardImplementation(AsyncTaskcallback callback) {
         this.callBack = callBack;
     }
 
@@ -29,6 +29,12 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     public void retrieveMessages(String token) {
         Request request = new Request(this, "GET");
         request.execute(HttpUrl.UrlRetrieveMessages + "/" + token);
+    }
+
+    @Override
+    public void getCourses(String token) {
+        Request request = new Request(this, "GET");
+        request.execute(HttpUrl.UrlGetCourses + "/" + token);
     }
 
     @Override
