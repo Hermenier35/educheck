@@ -11,4 +11,5 @@ public class HttpUrl {
     public static String UrlForgetPassword = ip + "resetPassword";
     public static String UrlSendMessageTo = ip + "sendMessageTo";
     public static String UrlRetrieveMessages = ip + "retrieveMessages";
+    public static String UrlGetCourses = ip + "getCourses";
 }
