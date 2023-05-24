@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.educheck.Controleur.Dashboard.DashBoardEtudiant;
+import com.example.educheck.Controleur.Dashboard.DashBoardTeacher;
+import com.example.educheck.Controleur.DashboardAdmin.DashboardAdmin;
 import com.example.educheck.Modele.Implementation.LoginImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.R;
@@ -31,7 +33,7 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
 
     TextView forgottenPassword;
     Intent forgottenPasswordActivity;
-    Intent dashboardStudent;
+    Intent dashboard;
     @Override
     protected void onCreate(Bundle save) {
 
@@ -41,7 +43,6 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
         email = findViewById(R.id.username);
         password = findViewById(R.id.password);
         forgottenPasswordActivity = new Intent(this, ForgotPassword.class);
-        dashboardStudent = new Intent(this, DashBoardEtudiant.class);
         forgottenPassword = findViewById(R.id.forgetten);
         model_login = new LoginImplementation(this);
         login.setOnClickListener(v -> login_verification());
@@ -80,13 +81,28 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
     public void onTaskCompleted(JSONArray items) throws JSONException {
         Objects.requireNonNull(items); //items ne doit pas être null
         JSONObject response = items.getJSONObject(0);
-        if(!response.getBoolean("status")){
+        if(!response.getBoolean("statut")){
             Toast.makeText(this,"Invalid email or password", Toast.LENGTH_SHORT).show();
         }else{
-            if(!response.getBoolean("valide"))
-                Toast.makeText(this, "please wait teacher's confirmation", Toast.LENGTH_SHORT).show();
-            else
-                startActivity(dashboardStudent);
+            switch(response.getString("status")){
+                case "Admin":
+                    dashboard = new Intent(this, DashboardAdmin.class);
+                    dashboard.putExtra("token", response.getString("token"));
+                    startActivity(dashboard);
+                    break;
+                case "Student":
+                    dashboard = new Intent(this, DashBoardEtudiant.class);
+                    if(!response.getBoolean("valide"))
+                        Toast.makeText(this, "please wait teacher's confirmation", Toast.LENGTH_SHORT).show();
+                    else
+                        startActivity(dashboard);
+                    break;
+                case "Teacher":
+                    dashboard = new Intent(this, DashBoardTeacher.class);
+                    startActivity(dashboard);
+                    break;
+                default: System.err.println("Erreur retour status"); System.exit(1);
+            }
         }
     }
 

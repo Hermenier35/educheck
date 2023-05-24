@@ -23,8 +23,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.educheck.Modele.Implementation.DashboardImplementation;
+import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 
@@ -33,11 +38,11 @@ import java.io.ByteArrayOutputStream;
  * Use the {@link ManagerUniversityFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ManagerUniversityFragment extends Fragment {
+public class ManagerUniversityFragment extends Fragment implements AsyncTaskcallback {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "suffixeStudent";
+    private static final String TOKEN = "token";
     private static final String ARG_PARAM2 = "suffixeTeacher";
     private final int STORAGE_PERMISSION_CODE = 23;
     private final int GALLERY_REQUEST_CODE=24;
@@ -48,7 +53,7 @@ public class ManagerUniversityFragment extends Fragment {
     private ImageView image;
 
     // TODO: Rename and change types of parameters
-    private String param1;
+    private String token;
     private String param2;
 
     public ManagerUniversityFragment() {
@@ -59,15 +64,15 @@ public class ManagerUniversityFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     * @param token Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment ManagerUniversityFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ManagerUniversityFragment newInstance(String param1, String param2) {
+    public static ManagerUniversityFragment newInstance(String token, String param2) {
         ManagerUniversityFragment fragment = new ManagerUniversityFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putString(TOKEN, token);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -79,7 +84,7 @@ public class ManagerUniversityFragment extends Fragment {
         ActivityCompat.requestPermissions(getActivity(),new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISSION_CODE);
         if (getArguments() != null) {
-            param1 = getArguments().getString(ARG_PARAM1);
+            token = getArguments().getString(TOKEN);
             param2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -136,6 +141,7 @@ public class ManagerUniversityFragment extends Fragment {
 
     public void saveToBDD(){
         University university;
+        DashboardImplementation request;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         Bitmap bitmap = null;
         Drawable drawable = image.getDrawable();
@@ -146,6 +152,12 @@ public class ManagerUniversityFragment extends Fragment {
         byte[] logo = byteArrayOutputStream.toByteArray();
         university = new University(nameUniv.getText().toString(), suffixeStudent.getText().toString(),
                 suffixeTeacher.getText().toString(), logo);
+        request = new DashboardImplementation(this);
+        request.postUniversity(this.token, university);
     }
 
+    @Override
+    public void onTaskCompleted(JSONArray items) throws JSONException {
+
+    }
 }

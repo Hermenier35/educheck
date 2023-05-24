@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.Base64;
 
 public class University implements Serializable {
 
@@ -27,9 +28,9 @@ public class University implements Serializable {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("uniName", getName());
-            jsonObject.put("suffixeStudent", getSuffixeStudent());
-            jsonObject.put("suffixeTeacher", getSuffixeTeacher());
-            jsonObject.put("image", getImage());
+            jsonObject.put("suffixe_student", getSuffixeStudent());
+            jsonObject.put("suffixe_teacher", getSuffixeTeacher());
+            jsonObject.put("image", Base64.getEncoder().encodeToString(getImage()));
         } catch (JSONException e) {
             e.printStackTrace();
         }

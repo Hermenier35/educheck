@@ -22,9 +22,7 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
     private static final int NUM_PAGES = 2;
     private ViewPager2 viewPager;
     private FragmentStateAdapter pagerAdapter;
-    private final int STORAGE_PERMISSION_CODE = 23;
-    private final int GALLERY_REQUEST_CODE=24;
-    private Button gallery;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +31,7 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        token = getIntent().getStringExtra("token");
         viewPager = findViewById(R.id.viewpager);
         pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
@@ -67,8 +65,8 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
 
         public ScreenSlidePagerAdapter(FragmentActivity fa) {
             super(fa);
-            managerUniversity = ManagerUniversityFragment.newInstance("p1","p2");
-            managerAcademicBackgrounds = ManagerAcademicBackgroundsFragment.newInstance("p1", "p2");
+            managerUniversity = ManagerUniversityFragment.newInstance(token,"p2");
+            managerAcademicBackgrounds = ManagerAcademicBackgroundsFragment.newInstance(token, "p2");
         }
 
         @Override

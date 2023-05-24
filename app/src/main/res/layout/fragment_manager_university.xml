@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:textSize="20sp"
-        android:textStyle="italic"
+        android:textStyle="italic|bold"
         android:text="Add University"
         android:layout_marginTop="20sp"/>
 
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="suffixe mail teacher"
+        android:hint="Suffixe mail teacher"
         android:textSize="21sp" />
 
     <LinearLayout
