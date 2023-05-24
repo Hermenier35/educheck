@@ -10,17 +10,18 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="top"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
         android:textStyle="italic"
-        android:text="Add University" />
+        android:text="Add University"
+        android:layout_marginTop="20sp"/>
 
 
     <EditText
         android:id="@+id/name_univ"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Your first name"
+        android:hint="Name university"
         android:textSize="21sp" />
 
     <EditText
@@ -28,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="Your last name"
+        android:hint="Suffixe mail student"
         android:textSize="21sp" />
 
     <EditText
@@ -36,14 +37,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="Your last name"
+        android:hint="suffixe mail teacher"
         android:textSize="21sp" />
 
-    <ImageView
-        android:layout_width="20sp"
-        android:layout_height="20sp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:text="Logo:"
+            android:layout_marginTop="70sp"
+            android:layout_marginLeft="20sp"/>
 
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_margin="20sp"
+            android:id="@+id/img_uni"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="gallery"
+            android:id="@+id/btnGallery"
+            android:layout_margin="70sp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add"
+            android:id="@+id/addUniv"
+            android:layout_marginTop="70sp"/>
+    </LinearLayout>
 
 </LinearLayout>

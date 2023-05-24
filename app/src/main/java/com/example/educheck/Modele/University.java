@@ -9,10 +9,10 @@ public class University implements Serializable {
 
     private String uniName;
     private String suffixeStudent;
-    private String[] suffixeTeacher;
+    private String suffixeTeacher;
     private byte[] image;
 
-    public University(String name, String suffixeStudent, String[] suffixeTeacher, byte[] image){
+    public University(String name, String suffixeStudent, String suffixeTeacher, byte[] image){
         this.uniName = name;
         this.suffixeStudent = suffixeStudent;
         this.suffixeTeacher = suffixeTeacher;
@@ -40,11 +40,11 @@ public class University implements Serializable {
         return suffixeStudent;
     }
 
-    public String[] getSuffixeTeacher() {
+    public String getSuffixeTeacher() {
         return suffixeTeacher;
     }
 
-    public void setSuffixeTeacher(String[] suffixeTeacher) {
+    public void setSuffixeTeacher(String suffixeTeacher) {
         this.suffixeTeacher = suffixeTeacher;
     }
 

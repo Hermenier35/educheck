@@ -4,6 +4,7 @@ public class HttpUrl {
     private static String ip = "http://10.41.50.44:3000/api/";
     public static String UrlPostOnUniversity = ip + "addUser";
     public static String UrlGetUniversity = "";
+    public static String UrlPostUniversity = ip + "postUni";
     public static String UrlGetUniversities = ip + "allUni";
     public static String UrlPostAcademicBackground = ip + "pathStudent";
     public static String UrlGetAcademicBackground = ip + "getPaths";

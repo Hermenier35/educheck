@@ -1,14 +1,32 @@
 package com.example.educheck.Controleur.DashboardAdmin;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.example.educheck.Modele.University;
 import com.example.educheck.R;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,12 +37,19 @@ public class ManagerUniversityFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "suffixeStudent";
+    private static final String ARG_PARAM2 = "suffixeTeacher";
+    private final int STORAGE_PERMISSION_CODE = 23;
+    private final int GALLERY_REQUEST_CODE=24;
+    private Button gallery, addUni;
+    private EditText suffixeStudent;
+    private EditText suffixeTeacher;
+    private EditText nameUniv;
+    private ImageView image;
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String param1;
+    private String param2;
 
     public ManagerUniversityFragment() {
         // Required empty public constructor
@@ -51,9 +76,11 @@ public class ManagerUniversityFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCompat.requestPermissions(getActivity(),new String[]{
+                Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISSION_CODE);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            param1 = getArguments().getString(ARG_PARAM1);
+            param2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -61,6 +88,64 @@ public class ManagerUniversityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manager_university, container, false);
+        View viewInflate = inflater.inflate(R.layout.fragment_manager_university, container, false);
+        gallery = viewInflate.findViewById(R.id.btnGallery);
+        addUni = viewInflate.findViewById(R.id.addUniv);
+        suffixeStudent = viewInflate.findViewById(R.id.suffixe_student);
+        suffixeTeacher = viewInflate.findViewById(R.id.suffixe_teacher);
+        nameUniv = viewInflate.findViewById(R.id.name_univ);
+        image = viewInflate.findViewById(R.id.img_uni);
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                String[] mimeTypes = {"image/jpeg", "image/png","image/jpg"};
+                intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+                startActivityForResult(intent,GALLERY_REQUEST_CODE);
+            }
+        });
+        addUni.setOnClickListener(v->{saveToBDD();});
+        return viewInflate;
     }
+
+    public void onActivityResult(int requestCode,int resultCode,Intent data) {
+        //Le code de résultat est RESULT_OK uniquement si l'utilisateur sélectionne une image.
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK)
+            switch (requestCode) {
+                case GALLERY_REQUEST_CODE:
+                    //data.getData renvoie l'URI de contenu pour l'image sélectionnée
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    // Obtenez le curseur
+                    Cursor cursor = getContext().getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+                    // Déplacer vers la première ligne
+                    cursor.moveToFirst();
+                    //Obtenir l'index de colonne de MediaStore.Images.Media.DATA
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    //Obtient la valeur de chaîne dans la colonne
+                    String imgDecodableString = cursor.getString(columnIndex);
+                    cursor.close();
+                    //Définir l'image dans ImageView après le décodage de la chaîne
+                    image.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                    break;
+            }
+    }
+
+    public void saveToBDD(){
+        University university;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        Bitmap bitmap = null;
+        Drawable drawable = image.getDrawable();
+        if (drawable instanceof BitmapDrawable) {
+            bitmap = ((BitmapDrawable) drawable).getBitmap();
+        }
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] logo = byteArrayOutputStream.toByteArray();
+        university = new University(nameUniv.getText().toString(), suffixeStudent.getText().toString(),
+                suffixeTeacher.getText().toString(), logo);
+    }
+
 }

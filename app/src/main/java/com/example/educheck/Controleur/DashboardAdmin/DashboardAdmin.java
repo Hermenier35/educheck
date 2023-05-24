@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.Button;
 
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.R;
@@ -21,6 +22,9 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
     private static final int NUM_PAGES = 2;
     private ViewPager2 viewPager;
     private FragmentStateAdapter pagerAdapter;
+    private final int STORAGE_PERMISSION_CODE = 23;
+    private final int GALLERY_REQUEST_CODE=24;
+    private Button gallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

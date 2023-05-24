@@ -4,6 +4,7 @@ import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Interface.Dashboard;
 import com.example.educheck.Modele.Message;
 import com.example.educheck.Modele.Request;
+import com.example.educheck.Modele.University;
 import com.example.educheck.Utils.HttpUrl;
 
 import org.json.JSONArray;
@@ -35,6 +36,14 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     public void getCourses(String token) {
         Request request = new Request(this, "GET");
         request.execute(HttpUrl.UrlGetCourses + "/" + token);
+    }
+
+    @Override
+    public void postUniversity(String token, University university) {
+        Request request = new Request(this, "POST");
+        JSONObject body = university.convertToJSONObject();
+        request.setBody(body);
+        request.execute(HttpUrl.UrlPostUniversity + "/" + token);
     }
 
     @Override
