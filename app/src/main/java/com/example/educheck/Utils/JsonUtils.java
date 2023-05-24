@@ -3,6 +3,7 @@ package com.example.educheck.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class JsonUtils {
@@ -22,5 +23,16 @@ public class JsonUtils {
         }
 
         return mergedJSON;
+    }
+
+    public static String[] jsonObjectToArrayString(JSONObject jsonObject) throws JSONException {
+        Iterator<String> iterator = jsonObject.keys();
+        String[] myArray;
+        ArrayList<String> array = new ArrayList<>();
+        while (iterator.hasNext()) {
+            array.add(jsonObject.getString(iterator.next()));
+        }
+        myArray = (String[]) array.toArray();
+        return myArray;
     }
 }

@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.logging.Logger;
 
 
@@ -57,7 +58,8 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
             System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
         for(int i = 0; i < items.length(); i++){
             JSONObject uniJson = items.getJSONObject(i);
-            University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_teacher"), new byte[20]);
+            University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_student"),
+                    uniJson.getString("suffixe_teacher"), Base64.getDecoder().decode(uniJson.getString("image")));
             univs.add(university);
         }
             adpater_card = new UnivAdapterCard(univs);
