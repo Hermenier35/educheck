@@ -15,7 +15,7 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     private AsyncTaskcallback callBack;
 
     public DashboardImplementation(AsyncTaskcallback callback) {
-        this.callBack = callBack;
+        this.callBack = callback;
     }
 
     @Override
@@ -44,6 +44,26 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
         JSONObject body = university.convertToJSONObject();
         request.setBody(body);
         request.execute(HttpUrl.UrlPostUniversity + "/" + token);
+    }
+
+    @Override
+    public void changePassword(String token, String password, String newPassword) {
+        Request request = new Request(this, "PUT");
+        JSONObject body = new JSONObject();
+        try {
+            body.put("password", password);
+            body.put("newPassword", newPassword);
+            request.setBody(body);
+            request.execute(HttpUrl.UrlChangePassword + "/" + token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void getUniversity(String token) {
+        Request request = new Request(this, "GET");
+        request.execute(HttpUrl.UrlGetUniversity + "/" + token);
     }
 
     @Override
