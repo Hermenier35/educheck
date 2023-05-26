@@ -6,16 +6,24 @@
     tools:context=".Controleur.DashboardAdmin.ManagerUniversityFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Manager University Fragment" />
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Manager University Fragment" />
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/logoRight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/baseline_more_vert_white_24dp"/>
+        android:layout_gravity="bottom|center_horizontal"
+        android:src="@drawable/baseline_switch_right_white_36dp"
+        android:background="?attr/colorPrimary"/>
 
 </FrameLayout>
