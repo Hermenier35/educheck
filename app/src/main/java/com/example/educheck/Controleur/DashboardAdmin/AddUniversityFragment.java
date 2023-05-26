@@ -152,16 +152,11 @@ public class AddUniversityFragment extends Fragment implements AsyncTaskcallback
             JSONObject response = items.getJSONObject(0);
             University university = new University(response.getString("name"), response.getString("suffixe_student"),
                     response.getString("suffixe_teacher"), Base64.getDecoder().decode(response.getString("image")));
-            replaceFragment(ManagerUniversityFragment.newInstance(this.token, university));
+            DashboardAdmin.pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(DashboardAdmin.fa,
+                    ManagerUniversityFragment.newInstance(token, university), ManagerAcademicBackgroundsFragment.newInstance(token, "p2"));
+            DashboardAdmin.viewPager.setAdapter(DashboardAdmin.pagerAdapter);
         }else
             System.err.println("code_retour: " + items.getJSONObject(0).getString("code_retour") + " " +
                     "please check university save in the data base");
-    }
-
-    private void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = DashboardAdmin.fragmentManager;
-        FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.scrollView,fragment);
-        fragmentTransaction.commit();
     }
 }

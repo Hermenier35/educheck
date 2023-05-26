@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -30,6 +31,7 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
     // TODO: Rename and change types of parameters
     private String token;
     private University university;
+    private ImageView logoRight;
 
     public ManagerUniversityFragment() {
         // Required empty public constructor
@@ -66,7 +68,9 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manager_university, container, false);
+        View viewInflate = inflater.inflate(R.layout.fragment_manager_university, container, false);
+        logoRight = viewInflate.findViewById(R.id.logoRight);
+        return viewInflate;
     }
 
     @Override
