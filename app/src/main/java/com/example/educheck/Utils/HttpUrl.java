@@ -1,7 +1,7 @@
 package com.example.educheck.Utils;
 
 public class HttpUrl {
-    private static String ip = "http://10.188.84.95:3000/api/";
+    private static String ip = "http://192.168.124.92:3000/api/";
     public static String UrlPostOnUniversity = ip + "addUser";
     public static String UrlGetUniversity = "";
     public static String UrlPostUniversity = ip + "addUni";
