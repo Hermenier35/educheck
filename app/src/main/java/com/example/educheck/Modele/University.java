@@ -27,7 +27,7 @@ public class University implements Serializable {
     public JSONObject convertToJSONObject(){
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("uniName", getName());
+            jsonObject.put("name", getName());
             jsonObject.put("suffixe_student", getSuffixeStudent());
             jsonObject.put("suffixe_teacher", getSuffixeTeacher());
             jsonObject.put("image", Base64.getEncoder().encodeToString(getImage()));

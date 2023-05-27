@@ -88,6 +88,7 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
                 case "Admin":
                     dashboard = new Intent(this, DashboardAdmin.class);
                     dashboard.putExtra("token", response.getString("token"));
+                    dashboard.putExtra("valide", response.getBoolean("valide"));
                     startActivity(dashboard);
                     break;
                 case "Student":

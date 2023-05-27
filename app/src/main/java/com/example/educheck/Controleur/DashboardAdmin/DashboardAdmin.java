@@ -4,25 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.Button;
+import android.view.autofill.AutofillManager;
 
+import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Base64;
 
 public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallback {
     private Toolbar toolbar;
     private static final int NUM_PAGES = 2;
-    private ViewPager2 viewPager;
-    private FragmentStateAdapter pagerAdapter;
+    public static ViewPager2 viewPager;
+    public static FragmentStateAdapter pagerAdapter;
     private String token;
+    private String request;
+    private boolean valide;
+    public static FragmentManager fragmentManager;
+    public static FragmentActivity fa;
+    private DashboardImplementation dashboardRequest;
+    private University university;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +42,23 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
         setContentView(R.layout.activity_dashboard_admin);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        fragmentManager = getSupportFragmentManager();
+        fa = this;
 
         token = getIntent().getStringExtra("token");
+        valide = getIntent().getBooleanExtra("valide", false);
         viewPager = findViewById(R.id.viewpager);
-        pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this);
-        viewPager.setAdapter(pagerAdapter);
+        System.out.println("valide: " + valide);
+        if(valide){
+            dashboardRequest = new DashboardImplementation(this);
+            request = "getUniversity";
+            dashboardRequest.getUniversity(token);
+        }else{
+            pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this, AddUniversityFragment.newInstance(token, "p2"),
+                    DefaultPageFragment.newInstance(token, "p2"));
+            viewPager.setAdapter(pagerAdapter);
+        }
+
     }
 
     @Override
@@ -45,7 +69,20 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
-
+        if(!items.getJSONObject(0).has("code_retour"))
+            switch (request){
+                case "getUniversity":
+                    JSONObject response = items.getJSONObject(0);
+                    university = new University(response.getString("name"), response.getString("suffixe_student"),
+                            response.getString("suffixe_teacher"), Base64.getDecoder().decode(response.getString("image")));
+                    pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this,
+                            ManagerUniversityFragment.newInstance(token, university), ManagerAcademicBackgroundsFragment.newInstance(token, "p2"));
+                    viewPager.setAdapter(pagerAdapter);
+                    break;
+                default: System.err.println("Request not find");
+            }else
+                System.err.println("code_retour: " + items.getJSONObject(0).getString("code_retour") + " " +
+                        "in task DasbordAdmin");
     }
 
     @Override
@@ -60,21 +97,20 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
         }
     }
 
-    private class ScreenSlidePagerAdapter extends FragmentStateAdapter {
-        Fragment managerUniversity, managerAcademicBackgrounds;
-
-        public ScreenSlidePagerAdapter(FragmentActivity fa) {
+    public static class ScreenSlidePagerAdapter extends FragmentStateAdapter {
+        private Fragment firstPage, secondPage;
+        public ScreenSlidePagerAdapter(FragmentActivity fa, Fragment page1, Fragment page2) {
             super(fa);
-            managerUniversity = ManagerUniversityFragment.newInstance(token,"p2");
-            managerAcademicBackgrounds = ManagerAcademicBackgroundsFragment.newInstance(token, "p2");
+            firstPage = page1;
+            secondPage = page2;
         }
 
         @Override
         public Fragment createFragment(int position) {
             if(position==0)
-                return managerUniversity;
+                return firstPage;
             else
-                return managerAcademicBackgrounds;
+                return secondPage;
         }
 
         @Override
