@@ -21,7 +21,8 @@
     <FrameLayout
         android:id="@+id/frame1"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="550dp"
+        android:layout_marginVertical="50dp"
         />
 
     <Button
@@ -42,7 +43,7 @@
         android:backgroundTint="@color/teal_700"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:layout_marginStart="125dp"
+        android:layout_marginStart="115dp"
         />
     <Button
         android:id="@+id/menu3"
@@ -52,7 +53,7 @@
         android:backgroundTint="@color/teal_700"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:layout_marginStart="220dp"
+        android:layout_marginStart="215dp"
         />
     <Button
         android:id="@+id/menu4"
