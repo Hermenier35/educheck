@@ -16,8 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.educheck.Controleur.Parcours_choices;
-import com.example.educheck.Controleur.Registration.parcours_choice;
 import com.example.educheck.Modele.Implementation.InscriptionImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Student;
@@ -68,7 +66,7 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
         TextView_status = findViewById(R.id.main_TextViewStatus);
         Button_Submit = findViewById(R.id.main_button_Submit);
         Button_Submit.setEnabled(false);
-        intentParcours_choice = new Intent(getApplicationContext(), Parcours_choices.class);
+        intentParcours_choice = new Intent(getApplicationContext(), ParcoursChoices.class);
 
         EditText_INE.addTextChangedListener(emailIneStatusWatcher);
         EditText_email.addTextChangedListener(emailIneStatusWatcher);
@@ -110,6 +108,7 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
     public void onTaskCompleted(JSONArray items) throws JSONException {
 
     }
+
 }
 
 

@@ -22,6 +22,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 
@@ -40,7 +42,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
         Logger.getGlobal().info("University itent init");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_inscription);
-        intentRegistration1 = new Intent(getApplicationContext(), registration1.class);
+        intentRegistration1 = new Intent(getApplicationContext(), Registration1.class);
         layoutManager = new LinearLayoutManager(this);
         univs = new ArrayList<>();
         myOnClickListener = new MyOnClickListener(this, recyclerView);
@@ -53,12 +55,19 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
+        if(items.getJSONObject(0).has("code_retour"))
+            System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
         for(int i = 0; i < items.length(); i++){
             JSONObject uniJson = items.getJSONObject(i);
-            University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_teacher"), new byte[20]);
+            System.out.println("value de i = " + i);
+            Iterator<String> it = uniJson.keys();
+            while(it.hasNext())
+                System.out.println(it.next());
+            University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_student"),
+                    uniJson.getString("suffixe_teacher"), Base64.getDecoder().decode(uniJson.getString("image")));
             univs.add(university);
         }
-            adpater_card = new univ_adapter_card(univs);
+            adpater_card = new UnivAdapterCard(univs);
             recyclerView.setAdapter(adpater_card);
     }
 

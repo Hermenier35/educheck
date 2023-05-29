@@ -23,6 +23,8 @@ public class AcademicBackground implements Serializable {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("name", getName());
+            jsonObject.put("type", getType());
+            jsonObject.put("image", getImage());
         } catch (JSONException e) {
             e.printStackTrace();
         }
