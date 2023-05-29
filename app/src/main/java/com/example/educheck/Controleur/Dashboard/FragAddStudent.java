@@ -15,7 +15,7 @@ import com.example.educheck.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Frag_add_student extends Fragment {
+public class FragAddStudent extends Fragment {
 
     View view;
     Spinner spinner;
