@@ -118,7 +118,7 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
             }else{
                 System.out.println("code retour error :" + this.code_retour);
                 JSONObject response_request = new JSONObject().put("code_retour", this.code_retour);
-                res = (JSONArray) response_request.get("code_retour");
+                res = response_request.getJSONArray("code_retour");
             }
         } catch (JSONException e) {
             e.printStackTrace();
