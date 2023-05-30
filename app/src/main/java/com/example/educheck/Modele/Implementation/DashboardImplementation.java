@@ -67,6 +67,22 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
+    public void addAcademicBackground(String token, String typePath, String namePath, String uniName, String referentMail) {
+        Request request = new Request(this, "PUT");
+        JSONObject body = new JSONObject();
+        try{
+            body.put("type", typePath);
+            body.put("pathName", namePath);
+            body.put("uniName", uniName);
+            body.put("referant", referentMail);
+            request.setBody(body);
+            request.execute(HttpUrl.UrlAddAcademicBackground + "/" + token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
         try {
             callBack.onTaskCompleted(items);
