@@ -1,6 +1,7 @@
 package com.example.educheck.Modele;
 
 import android.media.Image;
+import android.widget.ImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,12 +11,12 @@ import java.io.Serializable;
 public class AcademicBackground implements Serializable {
     private String name;
     private String type;
-    private byte[] image;
+    private ImageView image;
 
-    public AcademicBackground(String name, String type) {
+    public AcademicBackground(String name, String type, ImageView image) {
         this.name = name;
         this.type = type;
-        this.image=new byte[20];
+        this.image = image;
     }
 
 
@@ -46,11 +47,11 @@ public class AcademicBackground implements Serializable {
         this.type = type;
     }
 
-    public byte[] getImage() {
+    public ImageView getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(ImageView image) {
         this.image = image;
     }
 }

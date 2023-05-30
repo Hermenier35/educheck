@@ -10,4 +10,5 @@ public interface Dashboard {
     public void postUniversity(String token, University university);
     public void changePassword(String token, String password, String newPassword);
     public void getUniversity(String token);
+    public void addAcademicBackground(String token, String typePath, String namePath, String uniName, String referentMail);
 }

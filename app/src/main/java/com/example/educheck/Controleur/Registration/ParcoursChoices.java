@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.educheck.Controleur.Login.Login;
 import com.example.educheck.Modele.AcademicBackground;
@@ -35,6 +37,7 @@ public class ParcoursChoices extends AppCompatActivity implements AsyncTaskcallb
     private ArrayList<AcademicBackground> academicBackgrounds;
     private InscriptionImplementation inscriptionImplementation;
     private Intent logging_page;
+    private String request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,27 +52,46 @@ public class ParcoursChoices extends AppCompatActivity implements AsyncTaskcallb
         university = (University) getIntent().getSerializableExtra("university") ;
         student = (Student) getIntent().getSerializableExtra("student");
         logging_page = new Intent(this, Login.class);
+        request = "getAllAcademicBackgrounds";
         inscription.getAllAcademicBackgrounds(university.getSuffixeStudent());
         inscriptionImplementation = new InscriptionImplementation(this);
     }
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
-        academicBackgrounds = new ArrayList<>();
-        if(items.length()>0 && !items.getJSONObject(0).has("status")) {
-            for (int i = 0; i < items.length(); i++) {
-                JSONObject json = items.getJSONObject(i);
-                AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"));
-                //parcour.setImage(R.drawable.logo);
-                academicBackgrounds.add(parcour);
-            }
-        }else{
-            AcademicBackground parcour = new AcademicBackground("Not Academic Backgrounds find","contact your " +
-                    "university for more information");
-            academicBackgrounds.add(parcour);
+        switch (request){
+            case "getAllAcademicBackgrounds" :
+                academicBackgrounds = new ArrayList<>();
+                if(items.length()>0 && !items.getJSONObject(0).has("status")) {
+                    for (int i = 0; i < items.length(); i++) {
+                        JSONObject json = items.getJSONObject(i);
+                        ImageView imageView = new ImageView(this);
+                        switch(json.getString("type")){
+                            case "Licence" :
+                                imageView.setImageResource(R.drawable.licence);
+                                break;
+                            case "Master" :
+                                imageView.setImageResource(R.drawable.master);
+                                break;
+                            case "Doctorat" :
+                                imageView.setImageResource(R.drawable.doctorat);
+                                break;
+                        }
+                        AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"), imageView);
+                        academicBackgrounds.add(parcour);
+                    }
+                }else{
+                    AcademicBackground parcour = new AcademicBackground("Not Academic Backgrounds find","contact your " +
+                            "university for more information", new ImageView(this));
+                    academicBackgrounds.add(parcour);
+                }
+                adapter = new RecyclerAdapter(academicBackgrounds);
+                recyclerView.setAdapter(adapter);
+                break;
+            case "registerAcademicBackground" :
+                Toast.makeText(this, "inscription send", Toast.LENGTH_SHORT).show();
+                break;
         }
-        adapter = new RecyclerAdapter(academicBackgrounds);
-        recyclerView.setAdapter(adapter);
     }
 
     private class MyOnClickListener implements View.OnClickListener{
@@ -82,8 +104,9 @@ public class ParcoursChoices extends AppCompatActivity implements AsyncTaskcallb
         @Override
         public void onClick(View v) {
             AcademicBackground academic = academicBackgrounds.get(v.getVerticalScrollbarPosition());
-            startActivity(logging_page);
+            request = "registerAcademicBackground";
             inscriptionImplementation.registerAcademicBackground(academic, student, university);
+            startActivity(logging_page);
         }
     }
 
