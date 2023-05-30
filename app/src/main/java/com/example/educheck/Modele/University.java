@@ -4,15 +4,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.Base64;
 
 public class University implements Serializable {
 
     private String uniName;
     private String suffixeStudent;
-    private String[] suffixeTeacher;
+    private String suffixeTeacher;
     private byte[] image;
 
-    public University(String name, String suffixeStudent, String[] suffixeTeacher, byte[] image){
+    public University(String name, String suffixeStudent, String suffixeTeacher, byte[] image){
         this.uniName = name;
         this.suffixeStudent = suffixeStudent;
         this.suffixeTeacher = suffixeTeacher;
@@ -26,10 +27,10 @@ public class University implements Serializable {
     public JSONObject convertToJSONObject(){
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("uniName", getName());
-            jsonObject.put("suffixeStudent", getSuffixeStudent());
-            jsonObject.put("suffixeTeacher", getSuffixeTeacher());
-            jsonObject.put("image", getImage());
+            jsonObject.put("name", getName());
+            jsonObject.put("suffixe_student", getSuffixeStudent());
+            jsonObject.put("suffixe_teacher", getSuffixeTeacher());
+            jsonObject.put("image", Base64.getEncoder().encodeToString(getImage()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -40,11 +41,11 @@ public class University implements Serializable {
         return suffixeStudent;
     }
 
-    public String[] getSuffixeTeacher() {
+    public String getSuffixeTeacher() {
         return suffixeTeacher;
     }
 
-    public void setSuffixeTeacher(String[] suffixeTeacher) {
+    public void setSuffixeTeacher(String suffixeTeacher) {
         this.suffixeTeacher = suffixeTeacher;
     }
 

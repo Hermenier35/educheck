@@ -1,0 +1,71 @@
+package com.example.educheck.Modele;
+
+public class Date2 {
+    private int hours;
+    private int minutes;
+    private int date;
+    private int during;
+
+    public Date2(int hours, int minutes, int date, int during) {
+        this.hours = hours;
+        this.minutes = minutes;
+        this.date = date;
+        this.during = during;
+    }
+
+    public int getYear(){
+        return date/10000;
+    }
+
+    public int getMonth(){
+        switch(String.valueOf(date).substring(4,6)){
+            case"01" : return 0;
+            case"02" : return 1;
+            case"03" : return 2;
+            case"04" : return 3;
+            case"05" : return 4;
+            case"06" : return 5;
+            case"07" : return 6;
+            case"08" : return 7;
+            case"09" : return 8;
+            default: return Integer.getInteger(String.valueOf(date).substring(4,6)) - 1;
+        }
+    }
+
+    public int getDay(){
+        String day = String.valueOf(date).substring(6);
+        return Integer.parseInt(day);
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public int getDuring() {
+        return during;
+    }
+
+    public void setDuring(int during) {
+        this.during = during;
+    }
+}
