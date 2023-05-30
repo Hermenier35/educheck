@@ -42,7 +42,7 @@ public class DashBoardEtudiant extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new Frag1());
+                replaceFragment(new Schedule());
             }
         }
         );
