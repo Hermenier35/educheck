@@ -72,6 +72,17 @@
                 android:layout_marginLeft="20sp"/>
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22dp"
+            android:textStyle="bold|italic"
+            android:text="Settings academic backgrounds"/>
+
+        <Spinner
+            android:id="@+id/spinner_acaback_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/logoRight"

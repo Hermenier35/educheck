@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ManagerAcademicBackgroundsFragment#newInstance} factory method to
@@ -43,9 +45,10 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
     private EditText nameAcaBackground;
     private EditText mailReferent;
     private Button buttonAddPath;
-    private Spinner spinner;
+    private Spinner spinner, spinChoiceParcour;
     private DashboardImplementation dashboardImplementation;
     private String request;
+    private ArrayList<String> dataParcours;
 
     public ManagerAcademicBackgroundsFragment() {
         // Required empty public constructor
@@ -83,6 +86,12 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
         View view = inflater.inflate(R.layout.fragment_manager_academic_backgrounds, container, false);
         dashboardImplementation = new DashboardImplementation(this);
         spinner = view.findViewById(R.id.spinner_type_choice);
+        spinChoiceParcour = view.findViewById(R.id.spinner_acaback_name);
+        dataParcours = new ArrayList<>();
+        dataParcours.add("please select");
+        ArrayAdapter<String> adapterDataParcour = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, dataParcours);
+        adapterDataParcour.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinChoiceParcour.setAdapter(adapterDataParcour);
         nameAcaBackground = view.findViewById(R.id.addpathname);
         mailReferent = view.findViewById(R.id.addpathreferentname);
         buttonAddPath = view.findViewById(R.id.addpathbutton);
@@ -91,6 +100,8 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
         spinner.setAdapter(adapter);
         mailReferent.addTextChangedListener(watcher);
         buttonAddPath.setOnClickListener(v -> {addAcademicBackground();});
+        request = "getAllAcademicBackgrounds";
+        dashboardImplementation.getAllAcademicBackgrounds(university.getSuffixeTeacher());
         return view;
     }
 
@@ -100,6 +111,14 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
         switch (request){
             case "addAcademicBackground" :
                 Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
+                break;
+            case "getAllAcademicBackgrounds" :
+                if(items.length()>0 && !items.getJSONObject(0).has("status")) {
+                    for (int i = 0; i < items.length(); i++) {
+                        JSONObject json = items.getJSONObject(i);
+                        dataParcours.add(json.getString("type") + " : "+ json.getString("name"));
+                    }
+                }
                 break;
             default: System.err.println("ManagerAcademicBackgroundsFragment: request task not found");
         }
