@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".Controleur.Dashboard.FragMessages">
+    tools:context=".Controleur.Dashboard.FragMessages2">
 
     <TextView
         android:id="@+id/sendMessage"

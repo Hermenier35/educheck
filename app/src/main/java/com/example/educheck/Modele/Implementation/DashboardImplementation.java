@@ -83,6 +83,12 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
+    public void sendMexTo(String token){ // pour avoir tous les gens à qui on peux envoyer les messages.
+        Request request= new Request(this,"GET");
+        request.execute(HttpUrl.UrlSendMessageTo+ "/" + token);
+    }
+
+    @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
         try {
             callBack.onTaskCompleted(items);
@@ -90,4 +96,5 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             e.printStackTrace();
         }
     }
+
 }
