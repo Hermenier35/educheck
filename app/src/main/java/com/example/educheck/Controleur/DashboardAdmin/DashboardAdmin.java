@@ -76,7 +76,7 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
                     university = new University(response.getString("name"), response.getString("suffixe_student"),
                             response.getString("suffixe_teacher"), Base64.getDecoder().decode(response.getString("image")));
                     pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this,
-                            ManagerUniversityFragment.newInstance(token, university), ManagerAcademicBackgroundsFragment.newInstance(token, "p2"));
+                            ManagerUniversityFragment.newInstance(token, university), ManagerAcademicBackgroundsFragment.newInstance(token, university));
                     viewPager.setAdapter(pagerAdapter);
                     break;
                 default: System.err.println("Request not find");

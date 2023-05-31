@@ -38,7 +38,7 @@ public class UnivAdapterCard extends RecyclerView.Adapter<UnivAdapterCard.Univer
     public void onBindViewHolder(@NonNull UniversityHolder holder, int position) {
         TextView textViewUniv_Name= holder.Univ_Name;
         ImageView imageView = holder.imageView;
-        textViewUniv_Name.setText(universities.get(position).getName());
+        textViewUniv_Name.setText(universities.get(position).getUniName());
         byte[] image = universities.get(position).getImage();
         imageView.setImageBitmap(BitmapFactory.decodeByteArray(image, 0, image.length));
     }
