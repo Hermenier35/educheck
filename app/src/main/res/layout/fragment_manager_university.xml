@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controleur.DashboardAdmin.ManagerUniversityFragment">
+    tools:context=".Controleur.DashboardAdmin.ManagerUniversityFragment"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -22,8 +23,7 @@
         android:id="@+id/logoRight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
         android:src="@drawable/baseline_switch_right_white_36dp"
         android:background="?attr/colorPrimary"/>
 
-</FrameLayout>
+</LinearLayout>

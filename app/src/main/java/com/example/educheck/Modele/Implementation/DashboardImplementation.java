@@ -1,5 +1,6 @@
 package com.example.educheck.Modele.Implementation;
 
+import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Interface.Dashboard;
 import com.example.educheck.Modele.Message;
@@ -67,6 +68,48 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
+    public void addAcademicBackground(String token, String typePath, String namePath, String uniName, String referentMail) {
+        Request request = new Request(this, "PUT");
+        JSONObject body = new JSONObject();
+        try{
+            body.put("type", typePath);
+            body.put("pathName", namePath);
+            body.put("uniName", uniName);
+            body.put("referant", referentMail);
+            request.setBody(body);
+            request.execute(HttpUrl.UrlAddAcademicBackground + "/" + token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void getAllAcademicBackgrounds(String suffixe) {
+        Request request = new Request(this, "GET");
+        request.execute(HttpUrl.UrlGetAcademicBackground + "/" + suffixe);
+    }
+
+    @Override
+    public void editAcademicBackground(String token, AcademicBackground academicBackground) {
+        Request request = new Request(this, "PUT");
+        JSONObject body = academicBackground.convertToJSONObject();
+        request.setBody(body);
+        request.execute(HttpUrl.UrlEditAcademicBackground + "/" + token);
+    }
+
+    @Override
+    public void getPersonalCourses(String token) {
+        Request request= new Request(this,"GET");
+        request.execute(HttpUrl.UrlPersonalCourses+ "/" + token);
+    }
+
+    @Override
+    public void sendMexTo(String token){ // pour avoir tous les gens à qui on peux envoyer les messages.
+        Request request= new Request(this,"GET");
+        request.execute(HttpUrl.UrlSendMexTo+ "/" + token);
+    }
+
+    @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
         try {
             callBack.onTaskCompleted(items);
@@ -74,4 +117,5 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             e.printStackTrace();
         }
     }
+
 }

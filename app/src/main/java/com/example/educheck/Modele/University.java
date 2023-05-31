@@ -20,14 +20,10 @@ public class University implements Serializable {
         this.image = image;
     }
 
-    public String getName(){
-        return this.uniName;
-    }
-
     public JSONObject convertToJSONObject(){
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("name", getName());
+            jsonObject.put("name", getUniName());
             jsonObject.put("suffixe_student", getSuffixeStudent());
             jsonObject.put("suffixe_teacher", getSuffixeTeacher());
             jsonObject.put("image", Base64.getEncoder().encodeToString(getImage()));

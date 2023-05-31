@@ -51,8 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.itemTitle.setText(academicBackgrounds.get(i).getName());
         viewHolder.itemDetail.setText(academicBackgrounds.get(i).getType());
-        byte[] image = academicBackgrounds.get(i).getImage();
-        viewHolder.itemImage.setImageBitmap(BitmapFactory.decodeByteArray(image, 0, image.length));
+        viewHolder.itemImage.setImageDrawable(academicBackgrounds.get(i).getImage().getDrawable());
     }
     @Override
     public int getItemCount() {

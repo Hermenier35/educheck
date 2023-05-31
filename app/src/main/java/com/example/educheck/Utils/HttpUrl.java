@@ -7,6 +7,7 @@ public class HttpUrl {
     public static String UrlPostUniversity = ip + "addUni";
     public static String UrlGetUniversities = ip + "allUni";
     public static String UrlPostAcademicBackground = ip + "pathStudent";
+    public static String UrlAddAcademicBackground = ip + "addUniPath";
     public static String UrlGetAcademicBackground = ip + "getPaths";
     public static String UrlConnexion = ip + "findUser";
     public static String UrlForgetPassword = ip + "resetPassword";
@@ -14,4 +15,7 @@ public class HttpUrl {
     public static String UrlRetrieveMessages = ip + "retrieveMessages";
     public static String UrlGetCourses = ip + "getCourses";
     public static String UrlChangePassword = ip + "modifieUserPassword";
+    public static String UrlSendMexTo = ip + "sendMexTo";
+    public static String UrlEditAcademicBackground = ip + "editAcademicBackground";
+    public static String UrlPersonalCourses = ip + "";
 }
