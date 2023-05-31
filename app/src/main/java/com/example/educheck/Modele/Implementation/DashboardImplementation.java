@@ -98,6 +98,12 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
+    public void getPersonalCourses(String token) {
+        Request request= new Request(this,"GET");
+        request.execute(HttpUrl.UrlPersonalCourses+ "/" + token);
+    }
+
+    @Override
     public void sendMexTo(String token){ // pour avoir tous les gens à qui on peux envoyer les messages.
         Request request= new Request(this,"GET");
         request.execute(HttpUrl.UrlSendMexTo+ "/" + token);

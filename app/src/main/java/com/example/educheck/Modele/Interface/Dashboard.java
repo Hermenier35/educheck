@@ -15,4 +15,5 @@ public interface Dashboard {
     public void addAcademicBackground(String token, String typePath, String namePath, String uniName, String referentMail);
     public void getAllAcademicBackgrounds(String suffixe);
     public void editAcademicBackground(String token, AcademicBackground academicBackground);
+    public void getPersonalCourses(String token);
 }
