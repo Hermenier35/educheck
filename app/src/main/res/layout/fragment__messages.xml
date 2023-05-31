@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".Controleur.Dashboard.FragMessages">
+    tools:context=".Controleur.DashbardTeacher.FragMessages">
 
     <TextView
         android:id="@+id/sendMessage"
@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/messages"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="140dp"
         android:layout_marginBottom="60dp">
 
     </LinearLayout>
