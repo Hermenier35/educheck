@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -42,13 +43,14 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
     // TODO: Rename and change types of parameters
     private String token;
     private University university;
-    private EditText nameAcaBackground;
-    private EditText mailReferent;
-    private Button buttonAddPath;
+    private EditText nameAcaBackground, editNameAcaBackground;
+    private EditText mailReferent, editMailReferent;
+    private Button buttonAddPath, editPath, delete;
     private Spinner spinner, spinChoiceParcour;
     private DashboardImplementation dashboardImplementation;
     private String request;
     private ArrayList<String> dataParcours;
+    private ArrayList<AcademicBackground>  academicBackgrounds;
 
     public ManagerAcademicBackgroundsFragment() {
         // Required empty public constructor
@@ -87,19 +89,26 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
         dashboardImplementation = new DashboardImplementation(this);
         spinner = view.findViewById(R.id.spinner_type_choice);
         spinChoiceParcour = view.findViewById(R.id.spinner_acaback_name);
+
         dataParcours = new ArrayList<>();
+        academicBackgrounds = new ArrayList<>();
         dataParcours.add("Please select");
-        ArrayAdapter<String> adapterDataParcour = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, dataParcours);
+        ArrayAdapter<String> adapterDataParcour = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, dataParcours);
         adapterDataParcour.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinChoiceParcour.setAdapter(adapterDataParcour);
         nameAcaBackground = view.findViewById(R.id.addpathname);
         mailReferent = view.findViewById(R.id.addpathreferentname);
         buttonAddPath = view.findViewById(R.id.addpathbutton);
+        editPath = view.findViewById(R.id.editpathbutton);
+        delete = view.findViewById(R.id.deletepathbutton);
+        editMailReferent = view.findViewById(R.id.editpathreferentname);
+        editNameAcaBackground = view.findViewById(R.id.editpathname);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.choices, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         mailReferent.addTextChangedListener(watcher);
-        buttonAddPath.setOnClickListener(v -> {addAcademicBackground();});
+        buttonAddPath.setOnClickListener(v -> addAcademicBackground());
+        editPath.setOnClickListener(v -> editAcademicBackground());
         request = "getAllAcademicBackgrounds";
         dashboardImplementation.getAllAcademicBackgrounds(university.getSuffixeTeacher());
         return view;
@@ -110,6 +119,7 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
         JSONObject response = items.getJSONObject(0);
         switch (request){
             case "addAcademicBackground" :
+            case "editAcademicBackground" :
                 Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                 break;
             case "getAllAcademicBackgrounds" :
@@ -117,6 +127,7 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
                     for (int i = 0; i < items.length(); i++) {
                         JSONObject json = items.getJSONObject(i);
                         dataParcours.add(json.getString("type") + " : "+ json.getString("name"));
+                        academicBackgrounds.add(new AcademicBackground(json.getString("name"), json.getString("type"),null,json.getString("_id")));
                     }
                 }
                 break;
@@ -128,6 +139,25 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
         request = "addAcademicBackground";
         dashboardImplementation.addAcademicBackground(token, spinner.getSelectedItem().toString(), nameAcaBackground.getText().toString(),
                 university.getUniName(), mailReferent.getText().toString());
+    }
+
+    private void editAcademicBackground(){
+        request = "editAcademicBackground";
+        String valueSpinner = spinChoiceParcour.getSelectedItem().toString();
+        AcademicBackground find = findAcaByName(valueSpinner);
+        find.setName(editNameAcaBackground.getText().toString());
+        find.setType(editMailReferent.getText().toString());
+        dashboardImplementation.editAcademicBackground(token, find);
+    }
+
+    private AcademicBackground findAcaByName(String valueSpinner){
+        String data[] = valueSpinner.split(" : ");
+        for(int i = 0; i< academicBackgrounds.size(); i++){
+            if(academicBackgrounds.get(i).getType().equals(data[0]) && academicBackgrounds.get(i).getName().equals(data[1]))
+                return academicBackgrounds.get(i);
+        }
+        System.err.println("Aucun parcours trouvé");
+        return null;
     }
 
     private final TextWatcher watcher = new TextWatcher() {

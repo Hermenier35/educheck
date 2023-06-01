@@ -77,12 +77,13 @@ public class ParcoursChoices extends AppCompatActivity implements AsyncTaskcallb
                                 imageView.setImageResource(R.drawable.doctorat);
                                 break;
                         }
-                        AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"), imageView);
+                        AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"),
+                                imageView, json.getString("_id"));
                         academicBackgrounds.add(parcour);
                     }
                 }else{
                     AcademicBackground parcour = new AcademicBackground("Not Academic Backgrounds find","contact your " +
-                            "university for more information", new ImageView(this));
+                            "university for more information", new ImageView(this), "");
                     academicBackgrounds.add(parcour);
                 }
                 adapter = new RecyclerAdapter(academicBackgrounds);
