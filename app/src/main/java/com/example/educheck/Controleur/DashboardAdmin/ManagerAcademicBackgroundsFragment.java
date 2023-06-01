@@ -88,7 +88,7 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
         spinner = view.findViewById(R.id.spinner_type_choice);
         spinChoiceParcour = view.findViewById(R.id.spinner_acaback_name);
         dataParcours = new ArrayList<>();
-        dataParcours.add("please select");
+        dataParcours.add("Please select");
         ArrayAdapter<String> adapterDataParcour = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, dataParcours);
         adapterDataParcour.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinChoiceParcour.setAdapter(adapterDataParcour);
