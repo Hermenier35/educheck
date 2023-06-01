@@ -18,6 +18,8 @@ import com.example.educheck.R;
 public class DashBoardTeacher extends AppCompatActivity {
     Button btn1, btn2,btn3;
 
+    private String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +29,12 @@ public class DashBoardTeacher extends AppCompatActivity {
         btn2 = findViewById(R.id.tmenu2);
         btn3 = findViewById(R.id.tmenu3);
 
+        token = getIntent().getStringExtra("token");
+
         btn1.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new Frag1());
+                                        replaceFragment(new FragAddStudent());
                                     }
                                 }
         );
@@ -38,7 +42,7 @@ public class DashBoardTeacher extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new Frag2());
+                                        replaceFragment(new FragMessages());
                                     }
                                 }
         );

@@ -25,7 +25,7 @@ import java.util.List;
 public class FragAddStudent extends Fragment implements AsyncTaskcallback {
 
         private View view;
-        private Spinner spinner;
+        private Spinner course;
         private List CoursesList;
         private Button registre;
 
@@ -40,7 +40,7 @@ public class FragAddStudent extends Fragment implements AsyncTaskcallback {
             view =  inflater.inflate(R.layout.fragment_add_student, container, false);
 
             mailStudent = view.findViewById(R.id.mail_student);
-            spinner = view.findViewById(R.id.courses_spinner);
+            course = view.findViewById(R.id.courses_spinner);
             registre = view.findViewById(R.id.addStudentToCourse);
 
             CoursesList = new ArrayList();
@@ -54,7 +54,9 @@ public class FragAddStudent extends Fragment implements AsyncTaskcallback {
         }
 
         public void saveToBDD(){
-            //TODO
+            request = new DashboardImplementation(this);
+            //a revoir le couse (il faut id)
+            request.postCourses("token",mailStudent.toString(), course.getTransitionName());
         }
 
 
@@ -71,7 +73,7 @@ public class FragAddStudent extends Fragment implements AsyncTaskcallback {
                 CoursesList
             );
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
+            course.setAdapter(adapter);
 
         }
 
