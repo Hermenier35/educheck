@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:layout_marginLeft="10sp"
+                android:layout_marginStart="10sp"
                 android:textStyle="italic|bold"
                 android:text="Name :     " />
 
@@ -48,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/addpathname"
+                android:autofillHints="name"
                 android:hint="Informatique"
                 android:textSize="12sp"/>
 
@@ -64,13 +65,14 @@
                 android:textSize="16sp"
                 android:textStyle="italic|bold"
                 android:text="Referent :"
-                android:layout_marginLeft="10sp"/>
+                android:layout_marginStart="10sp"/>
 
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/addpathreferentname"
+                android:autofillHints="emailAddress"
                 android:hint="mailreferent@univ.fr"
                 android:textSize="12sp"/>
 
@@ -110,14 +112,15 @@
                 android:textSize="16sp"
                 android:textStyle="italic|bold"
                 android:text="Name :     "
-                android:layout_marginLeft="10sp"/>
+                android:layout_marginStart="10sp"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/editpathname"
+                android:autofillHints="name"
                 android:hint="Informatique"
-                android:textSize="12dp"/>
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
@@ -132,13 +135,14 @@
                 android:textSize="16sp"
                 android:textStyle="italic|bold"
                 android:text="Referent :"
-                android:layout_marginLeft="10sp"/>
+                android:layout_marginStart="10sp"/>
 
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/editpathreferentname"
+                android:autofillHints="emailAddress"
                 android:hint="mailreferent@univ.fr"
                 android:textSize="12sp"/>
 
@@ -155,14 +159,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editpathbutton"
                 android:text="Edit Path"
-                android:layout_marginRight="5sp"/>
+                android:layout_marginEnd="5sp"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/deletepathbutton"
                 android:text="Delete"
-                android:layout_marginLeft="5sp"/>
+                android:layout_marginStart="5sp"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -172,6 +176,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100sp"
+        android:contentDescription="navigationBar"
         android:src="@drawable/baseline_switch_left_white_36dp"
         android:background="?attr/colorPrimary"/>
 
