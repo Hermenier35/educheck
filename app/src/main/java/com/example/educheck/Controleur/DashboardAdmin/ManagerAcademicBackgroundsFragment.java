@@ -107,10 +107,9 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         mailReferent.addTextChangedListener(watcher);
-        buttonAddPath.setOnClickListener(v -> addAcademicBackground());
-        editPath.setOnClickListener(v -> editAcademicBackground());
-        request = "getAllAcademicBackgrounds";
-        dashboardImplementation.getAllAcademicBackgrounds(university.getSuffixeTeacher());
+        buttonAddPath.setOnClickListener(v -> sendRequest("addAcademicBackground"));
+        editPath.setOnClickListener(v -> sendRequest("editAcademicBackground"));
+        sendRequest("getAllAcademicBackgrounds");
         return view;
     }
 
@@ -121,13 +120,15 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
             case "addAcademicBackground" :
             case "editAcademicBackground" :
                 Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
+                sendRequest("getAllAcademicBackgrounds");
                 break;
             case "getAllAcademicBackgrounds" :
                 if(items.length()>0 && !items.getJSONObject(0).has("status")) {
                     for (int i = 0; i < items.length(); i++) {
                         JSONObject json = items.getJSONObject(i);
                         dataParcours.add(json.getString("type") + " : "+ json.getString("name"));
-                        academicBackgrounds.add(new AcademicBackground(json.getString("name"), json.getString("type"),null,json.getString("_id")));
+                        academicBackgrounds.add(new AcademicBackground(json.getString("name"), json.getString("type"),
+                                null,json.getString("_id"), json.getString("referant")));
                     }
                 }
                 break;
@@ -135,19 +136,28 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
         }
     }
 
-    private void addAcademicBackground(){
-        request = "addAcademicBackground";
-        dashboardImplementation.addAcademicBackground(token, spinner.getSelectedItem().toString(), nameAcaBackground.getText().toString(),
-                university.getUniName(), mailReferent.getText().toString());
-    }
-
-    private void editAcademicBackground(){
-        request = "editAcademicBackground";
-        String valueSpinner = spinChoiceParcour.getSelectedItem().toString();
-        AcademicBackground find = findAcaByName(valueSpinner);
-        find.setName(editNameAcaBackground.getText().toString());
-        find.setType(editMailReferent.getText().toString());
-        dashboardImplementation.editAcademicBackground(token, find);
+    private void sendRequest(String name){
+        this.request = name;
+        switch(name){
+            case "getAllAcademicBackgrounds" :
+                dashboardImplementation.getAllAcademicBackgrounds(university.getSuffixeTeacher());
+                dataParcours.clear();
+                academicBackgrounds.clear();
+                dataParcours.add("Please select");
+                break;
+            case "addAcademicBackground" :
+                dashboardImplementation.addAcademicBackground(token, spinner.getSelectedItem().toString(), nameAcaBackground.getText().toString(),
+                        university.getUniName(), mailReferent.getText().toString());
+                break;
+            case "editAcademicBackground" :
+                String valueSpinner = spinChoiceParcour.getSelectedItem().toString();
+                AcademicBackground find = findAcaByName(valueSpinner);
+                find.setName(editNameAcaBackground.getText().toString());
+                find.setReferent(editMailReferent.getText().toString());
+                dashboardImplementation.editAcademicBackground(token, find);
+                break;
+            default: System.err.println("No request Found");
+        }
     }
 
     private AcademicBackground findAcaByName(String valueSpinner){
