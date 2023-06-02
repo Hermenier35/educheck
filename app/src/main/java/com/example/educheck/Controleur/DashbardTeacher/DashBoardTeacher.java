@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.example.educheck.Controleur.Dashboard.Frag1;
 import com.example.educheck.Controleur.Dashboard.Frag2;
 import com.example.educheck.Controleur.Dashboard.Frag3;
+import com.example.educheck.Controleur.Dashboard.FragMessages1;
 import com.example.educheck.Controleur.Dashboard.FragMessages2;
 import com.example.educheck.R;
 
