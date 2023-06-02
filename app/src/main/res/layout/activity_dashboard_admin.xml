@@ -20,19 +20,30 @@
         app:titleTextAppearance="@style/TextAppearance.Randoomz.Toolbar.Title"/>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView">
+        android:layout_height="591dp">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-        </androidx.viewpager2.widget.ViewPager2>
-
-
+            android:layout_weight="1"></androidx.viewpager2.widget.ViewPager2>
 
     </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schema.android.com/apk/res/res-auto"
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="start"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.Randoomz.Toolbar"
+        app:titleTextAppearance="@style/TextAppearance.Randoomz.Toolbar.Title"
+        app:menu="@menu/menu_bottom" />
 
 </LinearLayout>

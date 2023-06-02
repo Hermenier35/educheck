@@ -19,11 +19,4 @@
     </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/logoRight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_switch_right_white_36dp"
-        android:background="?attr/colorPrimary"/>
-
 </LinearLayout>
