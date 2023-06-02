@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.example.educheck.Controleur.Dashboard.Frag1;
 import com.example.educheck.Controleur.Dashboard.Frag2;
 import com.example.educheck.Controleur.Dashboard.Frag3;
+import com.example.educheck.Controleur.Dashboard.FragMessages2;
 import com.example.educheck.R;
 
 public class DashBoardTeacher extends AppCompatActivity {
@@ -42,7 +43,7 @@ public class DashBoardTeacher extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new FragMessages());
+                                        replaceFragment(new FragMessages2());
                                     }
                                 }
         );
