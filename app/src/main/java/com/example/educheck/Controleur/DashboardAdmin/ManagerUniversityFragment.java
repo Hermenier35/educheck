@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,6 +16,8 @@ import com.example.educheck.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.io.Serializable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +34,7 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
     // TODO: Rename and change types of parameters
     private String token;
     private University university;
-    private ImageView logoRight;
+    private MenuItem item;
 
     public ManagerUniversityFragment() {
         // Required empty public constructor
@@ -69,7 +72,6 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View viewInflate = inflater.inflate(R.layout.fragment_manager_university, container, false);
-        logoRight = viewInflate.findViewById(R.id.logoRight);
         return viewInflate;
     }
 

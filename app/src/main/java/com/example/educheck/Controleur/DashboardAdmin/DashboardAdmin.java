@@ -1,6 +1,7 @@
 package com.example.educheck.Controleur.DashboardAdmin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -8,14 +9,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.autofill.AutofillManager;
 
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,20 +41,25 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
     public static FragmentActivity fa;
     private DashboardImplementation dashboardRequest;
     private University university;
+    private BottomNavigationView bottomNavigationView;
+    private static MenuItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_admin);
         toolbar = findViewById(R.id.toolbar);
+        bottomNavigationView = findViewById(R.id.navigation);
+        bottomNavigationView.inflateMenu(R.menu.menu_bottom);
+        item = bottomNavigationView.getMenu().findItem(R.id.logoNavigation);
         setSupportActionBar(toolbar);
+
         fragmentManager = getSupportFragmentManager();
         fa = this;
 
         token = getIntent().getStringExtra("token");
         valide = getIntent().getBooleanExtra("valide", false);
         viewPager = findViewById(R.id.viewpager);
-        System.out.println("valide: " + valide);
         if(valide){
             dashboardRequest = new DashboardImplementation(this);
             request = "getUniversity";
@@ -58,6 +69,18 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
                     DefaultPageFragment.newInstance(token, "p2"));
             viewPager.setAdapter(pagerAdapter);
         }
+
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if(position==0)
+                    item.setIcon(R.drawable.baseline_switch_left_white_36dp);
+                else
+                    item.setIcon(R.drawable.baseline_switch_right_white_36dp);
+
+            }
+        });
 
     }
 
@@ -88,10 +111,12 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
     @Override
     public void onBackPressed() {
         if (viewPager.getCurrentItem() == 0) {
+            item.setIcon(R.drawable.baseline_switch_left_white_36dp);
             // If the user is currently looking at the first step, allow the system to handle the
             // Back button. This calls finish() on this activity and pops the back stack.
             super.onBackPressed();
         } else {
+            item.setIcon(R.drawable.baseline_switch_right_white_36dp);
             // Otherwise, select the previous step.
             viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
         }
