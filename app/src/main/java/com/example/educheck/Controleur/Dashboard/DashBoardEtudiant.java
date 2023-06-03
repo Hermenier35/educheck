@@ -1,4 +1,6 @@
 package com.example.educheck.Controleur.Dashboard;
+import android.os.Bundle;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -13,10 +15,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.R;
 
-public class DashBoardEtudiant extends AppCompatActivity {
+import org.json.JSONArray;
+import org.json.JSONException;
+
+public class DashBoardEtudiant extends AppCompatActivity implements AsyncTaskcallback {
     Button btn1;
     Button btn2;
     Button btn3;
@@ -27,13 +33,7 @@ public class DashBoardEtudiant extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_etudiant);
-
-        Student student = new Student("yasser","el mellali","yelmellali@gmail.com","1234567899","student");
-        String name = student.getFirstName();
-        textView = findViewById(R.id.welcome);
-        String myString = "Hello ";
-        textView.setText(myString + name);
-
+        String name= getIntent().getStringExtra("mail");
         btn1 = findViewById(R.id.menu1);
         btn2 = findViewById(R.id.menu2);
         btn3 = findViewById(R.id.menu3);
@@ -50,15 +50,15 @@ public class DashBoardEtudiant extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new FragMessages1());
+                replaceFragment(new Frag_GetCours());
             }
         }
         );
 
         btn3.setOnClickListener(new View.OnClickListener() {
-                                    @Override
+                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new FragMessages2());
+                                        replaceFragment(new FragMessages1());
                                     }
                                 }
         );
@@ -77,6 +77,11 @@ public class DashBoardEtudiant extends AppCompatActivity {
             FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame1,fragment);
             fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onTaskCompleted(JSONArray items) throws JSONException {
+
     }
 }
 

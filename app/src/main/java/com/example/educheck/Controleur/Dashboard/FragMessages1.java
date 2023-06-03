@@ -90,9 +90,9 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         @Override
         public void onClick(View v) {
             String mailRecipient = users_mail.get(v.getVerticalScrollbarPosition());
-            intentMess1.putExtra("mailRecipient",mailRecipient);
+            Fragment fragMessages2 = FragMessages2.newInstance(mailRecipient);
             // startActivity(intentMess1);
-            replaceFragment(new FragMessages2());
+            replaceFragment(fragMessages2);
         }
     }
 

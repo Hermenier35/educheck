@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.educheck.Controleur.Dashboard.DashBoardEtudiant;
 import com.example.educheck.Controleur.DashbardTeacher.DashBoardTeacher;
+import com.example.educheck.Controleur.Dashboard.FragMessages1;
 import com.example.educheck.Controleur.DashboardAdmin.DashboardAdmin;
 import com.example.educheck.Modele.Implementation.LoginImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
@@ -34,6 +35,10 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
     TextView forgottenPassword;
     Intent forgottenPasswordActivity;
     Intent dashboard;
+
+    String mail;
+
+    String pass;
     @Override
     protected void onCreate(Bundle save) {
 
@@ -75,7 +80,9 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
     };
 
     protected void login_verification(){
-        model_login.connexion(email.getText().toString(),password.getText().toString());
+        mail=email.getText().toString();
+        pass=password.getText().toString();
+        model_login.connexion(mail,pass);
     }
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
@@ -97,6 +104,7 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
                         Toast.makeText(this, "please wait teacher's confirmation", Toast.LENGTH_SHORT).show();
                     else
                         dashboard.putExtra("token", response.getString("token"));
+                        dashboard.putExtra("mail",mail);
                         startActivity(dashboard);
                     break;
                 case "Teacher":
