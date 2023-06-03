@@ -52,6 +52,10 @@
             android:exported="true"
             android:label="Login Activity" />
         <activity
+            android:name=".Controleur.Dashboard.FragMessages1"
+            android:exported="true" />
+
+        <activity
             android:name=".Controleur.Login.MainActivity"
             android:exported="true" />
         <activity
