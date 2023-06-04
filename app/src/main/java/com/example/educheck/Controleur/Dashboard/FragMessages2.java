@@ -85,7 +85,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
        Instant instant= date.toInstant();
 
-       System.out.println("Current date and time: " + instant);
+        System.out.println("Current date and time: " + instant);
         System.out.println("Current mailRecipient: " + mailRecipient);
         System.out.println("Current mailSender: " + mailSender);
         System.out.println("Current message: " + text);
