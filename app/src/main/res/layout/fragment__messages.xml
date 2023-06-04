@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/sendMessage"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:gravity="center"
         android:padding="8dp"
@@ -19,31 +19,34 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
         android:id="@+id/messages"
+        android:layout_width="match_parent"
+        android:layout_height="325dp"
         android:layout_marginTop="90dp"
-        android:layout_marginBottom="60dp">
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical">
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="650dp">
+        android:layout_width="361dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="430dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/messageToSend"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:hint="Message" />
-    <Button
-        android:id="@+id/buttonSend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send" />
+        <EditText
+            android:id="@+id/messageToSend"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:hint="Message" />
+
+        <Button
+            android:id="@+id/buttonSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send" />
     </LinearLayout>
 
 </FrameLayout>
