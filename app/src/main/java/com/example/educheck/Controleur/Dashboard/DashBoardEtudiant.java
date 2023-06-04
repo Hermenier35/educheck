@@ -30,7 +30,7 @@ public class DashBoardEtudiant extends AppCompatActivity {
 
         Student student = new Student("yasser","el mellali","yelmellali@gmail.com","1234567899","student");
         String name = student.getFirstName();
-        textView = findViewById(R.id.welcome);
+        //textView = findViewById(R.id.welcome);
         String myString = "Hello ";
         textView.setText(myString + name);
 

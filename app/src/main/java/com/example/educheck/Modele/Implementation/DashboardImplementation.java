@@ -116,7 +116,7 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
         try {
             body.put("_id", id);
             request.setBody(body);
-            request.execute(HttpUrl.UrlDeleteAcademicBackground + "/" + token);
+            //request.execute(HttpUrl.UrlDeleteAcademicBackground + "/" + token);
         } catch (JSONException e) {
             e.printStackTrace();
         }

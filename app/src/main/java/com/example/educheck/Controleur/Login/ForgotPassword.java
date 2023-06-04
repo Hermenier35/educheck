@@ -1,5 +1,6 @@
 package com.example.educheck.Controleur.Login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,10 +35,18 @@ public class ForgotPassword extends AppCompatActivity implements AsyncTaskcallba
         super.onCreate(save);
         setContentView(R.layout.forgot_password);
         reset = findViewById(R.id.reset);
+        my_button = findViewById(R.id.my_button);
 
         email = findViewById(R.id.username2);
         model_forgot = new LoginImplementation(this);
         reset.setOnClickListener(v -> email_verification());
+
+        my_button.setOnClickListener(v -> {
+            // Code pour naviguer vers la page de login
+            Intent intent = new Intent(ForgotPassword.this, Login.class);
+            startActivity(intent);
+            finish(); // Facultatif, ferme l'activité actuelle pour qu'elle ne soit pas empilée dans la pile d'activités
+        });
 
         email.addTextChangedListener(emailWatcher);
     }
