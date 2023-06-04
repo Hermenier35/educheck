@@ -48,7 +48,9 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
     private RecyclerView.Adapter adapter_card;
     private RecyclerView.LayoutManager layoutManager;
 
-    private ArrayList<String> users_mail;
+    private ArrayList<String> users_messages;
+
+    private ArrayList<int[]> index;
 
     Calendar calendar = Calendar.getInstance();
     DashboardImplementation model_message;
@@ -68,6 +70,8 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         model_message = new DashboardImplementation(this);
+        users_messages = new ArrayList<>();
+        index=new ArrayList<>();
         sendRequest();
         buttonSend.setOnClickListener(v -> send_message());
 
@@ -104,14 +108,32 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         if (items.getJSONObject(0).has("code_retour"))
             System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
         JSONObject mailJson = items.getJSONObject(0);
-        String mail = mailJson.getString("mail").replaceAll("[\\[\\]\" ]" , "");
-        String[] mails= mail.split(",");
-        for (int j=0;j<mails.length;j++) {
-            users_mail.add(mails[j]);
+        String mailRe = mailJson.getString("mailRecipients").replaceAll("[\\[\\]\"\\{\\}]" , "");
+        String mailSe = mailJson.getString("mailSenders").replaceAll("[\\[\\]\"\\{\\}]" , "");
+        System.out.println(mailRe);
+        String[] receivers=mailRe.split(",");
+        String[] senders= mailSe.split(",");
+        for(int i=0;i<receivers.length;i++){
+            if(receivers[i].equals(mailRecipient)&&senders[i].equals(mailSender)) {
+                index.add(new int[]{i,0});
+            }else if(receivers[i].equals(mailSender)&&senders[i].equals(mailRecipient)){
+
+                index.add(new int[]{i,1});
+            }
+        }
+        String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]" , "");
+        String[] messages= mex.split(",");
+        for (int j=0;j<index.size();j++) {
+            int[] pair= index.get(j);
+            if(pair[1]==1){
+                users_messages.add(messages[pair[0]]+" Sent ");
+            }else{
+                users_messages.add(messages[pair[0]]+" Received ");
+            }
+
         }
 
-
-        adapter_card = new MailAdapterCard(users_mail);
+        adapter_card = new MailAdapterCard(users_messages);
         recyclerView.setAdapter(adapter_card);
 
     }

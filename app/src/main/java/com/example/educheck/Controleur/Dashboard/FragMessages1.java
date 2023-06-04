@@ -69,7 +69,9 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
             String mail = mailJson.getString("mail").replaceAll("[\\[\\]\" ]" , "");
             String[] mails= mail.split(",");
             for (int j=0;j<mails.length;j++) {
-                users_mail.add(mails[j]);
+                if(!mails[j].equals(users_mail)) {
+                    users_mail.add(mails[j]);
+                }
             }
 
 
