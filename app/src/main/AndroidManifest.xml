@@ -74,6 +74,9 @@
             android:name=".Controleur.Dashboard.Frag4"
             android:exported="true" />
         <activity
+            android:name=".Controleur.Dashboard.FragMessages1"
+            android:exported="true" />
+        <activity
             android:name=".Controleur.Login.Loading"
             android:exported="true" >
             <intent-filter>
