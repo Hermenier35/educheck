@@ -101,4 +101,5 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         fragmentTransaction.replace(R.id.frame1, fragment);
         fragmentTransaction.commit();
     }
+
 }
