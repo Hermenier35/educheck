@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +49,8 @@ public class Schedule extends Fragment {
             "18:00", "19:00", "20:00"
     };
     private GridView gridView;
-    private ScheduleAdapter agendaAdapter;
+    private GridViewAdapter agendaAdapter;
+    private RecyclerView mRecyclerView;
     private ArrayList<Cellule> schedule;
     private ArrayList<Cellule> filter;
     private View view;
@@ -67,7 +69,9 @@ public class Schedule extends Fragment {
         year=0;
         weekNumber=0;
         view = inflater.inflate(R.layout.fragment_schedule, container, false);
-        gridView = view.findViewById(R.id.grid_view);
+        //gridView = view.findViewById(R.id.grid_view);
+        mRecyclerView = view.findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 6));
         seek = view.findViewById(R.id.seek);
         LinearLayoutView = view.findViewById(R.id.spinner_container);
         spinYears = view.findViewById(R.id.spinnerYears);
@@ -90,8 +94,10 @@ public class Schedule extends Fragment {
         System.out.println(Calendar.getInstance().get(Calendar.YEAR) + Calendar.getInstance().get(Calendar.MONTH) +
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         System.out.println(Calendar.getInstance().get(Calendar.DATE));
-         agendaAdapter = new ScheduleAdapter(getContext(), joursSemaineList, horairesList, schedule);
-        gridView.setAdapter(agendaAdapter);
+         agendaAdapter = new GridViewAdapter(getContext(), joursSemaineList, horairesList, schedule);
+
+       // gridView.setAdapter(agendaAdapter);
+        mRecyclerView.setAdapter(agendaAdapter);
 
         dataParcours = new ArrayList<>();
         dataParcours.add(Calendar.getInstance().get(Calendar.YEAR)+"");
@@ -121,8 +127,9 @@ public class Schedule extends Fragment {
             filter.removeIf(cellule-> {
                 return cellule.getDate().getYear()!=this.year ||
                     ScheduleAdapter.getWeekNumberDate(ScheduleAdapter.getDateFromDate2(cellule.getDate()))!= this.weekNumber;});
-            agendaAdapter = new ScheduleAdapter(getContext(), joursSemaineList, horairesList, filter);
-            gridView.setAdapter(agendaAdapter);
+            agendaAdapter = new GridViewAdapter(getContext(), joursSemaineList, horairesList, filter);
+            //gridView.setAdapter(agendaAdapter);
+            mRecyclerView.setAdapter(agendaAdapter);
         }
 
     }
