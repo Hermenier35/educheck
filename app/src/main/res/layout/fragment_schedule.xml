@@ -1,19 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".Controleur.Dashboard.DashBoardEtudiant">
 
-    <GridView
+   <!-- <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="6"
-        android:verticalSpacing="1dp"
+        android:layout_height="526dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
         android:horizontalSpacing="1dp"
+        android:numColumns="6"
         android:stretchMode="columnWidth"
-        android:background="@android:color/white" />
+        android:verticalSpacing="1dp" /> -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2" />
 
-</RelativeLayout>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/spinner_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+    </HorizontalScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/horiScroll">
+
+            <Spinner
+                android:id="@+id/spinnerYears"
+                android:layout_width="166dp"
+                android:layout_height="34dp" />
+
+            <Button
+                android:id="@+id/seek"
+                android:layout_width="166dp"
+                android:layout_height="wrap_content"
+                android:text="Search" />
+        </LinearLayout>
+
+</LinearLayout>

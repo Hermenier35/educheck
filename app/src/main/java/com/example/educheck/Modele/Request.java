@@ -51,7 +51,7 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
             e.printStackTrace();
         }
 
-       if(type.equals("POST") || type.equals("PUT")){
+       if(type.equals("POST") || type.equals("PUT") || type.equals("DELETE")){
                 try {
                     urlConnection.setRequestMethod(type);
                     urlConnection.setRequestProperty("Content-Type", "application/json");

@@ -53,7 +53,7 @@ public class ParcoursChoices extends AppCompatActivity implements AsyncTaskcallb
         student = (Student) getIntent().getSerializableExtra("student");
         logging_page = new Intent(this, Login.class);
         request = "getAllAcademicBackgrounds";
-        inscription.getAllAcademicBackgrounds(university.getSuffixeStudent());
+        inscription.getAllAcademicBackgrounds(university.getSuffixeTeacher());
         inscriptionImplementation = new InscriptionImplementation(this);
     }
 
@@ -77,12 +77,13 @@ public class ParcoursChoices extends AppCompatActivity implements AsyncTaskcallb
                                 imageView.setImageResource(R.drawable.doctorat);
                                 break;
                         }
-                        AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"), imageView);
+                        AcademicBackground parcour = new AcademicBackground(json.getString("name"), json.getString("type"),
+                                imageView, json.getString("_id"), json.getString("referant"));
                         academicBackgrounds.add(parcour);
                     }
                 }else{
                     AcademicBackground parcour = new AcademicBackground("Not Academic Backgrounds find","contact your " +
-                            "university for more information", new ImageView(this));
+                            "university for more information", new ImageView(this), "", "No referent");
                     academicBackgrounds.add(parcour);
                 }
                 adapter = new RecyclerAdapter(academicBackgrounds);

@@ -17,4 +17,5 @@ public interface Dashboard {
     public void editAcademicBackground(String token, AcademicBackground academicBackground);
     public void getPersonalCourses(String token);
     public void postCourses(String token, String mailStudent, String idCourse);
+    public void deleteAcademicBackground(String token, String id);
 }

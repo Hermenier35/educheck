@@ -2,16 +2,20 @@ package com.example.educheck.Controleur.Dashboard;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.educheck.Modele.Cellule;
 import com.example.educheck.Modele.Date2;
 import com.example.educheck.R;
 
+import java.text.AttributedCharacterIterator;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -63,6 +67,12 @@ public class ScheduleAdapter extends BaseAdapter {
         if (convertView == null) {
             // Crée une nouvelle vue si elle n'existe pas déjà
             convertView = LayoutInflater.from(context).inflate(R.layout.grid_item, parent, false);
+
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) convertView.getLayoutParams();
+            layoutParams.height = 50;
+            //layoutParams.setMargins(margin, margin, margin, margin);
+            convertView.setLayoutParams(layoutParams);
+
             viewHolder = new ViewHolder();
             viewHolder.summary = convertView.findViewById(R.id.summary);
             viewHolder.location = convertView.findViewById(R.id.location);
@@ -75,13 +85,14 @@ public class ScheduleAdapter extends BaseAdapter {
 
         // Récupère l'élément à la position donnée
         Object item = getItem(position);
-        //System.out.println("position : " + jourIndex);
+        int horairePos = position / (joursSemaineList.size() + 1);
         for(int i = 0; i<schedule.size(); i++ ) {
             Date day = getDateFromDate2(schedule.get(i).getDate());
-            if (horaireIndex!=0 && jourIndex != 0 && joursSemaineList.get(jourIndex - 1).equals(getDayOfWeekFromDate(day))) {
+            if (horaireIndex !=0 && jourIndex != 0 && joursSemaineList.get(jourIndex - 1).equals(getDayOfWeekFromDate(day)) &&
+            betweenHour(horairesList.get(horairePos), schedule.get(i))) {
                 System.out.println(getDayOfWeekFromDate(day));
                 viewHolder.summary.setText(schedule.get(i).getSummary());
-                System.out.println(horairesList.get(horaireIndex - 1));
+                System.out.println(horairesList.get(horairePos));
                 viewHolder.location.setText(schedule.get(i).getLocation());
                 viewHolder.description.setText(schedule.get(i).getDescription());
                 convertView.setBackgroundColor(Color.GREEN);
@@ -108,7 +119,7 @@ public class ScheduleAdapter extends BaseAdapter {
         return cellule.getStartHour().equals(hour) || cellule.getEndHour().equals(hour);
     }
 
-    private Date getDateFromDate2(Date2 date){
+    public static Date getDateFromDate2(Date2 date){
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, date.getYear());
         calendar.set(Calendar.MONTH, date.getMonth());
@@ -116,7 +127,7 @@ public class ScheduleAdapter extends BaseAdapter {
         return calendar.getTime();
     }
 
-    private int getWeekNumberDate(Date date){
+    public static int getWeekNumberDate(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.WEEK_OF_YEAR);
