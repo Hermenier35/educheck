@@ -42,7 +42,6 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Logger.getGlobal().info("Message itent init");
         View view = inflater.inflate(R.layout.fragment_messages1, container, false);
-
         intentMess1 = new Intent(getContext(), FragMessages2.class);
         layoutManager = new LinearLayoutManager(getContext());
         users_mail = new ArrayList<>();
@@ -90,7 +89,7 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         @Override
         public void onClick(View v) {
             String mailRecipient = users_mail.get(v.getVerticalScrollbarPosition());
-            Fragment fragMessages2 = FragMessages2.newInstance(mailRecipient);
+            Fragment fragMessages2 = FragMessages2.newInstance(mailRecipient,token);
             // startActivity(intentMess1);
             replaceFragment(fragMessages2);
         }
