@@ -10,13 +10,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp">
+        android:layout_height="100dp"
+        android:id="@+id/linearMail">
 
 
         <TextView
             android:id="@+id/Mail_Name"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="100dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/idIVCourseImage"
