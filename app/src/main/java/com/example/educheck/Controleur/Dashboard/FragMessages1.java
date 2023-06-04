@@ -1,7 +1,6 @@
 package com.example.educheck.Controleur.Dashboard;
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,7 +41,6 @@ public class FragMessages1 extends AppCompatActivity implements AsyncTaskcallbac
 
     private String token;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Logger.getGlobal().info("University itent init");
@@ -53,7 +51,7 @@ public class FragMessages1 extends AppCompatActivity implements AsyncTaskcallbac
         users_mail = new ArrayList<>();
         token = getIntent().getStringExtra("token");
         myOnClickListener = new FragMessages1.MyOnClickListener(this, recyclerView);
-        recyclerView = findViewById(R.id.recycler_mex);
+        recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         messageImplementation = new DashboardImplementation(this);

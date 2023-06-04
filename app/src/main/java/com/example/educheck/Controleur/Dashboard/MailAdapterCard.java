@@ -31,7 +31,7 @@ public class MailAdapterCard extends RecyclerView.Adapter<MailAdapterCard.MailHo
     @Override
     public MailHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_card_univ, parent, false);
+                .inflate(R.layout.activity_card_mail, parent, false);
         item.setOnClickListener(FragMessages1.myOnClickListener);
         return new MailAdapterCard.MailHolder(item);
     }

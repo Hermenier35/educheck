@@ -108,7 +108,7 @@ public class ScheduleAdapter extends BaseAdapter {
         return cellule.getStartHour().equals(hour) || cellule.getEndHour().equals(hour);
     }
 
-    private Date getDateFromDate2(Date2 date){
+    public static Date getDateFromDate2(Date2 date){
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, date.getYear());
         calendar.set(Calendar.MONTH, date.getMonth());
@@ -116,7 +116,7 @@ public class ScheduleAdapter extends BaseAdapter {
         return calendar.getTime();
     }
 
-    private int getWeekNumberDate(Date date){
+    public static int getWeekNumberDate(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.WEEK_OF_YEAR);

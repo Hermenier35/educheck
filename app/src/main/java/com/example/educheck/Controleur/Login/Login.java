@@ -35,6 +35,10 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
     TextView forgottenPassword;
     Intent forgottenPasswordActivity;
     Intent dashboard;
+
+    String mail;
+
+    String pass;
     @Override
     protected void onCreate(Bundle save) {
 
@@ -76,7 +80,9 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
     };
 
     protected void login_verification(){
-        model_login.connexion(email.getText().toString(),password.getText().toString());
+        mail=email.getText().toString();
+        pass=password.getText().toString();
+        model_login.connexion(mail,pass);
     }
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
@@ -97,10 +103,13 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
                     if(!response.getBoolean("valide"))
                         Toast.makeText(this, "please wait teacher's confirmation", Toast.LENGTH_SHORT).show();
                     else
+                        dashboard.putExtra("token", response.getString("token"));
+                        dashboard.putExtra("mail",mail);
                         startActivity(dashboard);
                     break;
                 case "Teacher":
                     dashboard = new Intent(this, DashBoardTeacher.class);
+                    dashboard.putExtra("token", response.getString("token"));
                     startActivity(dashboard);
                     break;
                 default: System.err.println("Erreur retour status"); System.exit(1);

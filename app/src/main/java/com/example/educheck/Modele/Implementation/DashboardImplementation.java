@@ -110,6 +110,19 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
+    public void deleteAcademicBackground(String token, String id) {
+        Request request = new Request(this, "DELETE");
+        JSONObject body = new JSONObject();
+        try {
+            body.put("_id", id);
+            request.setBody(body);
+            request.execute(HttpUrl.UrlDeleteAcademicBackground + "/" + token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void sendMexTo(String token){ // pour avoir tous les gens à qui on peux envoyer les messages.
         Request request= new Request(this,"GET");
         request.execute(HttpUrl.UrlSendMexTo+ "/" + token);
