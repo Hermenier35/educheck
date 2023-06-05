@@ -62,19 +62,16 @@
             android:name=".Controleur.Dashboard.DashBoardEtudiant"
             android:exported="true" />
         <activity
-            android:name=".Controleur.Dashboard.Frag1"
+            android:name=".Controleur.Dashboard.FragGetCourses"
             android:exported="true" />
         <activity
-            android:name=".Controleur.Dashboard.Frag2"
+            android:name=".Controleur.Dashboard.Schedule"
             android:exported="true" />
         <activity
             android:name=".Controleur.Dashboard.Frag3"
             android:exported="true" />
         <activity
             android:name=".Controleur.Dashboard.Frag4"
-            android:exported="true" />
-        <activity
-            android:name=".Controleur.Dashboard.FragMessages1"
             android:exported="true" />
         <activity
             android:name=".Controleur.Login.Loading"

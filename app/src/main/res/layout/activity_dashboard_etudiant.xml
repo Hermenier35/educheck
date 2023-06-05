@@ -5,54 +5,79 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="welcome "
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-medium"
+        />
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginEnd="20dp"
+        android:text="search" />
+
     <FrameLayout
         android:id="@+id/frame1"
-        android:layout_width="401dp"
-        android:layout_height="600dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
         android:layout_marginVertical="50dp"
-        android:layout_marginTop="5dp" />
+        />
 
     <Button
         android:id="@+id/menu1"
-        android:layout_width="50dp"
+        android:layout_width="90dp"
         android:layout_height="50dp"
-        android:text="frag 1"
+        android:text="Schedule"
         android:backgroundTint="@color/teal_700"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
+        android:textSize="10dp"
         />
     <Button
         android:id="@+id/menu2"
-        android:layout_width="50dp"
+        android:layout_width="90dp"
         android:layout_height="50dp"
-        android:text="frag 2"
+        android:text="Courses"
         android:backgroundTint="@color/teal_700"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:layout_marginStart="115dp"
+        android:textSize="10dp"
         />
     <Button
         android:id="@+id/menu3"
-        android:layout_width="50dp"
+        android:layout_width="85dp"
         android:layout_height="50dp"
-        android:text="frag 3"
+        android:text="Justify"
         android:backgroundTint="@color/teal_700"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:layout_marginStart="215dp"
+        android:textSize="10dp"
         />
     <Button
         android:id="@+id/menu4"
-        android:layout_width="50dp"
+        android:layout_width="85dp"
         android:layout_height="50dp"
-        android:text="frag 4"
+        android:text="Mail"
         android:backgroundTint="@color/teal_700"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="30dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="15dp"
+        android:textSize="10dp"
         />
 
 
