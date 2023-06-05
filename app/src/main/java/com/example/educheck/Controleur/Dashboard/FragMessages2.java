@@ -110,7 +110,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
 
     public void send_message(){
-
+        onPause();
         String text = messageToSend.getText().toString();
         Date date=new Date();
 
@@ -127,6 +127,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         model_message.sendMessageTo(mess,token);
         messageToSend.getText().clear();
         sendRequest();
+        onResume();
     }
 
     public static FragMessages2 newInstance(String mailRecipient,String token) {
