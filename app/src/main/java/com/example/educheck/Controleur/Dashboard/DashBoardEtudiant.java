@@ -17,10 +17,8 @@ import com.example.educheck.Modele.Student;
 import com.example.educheck.R;
 
 public class DashBoardEtudiant extends AppCompatActivity {
-    Button btn1;
-    Button btn2;
-    Button btn3;
-    Button btn4;
+    Button btn1,btn2,btn3,btn4;
+    private String token;
     TextView textView;
     Intent click;
     @Override
@@ -39,6 +37,9 @@ public class DashBoardEtudiant extends AppCompatActivity {
         btn3 = findViewById(R.id.menu3);
         btn4 = findViewById(R.id.menu4);
 
+        token = getIntent().getStringExtra("token");
+
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +51,7 @@ public class DashBoardEtudiant extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new Frag2());
+                replaceFragment(new FragGetCourses());
             }
         }
         );
