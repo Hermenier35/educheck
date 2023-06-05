@@ -88,6 +88,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         String text = messageToSend.getText().toString();
        Date date=new Date();
 
+
        Instant instant= date.toInstant();
 
         System.out.println("Current date and time: " + instant);
@@ -133,7 +134,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
         MessageLayout message;
         boolean isUser;
-
+        messageAdapter.delete();
         for (int j=0;j<index.size();j++) {
             int[] pair= index.get(j);
             isUser= pair[1]==0;

@@ -50,7 +50,6 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
         coursesList.add("INF1");
         coursesList.add("CODAGE");
 
-        search = view.findViewById(R.id.search);
         //course = view.findViewById(R.id.courses_spinner);
         request = new DashboardImplementation(this);
         request.getCourses(token);
