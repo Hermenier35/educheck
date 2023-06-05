@@ -5,41 +5,40 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".Controleur.Dashboard.FragMessages2">
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/messages_view"
+        android:layout_weight="2"
+        android:divider="#fff"
+        android:layout_height="500dp"
+        />
 
-    <EditText
-        android:id="@+id/messageToSend"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#fff"
         android:layout_marginTop="500dp"
         android:layout_marginBottom="16dp"
-        android:hint="Message" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/buttonSend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="500dp"
-        android:layout_marginBottom="16dp"
-        android:text="Send" />
+        <EditText
+            android:id="@+id/messageToSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:hint="Write a message"
+            android:inputType="text"
+            android:paddingHorizontal="10dp"
+            android:text="" />
 
-    <TextView
-        android:id="@+id/sendMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="Send Message"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_mess"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="90dp"
-        android:layout_marginBottom="16dp" />
+        <Button
+            android:id="@+id/buttonSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Send" />
+    </LinearLayout>
 
 </FrameLayout>

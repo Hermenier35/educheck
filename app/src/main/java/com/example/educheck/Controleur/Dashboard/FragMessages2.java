@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
@@ -45,10 +46,11 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
     private String request;
 
-    private RecyclerView.Adapter adapter_card;
-    private RecyclerView.LayoutManager layoutManager;
+    private MessageAdapter messageAdapter;
 
-    private ArrayList<String> users_messages;
+    private ListView messagesView;
+
+    private ArrayList<MessageLayout> users_messages;
 
     private ArrayList<int[]> index;
 
@@ -63,12 +65,15 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         mailSender= getActivity().getIntent().getStringExtra("mail");
         mailRecipient = getArguments().getString("mailRecipient");
         token = getArguments().getString("token");
-        layoutManager = new LinearLayoutManager(getContext());
         messageToSend = view.findViewById(R.id.messageToSend);
         buttonSend = view.findViewById(R.id.buttonSend);
-        recyclerView = view.findViewById(R.id.recycler_mess);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+
+        messageAdapter = new MessageAdapter(getContext());
+        messagesView = (ListView) view.findViewById(R.id.messages_view);
+        messagesView.setAdapter(messageAdapter);
+
+
+
         model_message = new DashboardImplementation(this);
         users_messages = new ArrayList<>();
         index=new ArrayList<>();
@@ -93,6 +98,8 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
         Message mess=new Message(mailRecipient,mailSender,text,date);
         model_message.sendMessageTo(mess,token);
+        messageToSend.getText().clear();
+        sendRequest();
     }
 
     public static FragMessages2 newInstance(String mailRecipient,String token) {
@@ -123,18 +130,17 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         }
         String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]" , "");
         String[] messages= mex.split(",");
+
+        MessageLayout message;
+        boolean isUser;
+
         for (int j=0;j<index.size();j++) {
             int[] pair= index.get(j);
-            if(pair[1]==1){
-                users_messages.add(messages[pair[0]]+" Sent ");
-            }else{
-                users_messages.add(messages[pair[0]]+" Received ");
-            }
-
+            isUser= pair[1]==0;
+            message=new MessageLayout(messages[pair[0]],isUser,mailSender);
+            messageAdapter.add(message);
         }
-
-        adapter_card = new MailAdapterCard(users_messages);
-        recyclerView.setAdapter(adapter_card);
+        messagesView.setSelection(messagesView.getCount() - 1);
 
     }
 
