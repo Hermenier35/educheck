@@ -123,6 +123,12 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
+    public void getSchedule(String url) {
+        Request request = new Request(this, "PLANNING");
+        request.execute(url);
+    }
+
+    @Override
     public void sendMexTo(String token){ // pour avoir tous les gens à qui on peux envoyer les messages.
         Request request= new Request(this,"GET");
         request.execute(HttpUrl.UrlSendMexTo+ "/" + token);

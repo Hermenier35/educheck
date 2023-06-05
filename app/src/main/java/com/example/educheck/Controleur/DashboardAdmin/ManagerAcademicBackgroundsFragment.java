@@ -223,7 +223,6 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
             editPath.setEnabled(Patterns.EMAIL_ADDRESS.matcher(editMailReferent.getText()).matches()
                 && editNameAcaBackground.getText().length() >=5 && !spinChoiceParcour.getSelectedItem().toString()
                     .equals("Please select"));
-
         }
     };
 }

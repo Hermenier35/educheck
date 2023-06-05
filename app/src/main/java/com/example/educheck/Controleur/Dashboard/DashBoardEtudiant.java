@@ -32,7 +32,7 @@ public class DashBoardEtudiant extends AppCompatActivity {
         String name = student.getFirstName();
         //textView = findViewById(R.id.welcome);
         String myString = "Hello ";
-        textView.setText(myString + name);
+        //textView.setText(myString + name);
 
         btn1 = findViewById(R.id.menu1);
         btn2 = findViewById(R.id.menu2);

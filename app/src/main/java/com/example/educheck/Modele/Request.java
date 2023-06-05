@@ -4,10 +4,12 @@ import android.os.AsyncTask;
 import android.os.Debug;
 
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Utils.JsonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -90,15 +92,19 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
         }
 
         JSONObject json = null;
-        try {
-            if (urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK ||
-                urlConnection.getResponseCode()==201)
-                json = new JSONObject(result);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK ||
+                        urlConnection.getResponseCode() == 201)
+                    if(type.equals("PLANNING")){
+                        json = JsonUtils.eventClean(result);
+                    }else
+                        json = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
         try {
             code_retour = urlConnection.getResponseCode();
