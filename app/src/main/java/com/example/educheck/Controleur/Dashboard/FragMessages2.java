@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +56,10 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
     private ArrayList<int[]> index;
 
-    Calendar calendar = Calendar.getInstance();
+    private static final long REQUEST_DELAY_MS = 5000; // 30 seconds
+
+    private Handler requestHandler;
+    private Runnable requestRunnable;
     DashboardImplementation model_message;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,10 +83,31 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         users_messages = new ArrayList<>();
         index=new ArrayList<>();
         sendRequest();
+        requestHandler = new Handler(Looper.getMainLooper());
+        requestRunnable = new Runnable() {
+            @Override
+            public void run() {
+                sendRequest();
+                requestHandler.postDelayed(this, REQUEST_DELAY_MS);
+            }
+        };
         buttonSend.setOnClickListener(v -> send_message());
 
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestHandler.postDelayed(requestRunnable, REQUEST_DELAY_MS);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        requestHandler.removeCallbacks(requestRunnable);
+    }
+
 
     public void send_message(){
 
