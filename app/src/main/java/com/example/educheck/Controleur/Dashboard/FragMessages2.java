@@ -31,16 +31,16 @@ import java.util.Date;
 public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
     private View view;
-     private EditText messageToSend;
-     private Button buttonSend;
+    private EditText messageToSend;
+    private Button buttonSend;
 
-     private Message message;
+    private Message message;
 
-     private String token;
+    private String token;
 
-     private String mailRecipient;
+    private String mailRecipient;
 
-     private String mailSender;
+    private String mailSender;
 
     private RecyclerView recyclerView;
 
@@ -86,10 +86,10 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
     public void send_message(){
 
         String text = messageToSend.getText().toString();
-       Date date=new Date();
+        Date date=new Date();
 
 
-       Instant instant= date.toInstant();
+        Instant instant= date.toInstant();
 
         System.out.println("Current date and time: " + instant);
         System.out.println("Current mailRecipient: " + mailRecipient);
@@ -137,17 +137,21 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         messageAdapter.delete();
         for (int j=0;j<index.size();j++) {
             int[] pair= index.get(j);
-            isUser= pair[1]==0;
-            message=new MessageLayout(messages[pair[0]],isUser,mailSender);
-            messageAdapter.add(message);
+            int messageIndex = pair[0];
+            if (messageIndex >= 0 && messageIndex < messages.length) {
+                isUser = pair[1] == 0;
+                message = new MessageLayout(messages[messageIndex], isUser, mailRecipient);
+                messageAdapter.add(message);
+            }
         }
+        index.clear();
         messagesView.setSelection(messagesView.getCount() - 1);
 
     }
 
     private void sendRequest(){
 
-            model_message.retrieveMessages(token);
+        model_message.retrieveMessages(token);
     }
 
-    }
+}
