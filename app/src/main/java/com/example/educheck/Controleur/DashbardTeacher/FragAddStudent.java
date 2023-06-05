@@ -11,8 +11,10 @@ import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.educheck.Controleur.DashboardAdmin.ManagerAcademicBackgroundsFragment;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
 import org.json.JSONArray;
@@ -24,6 +26,8 @@ import java.util.List;
 
 public class FragAddStudent extends Fragment implements AsyncTaskcallback {
 
+        private static final String TOKEN = "token";
+
         private View view;
         private Spinner course;
         private List CoursesList;
@@ -32,6 +36,15 @@ public class FragAddStudent extends Fragment implements AsyncTaskcallback {
         private EditText mailStudent;
 
         private DashboardImplementation request;
+
+
+    public static FragAddStudent newInstance(String token) {
+        FragAddStudent fragment = new FragAddStudent();
+        Bundle args = new Bundle();
+        args.putString(TOKEN, token);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,8 +59,8 @@ public class FragAddStudent extends Fragment implements AsyncTaskcallback {
             CoursesList = new ArrayList();
 
             request = new DashboardImplementation(this);
-            request.getPersonalCourses("token");// les cours enseignés par le prof
-
+            //request.getPersonalCourses("token");// les cours enseignés par le prof
+            request.getCourses("token");
             registre.setOnClickListener(v->{saveToBDD();});
 
             return view;

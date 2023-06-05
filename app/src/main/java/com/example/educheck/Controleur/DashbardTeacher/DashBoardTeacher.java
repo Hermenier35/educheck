@@ -36,7 +36,7 @@ public class DashBoardTeacher extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new FragAddStudent());
+                                        replaceFragment(new FragAddStudent().newInstance(token));
                                     }
                                 }
         );
@@ -44,7 +44,7 @@ public class DashBoardTeacher extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new FragMessages2());
+                                        replaceFragment(new FragMessages2().newInstance(,token));
                                     }
                                 }
         );
