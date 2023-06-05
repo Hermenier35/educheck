@@ -65,6 +65,7 @@ public class UniversityInscription extends AppCompatActivity implements AsyncTas
                 System.out.println(it.next());
             University university = new University(uniJson.getString("name"), uniJson.getString("suffixe_student"),
                     uniJson.getString("suffixe_teacher"), Base64.getDecoder().decode(uniJson.getString("image")));
+            System.out.println("name "+university.getUniName()+"\n");
             univs.add(university);
         }
             adpater_card = new UnivAdapterCard(univs);

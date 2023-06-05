@@ -25,7 +25,7 @@ public class  Message implements Serializable {
             jsonObject.put("mailRecipient", getMailRecipient());
             jsonObject.put("mailSender", getMailSender());
             jsonObject.put("message", getMessage());
-            jsonObject.put("date", getDate());
+            jsonObject.put("date", getDate().toInstant());
         } catch (JSONException e) {
             e.printStackTrace();
         }
