@@ -17,5 +17,6 @@ public class HttpUrl {
     public static String UrlChangePassword = ip + "modifieUserPassword";
     public static String UrlSendMexTo = ip + "sendMexTo";
     public static String UrlEditAcademicBackground = ip + "editAcademicBackground";
-    public static String UrlPersonalCourses = ip + "";
+    public static String UrlPersonalCourses = ip + "personalCourses";
+    public static String UrlDeleteAcademicBackground = ip + "deleteAcademicBackground";
 }

@@ -22,6 +22,10 @@
             android:exported="false"
             android:label="ParcoursChoice"/>
         <activity
+            android:name=".Controleur.DashbardTeacher.DashBoardTeacher"
+            android:exported="false"
+            android:label="DashBoardTeacher"/>
+        <activity
             android:name=".Controleur.Login.ForgotPassword"
             android:exported="false"
             android:label="ForgotPassword"/>
@@ -71,9 +75,6 @@
             android:exported="true" />
         <activity
             android:name=".Controleur.Dashboard.Schedule"
-            android:exported="true" />
-        <activity
-            android:name=".Controleur.Dashboard.Frag3"
             android:exported="true" />
         <activity
             android:name=".Controleur.Dashboard.Frag4"
