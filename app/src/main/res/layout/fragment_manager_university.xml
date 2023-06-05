@@ -88,7 +88,7 @@
                  android:id="@+id/NewName"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
-                android:text="NewName"
+                android:hint="NewName"
                 android:textSize="15dp"/>
          </LinearLayout>
         <LinearLayout
@@ -106,7 +106,7 @@
                 android:id="@+id/NewSuffixStudent"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
-                android:text="NewSuffixStudent"
+                android:hint="NewSuffixStudent"
                 android:textSize="15dp"/>
         </LinearLayout>
         <LinearLayout
@@ -124,7 +124,7 @@
                 android:id="@+id/NewSuffixTeacher"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
-                android:text="NewSuffixTeacher"
+                android:hint="NewSuffixTeacher"
                 android:textSize="15dp"/>
         </LinearLayout>
         <LinearLayout
