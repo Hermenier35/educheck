@@ -30,7 +30,6 @@ public class DashBoardEtudiant extends AppCompatActivity {
         String name = student.getFirstName();
         //textView = findViewById(R.id.welcome);
         String myString = "Hello ";
-        textView.setText(myString + name);
 
         btn1 = findViewById(R.id.menu1);
         btn2 = findViewById(R.id.menu2);
@@ -67,7 +66,7 @@ public class DashBoardEtudiant extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new Frag4());
+                                        replaceFragment(new FragMessages1());
                                     }
                                 }
         );
