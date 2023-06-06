@@ -31,7 +31,7 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
     private AsyncTaskcallback asyncTaskcallback;
     private String type;
     private JSONObject body;
-    private int code_retour;
+    public static int code_retour;
 
     public Request(AsyncTaskcallback asyncTaskcallback, String type) {
         this.asyncTaskcallback = asyncTaskcallback;
@@ -124,7 +124,8 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
             }else{
                 System.out.println("code retour error :" + this.code_retour);
                 JSONObject response_request = new JSONObject().put("code_retour", this.code_retour);
-                res = response_request.getJSONArray("code_retour");
+                res = new JSONArray();
+                res.put(response_request);
             }
         } catch (JSONException e) {
             e.printStackTrace();

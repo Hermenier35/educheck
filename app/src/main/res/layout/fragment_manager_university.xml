@@ -42,20 +42,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Suffix student : " />
+                android:text="Suffix student : "
+                android:layout_marginStart="20sp"/>
 
             <TextView
                 android:id="@+id/sufTeacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Suffix teacher : " />
+                android:text="Suffix teacher : "
+                android:layout_marginStart="20sp"/>
             <TextView
                 android:id="@+id/Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Name of university : " />
+                android:text="Name of university : "
+                android:layout_marginStart="20sp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -71,7 +74,8 @@
             android:textSize="18dp"
             android:background="#D0B0F3"
             android:textStyle="bold|italic"
-            android:text="Si vous voulez changer les coordonnées d'université :  " />
+            android:gravity="center"
+            android:text="Change university information :  " />
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -98,6 +98,15 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
+    public void editUniversity(String token, University university) {
+        Request request = new Request(this, "PUT");
+        JSONObject body = university.convertToJSONObject();
+        request.setBody(body);
+        request.execute(HttpUrl.UrlEditUniversity + "/" + token);
+
+    }
+
+    @Override
     public void getPersonalCourses(String token) {
         Request request= new Request(this,"GET");
         request.execute(HttpUrl.UrlPersonalCourses+ "/" + token);

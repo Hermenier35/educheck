@@ -97,7 +97,8 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
                 case "getUniversity":
                     JSONObject response = items.getJSONObject(0);
                     university = new University(response.getString("name"), response.getString("suffixe_student"),
-                            response.getString("suffixe_teacher"), Base64.getDecoder().decode(response.getString("image")));
+                            response.getString("suffixe_teacher"), Base64.getDecoder().decode(response.getString("image")),
+                            response.getString("_id"));
                     pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this,
                             ManagerUniversityFragment.newInstance(token, university), ManagerAcademicBackgroundsFragment.newInstance(token, university));
                     viewPager.setAdapter(pagerAdapter);
