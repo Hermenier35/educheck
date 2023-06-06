@@ -20,8 +20,7 @@ import com.example.educheck.R;
 public class DashBoardEtudiant extends AppCompatActivity {
 
     private String token;
-    TextView textView;
-    Intent click;
+    //TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,18 +70,3 @@ public class DashBoardEtudiant extends AppCompatActivity {
             fragmentTransaction.commit();
     }
 }
-
-    /**
-        btn1.setOnClickListener(v->{clickCourse();});
-        btn2.setOnClickListener(v->{clickMsg();});
-    }
-
-    void clickCourse(){
-        click = new Intent(DashBoard_Etudiant.this, Courses.class);
-        startActivity(click);
-    }
-    void clickMsg (){
-        click = new Intent(DashBoard_Etudiant.this, Messages.class);
-                startActivity(click);
-    }
-     */

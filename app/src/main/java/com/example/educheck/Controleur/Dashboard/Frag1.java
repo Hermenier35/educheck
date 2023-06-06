@@ -20,7 +20,7 @@ public class Frag1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_frag1, container, false);
+        view = inflater.inflate(R.layout.fragment_get_cours, container, false);
         return view;
     }
 }
