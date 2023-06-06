@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +34,7 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
     private ListView listView;
     private EditText search;    // search bar
     private DashboardImplementation request;
-    private ArrayAdapter<String> adapter;
+    private CoursAdapter adapter;
     private List<Cours> coursList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
