@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         login_activity = new  Intent(getApplicationContext(), Login.class);
+        //login_activity = new  Intent(getApplicationContext(), DashBoardEtudiant.class);
         registration_activity = new Intent(getApplicationContext(), UniversityInscription.class);
         Button login = findViewById(R.id.sign_in);
         Button sign_up = findViewById(R.id.sign_up);
