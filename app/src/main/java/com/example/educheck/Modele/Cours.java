@@ -34,5 +34,10 @@ public class Cours {
     }
     public List<Double> getMarks() { return marks;  }
     public void setMarks(double mark) { marks.add(mark); return;}
+
+    @Override
+    public String toString(){
+        return "Name: "+ name +"\nprofName: "+profName+"\ncredit: "+ credit;
+    }
 }
 

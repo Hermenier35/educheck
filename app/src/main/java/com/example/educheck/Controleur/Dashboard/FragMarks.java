@@ -21,8 +21,15 @@ public class FragMarks extends Fragment {
     private String courseName;
     private List<Integer> marksList;
 
-    public FragMarks() {
-        // Required empty public constructor
+
+
+    public static FragMarks newInstance(String nameCours,String token) {
+        FragMarks fragment = new FragMarks();
+        Bundle args = new Bundle();
+        args.putString("nameCours", nameCours);
+        args.putString("token",token);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     public static FragMarks newInstance(String courseName, List<Integer> marksList) {
@@ -64,4 +71,5 @@ public class FragMarks extends Fragment {
 
         return view;
     }
+
 }
