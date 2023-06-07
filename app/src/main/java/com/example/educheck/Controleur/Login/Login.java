@@ -111,6 +111,7 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
                 case "Teacher":
                     dashboard = new Intent(this, DashBoardTeacher.class);
                     dashboard.putExtra("token", response.getString("token"));
+                    dashboard.putExtra("mail",mail);
                     startActivity(dashboard);
                     break;
                 default: System.err.println("Erreur retour status"); System.exit(1);
