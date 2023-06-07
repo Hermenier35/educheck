@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,33 +41,40 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_get_cours, container, false);
-        //listView = view.findViewById(R.id.listView);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        token = "token";
+        token = getActivity().getIntent().getStringExtra("token");
         coursList = new ArrayList<>();
         adapter = new CoursAdapter(coursList);
-        //adapter = new CoursAdapter<Cours>(getContext(), android.R.layout.simple_list_item_1, coursList);
         recyclerView.setAdapter(adapter);
         request = new DashboardImplementation(this);
         request.getCourses(token);
         request.getPersonalCourses("token");
-       // ArrayAdapter<Cours> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, coursList);
-       // listView.setAdapter(adapter);
-       // listView = view.findViewById(R.id.listView);
         return view;
     }
+
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
         for (int i = 0; i < items.length(); i++) {
             JSONObject coursesJson = items.getJSONObject(i);
-            String name = coursesJson.getString("name");
-            Cours course = new Cours(name,"","","","",0);
+            String name = coursesJson.getString("cours");
+            System.out.println("test Name : "+name);
+
+            /*
+            JSONArray marksJsonArray = coursesJson.getJSONArray("marks");
+            List<Integer> marksList = new ArrayList<>();
+            for (int j = 0; j < marksJsonArray.length(); j++) {
+                int mark = marksJsonArray.getInt(j);
+                marksList.add(mark);
+            }
+
+            */
+            Cours course = new Cours(name,"",0);
             coursList.add(course);
         }
         adapter.notifyDataSetChanged();
     }
+
 }
