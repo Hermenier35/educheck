@@ -60,7 +60,7 @@ public class FragAddStudent extends Fragment implements AsyncTaskcallback {
 
             request = new DashboardImplementation(this);
             //request.getPersonalCourses("token");// les cours enseignés par le prof
-            request.getCourses("token");
+            request.getCourses(TOKEN);
             registre.setOnClickListener(v->{saveToBDD();});
 
             return view;
