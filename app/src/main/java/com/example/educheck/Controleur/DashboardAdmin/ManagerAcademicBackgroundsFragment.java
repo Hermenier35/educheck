@@ -188,6 +188,8 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
             case DELETE_ACADEMIC_BACKGROUND:
                 String valueSpinnerDelete = spinChoiceParcour.getSelectedItem().toString();
                 AcademicBackground aca = findAcaByName(valueSpinnerDelete);
+                delete.setEnabled(false);
+                editPath.setEnabled(false);
                 dashboardImplementation.deleteAcademicBackground(token, aca.get_id());
                 break;
             default: System.err.println("No request Found");
@@ -223,7 +225,6 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
             editPath.setEnabled(Patterns.EMAIL_ADDRESS.matcher(editMailReferent.getText()).matches()
                 && editNameAcaBackground.getText().length() >=5 && !spinChoiceParcour.getSelectedItem().toString()
                     .equals("Please select"));
-
         }
     };
 }
