@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
@@ -58,10 +59,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
     };
     public static String GREEN = "2FFC4B", YELLOW = "E9FC2F", RED = "FC4D44", BLUE = "44F6FC", PINK = "FE75D0", ORANGE = "FABD42",
                 CIEL="72FBF1", PURPLE= "C685F9";
-    //private GridView gridView;
-    //private GridViewAdapter agendaAdapter;
     private GridLayout gridLayout;
-   // private RecyclerView mRecyclerView;
     private ArrayList<Cellule> schedule;
     private ArrayList<Cellule> filter;
     private View view;
@@ -71,9 +69,10 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
     private LinearLayout LinearLayoutView;
     private int weekNumber;
     private int year;
-    private Button seek;
+    private Button seek, go;
     private DashboardImplementation dashboardImplementation;
     private TextView week, date;
+    private EditText ade;
 
     @Nullable
     @Override
@@ -81,13 +80,16 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         year=0;
         weekNumber=0;
         view = inflater.inflate(R.layout.fragment_schedule, container, false);
-        //gridView = view.findViewById(R.id.grid_view);
+
         gridLayout = view.findViewById(R.id.grid_layout);
         week = view.findViewById(R.id.week);
         date = view.findViewById(R.id.date);
-       // mRecyclerView = view.findViewById(R.id.grid_layout);
-        //mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 6));
+        go = view.findViewById(R.id.btnAde);
+        ade = view.findViewById(R.id.adeUrl);
+
         seek = view.findViewById(R.id.seek);
+
+        ade.setText("https://planning.univ-rennes1.fr/jsp/custom/modules/plannings/LW1MzLWa.shu");
         LinearLayoutView = view.findViewById(R.id.spinner_container);
         spinYears = view.findViewById(R.id.spinnerYears);
         schedule = new ArrayList<>();
@@ -115,9 +117,9 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         adapterDataParcour.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinYears.setAdapter(adapterDataParcour);
         seek.setOnClickListener(v -> updateSchedule());
+        go.setOnClickListener(v -> dashboardImplementation.getSchedule(ade.getText().toString()));
 
         createPlanningCells();
-        dashboardImplementation.getSchedule("https://planning.univ-rennes1.fr/jsp/custom/modules/plannings/LW1MzLWa.shu");
         return view;
 
     }
