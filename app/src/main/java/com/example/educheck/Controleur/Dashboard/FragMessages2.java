@@ -56,7 +56,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
     private ArrayList<int[]> index;
 
-    private static final long REQUEST_DELAY_MS = 10000; // 30 seconds
+    private static final long REQUEST_DELAY_MS = 5000; // 30 seconds
 
     private Handler requestHandler;
     private Runnable requestRunnable;

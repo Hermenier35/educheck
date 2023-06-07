@@ -100,17 +100,18 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
                     break;
                 case "Student":
                     dashboard = new Intent(this, DashBoardEtudiant.class);
-                    if(!response.getBoolean("valide")) {
+                    if(!response.getBoolean("valide"))
                         Toast.makeText(this, "please wait teacher's confirmation", Toast.LENGTH_SHORT).show();
-                    }else {
+                    else {
                         dashboard.putExtra("token", response.getString("token"));
                         dashboard.putExtra("mail", mail);
                         startActivity(dashboard);
-                    }break;
+                    }
+                    break;
                 case "Teacher":
                     dashboard = new Intent(this, DashBoardTeacher.class);
                     dashboard.putExtra("token", response.getString("token"));
-                    dashboard.putExtra("mail", mail);
+                    dashboard.putExtra("mail",mail);
                     startActivity(dashboard);
                     break;
                 default: System.err.println("Erreur retour status"); System.exit(1);

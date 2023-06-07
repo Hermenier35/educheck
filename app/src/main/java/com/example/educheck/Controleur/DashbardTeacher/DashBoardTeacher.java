@@ -10,10 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.educheck.Controleur.Dashboard.Frag1;
-import com.example.educheck.Controleur.Dashboard.Frag2;
-import com.example.educheck.Controleur.Dashboard.Frag3;
-import com.example.educheck.Controleur.Dashboard.FragMessages1;
 import com.example.educheck.Controleur.Dashboard.FragMessages2;
 import com.example.educheck.R;
 
@@ -36,7 +32,7 @@ public class DashBoardTeacher extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new FragAddStudent());
+                                        replaceFragment(new FragAddStudent().newInstance(token));
                                     }
                                 }
         );
@@ -44,7 +40,7 @@ public class DashBoardTeacher extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        replaceFragment(new FragMessages2());
+                                        replaceFragment(new FragMessages1());
                                     }
                                 }
         );

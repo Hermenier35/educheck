@@ -4,10 +4,12 @@ import android.os.AsyncTask;
 import android.os.Debug;
 
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Utils.JsonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -29,7 +31,7 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
     private AsyncTaskcallback asyncTaskcallback;
     private String type;
     private JSONObject body;
-    private int code_retour;
+    public static int code_retour;
 
     public Request(AsyncTaskcallback asyncTaskcallback, String type) {
         this.asyncTaskcallback = asyncTaskcallback;
@@ -90,15 +92,19 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
         }
 
         JSONObject json = null;
-        try {
-            if (urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK ||
-                urlConnection.getResponseCode()==201)
-                json = new JSONObject(result);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK ||
+                        urlConnection.getResponseCode() == 201)
+                    if(type.equals("PLANNING")){
+                        json = JsonUtils.eventClean(result);
+                    }else
+                        json = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
         try {
             code_retour = urlConnection.getResponseCode();
@@ -118,7 +124,8 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
             }else{
                 System.out.println("code retour error :" + this.code_retour);
                 JSONObject response_request = new JSONObject().put("code_retour", this.code_retour);
-                res = response_request.getJSONArray("code_retour");
+                res = new JSONArray();
+                res.put(response_request);
             }
         } catch (JSONException e) {
             e.printStackTrace();
