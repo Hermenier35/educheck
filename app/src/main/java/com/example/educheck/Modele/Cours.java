@@ -5,13 +5,10 @@ import java.util.List;
 public class Cours {
     String name,profName;
     int credit;
-    private List<Double> marks;
-
     public Cours(String name,String profName, int credit) {
         this.name = name;
         this.profName = profName;
         this.credit = credit;
-        this.marks= marks;
     }
 
     public String getName() {
@@ -32,9 +29,6 @@ public class Cours {
     public void setCredit(int credit) {
         this.credit = credit;
     }
-    public List<Double> getMarks() { return marks;  }
-    public void setMarks(double mark) { marks.add(mark); return;}
-
     @Override
     public String toString(){
         return "Name: "+ name +"\nprofName: "+profName+"\ncredit: "+ credit;
