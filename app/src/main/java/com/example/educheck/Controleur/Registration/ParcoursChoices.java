@@ -68,9 +68,14 @@ public class ParcoursChoices extends AppCompatActivity implements AsyncTaskcallb
                         ImageView imageView = new ImageView(this);
                         switch(json.getString("type")){
                             case "Licence" :
+                            case "Licence 1":
+                            case "Licence 2":
+                            case "Licence 3":
                                 imageView.setImageResource(R.drawable.licence);
                                 break;
                             case "Master" :
+                            case "Master 1":
+                            case "Master 2":
                                 imageView.setImageResource(R.drawable.master);
                                 break;
                             case "Doctorat" :

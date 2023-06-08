@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Controleur.DashbardTeacher.AddCoursesFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_marginTop="20sp"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:text="Add academic backgrounds"
+        android:padding="10sp"
+        android:background="#D0B0F3"/>
+
+    <Spinner
+        android:id="@+id/spinner_add_type_choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25sp"
+        android:entries="@array/choices"
+        android:background="@color/gray_400"/>
+
+</LinearLayout>

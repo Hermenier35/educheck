@@ -59,8 +59,11 @@
     <string name="title_activity_registration">registration</string>
     <string name="select">select</string>
     <string-array name="choices">
-        <item>Licence</item>
-        <item>Master</item>
+        <item>Licence 1</item>
+        <item>Licence 2</item>
+        <item>Licence 3</item>
+        <item>Master 1</item>
+        <item>Master 2</item>
         <item>Doctorat</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->

@@ -84,13 +84,15 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         index=new ArrayList<>();
         sendRequest();
         requestHandler = new Handler(Looper.getMainLooper());
-        requestRunnable = new Runnable() {
+       requestRunnable = new Runnable() {
             @Override
             public void run() {
                 sendRequest();
                 requestHandler.postDelayed(this, REQUEST_DELAY_MS);
             }
         };
+
+
         buttonSend.setOnClickListener(v -> send_message());
 
         return view;
@@ -110,7 +112,6 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
 
     public void send_message(){
-
         String text = messageToSend.getText().toString();
         Date date=new Date();
 
@@ -126,6 +127,12 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         Message mess=new Message(mailRecipient,mailSender,text,date);
         model_message.sendMessageTo(mess,token);
         messageToSend.getText().clear();
+        updateMessages();
+    }
+
+
+    private void updateMessages() {
+        // Appeler la méthode pour récupérer les messages
         sendRequest();
     }
 

@@ -1,19 +1,23 @@
 package com.example.educheck.Controleur.Dashboard;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.educheck.Modele.Cours;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.R;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
@@ -29,54 +33,90 @@ import java.util.List;
 public class FragGetCourses extends Fragment implements AsyncTaskcallback {
     String token;
     private View view;
-    //private Spinner course;
-    private ListView listView;
-    private List CoursesList;
+    private RecyclerView recyclerView;
 
-    private EditText search;    // search bar
+    public static View.OnClickListener myOnClickListener;
+
     private DashboardImplementation request;
+    private MailAdapterCard adapter;
 
-    private ArrayAdapter<String> adapter;
-    private List<String> coursesList;
+    private RecyclerView.Adapter adapter_card;
 
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Cours> coursList;
+
+    private ArrayList<String> nameCourses;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_frag1, container, false);
+        view = inflater.inflate(R.layout.fragment_get_cours, container, false);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView = view.findViewById(R.id.recyclerView_Cours);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        token = getActivity().getIntent().getStringExtra("token");
 
-        coursesList = new ArrayList<>();
-        coursesList.add("Math1");
-        coursesList.add("INF1");
-        coursesList.add("CODAGE");
-
-        //course = view.findViewById(R.id.courses_spinner);
+        myOnClickListener = new FragGetCourses.MyOnClickListener(getContext(),recyclerView);
+        coursList = new ArrayList<>();
+        nameCourses= new ArrayList<>();
+        adapter = new MailAdapterCard(nameCourses);
+        recyclerView.setAdapter(adapter);
         request = new DashboardImplementation(this);
         request.getCourses(token);
-
         request.getPersonalCourses("token");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, coursesList);
-        listView.setAdapter(adapter);
-
-        listView = view.findViewById(R.id.listView);
         return view;
-
     }
+
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
-        for(int i = 0; i < items.length(); i++){
-            JSONObject coursesJson = items.getJSONObject(i);
-            CoursesList.add(coursesJson.getString("name"));
+        JSONObject coursesJson = items.getJSONObject(0);
+        JSONArray coursesArray = coursesJson.getJSONArray("cours");
+
+        for (int i = 0; i < coursesArray.length(); i++) {
+            JSONObject courseJson = coursesArray.getJSONObject(i);
+            String name = courseJson.getString("name");
+            String prof = courseJson.getString("profName");
+            int credit = Integer.parseInt(courseJson.getString("credit"));
+
+            Cours course = new Cours(name, prof, credit);
+            nameCourses.add(name);
+            coursList.add(course);
+        }
+        coursList.forEach(cours -> System.out.println(cours.toString()));
+        adapter_card = new MailAdapterCard(nameCourses);
+        recyclerView.setAdapter(adapter_card);
+    }
+
+
+    private class MyOnClickListener implements View.OnClickListener {
+        private Context context;
+        private RecyclerView recyclerView;
+
+        public MyOnClickListener(Context context, RecyclerView recyclerView) {
+            this.context = context;
+            this.recyclerView = recyclerView;
         }
 
-        ArrayAdapter adapter = new ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                CoursesList
-        );
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        listView.setAdapter(adapter);
+        @Override
+        public void onClick(View v) {
+            String nameCours = nameCourses.get(v.getVerticalScrollbarPosition());
+            System.out.println(nameCours);
+            Fragment Fm = FragMarks.newInstance(nameCours,token);;
+            replaceFragment(Fm);
+        }
     }
+
+
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame1, fragment);
+        fragmentTransaction.commit();
+    }
+
+
+
 }

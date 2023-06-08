@@ -12,12 +12,22 @@ public class University implements Serializable {
     private String suffixeStudent;
     private String suffixeTeacher;
     private byte[] image;
+    private String _id;
 
     public University(String name, String suffixeStudent, String suffixeTeacher, byte[] image){
         this.uniName = name;
         this.suffixeStudent = suffixeStudent;
         this.suffixeTeacher = suffixeTeacher;
         this.image = image;
+        this._id = "";
+    }
+
+    public University(String name, String suffixeStudent, String suffixeTeacher, byte[] image, String _id){
+        this.uniName = name;
+        this.suffixeStudent = suffixeStudent;
+        this.suffixeTeacher = suffixeTeacher;
+        this.image = image;
+        this._id = _id;
     }
 
     public JSONObject convertToJSONObject(){
@@ -27,6 +37,7 @@ public class University implements Serializable {
             jsonObject.put("suffixe_student", getSuffixeStudent());
             jsonObject.put("suffixe_teacher", getSuffixeTeacher());
             jsonObject.put("image", Base64.getEncoder().encodeToString(getImage()));
+            jsonObject.put("_id", get_id());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -63,5 +74,13 @@ public class University implements Serializable {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 }

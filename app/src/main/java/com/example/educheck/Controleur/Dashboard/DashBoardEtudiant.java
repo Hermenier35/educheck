@@ -17,11 +17,13 @@ import android.widget.Button;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DashBoardEtudiant extends AppCompatActivity {
 
-    private String token;
-    TextView textView;
-    Intent click;
+    private static String token;
+    //TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class DashBoardEtudiant extends AppCompatActivity {
             }
         });
 
+
         menu2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +52,22 @@ public class DashBoardEtudiant extends AppCompatActivity {
             }
         });
 
+        /*
+        menu2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Pass the marks data to FragMarks
+                List<Integer> marksList = new ArrayList<>();
+                marksList.add(18);
+                marksList.add(19);
+                marksList.add(10);
+                FragMarks fragMarks = FragMarks.newInstance("Course Name", marksList);
+
+                replaceFragment(fragMarks);
+            }
+        });
+
+         */
         menu3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,18 +90,3 @@ public class DashBoardEtudiant extends AppCompatActivity {
             fragmentTransaction.commit();
     }
 }
-
-    /**
-        btn1.setOnClickListener(v->{clickCourse();});
-        btn2.setOnClickListener(v->{clickMsg();});
-    }
-
-    void clickCourse(){
-        click = new Intent(DashBoard_Etudiant.this, Courses.class);
-        startActivity(click);
-    }
-    void clickMsg (){
-        click = new Intent(DashBoard_Etudiant.this, Messages.class);
-                startActivity(click);
-    }
-     */

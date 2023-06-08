@@ -7,71 +7,60 @@
     tools:context=".Controleur.DashboardAdmin.ManagerUniversityFragment"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="24dp"
+            android:layout_marginTop="20sp"
             android:gravity="center_horizontal"
-            android:padding="24dp"
-            android:textSize="18dp"
+            android:padding="10sp"
+            android:textSize="22sp"
             android:background="#D0B0F3"
             android:textStyle="bold|italic"
             android:text="University information" />
 
         <ImageView
             android:id="@+id/LogoUniv"
-            android:layout_width="92dp"
-            android:layout_height="90dp"
-            android:layout_margin="20dp"
+            android:layout_width="92sp"
+            android:layout_height="90sp"
+            android:layout_margin="20sp"
+            android:layout_gravity="center"
             tools:src="@drawable/baseline_more_vert_white_24dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/sufStudent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Suffix student : " />
+                android:text="Suffix student : "
+                android:layout_marginStart="20sp"/>
 
             <TextView
                 android:id="@+id/sufTeacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Suffix teacher : " />
+                android:text="Suffix teacher : "
+                android:layout_marginStart="20sp"/>
             <TextView
                 android:id="@+id/Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Name of university : " />
-        </LinearLayout>
+                android:text="Name of university : "
+                android:layout_marginStart="20sp"/>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="20dp">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
+            android:textSize="18sp"
             android:background="#D0B0F3"
             android:textStyle="bold|italic"
-            android:text="Si vous voulez changer les coordonnées d'université :  " />
+            android:gravity="center"
+            android:padding="10sp"
+            android:text="Change university information :  " />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -79,17 +68,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="160sp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:text="Name  :" />
+                android:textSize="14sp"
+                android:text="Name  :"
+                android:layout_marginStart="20sp"/>
 
             <EditText
                  android:id="@+id/NewName"
-                android:layout_width="194dp"
+                android:layout_width="194sp"
                 android:layout_height="wrap_content"
                 android:hint="NewName"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
          </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -97,17 +87,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="160sp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:text="SuffixStudent  :" />
+                android:textSize="14sp"
+                android:text="SuffixStudent  :"
+                android:layout_marginStart="20sp"/>
 
             <EditText
                 android:id="@+id/NewSuffixStudent"
-                android:layout_width="194dp"
+                android:layout_width="194sp"
                 android:layout_height="wrap_content"
                 android:hint="NewSuffixStudent"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -115,17 +106,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="160sp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:text="SuffixTeacher :" />
+                android:textSize="14sp"
+                android:text="SuffixTeacher :"
+                android:layout_marginStart="20sp"/>
 
             <EditText
                 android:id="@+id/NewSuffixTeacher"
-                android:layout_width="194dp"
+                android:layout_width="194sp"
                 android:layout_height="wrap_content"
                 android:hint="NewSuffixTeacher"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -133,16 +125,16 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="160sp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:text="Logo :" />
+                android:textSize="14sp"
+                android:text="Logo :"
+                android:layout_marginStart="20sp"/>
 
             <Button
                 android:id="@+id/btnImportImage"
-                android:layout_width="194dp"
+                android:layout_width="194sp"
                 android:layout_height="wrap_content"
-                android:onClick="importImage"
                 android:text="Importer une image" />
 
         </LinearLayout>
@@ -154,22 +146,18 @@
 
             <ImageView
                 android:id="@+id/NewLogo"
-                android:layout_width="92dp"
-                android:layout_height="90dp"
-                android:layout_margin="20dp"
+                android:layout_width="90sp"
+                android:layout_height="90sp"
+                android:layout_marginStart="20sp"
                 tools:src="@drawable/baseline_more_vert_white_24dp" />
 
             <Button
                 android:id="@+id/btnSave"
-                android:layout_width="match_parent"
+                android:layout_width="194sp"
                 android:layout_height="wrap_content"
-                android:layout_margin="28dp"
-                android:onClick="saveChanges"
+                android:layout_marginStart="70sp"
                 android:text="Enregistrer" />
         </LinearLayout>
-
-
-    </LinearLayout>
 
 
 </LinearLayout>
