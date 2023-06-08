@@ -31,14 +31,18 @@
         android:id="@+id/spinner_acaback_name_teacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
         android:background="@color/gray_400"/>
 
     <Spinner
         android:id="@+id/spinner_course_name_teacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
         android:background="@color/gray_400"/>
 
     <LinearLayout
