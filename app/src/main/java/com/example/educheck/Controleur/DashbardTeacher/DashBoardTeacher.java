@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.educheck.Controleur.Dashboard.FragMessages1;
 import com.example.educheck.Controleur.Dashboard.FragMessages2;
 import com.example.educheck.R;
 
