@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Controleur.DashbardTeacher.AddStudentFragment">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:gravity="center_horizontal"
+        android:padding="10sp"
+        android:textSize="22sp"
+        android:background="#D0B0F3"
+        android:textStyle="bold|italic"
+        android:text="Add Student" />
+
+    <Spinner
+        android:id="@+id/spinner_type_choice_teacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25sp"
+        android:entries="@array/choices"
+        android:layout_marginStart="10sp"
+        android:background="@color/gray_400"/>
+
+    <Spinner
+        android:id="@+id/spinner_acaback_name_teacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25sp"
+        android:background="@color/gray_400"/>
+
+    <Spinner
+        android:id="@+id/spinner_course_name_teacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25sp"
+        android:background="@color/gray_400"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="10sp">
+
+        <TextView
+            android:layout_marginTop="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Student :"/>
+        <EditText
+            android:id="@+id/emailStudent"
+            android:layout_marginTop="20sp"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_marginEnd="10sp"
+            android:layout_marginTop="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="File .csv :"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="230sp"
+            android:layout_marginEnd="10sp"
+            android:text="Add File"
+            android:id="@+id/btnAddFile"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.educheck.Modele.Implementation;
 
 import com.example.educheck.Modele.AcademicBackground;
+import com.example.educheck.Modele.Cours;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Interface.Dashboard;
 import com.example.educheck.Modele.Message;
@@ -135,6 +136,24 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     public void getSchedule(String url) {
         Request request = new Request(this, "PLANNING");
         request.execute(url);
+    }
+
+    @Override
+    public void addCourse(String token, Cours cours, String _id) {
+        Request request = new Request(this, "POST");
+        JSONObject body = cours.convertToJSONObject();
+        try {
+            body.put("_id", _id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.setBody(body);
+        request.execute(HttpUrl.UrlAddCourse + "/" + token);
+    }
+
+    @Override
+    public void getMarks(String token, String _idCour) {
+        //TODO
     }
 
     @Override

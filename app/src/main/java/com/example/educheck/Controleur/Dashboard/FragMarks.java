@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.educheck.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FragMarks extends Fragment {
@@ -23,15 +22,15 @@ public class FragMarks extends Fragment {
 
 
 
-    public static FragMarks newInstance(String nameCours,String token) {
+    public static FragMarks newInstance(String coursName,String token) {
         FragMarks fragment = new FragMarks();
         Bundle args = new Bundle();
-        args.putString("nameCours", nameCours);
+        args.putString("course_name", coursName);
         args.putString("token",token);
         fragment.setArguments(args);
         return fragment;
     }
-
+/*
     public static FragMarks newInstance(String courseName, List<Integer> marksList) {
         FragMarks fragment = new FragMarks();
         Bundle args = new Bundle();
@@ -40,7 +39,7 @@ public class FragMarks extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,7 @@ public class FragMarks extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_note, container, false);
+        View view = inflater.inflate(R.layout.fragment_marks, container, false);
         TextView courseNameTextView = view.findViewById(R.id.courseNameTextView);
         TextView marksTextView = view.findViewById(R.id.marksTextView);
 

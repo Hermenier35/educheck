@@ -3,64 +3,129 @@ package com.example.educheck.Controleur.DashbardTeacher;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.widget.ImageView;
 
 import com.example.educheck.Controleur.Dashboard.FragMessages1;
-import com.example.educheck.Controleur.Dashboard.FragMessages2;
+import com.example.educheck.Modele.Implementation.DashboardImplementation;
+import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
-public class DashBoardTeacher extends AppCompatActivity {
-    Button btn1, btn2,btn3;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.Base64;
+
+public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcallback {
+
+    private static final int NUM_PAGES = 4;
     private String token;
+    private Toolbar toolbar;
+    public static ViewPager2 viewPager;
+    public static FragmentStateAdapter pagerAdapter;
+    public static FragmentActivity fa;
+    private DashboardImplementation dashboardImplementation;
+    private ImageView imgAddStudent, imgAddCourse, imgMessenger, imgPresent;
+    private String request;
+    private final String GET_UNIVERSITY = "getUniversity";
+    private University university;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_prof);
 
-        btn1 = findViewById(R.id.tmenu1);
-        btn2 = findViewById(R.id.tmenu2);
-        btn3 = findViewById(R.id.tmenu3);
-
         token = getIntent().getStringExtra("token");
+        toolbar = findViewById(R.id.toolbar);
+        viewPager = findViewById(R.id.viewPagerteacher);
+        imgAddStudent = findViewById(R.id.imgAddStu);
+        imgAddCourse = findViewById(R.id.imgAddCou);
+        imgMessenger = findViewById(R.id.imgMess);
+        imgPresent = findViewById(R.id.imgPre);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        replaceFragment(new FragAddStudent().newInstance(token));
-                                    }
-                                }
-        );
+        setSupportActionBar(toolbar);
+        fa = this;
+        dashboardImplementation = new DashboardImplementation(this);
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        replaceFragment(new FragMessages1());
-                                    }
-                                }
-        );
+        imgAddStudent.setOnClickListener(v -> viewPager.setCurrentItem(0));
+        imgAddCourse.setOnClickListener(v -> viewPager.setCurrentItem(1));
+        imgMessenger.setOnClickListener(v -> viewPager.setCurrentItem(2));
+        imgPresent.setOnClickListener(v -> viewPager.setCurrentItem(3));
 
-        btn3.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        replaceFragment(new FragConfirmationStudent());
-                                    }
-                                }
-        );
+        sendRequest(GET_UNIVERSITY);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onTaskCompleted(JSONArray items) throws JSONException {
+        switch (request){
+            case GET_UNIVERSITY:
+                JSONObject response = items.getJSONObject(0);
+                this.university = new University(response.getString("name"), response.getString("suffixe_student"),
+                        response.getString("suffixe_teacher"), Base64.getDecoder().decode(response.getString("image")),
+                        response.getString("_id"));
+                initialisation();
+                break;
+        }
+    }
+
+    private void sendRequest(String name){
+        request = name;
+        switch(request){
+            case GET_UNIVERSITY:
+                dashboardImplementation.getUniversity(token);
+                break;
+        }
 
     }
 
-    private void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameTeacher,fragment);
-        fragmentTransaction.commit();
+    private void initialisation(){
+        Fragment addStudent = AddStudentFragment.newInstance(token, this.university);
+        Fragment addCourse = AddCoursesFragment.newInstance(token, this.university);
+        Fragment present = PresentFragment.newInstance(token, this.university);
+        Fragment messenger = new FragMessages1();
+        pagerAdapter = new ScreenSlidePagerAdapter(fa, addStudent,addCourse, messenger, present);
+        viewPager.setAdapter(pagerAdapter);
+    }
+
+    public static class ScreenSlidePagerAdapter extends FragmentStateAdapter {
+        private Fragment addStudentFragment, addCourseFragment, messengerFragment, presentFragment;
+        public ScreenSlidePagerAdapter(FragmentActivity fa, Fragment page1, Fragment page2, Fragment page3, Fragment page4) {
+            super(fa);
+            addStudentFragment = page1;
+            addCourseFragment = page2;
+            messengerFragment = page3;
+            presentFragment = page4;
+        }
+
+        @Override
+        public Fragment createFragment(int position) {
+            switch(position){
+                case 0: return addStudentFragment;
+                case 1: return addCourseFragment;
+                case 2: return messengerFragment;
+                default: return presentFragment;
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return NUM_PAGES;
+        }
     }
 }
