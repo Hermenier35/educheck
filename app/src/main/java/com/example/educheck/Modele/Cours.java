@@ -4,16 +4,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Cours implements Serializable {
-    String name,profName;
+    String name,profName, _id;
     int credit;
 
     public Cours(String name,String profName, int credit) {
         this.name = name;
         this.profName = profName;
         this.credit = credit;
+    }
+
+    public Cours(String name,String profName, int credit, String _id) {
+        this.name = name;
+        this.profName = profName;
+        this.credit = credit;
+        this._id = _id;
     }
 
     public JSONObject convertToJSONObject(){
@@ -46,9 +52,14 @@ public class Cours implements Serializable {
     public void setCredit(int credit) {
         this.credit = credit;
     }
+    public String get_id() {
+        return _id;
+    }
+
     @Override
     public String toString(){
         return "Name: "+ name +"\nprofName: "+profName+"\ncredit: "+ credit;
     }
+
 }
 

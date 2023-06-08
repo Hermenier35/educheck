@@ -70,4 +70,12 @@ public class JsonUtils {
 
         return jsonResult;
     }
+
+    public static JSONArray arrayListToJson(ArrayList<String> array){
+        JSONArray jsonArray = new JSONArray();
+        for(String s : array){
+            jsonArray.put(s);
+        }
+        return jsonArray;
+    }
 }
