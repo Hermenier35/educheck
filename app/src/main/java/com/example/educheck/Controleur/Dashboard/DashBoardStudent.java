@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.View;
 import android.widget.ImageView;
 
 
@@ -13,15 +12,14 @@ import android.os.Bundle;
 
 import com.example.educheck.R;
 
-public class DashBoardEtudiant extends AppCompatActivity {
+public class DashBoardStudent extends AppCompatActivity {
 
-    private static String token;
+    String token;
     //TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_etudiant);
-        //textView = findViewById(R.id.welcome);
+        setContentView(R.layout.activity_dashboard_student);
         ImageView menu1 = findViewById(R.id.menu1);
         ImageView menu2 = findViewById(R.id.menu2);
         ImageView menu3 = findViewById(R.id.menu3);
@@ -30,20 +28,10 @@ public class DashBoardEtudiant extends AppCompatActivity {
         token = getIntent().getStringExtra("token");
 
 
-        menu1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragment(new Schedule());
-            }
-        });
+        menu1.setOnClickListener(v -> replaceFragment(new Schedule()));
 
 
-        menu2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragment(new FragGetCourses());
-            }
-        });
+        menu2.setOnClickListener(v -> replaceFragment(new FragGetCourses()));
 
         /*
         menu2.setOnClickListener(new View.OnClickListener() {
@@ -61,19 +49,9 @@ public class DashBoardEtudiant extends AppCompatActivity {
         });
 
          */
-        menu3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragment(new FragMessages1());
-            }
-        });
+        menu3.setOnClickListener(v -> replaceFragment(new FragMessages1()));
 
-        menu4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragment(new FragJustification());
-            }
-        });
+        menu4.setOnClickListener(v -> replaceFragment(new FragJustification()));
     }
 
     private void replaceFragment(Fragment fragment){

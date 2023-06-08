@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.educheck.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FragMarks extends Fragment {
@@ -23,10 +22,10 @@ public class FragMarks extends Fragment {
 
 
 
-    public static FragMarks newInstance(String nameCours,String token) {
+    public static FragMarks newInstance(String coursName,String token) {
         FragMarks fragment = new FragMarks();
         Bundle args = new Bundle();
-        args.putString("nameCours", nameCours);
+        args.putString("course_name", coursName);
         args.putString("token",token);
         fragment.setArguments(args);
         return fragment;
