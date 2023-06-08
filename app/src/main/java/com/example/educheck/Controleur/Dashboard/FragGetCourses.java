@@ -35,7 +35,7 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
     public static View.OnClickListener myOnClickListener;
 
     private DashboardImplementation request;
-    private MailAdapterCard adapter;
+    private CoursesAdapterCard adapter;
 
     private RecyclerView.Adapter adapter_card;
 
@@ -57,7 +57,7 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
         myOnClickListener = new FragGetCourses.MyOnClickListener(getContext(),recyclerView);
         courseList = new ArrayList<>();
         coursesName = new ArrayList<>();
-        adapter = new MailAdapterCard(coursesName);
+        adapter = new CoursesAdapterCard(coursesName);
         recyclerView.setAdapter(adapter);
         request = new DashboardImplementation(this);
         request.getCourses(token);
@@ -81,7 +81,7 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
             courseList.add(course);
         }
         courseList.forEach(cours -> System.out.println(cours.toString()));
-        adapter_card = new MailAdapterCard(coursesName);
+        adapter_card = new CoursesAdapterCard(coursesName);
         recyclerView.setAdapter(adapter_card);
     }
 

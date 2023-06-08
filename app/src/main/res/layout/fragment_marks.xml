@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_400"
+    android:background="#FFC0CB"
     tools:context=".Controleur.Dashboard.FragJustification">
 
     <TextView
-        android:id="@+id/courseNameTextView"
+        android:id="@+id/courseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Marks :"

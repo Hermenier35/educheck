@@ -3,21 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="100dp"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/purple_200" >
+    app:cardBackgroundColor="#FFC0CB" >
 
 
     <LinearLayout
         android:id="@+id/linearMail"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="94dp">
 
 
         <TextView
-            android:id="@+id/Mail_Name"
+            android:id="@+id/Cours_Name"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/idIVCourseImage"
