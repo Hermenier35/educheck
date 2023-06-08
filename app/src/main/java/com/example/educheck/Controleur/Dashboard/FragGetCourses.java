@@ -61,7 +61,6 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
         recyclerView.setAdapter(adapter);
         request = new DashboardImplementation(this);
         request.getCourses(token);
-        request.getPersonalCourses("token");
         return view;
     }
 

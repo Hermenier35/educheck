@@ -190,6 +190,7 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
     private void initialisationSpinnerPath(String type){
         dataParcours.clear();
         dataParcours.add("Select");
+        path.setSelection(0);
         for (AcademicBackground aca : academicBackgrounds){
             if(aca.getType().equals(type))
                 dataParcours.add(aca.getName());
@@ -197,7 +198,7 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
     }
 
     private void initIdPath(String acaName){
-        if(!type.equals("Select"))
+        if(!acaName.equals("Select"))
             for (AcademicBackground aca : academicBackgrounds){
                 if(aca.getName().equals(acaName))
                     idPath = aca.get_id();
