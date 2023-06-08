@@ -7,18 +7,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
-import com.example.educheck.Modele.Student;
 import com.example.educheck.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DashBoardEtudiant extends AppCompatActivity {
 
@@ -78,7 +71,7 @@ public class DashBoardEtudiant extends AppCompatActivity {
         menu4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new Frag4());
+                replaceFragment(new FragJustification());
             }
         });
     }

@@ -31,7 +31,7 @@ public class FragMarks extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+/*
     public static FragMarks newInstance(String courseName, List<Integer> marksList) {
         FragMarks fragment = new FragMarks();
         Bundle args = new Bundle();
@@ -40,7 +40,7 @@ public class FragMarks extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
