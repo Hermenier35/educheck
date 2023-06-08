@@ -152,8 +152,15 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
-    public void getMarks(String token, String _idCour) {
-        //TODO
+    public void getMarks(String token, String nameCours) {
+        Request request= new Request(this,"GET");
+        JSONObject body=new JSONObject();
+        try {
+            body.put("nameCours", nameCours);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.execute(HttpUrl.UrlGetMarks+"/"+token);
     }
 
     @Override
