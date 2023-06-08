@@ -79,7 +79,6 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
                 this.university = new University(response.getString("name"), response.getString("suffixe_student"),
                         response.getString("suffixe_teacher"), Base64.getDecoder().decode(response.getString("image")),
                         response.getString("_id"));
-                System.out.println(university.getUniName());
                 initialisation();
                 break;
         }
@@ -96,9 +95,9 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
     }
 
     private void initialisation(){
-        Fragment addStudent = AddStudentFragment.newInstance(token,university);
-        Fragment addCourse = AddCoursesFragment.newInstance(token, university);
-        Fragment present = PresentFragment.newInstance(token, university);
+        Fragment addStudent = AddStudentFragment.newInstance(token, this.university);
+        Fragment addCourse = AddCoursesFragment.newInstance(token, this.university);
+        Fragment present = PresentFragment.newInstance(token, this.university);
         Fragment messenger = new FragMessages1();
         pagerAdapter = new ScreenSlidePagerAdapter(fa, addStudent,addCourse, messenger, present);
         viewPager.setAdapter(pagerAdapter);

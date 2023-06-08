@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25sp"
         android:entries="@array/choices"
+        android:layout_marginStart="10sp"
         android:background="@color/gray_400"/>
 
     <Spinner
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/btnAdd"
+            android:layout_marginEnd="10sp"
             android:layout_marginTop="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:layout_marginStart="230sp"
+            android:layout_marginEnd="10sp"
             android:text="Add File"
             android:id="@+id/btnAddFile"/>
 

@@ -59,6 +59,7 @@
     <string name="title_activity_registration">registration</string>
     <string name="select">select</string>
     <string-array name="choices">
+        <item>Select</item>
         <item>Licence 1</item>
         <item>Licence 2</item>
         <item>Licence 3</item>

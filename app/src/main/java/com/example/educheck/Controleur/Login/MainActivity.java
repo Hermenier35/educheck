@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.example.educheck.Controleur.Dashboard.DashBoardEtudiant;
-import com.example.educheck.Controleur.Dashboard.Schedule;
 import com.example.educheck.Controleur.Registration.UniversityInscription;
 import com.example.educheck.R;
 
