@@ -16,7 +16,7 @@
         android:textSize="22sp"
         android:background="#D0B0F3"
         android:textStyle="bold|italic"
-        android:text="Add Student" />
+        android:text="Select Course" />
 
     <Spinner
         android:id="@+id/spinner_type_choice_teacher"
@@ -44,6 +44,17 @@
         android:layout_marginStart="10sp"
         android:layout_marginEnd="10sp"
         android:background="@color/gray_400"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="20sp"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:text="Add Course Students"
+        android:padding="5sp"
+        android:background="#D0B0F3"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,7 +86,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/filecsv"
             android:layout_marginTop="20sp"
             android:layout_marginStart="10sp"
             android:layout_width="wrap_content"
@@ -89,6 +102,65 @@
             android:layout_marginEnd="10sp"
             android:text="Add File"
             android:id="@+id/btnAddFile"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="20sp"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:text="Add Marks Students"
+        android:padding="5sp"
+        android:background="#D0B0F3"/>
+
+    <Spinner
+        android:id="@+id/spinner_type_choice_students"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25sp"
+        android:layout_marginStart="10sp"
+        android:background="@color/gray_400"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:text="Type:"/>
+
+        <EditText
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittype"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:text="Teacher:"/>
+
+        <EditText
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editteacher"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:text="Mark:"/>
+
+        <EditText
+            android:layout_width="40sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editmark"/>
 
     </LinearLayout>
 

@@ -111,14 +111,16 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
-    public void postCoursesStudent(String token, ArrayList<String> mailStudent, String idCourse) {
+    public void postCoursesStudent(String token, ArrayList<String> mailStudent, String idCourse, String idPath) {
         Request request = new Request(this, "POST");
         JSONObject body = new JSONObject();
         try{
             body.put("mail", JsonUtils.arrayListToJson(mailStudent));
-            body.put("_id", idCourse);
+            body.put("_idCourse", idCourse);
+            body.put("_idPath", idPath);
             request.setBody(body);
-            request.execute();
+            System.out.println(JsonUtils.arrayListToJson(mailStudent));
+            request.execute(HttpUrl.UrlPostCourseStudent + "/" + token);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -129,7 +131,7 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
         Request request = new Request(this, "DELETE");
         JSONObject body = new JSONObject();
         try {
-            body.put("_id", id);
+            body.put("_idPath", id);
             request.setBody(body);
             request.execute(HttpUrl.UrlDeleteAcademicBackground + "/" + token);
         } catch (JSONException e) {

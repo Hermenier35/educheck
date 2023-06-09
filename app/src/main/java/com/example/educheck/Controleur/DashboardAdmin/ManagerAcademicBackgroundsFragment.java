@@ -190,6 +190,7 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
                 AcademicBackground aca = findAcaByName(valueSpinnerDelete);
                 delete.setEnabled(false);
                 editPath.setEnabled(false);
+                spinChoiceParcour.setSelection(0);
                 dashboardImplementation.deleteAcademicBackground(token, aca.get_id());
                 break;
             default: System.err.println("No request Found");

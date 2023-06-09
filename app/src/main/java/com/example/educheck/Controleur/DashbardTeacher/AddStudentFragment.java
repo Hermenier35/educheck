@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.educheck.Modele.AcademicBackground;
@@ -48,6 +50,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
     private String token;
     private University university;
     private EditText emailStudent;
+    private TextView filecsv;
     private Button btnAddStudent, btnAddFile;
     private String request, idPath, idCourse;
     private Spinner spnType, spnAcaB, spnCour;
@@ -99,6 +102,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         spnType = view.findViewById(R.id.spinner_type_choice_teacher);
         spnAcaB = view.findViewById(R.id.spinner_acaback_name_teacher);
         spnCour = view.findViewById(R.id.spinner_course_name_teacher);
+        filecsv = view.findViewById(R.id.filecsv);
 
         dataCourse = new ArrayList<>();
         dataParcours = new ArrayList<>();
@@ -164,8 +168,8 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
             }
         });
 
-        btnAddStudent.addTextChangedListener(watcher);
-        btnAddFile.addTextChangedListener(watcher);
+        emailStudent.addTextChangedListener(watcher);
+        filecsv.addTextChangedListener(watcher);
         btnAddStudent.setEnabled(false);
         btnAddFile.setEnabled(false);
         btnAddStudent.setOnClickListener(v -> initMails("btnAddStudent"));
@@ -211,7 +215,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                 dashboardImplementation.getAllAcademicBackgrounds(university.getSuffixeTeacher());
                 break;
             case POST_COURSES_STUDENT:
-                dashboardImplementation.postCoursesStudent(token, mails, idCourse);
+                dashboardImplementation.postCoursesStudent(token, mails, idCourse, idPath);
                 break;
         }
     }
@@ -254,6 +258,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
     }
 
     private void initMails(String button){
+        mails.clear();
         if(button.equals("btnAddStudent")){
             mails.add(emailStudent.getText().toString());
         }else{
@@ -274,7 +279,8 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
 
         @Override
         public void afterTextChanged(Editable editable) {
-
+            btnAddStudent.setEnabled(Patterns.EMAIL_ADDRESS.matcher(emailStudent.getText()).matches());
+            btnAddFile.setEnabled(true);
         }
     };
 }
