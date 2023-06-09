@@ -19,7 +19,7 @@ public interface Dashboard {
     public void getAllAcademicBackgrounds(String suffixe);
     public void editAcademicBackground(String token, AcademicBackground academicBackground);
     public void editUniversity(String token, University university);
-    public void postCoursesStudent(String token, ArrayList<String> mailStudent, String idCourse);
+    public void postCoursesStudent(String token, ArrayList<String> mailStudent, String idCourse, String idPath);
     public void deleteAcademicBackground(String token, String id);
     public void getSchedule(String url);
     public void addCourse(String token, Cours cours, String _id);
