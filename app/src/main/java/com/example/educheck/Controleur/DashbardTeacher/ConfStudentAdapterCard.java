@@ -32,7 +32,7 @@ public class ConfStudentAdapterCard extends RecyclerView.Adapter<ConfStudentAdap
     public ConfiStudentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_card_confi_student, parent, false);
-        item.setOnClickListener(FragConfirmationStudent.myOnClickListener);
+        //item.setOnClickListener(FragConfirmationStudent.myOnClickListener);
         return new ConfiStudentHolder(item);
     }
 
