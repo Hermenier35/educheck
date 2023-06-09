@@ -5,9 +5,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.widget.EditText;
-import android.widget.ListView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,14 +35,14 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
     public static View.OnClickListener myOnClickListener;
 
     private DashboardImplementation request;
-    private MailAdapterCard adapter;
+    private CoursesAdapterCard adapter;
 
     private RecyclerView.Adapter adapter_card;
 
     private RecyclerView.LayoutManager layoutManager;
-    private List<Cours> coursList;
+    private List<Cours> courseList;
 
-    private ArrayList<String> nameCourses;
+    private ArrayList<String> coursesName;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,13 +55,12 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
         token = getActivity().getIntent().getStringExtra("token");
 
         myOnClickListener = new FragGetCourses.MyOnClickListener(getContext(),recyclerView);
-        coursList = new ArrayList<>();
-        nameCourses= new ArrayList<>();
-        adapter = new MailAdapterCard(nameCourses);
+        courseList = new ArrayList<>();
+        coursesName = new ArrayList<>();
+        adapter = new CoursesAdapterCard(coursesName);
         recyclerView.setAdapter(adapter);
         request = new DashboardImplementation(this);
         request.getCourses(token);
-        request.getPersonalCourses("token");
         return view;
     }
 
@@ -81,11 +77,11 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
             int credit = Integer.parseInt(courseJson.getString("credit"));
 
             Cours course = new Cours(name, prof, credit);
-            nameCourses.add(name);
-            coursList.add(course);
+            coursesName.add(name);
+            courseList.add(course);
         }
-        coursList.forEach(cours -> System.out.println(cours.toString()));
-        adapter_card = new MailAdapterCard(nameCourses);
+        courseList.forEach(cours -> System.out.println(cours.toString()));
+        adapter_card = new CoursesAdapterCard(coursesName);
         recyclerView.setAdapter(adapter_card);
     }
 
@@ -101,9 +97,9 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
 
         @Override
         public void onClick(View v) {
-            String nameCours = nameCourses.get(v.getVerticalScrollbarPosition());
-            System.out.println(nameCours);
-            Fragment Fm = FragMarks.newInstance(nameCours,token);;
+            String singleCourseName = coursesName.get(v.getVerticalScrollbarPosition());
+            System.out.println(singleCourseName);
+            Fragment Fm = FragMarks.newInstance(singleCourseName,token);;
             replaceFragment(Fm);
         }
     }

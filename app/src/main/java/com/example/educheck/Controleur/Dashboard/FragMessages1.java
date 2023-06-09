@@ -23,7 +23,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Logger;
 
 public class FragMessages1 extends Fragment implements AsyncTaskcallback {
@@ -40,7 +39,7 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Logger.getGlobal().info("Message itent init");
+        Logger.getGlobal().info("Message intent init");
         View view = inflater.inflate(R.layout.fragment_messages1, container, false);
         intentMess1 = new Intent(getContext(), FragMessages2.class);
         layoutManager = new LinearLayoutManager(getContext());

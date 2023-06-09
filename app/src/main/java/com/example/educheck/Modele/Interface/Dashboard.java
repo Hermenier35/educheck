@@ -1,8 +1,11 @@
 package com.example.educheck.Modele.Interface;
 
 import com.example.educheck.Modele.AcademicBackground;
+import com.example.educheck.Modele.Cours;
 import com.example.educheck.Modele.Message;
 import com.example.educheck.Modele.University;
+
+import java.util.ArrayList;
 
 public interface Dashboard {
     public void sendMessageTo(Message message, String token);
@@ -16,8 +19,9 @@ public interface Dashboard {
     public void getAllAcademicBackgrounds(String suffixe);
     public void editAcademicBackground(String token, AcademicBackground academicBackground);
     public void editUniversity(String token, University university);
-    public void getPersonalCourses(String token);
-    public void postCourses(String token, String mailStudent, String idCourse);
+    public void postCoursesStudent(String token, ArrayList<String> mailStudent, String idCourse);
     public void deleteAcademicBackground(String token, String id);
     public void getSchedule(String url);
+    public void addCourse(String token, Cours cours, String _id);
+    public void getMarks(String token, String _idCour);
 }

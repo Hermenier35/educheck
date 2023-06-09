@@ -11,9 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.educheck.Controleur.Dashboard.DashBoardEtudiant;
+import com.example.educheck.Controleur.Dashboard.DashBoardStudent;
 import com.example.educheck.Controleur.DashbardTeacher.DashBoardTeacher;
-import com.example.educheck.Controleur.Dashboard.FragMessages1;
 import com.example.educheck.Controleur.DashboardAdmin.DashboardAdmin;
 import com.example.educheck.Modele.Implementation.LoginImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
@@ -99,7 +98,7 @@ public class Login extends AppCompatActivity implements AsyncTaskcallback {
                     startActivity(dashboard);
                     break;
                 case "Student":
-                    dashboard = new Intent(this, DashBoardEtudiant.class);
+                    dashboard = new Intent(this, DashBoardStudent.class);
                     if(!response.getBoolean("valide"))
                         Toast.makeText(this, "please wait teacher's confirmation", Toast.LENGTH_SHORT).show();
                     else {

@@ -68,7 +68,7 @@
             android:name=".Controleur.Login.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".Controleur.Dashboard.DashBoardEtudiant"
+            android:name=".Controleur.Dashboard.DashBoardStudent"
             android:exported="true" />
         <activity
             android:name=".Controleur.Dashboard.FragGetCourses"
@@ -77,7 +77,7 @@
             android:name=".Controleur.Dashboard.Schedule"
             android:exported="true" />
         <activity
-            android:name=".Controleur.Dashboard.Frag4"
+            android:name=".Controleur.Dashboard.FragJustification"
             android:exported="true" />
         <activity
             android:name=".Controleur.Login.Loading"

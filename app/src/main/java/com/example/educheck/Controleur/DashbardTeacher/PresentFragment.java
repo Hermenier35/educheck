@@ -31,7 +31,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
 
     // TODO: Rename and change types of parameters
     private String token;
-    private String university;
+    private University university;
     private String request;
 
 
@@ -62,7 +62,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             token = getArguments().getString(TOKEN);
-            university = getArguments().getString(UNIVERSITY);
+            university = (University) getArguments().getSerializable(UNIVERSITY);
         }
     }
 
