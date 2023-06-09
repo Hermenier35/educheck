@@ -21,5 +21,6 @@ public class HttpUrl {
     public static String UrlEditUniversity = ip + "editUniversity";
     public static String UrlAddCourse = ip + "setCourses";
     public static String UrlPostCourse = ip + "postCoursesStudent";
+    public static String UrlGetMarks= ip + "getNotes";
 
 }
