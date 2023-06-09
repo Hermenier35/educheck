@@ -183,6 +183,9 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
                 int credit = Integer.parseInt(this.ects.getText().toString());
                 Cours cour = new Cours(this.name.getText().toString(), this.teacher.getText().toString(), credit);
                 dashboardImplementation.addCourse(token, cour, idPath);
+                ects.setText("");
+                teacher.setText("");
+                this.name.setText("");
                 break;
         }
     }
@@ -221,7 +224,7 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
             int credit = 0;
             if(ects.getText().length()>0)
                 credit = Integer.parseInt(ects.getText().toString());
-            add.setEnabled(valueSpin && name.getText().length() > 2 && teacher.getText().length() > 5 && credit!=-1);
+            add.setEnabled(valueSpin && name.getText().length() > 2 && teacher.getText().length() > 3 && credit!=-1);
         }
     };
 }

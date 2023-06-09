@@ -37,7 +37,7 @@ public class University implements Serializable {
             jsonObject.put("suffixe_student", getSuffixeStudent());
             jsonObject.put("suffixe_teacher", getSuffixeTeacher());
             jsonObject.put("image", Base64.getEncoder().encodeToString(getImage()));
-            jsonObject.put("_id", get_id());
+            jsonObject.put("_idUni", get_id());
         } catch (JSONException e) {
             e.printStackTrace();
         }
