@@ -21,14 +21,16 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="591dp">
+        android:layout_height="596dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="-1dp">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerteacher"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
-            android:layout_marginTop="65sp"
+            android:layout_marginTop="0sp"
             android:layout_weight="1"></androidx.viewpager2.widget.ViewPager2>
 
     </ScrollView>

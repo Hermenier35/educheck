@@ -1,6 +1,7 @@
 package com.example.educheck.Controleur.DashboardAdmin;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -145,7 +146,7 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
                 galleryLauncher.launch(null);
             }
         });
-        galleryLauncher = registerForActivityResult(new GalleryActivityResultContract(), result -> {
+        galleryLauncher = registerForActivityResult(new GalleryActivityResultContract(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Intent.ACTION_PICK), result -> {
             if (result != null) {
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
                 Cursor cursor = requireContext().getContentResolver().query((Uri) result, filePathColumn, null, null, null);

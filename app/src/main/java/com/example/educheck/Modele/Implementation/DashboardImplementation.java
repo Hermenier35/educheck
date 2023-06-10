@@ -120,6 +120,8 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             body.put("_idPath", idPath);
             request.setBody(body);
             System.out.println(JsonUtils.arrayListToJson(mailStudent));
+            System.out.println(idCourse);
+            System.out.println(idPath);
             request.execute(HttpUrl.UrlPostCourseStudent + "/" + token);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -168,6 +170,12 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             e.printStackTrace();
         }
         request.execute(HttpUrl.UrlGetMarks+"/"+token);
+    }
+
+    @Override
+    public void getUsers(String token) {
+        Request request = new Request(this, "GET");
+        request.execute(HttpUrl.UrlGetUsers + "/" + token);
     }
 
     @Override

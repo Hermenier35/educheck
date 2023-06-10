@@ -11,10 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class GalleryActivityResultContract extends ActivityResultContract {
+
+    Uri uri;
+    String intent;
+
+    public GalleryActivityResultContract(Uri uri, String intent) {
+        this.uri = uri;
+        this.intent = intent;
+    }
+
     @NonNull
     @Override
     public Intent createIntent(@NonNull Context context, Object input) {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(this.intent, this.uri);
+        intent.setDataAndType(uri, "*/*");
         return intent;
     }
 
@@ -23,6 +33,7 @@ public class GalleryActivityResultContract extends ActivityResultContract {
         if (resultCode == Activity.RESULT_OK && intent != null) {
             return intent.getData();
         }
+        System.out.println("Resultat : null");
         return null;
     }
 }

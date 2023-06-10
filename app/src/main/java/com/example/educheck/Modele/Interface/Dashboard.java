@@ -24,4 +24,5 @@ public interface Dashboard {
     public void getSchedule(String url);
     public void addCourse(String token, Cours cours, String _id);
     public void getMarks(String token, String _idCour);
+    public void getUsers(String token);
 }
