@@ -85,12 +85,12 @@
                 android:text="Name  :" />
 
             <EditText
-                 android:id="@+id/NewName"
+                android:id="@+id/NewName"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
                 android:hint="NewName"
-                android:textSize="15dp"/>
-         </LinearLayout>
+                android:textSize="15dp" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
