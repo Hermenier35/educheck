@@ -269,6 +269,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
             case ADD_MARK:
                 Marks mark = new Marks(eTeacher.getText().toString(), eType.getText().toString(), eMark.getText().toString());
                 dashboardImplementation.addMark(token, spnStudent.getSelectedItem().toString(), mark, spnCour.getSelectedItem().toString());
+                eMark.setText("");
                     break;
         }
     }
