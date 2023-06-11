@@ -19,6 +19,15 @@ public class Cellule {
         this.color = color;
     }
 
+    public void setAverageHour(int add){
+
+    }
+
+    private String setAverage(int add){
+        String data[] = startHour.split(" : ");
+        int hour = Integer.parseInt(data[0]) + add;
+        return hour + " : " + data[1];
+    }
     public String getSummary() {
         return summary;
     }

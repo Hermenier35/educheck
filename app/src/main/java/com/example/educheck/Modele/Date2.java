@@ -28,7 +28,7 @@ public class Date2 {
             case"07" : return 6;
             case"08" : return 7;
             case"09" : return 8;
-            default: return Integer.getInteger(String.valueOf(date).substring(4,6)) - 1;
+            default: return Integer.parseInt(String.valueOf(date).substring(4,6)) - 1;
         }
     }
 
