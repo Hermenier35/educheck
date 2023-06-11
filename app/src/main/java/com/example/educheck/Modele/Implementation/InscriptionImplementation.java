@@ -46,6 +46,7 @@ public class InscriptionImplementation implements Inscription, AsyncTaskcallback
         JSONObject merge = JsonUtils.mergeJSONObjects(academicBackground.convertToJSONObject(), student.convertToJSONObject());
         JSONObject body = JsonUtils.mergeJSONObjects(merge, university.convertToJSONObject());
         request.setBody(body);
+        System.out.println(body.toString());
         request.execute(HttpUrl.UrlPostAcademicBackground);
     }
 

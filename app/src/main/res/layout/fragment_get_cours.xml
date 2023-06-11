@@ -7,14 +7,15 @@
     tools:context=".Controleur.Dashboard.FragGetCourses">
 
 
-    <ListView
-        android:id="@+id/listView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_Cours"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_centerInParent="true"
         android:layout_marginVertical="50dp"
         android:text="Liste de cours : "
         android:textSize="30dp" />
+
 
 
 

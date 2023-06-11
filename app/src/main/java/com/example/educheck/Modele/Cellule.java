@@ -1,20 +1,22 @@
 package com.example.educheck.Modele;
 
+import android.graphics.Color;
+
 public class Cellule {
     private String summary;
     private String location;
-    private String description;
     private String startHour;
     private String endHour;
+    private int color;
     private Date2 date;
 
-    public Cellule(String summary, String location, String description, String startHour, String endHour, Date2 date) {
+    public Cellule(String summary, String location, String startHour, String endHour, Date2 date, int color) {
         this.summary = summary;
         this.location = location;
-        this.description = description;
         this.startHour = startHour;
         this.endHour = endHour;
         this.date = date;
+        this.color = color;
     }
 
     public String getSummary() {
@@ -31,14 +33,6 @@ public class Cellule {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getStartHour() {
@@ -63,5 +57,13 @@ public class Cellule {
 
     public void setDate(Date2 date) {
         this.date = date;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

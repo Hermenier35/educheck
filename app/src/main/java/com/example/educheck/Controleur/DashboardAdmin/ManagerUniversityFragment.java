@@ -1,6 +1,7 @@
 package com.example.educheck.Controleur.DashboardAdmin;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,13 +24,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.Request;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
@@ -62,6 +67,7 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
     private ActivityResultLauncher<Void> galleryLauncher;
     private University university;
     private MenuItem item;
+    private DashboardImplementation dashboardImplementation;
 
     public ManagerUniversityFragment() {
         // Required empty public constructor
@@ -114,6 +120,7 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
         NewSuffixTeacher.addTextChangedListener(NameWatcher);
         NewSuffixStudent.addTextChangedListener(NameWatcher);
         NewName.addTextChangedListener(NameWatcher);
+        dashboardImplementation = new DashboardImplementation(this);
 
 
         btnSave.setOnClickListener(v->{
@@ -129,20 +136,17 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
             university.setSuffixeStudent(NewSuffixStudent.getText().toString());
             university.setSuffixeTeacher(NewSuffixTeacher.getText().toString());
             university.setImage(logo);
+            dashboardImplementation.editUniversity(this.token, this.university);
         });
 
-        suffixStudent.setText( "Suffixe Student : " +university.getSuffixeStudent() + ".");
-        suffixTeacher.setText( "Suffixe Teacher : " +university.getSuffixeTeacher() +".");
-        NameOfUniversity.setText("Name of university : " + university.getUniName() +".");
-        byte[] imageBytes =university.getImage();
-        LogoUniv.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length));
+        setInfo();
         btnImportImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 galleryLauncher.launch(null);
             }
         });
-        galleryLauncher = registerForActivityResult(new GalleryActivityResultContract(), result -> {
+        galleryLauncher = registerForActivityResult(new GalleryActivityResultContract(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Intent.ACTION_PICK), result -> {
             if (result != null) {
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
                 Cursor cursor = requireContext().getContentResolver().query((Uri) result, filePathColumn, null, null, null);
@@ -178,10 +182,21 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
     };
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
-
+        JSONObject response = items.getJSONObject(0);
+        Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
+        switch (Request.code_retour){
+            case 200:
+                setInfo();
+                break;
+        }
     }
 
-    public void setUniversity(University university) {
-        this.university = university;
+    private void setInfo(){
+        suffixStudent.setText( "Suffixe Student : " +university.getSuffixeStudent() + ".");
+        suffixTeacher.setText( "Suffixe Teacher : " +university.getSuffixeTeacher() +".");
+        NameOfUniversity.setText("Name of university : " + university.getUniName() +".");
+        byte[] imageBytes =university.getImage();
+        LogoUniv.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length));
     }
+
 }

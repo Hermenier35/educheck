@@ -1,16 +1,20 @@
 package com.example.educheck.Modele.Implementation;
 
 import com.example.educheck.Modele.AcademicBackground;
+import com.example.educheck.Modele.Cours;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Interface.Dashboard;
 import com.example.educheck.Modele.Message;
 import com.example.educheck.Modele.Request;
 import com.example.educheck.Modele.University;
 import com.example.educheck.Utils.HttpUrl;
+import com.example.educheck.Utils.JsonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     private AsyncTaskcallback callBack;
@@ -98,15 +102,30 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
-    public void getPersonalCourses(String token) {
-        Request request= new Request(this,"GET");
-        request.execute(HttpUrl.UrlPersonalCourses+ "/" + token);
+    public void editUniversity(String token, University university) {
+        Request request = new Request(this, "PUT");
+        JSONObject body = university.convertToJSONObject();
+        request.setBody(body);
+        request.execute(HttpUrl.UrlEditUniversity + "/" + token);
+
     }
 
     @Override
-    public void postCourses(String token, String mailStudent, String idCourse) {
+    public void postCoursesStudent(String token, ArrayList<String> mailStudent, String idCourse, String idPath) {
         Request request = new Request(this, "POST");
-        request.execute();
+        JSONObject body = new JSONObject();
+        try{
+            body.put("mail", JsonUtils.arrayListToJson(mailStudent));
+            body.put("_idCourse", idCourse);
+            body.put("_idPath", idPath);
+            request.setBody(body);
+            System.out.println(JsonUtils.arrayListToJson(mailStudent));
+            System.out.println(idCourse);
+            System.out.println(idPath);
+            request.execute(HttpUrl.UrlPostCourseStudent + "/" + token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -114,12 +133,49 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
         Request request = new Request(this, "DELETE");
         JSONObject body = new JSONObject();
         try {
-            body.put("_id", id);
+            body.put("_idPath", id);
             request.setBody(body);
-            //request.execute(HttpUrl.UrlDeleteAcademicBackground + "/" + token);
+            request.execute(HttpUrl.UrlDeleteAcademicBackground + "/" + token);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void getSchedule(String url) {
+        Request request = new Request(this, "PLANNING");
+        request.execute(url);
+    }
+
+    @Override
+    public void addCourse(String token, Cours cours, String _id) {
+        Request request = new Request(this, "POST");
+        JSONObject body = cours.convertToJSONObject();
+        try {
+            body.put("_id", _id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.setBody(body);
+        request.execute(HttpUrl.UrlAddCourse + "/" + token);
+    }
+
+    @Override
+    public void getMarks(String token, String nameCours) {
+        Request request= new Request(this,"GET");
+        JSONObject body=new JSONObject();
+        try {
+            body.put("nameCours", nameCours);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.execute(HttpUrl.UrlGetMarks+"/"+token);
+    }
+
+    @Override
+    public void getUsers(String token) {
+        Request request = new Request(this, "GET");
+        request.execute(HttpUrl.UrlGetUsers + "/" + token);
     }
 
     @Override

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Controleur.DashbardTeacher.AddCoursesFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_marginTop="20sp"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:text="Add Courses"
+        android:padding="10sp"
+        android:background="#D0B0F3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_select_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25sp"
+            android:layout_marginStart="10sp"
+            android:entries="@array/choices"
+            android:background="@color/gray_400"/>
+
+        <Spinner
+            android:id="@+id/spinner_select_parcour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25sp"
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="10sp"
+            android:background="@color/gray_400"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ECTS :"
+            android:layout_marginStart="10sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_width="30sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editects"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teacher :"
+            android:textStyle="bold"
+            android:layout_marginStart="20sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editteacher"
+            android:layout_marginEnd="12sp"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:textStyle="bold"
+            android:text="Name :"
+            android:layout_marginTop="10sp"/>
+
+        <EditText
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginTop="12sp"
+            android:id="@+id/editname"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:id="@+id/btnaddCourse"
+            android:layout_marginStart="20sp"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

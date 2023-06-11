@@ -30,7 +30,8 @@
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:onClick="onMenuItemClick"
-                android:src="@drawable/ic_calendar" />
+                android:src="@drawable/ic_calendar"
+                android:contentDescription="schedule"/>
 
             <ImageView
                 android:id="@+id/menu2"
@@ -38,7 +39,8 @@
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:onClick="onMenuItemClick"
-                android:src="@drawable/ic_book" />
+                android:src="@drawable/ic_book"
+                android:contentDescription="courses"/>
 
             <ImageView
                 android:id="@+id/menu3"
@@ -46,7 +48,9 @@
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:onClick="onMenuItemClick"
-                android:src="@drawable/ic_mail" />
+                android:src="@drawable/ic_mail"
+                android:contentDescription="messages"
+            />
 
             <ImageView
                 android:id="@+id/menu4"
@@ -54,7 +58,8 @@
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:onClick="onMenuItemClick"
-                android:src="@drawable/ic_document" />
+                android:src="@drawable/ic_document"
+                android:contentDescription="justify"/>
 
         </LinearLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>

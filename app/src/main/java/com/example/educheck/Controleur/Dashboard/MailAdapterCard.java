@@ -1,17 +1,13 @@
 package com.example.educheck.Controleur.Dashboard;
 
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.educheck.Controleur.Registration.UnivAdapterCard;
-import com.example.educheck.Controleur.Registration.UniversityInscription;
 import com.example.educheck.R;
 
 import java.util.ArrayList;

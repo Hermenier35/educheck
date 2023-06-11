@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controleur.DashbardTeacher.PresentFragment">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:gravity="center_horizontal"
+        android:padding="10sp"
+        android:textSize="22sp"
+        android:background="#D0B0F3"
+        android:textStyle="bold|italic"
+        android:text="Present Student" />
+
+    <TextView
+        android:layout_marginTop="120sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15sp"
+        android:text="Parcours :"/>
+
+    <Spinner
+        android:id="@+id/spinner_type_choice_parcours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120sp"
+        android:entries="@array/choices"
+        android:layout_marginStart="100sp"
+        android:background="@color/gray_400"/>
+    <TextView
+        android:layout_marginTop="170sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15sp"
+        android:text="Diploma :"/>
+    <Spinner
+        android:id="@+id/spinner_type_choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170sp"
+        android:entries="@array/choices"
+        android:layout_marginStart="100sp"
+        android:background="@color/gray_400"/>
+    <TextView
+        android:layout_marginTop="220sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15sp"
+        android:text="Cours :"/>
+    <Spinner
+        android:id="@+id/spinner_type_choice_cours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220sp"
+        android:entries="@array/choices"
+        android:layout_marginStart="100sp"
+        android:background="@color/gray_400"/>
+
+    <TextView
+        android:layout_marginTop="270sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15sp"
+        android:text="DATE :"/>
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="200sp"
+        android:layout_height="25sp"
+        android:layout_marginStart="80sp"
+        android:layout_marginTop="270sp"
+        android:hint="jj/mm/aaaa"/>
+    <TextView
+        android:layout_marginTop="320sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15sp"
+        android:text="HOUR :"/>
+
+    <EditText
+        android:id="@+id/hour"
+        android:layout_width="150sp"
+        android:layout_height="25sp"
+        android:layout_marginStart="80sp"
+        android:layout_marginTop="320sp" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400sp"
+        android:layout_marginEnd="100sp"
+        android:layout_marginStart="130sp"
+        android:text="Next" />
+
+</FrameLayout>

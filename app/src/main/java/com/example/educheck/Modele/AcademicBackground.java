@@ -29,7 +29,7 @@ public class AcademicBackground implements Serializable {
         try {
             jsonObject.put("pathName", getName());
             jsonObject.put("type", getType());
-            jsonObject.put("_id", get_id());
+            jsonObject.put("_idPath", get_id());
             jsonObject.put("referant", getReferent());
         } catch (JSONException e) {
             e.printStackTrace();
