@@ -4,6 +4,7 @@ import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Cours;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Interface.Dashboard;
+import com.example.educheck.Modele.Marks;
 import com.example.educheck.Modele.Message;
 import com.example.educheck.Modele.Request;
 import com.example.educheck.Modele.University;
@@ -170,6 +171,20 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             e.printStackTrace();
         }
         request.execute(HttpUrl.UrlGetMarks+"/"+token);
+    }
+
+    @Override
+    public void addMark(String token, String email, Marks mark, String courseName) {
+        Request request = new Request(this, "POST");
+        JSONObject body = mark.convertToJSONObject();
+        try {
+            body.put("mailEtudiant", email);
+            body.put("nameCours", courseName);
+            request.setBody(body);
+            request.execute(HttpUrl.UrlAddNotes + "/" + token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

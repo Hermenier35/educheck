@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context=".Controleur.DashboardAdmin.DashboardAdmin">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -45,5 +53,7 @@
         app:theme="@style/ThemeOverlay.Randoomz.Toolbar"
         app:titleTextAppearance="@style/TextAppearance.Randoomz.Toolbar.Title"
         app:menu="@menu/menu_bottom" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

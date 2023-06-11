@@ -2,6 +2,7 @@ package com.example.educheck.Modele.Interface;
 
 import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Cours;
+import com.example.educheck.Modele.Marks;
 import com.example.educheck.Modele.Message;
 import com.example.educheck.Modele.University;
 
@@ -24,5 +25,6 @@ public interface Dashboard {
     public void getSchedule(String url);
     public void addCourse(String token, Cours cours, String _id);
     public void getMarks(String token, String _idCour);
+    public void addMark(String token, String email, Marks mark, String courseName );
     public void getUsers(String token);
 }

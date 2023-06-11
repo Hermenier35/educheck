@@ -18,11 +18,11 @@ public class HttpUrl {
     public static String UrlSendMexTo = ip + "sendMexTo";
     public static String UrlEditAcademicBackground = ip + "editAcademicBackground";
     public static String UrlDeleteAcademicBackground = ip + "deleteAcademicBackground";
-    public static String UrlPersonalCourses = ip + "";
     public static String UrlEditUniversity = ip + "editUniversity";
     public static String UrlAddCourse = ip + "setCourses";
     public static String UrlPostCourseStudent = ip + "postCoursesStudent";
     public static String UrlGetMarks= ip + "getNotes";
     public static String UrlGetUsers = ip + "users";
+    public static String UrlAddNotes = ip + "addNotes";
 
 }

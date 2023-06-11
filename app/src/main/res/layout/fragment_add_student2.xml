@@ -6,6 +6,15 @@
     android:orientation="vertical"
     tools:context=".Controleur.DashbardTeacher.AddStudentFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="600sp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,10 +125,6 @@
         android:padding="5sp"
         android:background="#D0B0F3"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -187,6 +192,7 @@
                 android:id="@+id/btnaddmark"/>
 
         </LinearLayout>
+    </LinearLayout>
 
     </ScrollView>
 </LinearLayout>

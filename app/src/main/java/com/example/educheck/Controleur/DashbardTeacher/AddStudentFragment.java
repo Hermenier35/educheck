@@ -32,6 +32,7 @@ import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Cours;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.Marks;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
@@ -60,14 +61,14 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
     private static final String TOKEN = "token";
     private static final String UNIVERSITY = "university";
     private static final String GET_ACADEMIC_BACKGROUNDS = "getAcademicBackground", POST_COURSES_STUDENT = "postCoursesStudent",
-            GET_USERS = "getUsers";
+            GET_USERS = "getUsers", ADD_MARK = "addMark";
 
     // TODO: Rename and change types of parameters
     private String token;
     private University university;
     private EditText emailStudent, eType, eTeacher, eMark;
     private TextView filecsv;
-    private Button btnAddStudent, btnAddFile;
+    private Button btnAddStudent, btnAddFile, btnAddMark;
     private String request, idPath, idCourse, mailStudent;
     private Spinner spnType, spnAcaB, spnCour, spnStudent;
     private ArrayList<String> dataParcours, dataCourse, dataStudent;
@@ -117,6 +118,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         emailStudent = view.findViewById(R.id.emailStudent);
         btnAddStudent= view.findViewById(R.id.btnAdd);
         btnAddFile = view.findViewById(R.id.btnAddFile);
+        btnAddMark = view.findViewById(R.id.btnaddmark);
         spnType = view.findViewById(R.id.spinner_type_choice_teacher);
         spnAcaB = view.findViewById(R.id.spinner_acaback_name_teacher);
         spnCour = view.findViewById(R.id.spinner_course_name_teacher);
@@ -182,10 +184,15 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
 
         emailStudent.addTextChangedListener(watcher);
         filecsv.addTextChangedListener(watcher);
+        eType.addTextChangedListener(watcher);
+        eMark.addTextChangedListener(watcher);
+        eTeacher.addTextChangedListener(watcher);
         btnAddStudent.setEnabled(false);
         btnAddFile.setEnabled(false);
-            btnAddStudent.setOnClickListener(v -> initMails("btnAddStudent"));
+        btnAddMark.setEnabled(false);
+        btnAddStudent.setOnClickListener(v -> initMails("btnAddStudent"));
         btnAddFile.setOnClickListener(v -> setAddFile());
+        btnAddMark.setOnClickListener(v -> sendRequest(ADD_MARK));
 
         sendRequest(GET_ACADEMIC_BACKGROUNDS);
         return view;
@@ -214,6 +221,8 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                 sendRequest(GET_USERS);
                 break;
             case POST_COURSES_STUDENT:
+                sendRequest(GET_USERS);
+            case ADD_MARK:
                 JSONObject response = items.getJSONObject(0);
                 Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                 break;
@@ -253,8 +262,14 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                 filecsv.setText("File .csv :");
                 break;
             case GET_USERS:
+                students.clear();
+                dataStudent.clear();
                 dashboardImplementation.getUsers(token);
                 break;
+            case ADD_MARK:
+                Marks mark = new Marks(eTeacher.getText().toString(), eType.getText().toString(), eMark.getText().toString());
+                dashboardImplementation.addMark(token, spnStudent.getSelectedItem().toString(), mark, spnCour.getSelectedItem().toString());
+                    break;
         }
     }
 
@@ -337,6 +352,11 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                 !spnCour.getSelectedItem().toString().equals("Select");
     }
 
+    private boolean isEnableAddMark(){
+        return eMark.getText().length() > 0 && eType.getText().length()>0 && eTeacher.getText().length() > 0 &&
+                isCourseSelected() && !spnStudent.getSelectedItem().toString().equals("Select");
+    }
+
     private void setOnItemSelectedSpinnerListener(){
         spnType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -348,6 +368,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                 }
 
                 btnAddFile.setEnabled(isCourseSelected());
+                btnAddMark.setEnabled(isEnableAddMark());
             }
 
             @Override
@@ -365,6 +386,8 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                     initialisationSpinnerCourse(idPath);
                     filterStudent("path", idPath);
                 }
+                btnAddFile.setEnabled(isCourseSelected());
+                btnAddMark.setEnabled(isEnableAddMark());
             }
 
             @Override
@@ -380,7 +403,9 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                     initIdCourse(courseName, idPath);
                     filterStudent("course", idCourse);
                 }
+                spnStudent.setSelection(0);
                 btnAddFile.setEnabled(isCourseSelected());
+                btnAddMark.setEnabled(isEnableAddMark());
 
             }
 
@@ -417,6 +442,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         @Override
         public void afterTextChanged(Editable editable) {
             btnAddStudent.setEnabled(Patterns.EMAIL_ADDRESS.matcher(emailStudent.getText()).matches());
+            btnAddMark.setEnabled(isEnableAddMark());
         }
     };
 }
