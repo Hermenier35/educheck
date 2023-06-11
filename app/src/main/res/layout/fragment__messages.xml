@@ -18,17 +18,17 @@
                 android:layout_height="531sp"
                 android:layout_gravity="top"
                 android:layout_weight="2"
-                android:divider="#fff" />
+                android:divider="#fff"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:orientation="horizontal"
-            android:layout_gravity="bottom"
-            android:padding="2dp"
-            android:layout_margin="2dp"
-            android:layout_marginBottom="100sp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:padding="2dp"
+                android:layout_margin="2dp"
+                android:layout_marginBottom="100sp">
 
             <EditText
                 android:id="@+id/messageToSend"
@@ -47,6 +47,6 @@
                 android:layout_height="wrap_content"
                 android:text="Send" />
 
-        </LinearLayout>
+            </LinearLayout>
         </FrameLayout>
 </ScrollView>
