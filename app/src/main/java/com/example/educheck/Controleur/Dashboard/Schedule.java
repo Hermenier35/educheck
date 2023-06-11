@@ -89,7 +89,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
 
         seek = view.findViewById(R.id.seek);
 
-        ade.setText("https://planning.univ-rennes1.fr/jsp/custom/modules/plannings/LW1MzLWa.shu");
+        ade.setText("https://planning.univ-rennes1.fr/jsp/custom/modules/plannings/rY6dlyWz.shu");
         LinearLayoutView = view.findViewById(R.id.spinner_container);
         spinYears = view.findViewById(R.id.spinnerYears);
         schedule = new ArrayList<>();
@@ -232,8 +232,8 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         int minute =((row-1) % 4) * 15 ;
         Date2 cel = cellule.getDate();
         int HeureFin = cel.getHours() + cel.getDuring()/60;
-        int minuteFin = cel.getDuring()  % 60 + cel.getMinutes();
-        HeureFin+= minuteFin/60;
+        int minuteFin = ((cel.getDuring() % 60) + cel.getMinutes()) % 60;
+        HeureFin+= ((cel.getDuring() % 60) + cel.getMinutes())/60;
         return (h>cel.getHours() || h==cel.getHours() && minute>=cel.getMinutes()) &&
                HeureFin>h || HeureFin==h && minuteFin>= minute ;
     }

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Controleur.DashbardTeacher.PresentFragment">
 
 
@@ -15,7 +16,7 @@
         android:textSize="22sp"
         android:background="#D0B0F3"
         android:textStyle="bold|italic"
-        android:text="Present Student" />
+        android:text="Check Presence Student" />
 
     <TextView
         android:layout_marginTop="120sp"
@@ -98,4 +99,4 @@
         android:layout_marginStart="130sp"
         android:text="Next" />
 
-</FrameLayout>
+</LinearLayout>
