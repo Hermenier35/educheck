@@ -52,6 +52,7 @@ public class DashBoardStudent extends AppCompatActivity {
         menu3.setOnClickListener(v -> replaceFragment(new FragMessages1()));
 
         menu4.setOnClickListener(v -> replaceFragment(new FragJustification()));
+        replaceFragment(new Schedule());
     }
 
     private void replaceFragment(Fragment fragment){
