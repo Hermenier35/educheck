@@ -8,16 +8,15 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:gravity="center_horizontal"
+        android:padding="10sp"
+        android:textSize="22sp"
+        android:background="#D0B0F3"
+        android:textStyle="bold|italic"
         android:text="Send email to :"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

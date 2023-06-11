@@ -135,7 +135,7 @@
                 android:id="@+id/btnImportImage"
                 android:layout_width="194sp"
                 android:layout_height="wrap_content"
-                android:text="Importer une image" />
+                android:text="Import an image" />
 
         </LinearLayout>
 
@@ -156,7 +156,7 @@
                 android:layout_width="194sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70sp"
-                android:text="Enregistrer" />
+                android:text="Save" />
         </LinearLayout>
 
 
