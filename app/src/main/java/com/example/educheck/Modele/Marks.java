@@ -1,20 +1,35 @@
 package com.example.educheck.Modele;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 public class Marks {
 
     String nameProf;
     String type;
-    float mark;
+    String mark;
 
     private Date date;
 
 
-    public  Marks(String nameProf,String type,float mark){
+    public  Marks(String nameProf,String type,String mark){
         this.type=type;
         this.mark=mark;
         this.nameProf=nameProf;
+    }
+
+    public JSONObject convertToJSONObject(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("nameProf", getNameProf());
+            jsonObject.put("type", getType());
+            jsonObject.put("note", getMark());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     public void setType(String type){
@@ -24,7 +39,7 @@ public class Marks {
         return type;
     }
 
-    public void setMark(float mark){
+    public void setMark(String mark){
         this.mark=mark;
     }
 
@@ -38,7 +53,7 @@ public class Marks {
 
 
 
-    public float getMark(){
+    public String getMark(){
         return mark;
     }
 

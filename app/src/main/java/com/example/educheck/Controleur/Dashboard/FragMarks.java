@@ -107,7 +107,7 @@ public class FragMarks extends Fragment implements AsyncTaskcallback {
             if(name.equals(courseName)) {
                 String type = markJson.getString("type");
                 String prof = markJson.getString("nameProf");
-                float note = Float.parseFloat(markJson.getString("note"));
+                String note = markJson.getString("note");
                 Marks mark = new Marks(prof, type, note);
                 marksList.add(mark);
             }

@@ -1,7 +1,6 @@
 package com.example.educheck.Controleur.DashboardAdmin;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -14,10 +13,10 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 
 import android.provider.MediaStore;
+import android.webkit.MimeTypeMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,9 +112,9 @@ public class AddUniversityFragment extends Fragment implements AsyncTaskcallback
             }
         });
         addUni.setOnClickListener(v->{saveToBDD();});
-        galleryLauncher = registerForActivityResult(new GalleryActivityResultContract(), result -> {
+        galleryLauncher = registerForActivityResult(new GalleryActivityResultContract(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Intent.ACTION_PICK), result -> {
             if (result != null) {
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                String[] filePathColumn = {MediaStore.Downloads.DATA};
                 Cursor cursor = requireContext().getContentResolver().query((Uri) result, filePathColumn, null, null, null);
                 if (cursor != null) {
                     if (cursor.moveToFirst()) {
