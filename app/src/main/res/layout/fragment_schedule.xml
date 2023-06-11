@@ -76,22 +76,34 @@
 
             <Spinner
                 android:id="@+id/spinnerYears"
-                android:layout_width="100sp"
+                android:layout_width="wrap_content"
                 android:layout_height="34sp" />
 
             <Button
                 android:id="@+id/seek"
-                android:layout_width="150sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search"
                 android:padding="10sp"/>
             <TextView
-                android:layout_width="100sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/week"
-                android:text="week"
+                android:text="week :"
                 android:textStyle="italic"
                 android:layout_marginStart="10sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AVG :"
+                android:textStyle="italic"
+                android:layout_marginStart="10sp"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/avg"
+                android:entries="@array/avgchoices"/>
         </LinearLayout>
 
 </LinearLayout>
