@@ -115,7 +115,7 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
 
         mailReferent.addTextChangedListener(watcher);
         editMailReferent.addTextChangedListener(watcher);
-        buttonAddPath.setOnClickListener(v -> sendRequest(ADD_ACADEMIC_BACKGROUND));
+        buttonAddPath.setOnClickListener(v -> addPath());
         editPath.setOnClickListener(v -> sendRequest(EDIT_ACADEMIC_BACKGROUND));
         delete.setOnClickListener(v -> sendRequest(DELETE_ACADEMIC_BACKGROUND));
         sendRequest(GET_ALL_ACADEMIC_BACKGROUNDS);
@@ -195,6 +195,12 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
                 break;
             default: System.err.println("No request Found");
         }
+    }
+
+    private void addPath(){
+        sendRequest(ADD_ACADEMIC_BACKGROUND);
+        nameAcaBackground.setText("");
+        mailReferent.setText("");
     }
 
     private AcademicBackground findAcaByName(String valueSpinner){

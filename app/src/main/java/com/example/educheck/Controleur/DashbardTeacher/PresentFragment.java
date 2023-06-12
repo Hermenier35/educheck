@@ -56,7 +56,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
     private University university;
     private String request;
 
-    private ArrayList<Student> students,mails;
+    private ArrayList<Student> students;
     private String  idPath, idCourse, mailStudent;
     private Spinner spinnerDegree;
     private Spinner spinnerCareer;
@@ -112,11 +112,12 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
 
         dashboardImplementation = new DashboardImplementation(this);
         allCourse = new HashMap<>();
-        mails = new ArrayList<>();
+        students = new ArrayList<>();
         dataCareer = new ArrayList<>();
         dataCourses = new ArrayList<>();
         dataDegree = new ArrayList<>();
         dataStudent = new ArrayList<>();
+        academicBackgrounds = new ArrayList<>();
         dataCareer.add("Select");
         dataCourses.add("Select");
         dataDegree.add("Select");

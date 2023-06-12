@@ -273,6 +273,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
             schedule.add(cellule);
         }
         updateSchedule();
+        Toast.makeText(getContext(), "Schedule update !", Toast.LENGTH_SHORT).show();
     }
 
     private String cleanHour(String eventHour){
