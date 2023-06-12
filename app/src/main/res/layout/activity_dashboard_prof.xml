@@ -62,31 +62,37 @@
 
             <ImageView
                 android:id="@+id/imgAddStu"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:src="@drawable/ic_add" />
 
             <ImageView
                 android:id="@+id/imgAddCou"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:src="@drawable/ic_addcourse" />
 
             <ImageView
                 android:id="@+id/imgMess"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:src="@drawable/ic_messenger" />
 
             <ImageView
                 android:id="@+id/imgPre"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:src="@drawable/ic_present" />
+            <ImageView
+                android:id="@+id/imgSched"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:src="@drawable/ic_calendar" />
 
         </LinearLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
