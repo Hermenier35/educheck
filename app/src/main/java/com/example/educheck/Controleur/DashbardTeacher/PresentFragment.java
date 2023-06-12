@@ -112,11 +112,13 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
 
         dashboardImplementation = new DashboardImplementation(this);
         allCourse = new HashMap<>();
-        mails = new ArrayList<>();
+        students = new ArrayList<>();
         dataCareer = new ArrayList<>();
         dataCourses = new ArrayList<>();
         dataDegree = new ArrayList<>();
         dataStudent = new ArrayList<>();
+
+        academicBackgrounds = new ArrayList<>();
         dataCareer.add("Select");
         dataCourses.add("Select");
         dataDegree.add("Select");
