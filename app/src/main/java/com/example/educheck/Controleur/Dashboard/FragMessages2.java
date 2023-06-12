@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.Message;
@@ -46,7 +47,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
     private RecyclerView recyclerView;
 
-    private String request;
+    private static String request;
 
     private MessageAdapter messageAdapter;
 
@@ -61,6 +62,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
     private Handler requestHandler;
     private Runnable requestRunnable;
     DashboardImplementation model_message;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,18 +84,18 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         model_message = new DashboardImplementation(this);
         users_messages = new ArrayList<>();
         index=new ArrayList<>();
-        sendRequest();
+        sendRequest("getMex");
         requestHandler = new Handler(Looper.getMainLooper());
        requestRunnable = new Runnable() {
             @Override
             public void run() {
-                sendRequest();
+                sendRequest("getMex");
                 requestHandler.postDelayed(this, REQUEST_DELAY_MS);
             }
         };
 
 
-        buttonSend.setOnClickListener(v -> send_message());
+        buttonSend.setOnClickListener(v -> sendRequest("sendMex"));
 
         return view;
     }
@@ -127,13 +129,13 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         Message mess=new Message(mailRecipient,mailSender,text,date);
         model_message.sendMessageTo(mess,token);
         messageToSend.getText().clear();
-        updateMessages();
+        sendRequest("getMex");
     }
 
 
     private void updateMessages() {
-        // Appeler la méthode pour récupérer les messages
-        sendRequest();
+        // Appeler la méthode pour récupérer les messages"
+        sendRequest("getMex");
     }
 
     public FragMessages2() {
@@ -149,42 +151,57 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
     }
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
-        if (items.getJSONObject(0).has("code_retour"))
-            System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
-        JSONObject mailJson = items.getJSONObject(0);
-        String mailRe = mailJson.getString("mailRecipients").replaceAll("[\\[\\]\"\\{\\}]" , "");
-        String mailSe = mailJson.getString("mailSenders").replaceAll("[\\[\\]\"\\{\\}]" , "");
-        System.out.println(mailRe);
-        String[] receivers=mailRe.split(",");
-        String[] senders= mailSe.split(",");
-        for(int i=0;i<receivers.length;i++){
-            if(receivers[i].equals(mailRecipient)&&senders[i].equals(mailSender)) {
-                index.add(new int[]{i,0});
-            }else if(receivers[i].equals(mailSender)&&senders[i].equals(mailRecipient)){
+        if(request.equals("getMex")) {
+            if (items.getJSONObject(0).has("code_retour"))
+                System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
+            JSONObject mailJson = items.getJSONObject(0);
+            String mailRe = mailJson.getString("mailRecipients").replaceAll("[\\[\\]\"\\{\\}]", "");
+            String mailSe = mailJson.getString("mailSenders").replaceAll("[\\[\\]\"\\{\\}]", "");
+            System.out.println(mailRe);
+            String[] receivers = mailRe.split(",");
+            String[] senders = mailSe.split(",");
+            for (int i = 0; i < receivers.length; i++) {
+                if (receivers[i].equals(mailRecipient) && senders[i].equals(mailSender)) {
+                    index.add(new int[]{i, 0});
+                } else if (receivers[i].equals(mailSender) && senders[i].equals(mailRecipient)) {
 
-                index.add(new int[]{i,1});
+                    index.add(new int[]{i, 1});
+                }
             }
-        }
-        String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]" , "");
-        String[] messages= mex.split(",");
+            String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]", "");
+            String[] messages = mex.split(",");
 
-        MessageLayout message;
-        boolean isUser;
-        messageAdapter.delete();
-        for (int j=0;j<index.size();j++) {
-            int[] pair= index.get(j);
-            int messageIndex = pair[0];
-            if (messageIndex >= 0 && messageIndex < messages.length) {
-                isUser = pair[1] == 0;
-                message = new MessageLayout(messages[messageIndex], isUser, mailRecipient);
-                messageAdapter.add(message);
+            MessageLayout message;
+            boolean isUser;
+            messageAdapter.delete();
+            for (int j = 0; j < index.size(); j++) {
+                int[] pair = index.get(j);
+                int messageIndex = pair[0];
+                if (messageIndex >= 0 && messageIndex < messages.length) {
+                    isUser = pair[1] == 0;
+                    message = new MessageLayout(messages[messageIndex], isUser, mailRecipient);
+                    messageAdapter.add(message);
+                }
             }
+            index.clear();
+            messagesView.setSelection(messagesView.getCount() - 1);
         }
-        index.clear();
-        messagesView.setSelection(messagesView.getCount() - 1);
+        request="";
 
     }
 
+    private void sendRequest(String name){
+        this.request = name;
+        switch(name){
+            case "sendMex":
+                send_message();
+                break;
+            case "getMex":
+                sendRequest();
+                break;
+            default: System.err.println("No request Found");
+        }
+    }
     private void sendRequest(){
 
         model_message.retrieveMessages(token);
