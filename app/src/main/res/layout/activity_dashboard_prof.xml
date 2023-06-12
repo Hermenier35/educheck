@@ -24,13 +24,8 @@
         app:titleTextAppearance="@style/TextAppearance.Randoomz.Toolbar.Title"/>
 
 
-        <FrameLayout
-            android:id="@+id/frame1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/bottom_navigation" />
     <ScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/scrollViewPager2"
         android:layout_width="match_parent"
         android:layout_height="596dp"
         android:layout_below="@+id/toolbar"
@@ -42,10 +37,11 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
             android:layout_marginTop="0sp"
-            android:layout_weight="1"></androidx.viewpager2.widget.ViewPager2>
-
+            android:layout_weight="1">
+        </androidx.viewpager2.widget.ViewPager2>
 
     </ScrollView>
+
 
     <!-- Bottom navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

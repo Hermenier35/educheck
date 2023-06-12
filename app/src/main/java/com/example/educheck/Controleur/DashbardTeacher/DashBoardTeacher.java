@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import com.example.educheck.Controleur.Dashboard.FragMessages1;
 import com.example.educheck.Controleur.Dashboard.FragMessages2;
@@ -33,13 +34,16 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
     private String token;
     private Toolbar toolbar;
     public static ViewPager2 viewPager;
-    public static FragmentStateAdapter pagerAdapter;
+    public static FragmentStateAdapter pagerAdapter, pagerAdapter2;
     public static FragmentActivity fa;
     private DashboardImplementation dashboardImplementation;
     private ImageView imgAddStudent, imgAddCourse, imgMessenger, imgPresent;
     private String request;
     private final String GET_UNIVERSITY = "getUniversity";
     private University university;
+    static Fragment addStudent;
+    static Fragment addCourse;
+    static Fragment present;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +58,22 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
         imgMessenger = findViewById(R.id.imgMess);
         imgPresent = findViewById(R.id.imgPre);
 
+
         setSupportActionBar(toolbar);
         fa = this;
         dashboardImplementation = new DashboardImplementation(this);
 
-        imgAddStudent.setOnClickListener(v -> viewPager.setCurrentItem(0));
-        imgAddCourse.setOnClickListener(v -> viewPager.setCurrentItem(1));
-        imgMessenger.setOnClickListener(v -> viewPager.setCurrentItem(2));
-        imgPresent.setOnClickListener(v -> viewPager.setCurrentItem(3));
+        imgAddStudent.setOnClickListener(v -> setCurrentItemAndAdapter(0));
+        imgAddCourse.setOnClickListener(v -> setCurrentItemAndAdapter(1));
+        imgMessenger.setOnClickListener(v -> setCurrentItemAndAdapter(2));
+        imgPresent.setOnClickListener(v -> setCurrentItemAndAdapter(3));
 
         sendRequest(GET_UNIVERSITY);
+    }
+
+    private void setCurrentItemAndAdapter(int position){
+        viewPager.setCurrentItem(position);
+        viewPager.setAdapter(pagerAdapter);
     }
 
     @Override
@@ -96,12 +106,18 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
     }
 
     private void initialisation(){
-        Fragment addStudent = AddStudentFragment.newInstance(token, this.university);
-        Fragment addCourse = AddCoursesFragment.newInstance(token, this.university);
-        Fragment present = PresentFragment.newInstance(token, this.university);
+        this.addStudent = AddStudentFragment.newInstance(token, this.university);
+        this.addCourse = AddCoursesFragment.newInstance(token, this.university);
+        this.present = PresentFragment.newInstance(token, this.university);
         Fragment messenger = new FragMessages1();
         pagerAdapter = new ScreenSlidePagerAdapter(fa, addStudent,addCourse, messenger, present);
         viewPager.setAdapter(pagerAdapter);
+    }
+
+    public static void replaceMessengerFragment(Fragment fragment) {
+        pagerAdapter2 = new ScreenSlidePagerAdapter(fa, addStudent, addCourse, fragment, present);
+        viewPager.setAdapter(pagerAdapter2);
+        viewPager.setCurrentItem(2);
     }
 
     public static class ScreenSlidePagerAdapter extends FragmentStateAdapter {
