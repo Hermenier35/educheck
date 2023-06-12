@@ -175,13 +175,12 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
                 messageAdapter.delete();
                 JSONObject mailJson = items.getJSONObject(0);
                 String[] receivers = mailJson.getString("mailRecipients").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
-                String[] senders = mailJson.getString("mailSenders").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
                 String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]", "");
                 String[] messages = mex.split(",");
                 ArrayList<String> messageClear = new ArrayList<>();
                 updateIndex(receivers, messageClear, messages);
                 updateScreenMessenger(messageClear);
-                messagesView.setSelection(messagesView.getCount() - 8);
+                messagesView.setSelection(messagesView.getCount() - 1);
                 break;
 
             case "sendMex":
