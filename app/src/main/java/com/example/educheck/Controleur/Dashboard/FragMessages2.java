@@ -138,7 +138,10 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         sendRequest("getMex");
     }
 
-    public static FragMessages2 newInstance(String mailRecipient,String token) {
+    public FragMessages2() {
+    }
+
+    public static FragMessages2 newInstance(String mailRecipient, String token) {
         FragMessages2 fragment = new FragMessages2();
         Bundle args = new Bundle();
         args.putString("mailRecipient", mailRecipient);
