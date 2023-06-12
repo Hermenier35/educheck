@@ -27,10 +27,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30sp"
                 android:layout_marginTop="24sp"
-                android:text="Parcours :" />
+                android:textSize="20sp"
+                android:text="Degree :" />
 
             <Spinner
-                android:id="@+id/spinner_type_choice_parcours"
+                android:id="@+id/spinnerDegreeChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="150sp"
@@ -47,9 +48,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30sp"
-            android:text="Diplome :"/>
+            android:textSize="20sp"
+            android:text="Career :"/>
         <Spinner
-            android:id="@+id/spinner_type_choice"
+            android:id="@+id/spinnerCareerChoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24sp"
@@ -66,14 +68,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30sp"
-            android:text="Cours :"/>
+            android:textSize="20sp"
+            android:text="Courses :"/>
         <Spinner
-            android:id="@+id/spinner_type_choice_cours"
+            android:id="@+id/spinnerCoursesChoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24sp"
             android:entries="@array/choices"
-            android:layout_marginStart="168sp"
+            android:layout_marginStart="140sp"
             android:background="@color/gray_400"/>
     </LinearLayout>
     <LinearLayout
@@ -81,44 +84,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <ListView
+            android:id="@+id/listViewStudent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="30sp"
+            android:layout_marginStart="20sp"
             android:layout_marginTop="24sp"
-            android:text="DATE :" />
-
-        <EditText
-        android:id="@+id/date"
-        android:layout_width="200sp"
-        android:layout_height="50sp"
-        android:layout_marginStart="160sp"
-        android:layout_marginTop="24sp"
-        android:hint="jj/mm/aaaa"/>
+            android:layout_toEndOf="@id/date" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30sp"
-            android:layout_marginTop="24sp"
-            android:text="HOUR :"
-            android:layout_gravity="center"/>
-
-        <EditText
-        android:id="@+id/hour"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:layout_marginStart="160sp"
-        android:layout_marginTop="24sp"
-        android:hint="H:M:S"/>
-        </LinearLayout>
-
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="127dp"
@@ -127,5 +105,6 @@
         android:layout_marginEnd="100sp"
         android:layout_marginStart="130sp"
         android:text="Next" />
+    </LinearLayout>
 
 </LinearLayout>
