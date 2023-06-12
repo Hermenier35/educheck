@@ -12,6 +12,8 @@ public interface Dashboard {
     public void sendMessageTo(Message message, String token);
     public void sendMexTo(String token);
 
+    void Justify(String id_j, String token, String mail, String profMail, byte[] img);
+
     void getAllJust(String token);
 
     public void retrieveMessages(String token);

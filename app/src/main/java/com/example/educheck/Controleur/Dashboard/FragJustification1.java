@@ -56,11 +56,12 @@ public class FragJustification1 extends Fragment implements AsyncTaskcallback {
         mail = getActivity().getIntent().getStringExtra("mail");
         layoutManager = new LinearLayoutManager(getContext());
         justList = new ArrayList<>();
-        myOnClickListener = new FragJustification1.MyOnClickListener(getContext(), recyclerView);
-
         recyclerView = view.findViewById(R.id.recycler_just);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+
+         myOnClickListener = new FragJustification1.MyOnClickListener(getContext(), recyclerView);
+
 
         request = new DashboardImplementation(this);
         request.getAllJust(token);
@@ -84,7 +85,7 @@ public class FragJustification1 extends Fragment implements AsyncTaskcallback {
         for (int i = 0; i < justifArray.length(); i++) {
             JSONObject justifJson = justifArray.getJSONObject(i);
             String name= justifJson.getString("nameCours");
-            String id = justifJson.getString("_id");
+            String id = justifJson.getString("id_j");
             String prof = justifJson.getString("mailProf");
             String date = justifJson.getString("date");
             Justificatif j = new Justificatif(id, date, new byte[0],prof,name,mail);
@@ -109,9 +110,16 @@ public class FragJustification1 extends Fragment implements AsyncTaskcallback {
 
         @Override
         public void onClick(View v) {
-            Fragment fragJust2 = FragJustification2.newInstance(token,"","","");
-            // startActivity(intentMess1);
-            replaceFragment(fragJust2);
+            int position = recyclerView.getChildAdapterPosition(v);
+            if (position != RecyclerView.NO_POSITION) {
+                Justificatif justificatif = justList.get(position);
+                String id = justificatif.getId_justificatif();
+                String name = justificatif.getNameCours();
+                String prof = justificatif.getProfName();
+
+                Fragment fragJust2 = FragJustification2.newInstance(token, id, prof, name);
+                replaceFragment(fragJust2);
+            }
         }
 
         private void replaceFragment(Fragment fragment) {
