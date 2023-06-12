@@ -64,7 +64,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
     private ArrayList<Cellule> filter;
     private View view;
 
-    private Spinner spinYears;
+    private Spinner spinYears, avg;
     private ArrayList<String> dataParcours;
     private LinearLayout LinearLayoutView;
     private int weekNumber;
@@ -86,8 +86,8 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         date = view.findViewById(R.id.date);
         go = view.findViewById(R.id.btnAde);
         ade = view.findViewById(R.id.adeUrl);
-
         seek = view.findViewById(R.id.seek);
+        avg = view.findViewById(R.id.avg);
 
         ade.setText("https://planning.univ-rennes1.fr/jsp/custom/modules/plannings/rY6dlyWz.shu");
         LinearLayoutView = view.findViewById(R.id.spinner_container);
@@ -132,6 +132,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
 
     private void updateSchedule(){
         filter.clear();
+        updateAvg();
         filter.addAll(schedule);
         if( year!=0 && weekNumber !=0 ){
             List<String> joursSemaineList = new ArrayList<>(Arrays.asList(joursSemaine));
@@ -141,7 +142,12 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
                         getWeekNumberDate(getDateFromDate2(cellule.getDate()))!= this.weekNumber;});
             createPlanningCells();
         }
+    }
 
+    private void updateAvg(){
+        for(Cellule cellule : schedule){
+            cellule.setAverageHour(Integer.parseInt(avg.getSelectedItem().toString()));
+        }
     }
 
     private void createPlanningCells() {

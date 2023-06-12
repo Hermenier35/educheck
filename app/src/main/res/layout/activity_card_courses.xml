@@ -3,27 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_margin="5dp"
-    app:cardBackgroundColor="#FFC0CB" >
+    android:layout_height="wrap_content" >
 
 
     <LinearLayout
         android:id="@+id/linearMail"
         android:layout_width="match_parent"
-        android:layout_height="94dp">
+        android:layout_height="60sp">
 
 
         <TextView
             android:id="@+id/Cours_Name"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="50sp"
+            android:layout_margin="10sp"
+            android:layout_gravity="center"
             android:layout_toEndOf="@id/idIVCourseImage"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:background="#CCCCFF"
+            android:gravity="center"
+            android:textStyle="italic" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

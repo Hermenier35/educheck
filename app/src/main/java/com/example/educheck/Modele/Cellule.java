@@ -20,13 +20,15 @@ public class Cellule {
     }
 
     public void setAverageHour(int add){
-
+        this.startHour = setAverage(add, this.startHour);
+        this.endHour = setAverage(add, this.endHour);
+        this.date.setHours(this.date.getHours()+add);
     }
 
-    private String setAverage(int add){
-        String data[] = startHour.split(" : ");
-        int hour = Integer.parseInt(data[0]) + add;
-        return hour + " : " + data[1];
+    private String setAverage(int add, String hour){
+        String data[] = hour.split(" : ");
+        int h = Integer.parseInt(data[0]) + add;
+        return h + " : " + data[1];
     }
     public String getSummary() {
         return summary;
