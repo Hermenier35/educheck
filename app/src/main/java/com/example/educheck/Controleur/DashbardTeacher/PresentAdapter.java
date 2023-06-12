@@ -24,7 +24,7 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
     @NonNull
     @Override
     public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_list_precence, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_present, parent, false);
         return new StudentViewHolder(view);
     }
 
@@ -45,11 +45,11 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
 
         public StudentViewHolder(@NonNull View itemView) {
             super(itemView);
-            //textViewName = itemView.findViewById(R.id.textViewName);
+            textViewName = itemView.findViewById(R.id.textViewName);
         }
 
         public void bind(Student student) {
-            //textViewName.setText(Student.getName());
+            textViewName.setText(student.getFirstName());
         }
     }
 }

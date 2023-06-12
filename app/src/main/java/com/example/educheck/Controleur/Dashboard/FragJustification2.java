@@ -1,8 +1,6 @@
 package com.example.educheck.Controleur.Dashboard;
         import android.Manifest;
-        import android.app.Activity;
         import android.content.Intent;
-        import android.content.pm.PackageManager;
         import android.database.Cursor;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
@@ -15,21 +13,15 @@ package com.example.educheck.Controleur.Dashboard;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.Button;
-        import android.widget.EditText;
         import android.widget.ImageView;
-        import android.widget.Toast;
 
         import androidx.activity.result.ActivityResultLauncher;
-        import androidx.annotation.NonNull;
         import androidx.core.app.ActivityCompat;
-        import androidx.core.content.ContextCompat;
         import androidx.fragment.app.Fragment;
 
-        import com.example.educheck.Controleur.DashboardAdmin.AddUniversityFragment;
         import com.example.educheck.Controleur.DashboardAdmin.GalleryActivityResultContract;
         import com.example.educheck.Modele.Implementation.DashboardImplementation;
         import com.example.educheck.Modele.Interface.AsyncTaskcallback;
-        import com.example.educheck.Modele.University;
         import com.example.educheck.R;
 
         import org.json.JSONArray;
@@ -37,9 +29,8 @@ package com.example.educheck.Controleur.Dashboard;
         import org.json.JSONObject;
 
         import java.io.ByteArrayOutputStream;
-        import java.io.File;
 
-public class FragJustification extends Fragment implements AsyncTaskcallback {
+public class FragJustification2 extends Fragment implements AsyncTaskcallback {
 
     private static final String TOKEN = "token";
     private static final String ARG_JUST = "id_justification";
@@ -64,11 +55,13 @@ public class FragJustification extends Fragment implements AsyncTaskcallback {
     String profName;
     String nameCours;
 
-    public FragJustification(){
+    String mail;
+
+    public FragJustification2(){
 
     }
-    public static FragJustification newInstance(String token, String id_justification,String  profName,String nameCours) {
-        FragJustification fragment = new FragJustification();
+    public static FragJustification2 newInstance(String token, String id_justification,String  profName,String nameCours) {
+        FragJustification2 fragment = new FragJustification2();
         Bundle args = new Bundle();
         args.putString(TOKEN, token);
         args.putString(ARG_JUST, id_justification);
@@ -134,7 +127,7 @@ public class FragJustification extends Fragment implements AsyncTaskcallback {
         }
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] img_Justificatif = byteArrayOutputStream.toByteArray();
-        justif = new Justificatif(id_j,"11/06/2023",img_Justificatif,profName,nameCours);
+        justif = new Justificatif(id_j,"11/06/2023",img_Justificatif,profName,nameCours,mail);
         request = new DashboardImplementation(this);
        // request.postJustificatif(this.token, justif);  a faire
     }
