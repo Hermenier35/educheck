@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.widget.ImageView;
 
 import com.example.educheck.Controleur.Dashboard.FragMessages1;
+import com.example.educheck.Controleur.Dashboard.FragMessages2;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -127,5 +128,6 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
         public int getItemCount() {
             return NUM_PAGES;
         }
+
     }
 }

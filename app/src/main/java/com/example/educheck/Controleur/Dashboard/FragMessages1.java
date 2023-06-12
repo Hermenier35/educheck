@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.educheck.Controleur.DashbardTeacher.DashBoardTeacher;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.R;
@@ -33,6 +37,8 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter_card;
     private ArrayList<String> users_mail;
+    private FrameLayout frame1;
+    private ScrollView scrollView;
 
     private String token;
 
@@ -50,6 +56,7 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         recyclerView = view.findViewById(R.id.recycler_mex);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+        frame1 = view.findViewById(R.id.frame1);
 
         messageImplementation = new DashboardImplementation(this);
         messageImplementation.sendMexTo(token);
@@ -91,7 +98,6 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         public void onClick(View v) {
             String mailRecipient = users_mail.get(v.getVerticalScrollbarPosition());
             Fragment fragMessages2 = FragMessages2.newInstance(mailRecipient,token);
-            // startActivity(intentMess1);
             replaceFragment(fragMessages2);
         }
     }
