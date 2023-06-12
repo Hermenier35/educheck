@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -16,6 +17,8 @@ import com.example.educheck.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +36,10 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
     private String token;
     private University university;
     private String request;
+    private Spinner spinnerDegree;
+    private Spinner spinnerCareer;
+    private Spinner spinnerCourses;
+    private ArrayList<String> dataStudent;
 
 
     public PresentFragment() {
@@ -70,6 +77,8 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_present, container, false);
+        spinnerCareer =view.findViewById(R.id.spinnerCareerChoice);
+
         return view;
     }
 
