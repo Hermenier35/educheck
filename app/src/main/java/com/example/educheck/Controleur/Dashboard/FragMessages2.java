@@ -55,13 +55,13 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
     private ArrayList<MessageLayout> users_messages;
 
-    private ArrayList<int[]> index;
+    private ArrayList<Integer> index;
 
     private static final long REQUEST_DELAY_MS = 5000; // 30 seconds
 
     private Handler requestHandler;
     private Runnable requestRunnable;
-    DashboardImplementation model_message;
+    DashboardImplementation requestMessage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,12 +81,12 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
 
 
-        model_message = new DashboardImplementation(this);
+        requestMessage = new DashboardImplementation(this);
         users_messages = new ArrayList<>();
-        index=new ArrayList<>();
+        index= new ArrayList<>();
         sendRequest("getMex");
         requestHandler = new Handler(Looper.getMainLooper());
-       requestRunnable = new Runnable() {
+        requestRunnable = new Runnable() {
             @Override
             public void run() {
                 sendRequest("getMex");
@@ -115,9 +115,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
     public void send_message(){
         String text = messageToSend.getText().toString();
-        Date date=new Date();
-
-
+        Date date = new Date();
         Instant instant= date.toInstant();
 
         System.out.println("Current date and time: " + instant);
@@ -125,11 +123,11 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         System.out.println("Current mailSender: " + mailSender);
         System.out.println("Current message: " + text);
 
-
-        Message mess=new Message(mailRecipient,mailSender,text,date);
-        model_message.sendMessageTo(mess,token);
-        messageToSend.getText().clear();
-        sendRequest("getMex");
+        if(text.length() > 0 ) {
+            Message mess = new Message(mailRecipient, mailSender, text, date);
+            requestMessage.sendMessageTo(mess, token);
+            messageToSend.getText().clear();
+        }
     }
 
 
@@ -149,46 +147,6 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         fragment.setArguments(args);
         return fragment;
     }
-    @Override
-    public void onTaskCompleted(JSONArray items) throws JSONException {
-        if(request.equals("getMex")) {
-            if (items.getJSONObject(0).has("code_retour"))
-                System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
-            JSONObject mailJson = items.getJSONObject(0);
-            String mailRe = mailJson.getString("mailRecipients").replaceAll("[\\[\\]\"\\{\\}]", "");
-            String mailSe = mailJson.getString("mailSenders").replaceAll("[\\[\\]\"\\{\\}]", "");
-            System.out.println(mailRe);
-            String[] receivers = mailRe.split(",");
-            String[] senders = mailSe.split(",");
-            for (int i = 0; i < receivers.length; i++) {
-                if (receivers[i].equals(mailRecipient) && senders[i].equals(mailSender)) {
-                    index.add(new int[]{i, 0});
-                } else if (receivers[i].equals(mailSender) && senders[i].equals(mailRecipient)) {
-
-                    index.add(new int[]{i, 1});
-                }
-            }
-            String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]", "");
-            String[] messages = mex.split(",");
-
-            MessageLayout message;
-            boolean isUser;
-            messageAdapter.delete();
-            for (int j = 0; j < index.size(); j++) {
-                int[] pair = index.get(j);
-                int messageIndex = pair[0];
-                if (messageIndex >= 0 && messageIndex < messages.length) {
-                    isUser = pair[1] == 0;
-                    message = new MessageLayout(messages[messageIndex], isUser, mailRecipient);
-                    messageAdapter.add(message);
-                }
-            }
-            index.clear();
-            messagesView.setSelection(messagesView.getCount() - 1);
-        }
-        request="";
-
-    }
 
     private void sendRequest(String name){
         this.request = name;
@@ -197,14 +155,64 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
                 send_message();
                 break;
             case "getMex":
-                sendRequest();
+                requestMessage.retrieveMessages(token);
                 break;
             default: System.err.println("No request Found");
         }
     }
-    private void sendRequest(){
 
-        model_message.retrieveMessages(token);
+    @Override
+    public void onTaskCompleted(JSONArray items) throws JSONException {
+
+        if (items.getJSONObject(0).has("code_retour")) {
+            System.err.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
+            return;
+        }
+
+        switch(request){
+            case "getMex" :
+                index.clear();
+                messageAdapter.delete();
+                JSONObject mailJson = items.getJSONObject(0);
+                String[] receivers = mailJson.getString("mailRecipients").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
+                String[] senders = mailJson.getString("mailSenders").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
+                String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]", "");
+                String[] messages = mex.split(",");
+                ArrayList<String> messageClear = new ArrayList<>();
+                updateIndex(receivers, messageClear, messages);
+                updateScreenMessenger(messageClear);
+                messagesView.setSelection(messagesView.getCount() - 8);
+                break;
+
+            case "sendMex":
+                sendRequest("getMex");
+                break;
+        }
+    }
+
+    private void updateIndex(String[] receivers, ArrayList<String> messageClear ,String[] messages){
+        for (int i = 0; i < receivers.length; i++) {
+            if (receivers[i].equals(mailRecipient)) {
+                index.add(0);
+                messageClear.add(messages[i]);
+            } else if(receivers[i].equals(mailSender)) {
+                index.add(1);
+                messageClear.add(messages[i]);
+            }
+
+        }
+    }
+
+    private void updateScreenMessenger(ArrayList<String> messages){
+        MessageLayout message;
+        boolean isUser;
+        System.out.println();
+        for (int i = 0; i < index.size(); i++) {
+            int pair = index.get(i);
+            isUser = pair == 0;
+            message = new MessageLayout(messages.get(i), isUser, mailRecipient);
+            messageAdapter.add(message);
+        }
     }
 
 }
