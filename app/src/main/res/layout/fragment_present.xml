@@ -29,10 +29,11 @@
         android:id="@+id/spinner_type_choice_parcours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120sp"
-        android:entries="@array/choices"
         android:layout_marginStart="100sp"
-        android:background="@color/gray_400"/>
+        android:layout_marginTop="1sp"
+        android:background="@color/gray_400"
+        android:entries="@array/choices" />
+
     <TextView
         android:layout_marginTop="170sp"
         android:layout_width="wrap_content"
@@ -43,12 +44,12 @@
         android:id="@+id/spinner_type_choice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170sp"
+        android:layout_marginTop="2sp"
         android:entries="@array/choices"
         android:layout_marginStart="100sp"
         android:background="@color/gray_400"/>
     <TextView
-        android:layout_marginTop="220sp"
+        android:layout_marginTop="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15sp"
