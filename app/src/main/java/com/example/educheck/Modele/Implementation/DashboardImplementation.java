@@ -33,6 +33,11 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
+    public void getAllJust(String token){
+        Request request=new Request(this,"GET");
+        request.execute(HttpUrl.UrlGetAllJust+"/"+token);
+    }
+    @Override
     public void retrieveMessages(String token) {
         Request request = new Request(this, "GET");
         request.execute(HttpUrl.UrlRetrieveMessages + "/" + token);

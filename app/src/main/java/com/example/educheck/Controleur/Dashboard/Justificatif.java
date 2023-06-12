@@ -15,19 +15,22 @@ public class Justificatif {
 
     private String nameCours;
 
-    public Justificatif(String id_justificatif, String date, byte[] image,String profName,String nameCours) {
+    private String mailStudent;
+
+    public Justificatif(String id_justificatif, String date, byte[] image,String profName,String nameCours,String mailStudent) {
         this.id_justificatif = id_justificatif;
         this.date = date;
         this.image = image;
         this.profName=profName;
         this.nameCours=nameCours;
+        this.mailStudent=mailStudent;
     }
 
 
     public JSONObject convertToJSONObject(){
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("id_justificatif", getId_justificatif());
+            jsonObject.put("mailStudent",getMailStudent());
             jsonObject.put("date", getDate());
             jsonObject.put("profName",getProfName());
             jsonObject.put("image", Base64.getEncoder().encodeToString(getImage()));
@@ -76,5 +79,13 @@ public class Justificatif {
 
     public void setNameCours(String nameCours) {
         this.nameCours = nameCours;
+    }
+
+    public String getMailStudent() {
+        return mailStudent;
+    }
+
+    public void setMailStudent(String mailStudent) {
+        this.mailStudent = mailStudent;
     }
 }
