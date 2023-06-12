@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnAbsence"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
