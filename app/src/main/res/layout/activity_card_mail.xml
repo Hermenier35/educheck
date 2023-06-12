@@ -7,7 +7,6 @@
     android:layout_margin="5dp"
     app:cardBackgroundColor="@color/purple_200" >
 
-
     <LinearLayout
         android:id="@+id/linearMail"
         android:layout_width="match_parent"
