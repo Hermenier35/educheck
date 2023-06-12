@@ -418,8 +418,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         spnStudent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String studentName = spnStudent.getSelectedItem().toString();
-
+//                String studentName = spnStudent.getSelectedItem().toString();
             }
 
             @Override
