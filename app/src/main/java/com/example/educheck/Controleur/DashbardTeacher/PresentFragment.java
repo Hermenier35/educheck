@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -224,6 +225,21 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
     }
 
     private ArrayList<String> initSendDataAbs(){
+        ArrayList<String> mails = new ArrayList<>();
+        ArrayList<PresentAdapter.StudentViewHolder> studentViewHolders = presentAdapter.getViewHolders();
+        for(int i =0; i <studentViewHolders.size(); i++){
+            if(studentViewHolders.get(i).checkBox.isChecked())
+                mails.add(studentViewHolders.get(i).textViewMail.toString());
+        }
+
+        return mails;
+    }
+
+    private Student seekByMail(String mail){
+        for(Student s : students){
+            if(s.getMail().equals(mail))
+                return s;
+        }
         return null;
     }
 
@@ -269,8 +285,8 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         }
         presentAdapter = new PresentAdapter(studentsFilter);
         listView.setAdapter(presentAdapter);
-
     }
+
     private boolean isCourseSelected(){
         return !spinnerDegree.getSelectedItem().toString().equals("Select") &&
                 !spinnerCareer.getSelectedItem().toString().equals("Select") &&
