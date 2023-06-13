@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.educheck.Modele.Cours;
 import com.example.educheck.R;
 
 import java.util.ArrayList;
@@ -17,9 +18,9 @@ public class CoursesAdapterCard extends RecyclerView.Adapter<CoursesAdapterCard.
 
     private int pos;
 
-    private ArrayList<String> courses;
+    private ArrayList<Cours> courses;
 
-    public CoursesAdapterCard(ArrayList<String> courses){
+    public CoursesAdapterCard(ArrayList<Cours> courses){
         this.courses = courses;
         this.pos=0;
     }
@@ -36,7 +37,9 @@ public class CoursesAdapterCard extends RecyclerView.Adapter<CoursesAdapterCard.
     public void onBindViewHolder(@NonNull CoursHolder holder, int position) {
 
         TextView textViewCours_Name= holder.Cours_Name;
-        textViewCours_Name.setText(courses.get(position));
+        TextView teacherName = holder.teacherName;
+        textViewCours_Name.setText(courses.get(position).getName());
+        teacherName.setText(courses.get(position).getProfName());
     }
 
     @Override
@@ -47,11 +50,13 @@ public class CoursesAdapterCard extends RecyclerView.Adapter<CoursesAdapterCard.
 
     class CoursHolder extends RecyclerView.ViewHolder{
         private TextView Cours_Name;
+        private TextView teacherName;
 
 
         CoursHolder(View itemView){
             super(itemView);
             Cours_Name = itemView.findViewById(R.id.Cours_Name);
+            teacherName = itemView.findViewById(R.id.prof_name);
             itemView.setVerticalScrollbarPosition(pos++);
         }
 

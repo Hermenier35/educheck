@@ -40,9 +40,8 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
     private RecyclerView.Adapter adapter_card;
 
     private RecyclerView.LayoutManager layoutManager;
-    private List<Cours> courseList;
+    private ArrayList<Cours> courseList;
 
-    private ArrayList<String> coursesName;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,8 +55,7 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
 
         myOnClickListener = new FragGetCourses.MyOnClickListener(getContext(),recyclerView);
         courseList = new ArrayList<>();
-        coursesName = new ArrayList<>();
-        adapter = new CoursesAdapterCard(coursesName);
+        adapter = new CoursesAdapterCard(courseList);
         recyclerView.setAdapter(adapter);
         request = new DashboardImplementation(this);
         request.getCourses(token);
@@ -77,11 +75,10 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
             int credit = Integer.parseInt(courseJson.getString("credit"));
 
             Cours course = new Cours(name, prof, credit);
-            coursesName.add(name);
             courseList.add(course);
         }
         courseList.forEach(cours -> System.out.println(cours.toString()));
-        adapter_card = new CoursesAdapterCard(coursesName);
+        adapter_card = new CoursesAdapterCard(courseList);
         recyclerView.setAdapter(adapter_card);
     }
 
@@ -97,8 +94,7 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
 
         @Override
         public void onClick(View v) {
-            String singleCourseName = coursesName.get(v.getVerticalScrollbarPosition());
-            System.out.println(singleCourseName);
+            String singleCourseName = courseList.get(v.getVerticalScrollbarPosition()).getName();
             Fragment Fm = FragMarks.newInstance(singleCourseName,token);;
             replaceFragment(Fm);
         }

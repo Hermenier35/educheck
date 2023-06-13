@@ -9,21 +9,35 @@
     <LinearLayout
         android:id="@+id/linearMail"
         android:layout_width="match_parent"
-        android:layout_height="60sp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#CCCCFF"
+        android:layout_margin="10sp">
 
 
         <TextView
             android:id="@+id/Cours_Name"
-            android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:layout_margin="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2sp"
             android:layout_gravity="center"
             android:layout_toEndOf="@id/idIVCourseImage"
-            android:text=""
+            android:text="visu"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:background="#CCCCFF"
             android:gravity="center"
             android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/prof_name"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="visu"
+            android:layout_margin="2sp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textStyle="italic"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
