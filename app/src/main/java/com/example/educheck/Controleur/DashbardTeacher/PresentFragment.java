@@ -200,6 +200,10 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                     studentsFilter.addAll(students);
                 }
                 break;
+            case ADD_ABS:
+                JSONObject response = items.getJSONObject(0);
+                Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 

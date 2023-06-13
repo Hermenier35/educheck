@@ -262,18 +262,9 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
     }
 
     @Override
-    public void onTaskCompleted(JSONArray items) throws JSONException {
+    public void onTaskCompleted(JSONArray items){
         schedule.clear();
-        for(int i=0; i< items.length(); i++){
-            JSONObject jsonObject = items.getJSONObject(i);
-            String dtStart = jsonObject.getString("DTSTART");
-            String dtEnd = jsonObject.getString("DTEND");
-            Cellule cellule = new Cellule(jsonObject.getString("SUMMARY"), jsonObject.getString("LOCATION"), cleanHour(dtStart),
-                    cleanHour(dtEnd),getDateFromData(dtStart, getDuringFromData(dtStart,dtEnd)), Color.parseColor("#"+randomColor()) );
-            schedule.add(cellule);
-        }
-        updateSchedule();
-        Toast.makeText(getContext(), "Schedule update !", Toast.LENGTH_SHORT).show();
+        bigtask(items);
     }
 
     private String cleanHour(String eventHour){
@@ -313,5 +304,30 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.WEEK_OF_YEAR);
+    }
+
+    private void bigtask(JSONArray items){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=0; i< items.length(); i++){
+                    JSONObject jsonObject = null;
+                    try {
+                        jsonObject = items.getJSONObject(i);
+                        String dtStart = jsonObject.getString("DTSTART");
+                        String dtEnd = jsonObject.getString("DTEND");
+                        Cellule cellule = new Cellule(jsonObject.getString("SUMMARY"), jsonObject.getString("LOCATION"), cleanHour(dtStart),
+                                cleanHour(dtEnd),getDateFromData(dtStart, getDuringFromData(dtStart,dtEnd)), Color.parseColor("#"+randomColor()) );
+                        schedule.add(cellule);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                updateSchedule();
+            }
+        });
+
+        thread.start();
+        Toast.makeText(getContext(), "Schedule update !", Toast.LENGTH_SHORT).show();
     }
 }
