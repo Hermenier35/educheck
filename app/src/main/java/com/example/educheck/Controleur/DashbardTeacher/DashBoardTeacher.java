@@ -17,6 +17,7 @@ import android.widget.ScrollView;
 
 import com.example.educheck.Controleur.Dashboard.FragMessages1;
 import com.example.educheck.Controleur.Dashboard.FragMessages2;
+import com.example.educheck.Controleur.Dashboard.Schedule;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Modele.University;
@@ -37,13 +38,17 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
     public static FragmentStateAdapter pagerAdapter, pagerAdapter2;
     public static FragmentActivity fa;
     private DashboardImplementation dashboardImplementation;
-    private ImageView imgAddStudent, imgAddCourse, imgMessenger, imgPresent;
+    private ImageView imgAddStudent, imgAddCourse, imgMessenger, imgPresent, imgSchedule;
     private String request;
     private final String GET_UNIVERSITY = "getUniversity";
     private University university;
     static Fragment addStudent;
     static Fragment addCourse;
     static Fragment present;
+
+    static Fragment schedule;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,7 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
         imgAddCourse.setOnClickListener(v -> setCurrentItemAndAdapter(1));
         imgMessenger.setOnClickListener(v -> setCurrentItemAndAdapter(2));
         imgPresent.setOnClickListener(v -> setCurrentItemAndAdapter(3));
+        imgSchedule.setOnClickListener(v -> setCurrentItemAndAdapter(4));
 
         sendRequest(GET_UNIVERSITY);
     }
@@ -110,24 +116,26 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
         this.addCourse = AddCoursesFragment.newInstance(token, this.university);
         this.present = PresentFragment.newInstance(token, this.university);
         Fragment messenger = new FragMessages1();
-        pagerAdapter = new ScreenSlidePagerAdapter(fa, addStudent,addCourse, messenger, present);
+        this.schedule = new Schedule();
+        pagerAdapter = new ScreenSlidePagerAdapter(fa, addStudent,addCourse, messenger, present,schedule);
         viewPager.setAdapter(pagerAdapter);
     }
 
     public static void replaceMessengerFragment(Fragment fragment) {
-        pagerAdapter2 = new ScreenSlidePagerAdapter(fa, addStudent, addCourse, fragment, present);
+        pagerAdapter2 = new ScreenSlidePagerAdapter(fa, addStudent, addCourse, fragment, present,schedule);
         viewPager.setAdapter(pagerAdapter2);
         viewPager.setCurrentItem(2);
     }
 
     public static class ScreenSlidePagerAdapter extends FragmentStateAdapter {
-        private Fragment addStudentFragment, addCourseFragment, messengerFragment, presentFragment;
-        public ScreenSlidePagerAdapter(FragmentActivity fa, Fragment page1, Fragment page2, Fragment page3, Fragment page4) {
+        private Fragment addStudentFragment, addCourseFragment, messengerFragment, presentFragment, scheduleFragment;
+        public ScreenSlidePagerAdapter(FragmentActivity fa, Fragment page1, Fragment page2, Fragment page3, Fragment page4,Fragment page5) {
             super(fa);
             addStudentFragment = page1;
             addCourseFragment = page2;
             messengerFragment = page3;
             presentFragment = page4;
+            scheduleFragment = page5;
         }
 
         @Override
@@ -136,7 +144,8 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
                 case 0: return addStudentFragment;
                 case 1: return addCourseFragment;
                 case 2: return messengerFragment;
-                default: return presentFragment;
+                case 3: return presentFragment;
+                default: return scheduleFragment;
             }
         }
 
