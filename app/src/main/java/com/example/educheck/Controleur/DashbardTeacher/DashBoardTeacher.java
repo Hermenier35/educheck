@@ -31,7 +31,7 @@ import java.util.Base64;
 
 public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcallback {
 
-    private static final int NUM_PAGES = 4;
+    private static final int NUM_PAGES = 5;
     private String token;
     private Toolbar toolbar;
     public static ViewPager2 viewPager;
@@ -62,6 +62,7 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
         imgAddCourse = findViewById(R.id.imgAddCou);
         imgMessenger = findViewById(R.id.imgMess);
         imgPresent = findViewById(R.id.imgPre);
+        imgSchedule = findViewById(R.id.imgSched);
 
 
         setSupportActionBar(toolbar);
