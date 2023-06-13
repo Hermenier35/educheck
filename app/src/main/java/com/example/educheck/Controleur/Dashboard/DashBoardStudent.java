@@ -1,10 +1,12 @@
 package com.example.educheck.Controleur.Dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.view.Menu;
 import android.widget.ImageView;
 
 
@@ -15,6 +17,7 @@ import com.example.educheck.R;
 public class DashBoardStudent extends AppCompatActivity {
 
     String token;
+    private Toolbar toolbar;
     //TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class DashBoardStudent extends AppCompatActivity {
         ImageView menu2 = findViewById(R.id.menu2);
         ImageView menu3 = findViewById(R.id.menu3);
         ImageView menu4 = findViewById(R.id.menu4);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         token = getIntent().getStringExtra("token");
 
@@ -53,6 +58,12 @@ public class DashBoardStudent extends AppCompatActivity {
 
         menu4.setOnClickListener(v -> replaceFragment(new FragJustification1()));
         replaceFragment(new Schedule());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void replaceFragment(Fragment fragment){
