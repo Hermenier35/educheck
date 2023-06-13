@@ -3,6 +3,7 @@ package com.example.educheck.Controleur.DashbardTeacher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,14 +43,16 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
     public class StudentViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewName;
+        private CheckBox checkBox;
 
         public StudentViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textViewName);
+            checkBox = itemView.findViewById(R.id.checkBox1);
         }
 
         public void bind(Student student) {
-            textViewName.setText(student.getFirstName());
+            textViewName.setText(student.getFirstName() + " " + student.getLastName());
         }
     }
 }

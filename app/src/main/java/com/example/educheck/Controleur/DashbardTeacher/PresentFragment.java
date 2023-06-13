@@ -3,6 +3,8 @@ package com.example.educheck.Controleur.DashbardTeacher;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,7 +34,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,30 +51,33 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TOKEN = "token";
-    private static final String GET_ACADEMIC_BACKGROUNDS = "getAcademicBackground", POST_COURSES_STUDENT = "postCoursesStudent",
+    private static final String GET_ACADEMIC_BACKGROUNDS = "getAcademicBackground", ADD_ABS = "addAbsent",
             GET_USERS = "getUsers";
     private static final String UNIVERSITY = "university";
 
     // TODO: Rename and change types of parameters
     private String token;
-    private ArrayList<AcademicBackground> academicBackgrounds;
 
     private Map<String, ArrayList<Cours>> allCourse;
     private University university;
     private String request;
 
-    private ArrayList<Student> students;
     private String  idPath, idCourse, mailStudent;
     private Spinner spinnerDegree;
     private Spinner spinnerCareer;
     private Spinner spinnerCourses;
 
     private DashboardImplementation dashboardImplementation;
-    private ArrayList<String> dataStudent;
     private ArrayList<String> dataCareer;
     private ArrayList<String> dataCourses;
     private ArrayList<String> dataDegree;
-    private Button studentabsent;
+    private ArrayList<AcademicBackground> academicBackgrounds;
+    private ArrayList<Student> students;
+    private ArrayList<Student> studentsFilter;
+    private Button btnSend;
+    private RecyclerView listView;
+    private PresentAdapter presentAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
 
     public PresentFragment() {
@@ -107,28 +117,31 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         View view = inflater.inflate(R.layout.fragment_present, container, false);
         spinnerCareer = view.findViewById(R.id.spinnerCareerChoice);
         spinnerCourses = view.findViewById(R.id.spinnerCoursesChoice);
-        studentabsent=view.findViewById(R.id.btnAbsence);
+        btnSend=view.findViewById(R.id.btnAbsence);
         spinnerDegree = view.findViewById(R.id.spinnerDegreeChoice);
+        listView = view.findViewById(R.id.listViewStudent);
 
         dashboardImplementation = new DashboardImplementation(this);
         allCourse = new HashMap<>();
-        students = new ArrayList<>();
+        students= new ArrayList<>();
+        studentsFilter = new ArrayList<>();
         dataCareer = new ArrayList<>();
         dataCourses = new ArrayList<>();
         dataDegree = new ArrayList<>();
-        dataStudent = new ArrayList<>();
         academicBackgrounds = new ArrayList<>();
         dataCareer.add("Select");
         dataCourses.add("Select");
-        dataDegree.add("Select");
-        dataStudent.add("Select");
+        layoutManager = new LinearLayoutManager(getContext());
+        listView.setLayoutManager(layoutManager);
+        presentAdapter = new PresentAdapter(studentsFilter);
+        listView.setAdapter(presentAdapter);
 
-        ArrayAdapter<String> adapterDataDegree = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, dataDegree);
-        adapterDataDegree.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDegree.setAdapter(adapterDataDegree);
+        ArrayAdapter<String> adapterDataCareer = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, dataCareer);
+        adapterDataCareer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCareer.setAdapter(adapterDataCareer);
 
         ArrayAdapter<String> adapterDataCourses = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, dataCourses);
-        adapterDataDegree.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterDataCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourses.setAdapter(adapterDataCourses);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.choices, android.R.layout.simple_spinner_item);
@@ -138,6 +151,8 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         setOnItemSelectedSpinnerListener();
 
         sendRequest(GET_ACADEMIC_BACKGROUNDS);
+
+        btnSend.setOnClickListener(v -> sendRequest(ADD_ABS));
 
         return view;
     }
@@ -164,8 +179,6 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                 }
                 sendRequest(GET_USERS);
                 break;
-            case POST_COURSES_STUDENT:
-                sendRequest(GET_USERS);
             case GET_USERS:
                 if (items.length() > 0) {
                     for (int i = 0; i < items.length(); i++) {
@@ -182,11 +195,36 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                             }
                         }
                         students.add(student);
-                        dataStudent.add(student.getMail());
                     }
+                    studentsFilter.addAll(students);
                 }
                 break;
         }
+    }
+
+    private void sendRequest(String name) {
+        this.request = name;
+
+        switch (request){
+            case GET_ACADEMIC_BACKGROUNDS:
+                dashboardImplementation.getAllAcademicBackgrounds(university.getSuffixeTeacher());
+                break;
+            case GET_USERS:
+                students.clear();
+                dashboardImplementation.getUsers(token);
+                break;
+            case ADD_ABS:
+                Calendar instance = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh/mm" );
+                String formattedDate = sdf.format(instance.getTime());
+                ArrayList mail = initSendDataAbs();
+                dashboardImplementation.addAbs(token, mail, spinnerCourses.getSelectedItem().toString(), formattedDate);
+                break;
+        }
+    }
+
+    private ArrayList<String> initSendDataAbs(){
+        return null;
     }
 
     private void initialisationSpinnerPath(String typePath) {
@@ -222,18 +260,15 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         }
     }
     private void filterStudent(String name, String id){
+        studentsFilter.clear();
+        studentsFilter.addAll(students);
         if(name.equals("path")){
-            for(Student s : students)
-                if(s.getPaths().contains(id))
-                    dataStudent.add(s.getMail());
-        }else if(name.equals("course")){
-            for(Student s : students)
-                if(s.getCours().contains(id))
-                    dataStudent.add(s.getMail());
-        }else if(name.equals("type")){
-            for(Student s : students)
-                dataStudent.add(s.getMail());
+            studentsFilter.removeIf(student -> !student.getPaths().contains(id));
+        }else if(name.equals("course")) {
+            studentsFilter.removeIf(student -> !student.getCours().contains(id));
         }
+        presentAdapter = new PresentAdapter(studentsFilter);
+        listView.setAdapter(presentAdapter);
 
     }
     private boolean isCourseSelected(){
@@ -243,6 +278,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
     }
 
     private void setOnItemSelectedSpinnerListener(){
+
         spinnerDegree.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -252,7 +288,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                     filterStudent("type", "");
                 }
 
-                studentabsent.setEnabled(isCourseSelected());
+                btnSend.setEnabled(isCourseSelected());
             }
 
             @Override
@@ -270,7 +306,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                     initialisationSpinnerCourse(idPath);
                     filterStudent("path", idPath);
                 }
-                studentabsent.setEnabled(isCourseSelected());
+                btnSend.setEnabled(isCourseSelected());
             }
 
             @Override
@@ -286,7 +322,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                     initIdCourse(courseName, idPath);
                     filterStudent("course", idCourse);
                 }
-                studentabsent.setEnabled(isCourseSelected());
+                btnSend.setEnabled(isCourseSelected());
 
             }
 
@@ -313,22 +349,4 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
 
         }
     };
-
-    private void sendRequest(String name) {
-        this.request = name;
-
-                switch (request){
-                    case GET_ACADEMIC_BACKGROUNDS:
-                        dashboardImplementation.getAllAcademicBackgrounds(university.getSuffixeTeacher());
-                        break;
-                    case GET_USERS:
-                        students.clear();
-                        dataStudent.clear();
-                        dashboardImplementation.getUsers(token);
-                        break;
-                }
-            }
-
-
-
 }

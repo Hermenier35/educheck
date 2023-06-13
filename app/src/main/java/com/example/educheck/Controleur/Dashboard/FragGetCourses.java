@@ -48,7 +48,6 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
         view = inflater.inflate(R.layout.fragment_get_cours, container, false);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView = view.findViewById(R.id.recyclerView_Cours);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         token = getActivity().getIntent().getStringExtra("token");

@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 
 public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     private AsyncTaskcallback callBack;
@@ -213,6 +214,20 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     public void getUsers(String token) {
         Request request = new Request(this, "GET");
         request.execute(HttpUrl.UrlGetUsers + "/" + token);
+    }
+
+    @Override
+    public void addAbs(String Token, ArrayList<String> mailStudent, String nameCourse, String date) {
+        Request request = new Request(this, "POST");
+        JSONObject body = new JSONObject();
+        JSONArray array = JsonUtils.arrayListToJson(mailStudent);
+        try {
+            body.put("mailStudent", mailStudent);
+            body.put("nameCours", nameCourse);
+            body.put("date", date);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
