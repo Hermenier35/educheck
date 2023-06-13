@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.educheck.Controleur.DashbardTeacher.DashBoardTeacher;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.R;
@@ -26,22 +30,21 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class FragMessages1 extends Fragment implements AsyncTaskcallback {
-    private Intent intentMess1;
     private DashboardImplementation messageImplementation;
     private RecyclerView.LayoutManager layoutManager;
     public static View.OnClickListener myOnClickListener;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter_card;
     private ArrayList<String> users_mail;
-
     private String token;
+    private Fragment parentFragment;
+    private FragmentManager fm;
 
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Logger.getGlobal().info("Message intent init");
         View view = inflater.inflate(R.layout.fragment_messages1, container, false);
-        intentMess1 = new Intent(getContext(), FragMessages2.class);
         layoutManager = new LinearLayoutManager(getContext());
         users_mail = new ArrayList<>();
         token = getActivity().getIntent().getStringExtra("token");
@@ -50,30 +53,31 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         recyclerView = view.findViewById(R.id.recycler_mex);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-
         messageImplementation = new DashboardImplementation(this);
         messageImplementation.sendMexTo(token);
+        parentFragment = getActivity().getSupportFragmentManager().getFragments().get(0);
+        System.out.println(parentFragment.getId());
 
         adapter_card = new MailAdapterCard(users_mail);
         recyclerView.setAdapter(adapter_card);
-
+        System.out.println("INITIALISATION MESSENGER");
         return view;
     }
 
     @Override
     public void onTaskCompleted(JSONArray items) throws JSONException {
         if (items.getJSONObject(0).has("code_retour"))
-            System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
-            JSONObject mailJson = items.getJSONObject(0);
-            String mail = mailJson.getString("mail").replaceAll("[\\[\\]\" ]" , "");
-            String[] mails= mail.split(",");
-            for (int j=0;j<mails.length;j++) {
-                if(!mails[j].equals(users_mail)) {
-                    users_mail.add(mails[j]);
-                }
+            System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour") + " retour users-mails");
+        JSONObject mailJson = items.getJSONObject(0);
+        String mail = mailJson.getString("mail").replaceAll("[\\[\\]\" ]" , "");
+        String[] mails= mail.split(",");
+        for (int j=0;j<mails.length;j++) {
+            if(!mails[j].equals(users_mail)) {
+                users_mail.add(mails[j]);
             }
+        }
 
-
+        System.out.println(users_mail.size()+ " : " + users_mail.stream().map(s -> s.toString()));
         adapter_card = new MailAdapterCard(users_mail);
         recyclerView.setAdapter(adapter_card);
     }
@@ -91,15 +95,17 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         public void onClick(View v) {
             String mailRecipient = users_mail.get(v.getVerticalScrollbarPosition());
             Fragment fragMessages2 = FragMessages2.newInstance(mailRecipient,token);
-            // startActivity(intentMess1);
-            replaceFragment(fragMessages2);
+            if(parentFragment.getId()!=0)
+                replaceFragment(fragMessages2);
+            else
+                DashBoardTeacher.replaceMessengerFragment(fragMessages2);
         }
     }
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame1, fragment);
+        fragmentTransaction.replace(parentFragment.getId(), fragment);
         fragmentTransaction.commit();
     }
 

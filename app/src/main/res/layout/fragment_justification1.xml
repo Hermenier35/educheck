@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/frame1">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -22,13 +17,13 @@
         android:textSize="22sp"
         android:background="#D0B0F3"
         android:textStyle="bold|italic"
-        android:text="Discussion :"
+        android:text="A Justifier :"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_mex"
+        android:id="@+id/recycler_just"
         android:layout_width="400sp"
         android:layout_height="491sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,8 +34,6 @@
 
         app:layout_constraintVertical_bias="0.088" />
 
-    </LinearLayout>
 
-
-</FrameLayout>
+</LinearLayout>
 

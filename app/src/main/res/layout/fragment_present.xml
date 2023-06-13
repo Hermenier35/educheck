@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,86 +18,93 @@
         android:background="#D0B0F3"
         android:textStyle="bold|italic"
         android:text="Check Presence Student" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30sp"
+                android:layout_marginTop="24sp"
+                android:textSize="20sp"
+                android:text="Degree :" />
 
-    <TextView
-        android:layout_marginTop="120sp"
-        android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/spinnerDegreeChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="150sp"
+                android:layout_marginTop="24sp"
+                android:background="@color/gray_400"
+                android:entries="@array/choices" />
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_marginTop="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:textSize="20sp"
+            android:text="Career :"/>
+        <Spinner
+            android:id="@+id/spinnerCareerChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24sp"
+            android:entries="@array/choices"
+            android:layout_marginStart="153sp"
+            android:background="@color/gray_400"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15sp"
-        android:text="Parcours :"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginTop="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:textSize="20sp"
+            android:text="Courses :"/>
+        <Spinner
+            android:id="@+id/spinnerCoursesChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24sp"
+            android:entries="@array/choices"
+            android:layout_marginStart="140sp"
+            android:background="@color/gray_400"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <Spinner
-        android:id="@+id/spinner_type_choice_parcours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120sp"
-        android:entries="@array/choices"
-        android:layout_marginStart="100sp"
-        android:background="@color/gray_400"/>
-    <TextView
-        android:layout_marginTop="170sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15sp"
-        android:text="Diploma :"/>
-    <Spinner
-        android:id="@+id/spinner_type_choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="170sp"
-        android:entries="@array/choices"
-        android:layout_marginStart="100sp"
-        android:background="@color/gray_400"/>
-    <TextView
-        android:layout_marginTop="220sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15sp"
-        android:text="Cours :"/>
-    <Spinner
-        android:id="@+id/spinner_type_choice_cours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="220sp"
-        android:entries="@array/choices"
-        android:layout_marginStart="100sp"
-        android:background="@color/gray_400"/>
+        <ListView
+            android:id="@+id/listViewStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="24sp"
+            android:layout_toEndOf="@id/date" />
+    </LinearLayout>
 
-    <TextView
-        android:layout_marginTop="270sp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15sp"
-        android:text="DATE :"/>
-
-    <EditText
-        android:id="@+id/date"
-        android:layout_width="200sp"
-        android:layout_height="25sp"
-        android:layout_marginStart="80sp"
-        android:layout_marginTop="270sp"
-        android:hint="jj/mm/aaaa"/>
-    <TextView
-        android:layout_marginTop="320sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15sp"
-        android:text="HOUR :"/>
-
-    <EditText
-        android:id="@+id/hour"
-        android:layout_width="150sp"
-        android:layout_height="25sp"
-        android:layout_marginStart="80sp"
-        android:layout_marginTop="320sp" />
-
+        android:orientation="horizontal">
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnAbsence"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400sp"
+        android:layout_marginTop="12sp"
         android:layout_marginEnd="100sp"
         android:layout_marginStart="130sp"
         android:text="Next" />
+    </LinearLayout>
 
 </LinearLayout>

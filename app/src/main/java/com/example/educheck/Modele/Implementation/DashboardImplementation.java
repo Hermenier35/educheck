@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Base64;
 
 public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     private AsyncTaskcallback callBack;
@@ -32,6 +33,27 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
         request.execute(HttpUrl.UrlSendMessageTo + "/" + token);
     }
 
+    @Override
+    public void Justify(String id_j,String token,String mail,String profMail,byte[] img){
+        Request request = new Request(this, "POST");
+        JSONObject body = new JSONObject();
+        try {
+            body.put("id_j",id_j);
+            body.put("studentEmail", mail);
+            body.put("professorEmail", profMail);
+            body.put("imagePath", Base64.getEncoder().encodeToString(img));
+            request.setBody(body);
+            request.execute(HttpUrl.UrlJustify + "/" + token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void getAllJust(String token){
+        Request request=new Request(this,"GET");
+        request.execute(HttpUrl.UrlGetAllJust+"/"+token);
+    }
     @Override
     public void retrieveMessages(String token) {
         Request request = new Request(this, "GET");
