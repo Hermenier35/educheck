@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FAF3FE"
     android:orientation="vertical"
-    tools:context=".Controleur.Dashboard.FragJustification">
+    tools:context=".Controleur.Dashboard.FragJustification2">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,7 +34,7 @@
         android:text="Select File"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400sp"
-        android:layout_marginLeft="-300sp"/>
+        android:layout_marginLeft="-360sp"/>
 
     <Button
         android:id="@+id/btnUpload"
@@ -45,5 +45,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400sp"
         />
+
+        <Button
+            android:id="@+id/btnOpenPdf"
+            android:layout_width="80sp"
+            android:layout_height="50sp"
+            android:text="Watch File"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="400sp"
+            />
     </LinearLayout>
 </RelativeLayout>
