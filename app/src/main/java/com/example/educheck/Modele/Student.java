@@ -5,10 +5,13 @@ import java.util.ArrayList;
 public class Student extends Users {
     private ArrayList<String> paths;
     private ArrayList<String> cours;
+    private ArrayList<Justify> justifies;
+
     public Student(String firstName, String lastName, String mail, String ine, String status) {
         super(firstName, lastName, mail, ine, status);
         this.paths = new ArrayList<>();
         this.cours = new ArrayList<>();
+        this.justifies = new ArrayList<>();
     }
 
     public void addPath(String id){
@@ -25,5 +28,9 @@ public class Student extends Users {
 
     public ArrayList<String> getCours() {
         return cours;
+    }
+
+    public ArrayList<Justify> getJustifies() {
+        return justifies;
     }
 }

@@ -54,10 +54,13 @@
         android:background="#e1e1fc"
         android:visibility="gone">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listViewAbs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test d'affichage"/>
+            android:layout_marginStart="5sp"
+            android:layout_marginTop="5sp" />
+
     </ScrollView>
 
 
