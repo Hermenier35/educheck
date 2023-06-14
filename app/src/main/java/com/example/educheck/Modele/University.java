@@ -1,5 +1,7 @@
 package com.example.educheck.Modele;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +44,12 @@ public class University implements Serializable {
             e.printStackTrace();
         }
         return jsonObject;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getUniName() + " " + get_id() + " " + getSuffixeStudent() + " " + getSuffixeTeacher();
     }
 
     public String getSuffixeStudent() {

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -29,7 +30,7 @@ import org.json.JSONException;
 public class Registration2 extends AppCompatActivity implements AsyncTaskcallback {
     private TextView TextView_AddInformation;
     private TextView TextView_EmailIneStatus;
-    private EditText EditText_email;
+    private AutoCompleteTextView EditText_email;
     private EditText EditText_INE;
     private TextView TextView_status;
     private Button Button_Submit;
@@ -39,6 +40,8 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
     private Spinner spinner;
     private List ChoiceList;
     private Intent intentParcours_choice;
+    private ArrayList<String> mailsSuffixeFound;
+    private ArrayAdapter<String> adapterAutoComplete;
 
 
     @Override
@@ -68,12 +71,18 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
         Button_Submit.setEnabled(false);
         intentParcours_choice = new Intent(getApplicationContext(), ParcoursChoices.class);
 
+
+
         EditText_INE.addTextChangedListener(emailIneStatusWatcher);
-        EditText_email.addTextChangedListener(emailIneStatusWatcher);
         TextView_status.addTextChangedListener(emailIneStatusWatcher);
         student = (Student) getIntent().getSerializableExtra("student");
         inscription = new InscriptionImplementation(this);
-        university = (University) getIntent().getSerializableExtra("university") ;
+        university = (University) getIntent().getSerializableExtra("university");
+        mailsSuffixeFound = new ArrayList<>();
+
+        adapterAutoComplete = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, mailsSuffixeFound);
+        EditText_email.setAdapter(adapterAutoComplete);
+        EditText_email.addTextChangedListener(emailIneStatusWatcher);
 
         Button_Submit.setOnClickListener(v -> {
            student.setIne( EditText_INE.getText().toString());
@@ -93,6 +102,24 @@ public class Registration2 extends AppCompatActivity implements AsyncTaskcallbac
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String text = charSequence.toString();
+
+                List<String> suggestions = new ArrayList<>();
+                char triggerChar = '@';
+                if (text.contains(String.valueOf(triggerChar))) {
+                    System.out.println(mailsSuffixeFound.size());
+                    String teacher = text.substring(0, text.indexOf(triggerChar) + 1) + university.getSuffixeTeacher();
+                    suggestions.add(teacher);
+                    String student = text.substring(0, text.indexOf(triggerChar) + 1) + university.getSuffixeStudent();
+                    suggestions.add(student);
+
+
+                }
+
+                // Mettez à jour les suggestions dans l'adaptateur
+                adapterAutoComplete.clear();
+                adapterAutoComplete.addAll(suggestions);
+                adapterAutoComplete.notifyDataSetChanged();
 
             }
 
