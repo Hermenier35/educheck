@@ -87,7 +87,7 @@
             android:name=".Controleur.Dashboard.Schedule"
             android:exported="true" />
         <activity
-            android:name=".Controleur.Dashboard.FragJustification"
+            android:name=".Controleur.Dashboard.FragJustification1"
             android:exported="true" />
         <activity
             android:name=".Controleur.Login.Loading"
