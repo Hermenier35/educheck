@@ -1,5 +1,6 @@
 package com.example.educheck.Controleur.DashbardTeacher;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.educheck.Modele.Student;
@@ -22,18 +24,20 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
     private List<Student> students;
     private int position;
     private ArrayList<StudentViewHolder> viewHolders;
+    private Context context;
 
-    public PresentAdapter(List<Student> students) {
+    public PresentAdapter(List<Student> students, Context context) {
         this.students = students;
         this.position =0;
         this.viewHolders = new ArrayList<>();
+        this.context = context;
     }
 
     @NonNull
     @Override
     public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_present, parent, false);
-        StudentViewHolder studentViewHolder = new StudentViewHolder(view);
+        StudentViewHolder studentViewHolder = new StudentViewHolder(view, this.context);
         return studentViewHolder;
     }
 
@@ -55,14 +59,20 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
         public Button detail;
         public ScrollView scrollView;
         public CheckBox checkBox;
+        private RecyclerView recyclerView;
+        private AbsentAdapter absentAdapter;
+        private RecyclerView.LayoutManager layoutManager;
+        private Context context;
 
-        public StudentViewHolder(@NonNull View itemView) {
+        public StudentViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
+            this.context = context;
             textViewName = itemView.findViewById(R.id.textViewName);
             textViewMail = itemView.findViewById(R.id.textViewMail);
             detail = itemView.findViewById(R.id.btnDetail);
             scrollView = itemView.findViewById(R.id.scrollViewDetail);
             checkBox = itemView.findViewById(R.id.checkBox1);
+            recyclerView = itemView.findViewById(R.id.listViewAbs);
         }
 
         public void bind(Student student) {
@@ -71,10 +81,19 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
             checkBox.setChecked(checkBox.isChecked());
             itemView.setVerticalScrollbarPosition(position++);
             initListenerButtonDetail();
+            initViewAbs(student);
+
         }
 
         private void initListenerButtonDetail(){
                 detail.setOnClickListener(v -> showOrHideDetail());
+        }
+
+        private void initViewAbs(Student student){
+            layoutManager = new LinearLayoutManager(this.context);
+            absentAdapter = new AbsentAdapter(student.getJustifies());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(absentAdapter);
         }
 
         private void showOrHideDetail(){

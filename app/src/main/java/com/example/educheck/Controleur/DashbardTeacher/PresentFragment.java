@@ -26,6 +26,7 @@ import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Cours;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.Justify;
 import com.example.educheck.Modele.Marks;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
@@ -134,7 +135,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         dataCourses.add("Select");
         layoutManager = new LinearLayoutManager(getContext());
         listView.setLayoutManager(layoutManager);
-        presentAdapter = new PresentAdapter(studentsFilter);
+        presentAdapter = new PresentAdapter(studentsFilter, getContext());
         listView.setAdapter(presentAdapter);
 
         ArrayAdapter<String> adapterDataCareer = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, dataCareer);
@@ -199,12 +200,23 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                     }
                     studentsFilter.addAll(students);
                 }
+                sendRequest(GET_ALL_JUST);
                 break;
             case ADD_ABS:
                 JSONObject response = items.getJSONObject(0);
                 Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                 break;
             case GET_ALL_JUST:
+                if (items.length() > 0) {
+                    JSONObject marksJson = items.getJSONObject(0);
+                    JSONArray justifs = marksJson.getJSONArray("justif");
+                    for (int i = 0; i < justifs.length(); i++) {
+                        JSONObject abences = justifs.getJSONObject(i);
+                        System.out.println(abences.toString());
+                        Justify justify = new Justify(abences.getString("id_j"), abences.getString("mailStudent"), abences.getString("date"), abences.getString("nameCours"), abences.getString("justifie"));
+                        students.forEach(student -> addJustify(student, justify));
+                    }
+                }
                 break;
         }
     }
@@ -231,6 +243,11 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                 dashboardImplementation.getAllJust(token);
                 break;
         }
+    }
+
+    private void addJustify(Student s, Justify justify){
+        if(s.getMail().equals(justify.getMailStudent()))
+            s.getJustifies().add(justify);
     }
 
     private ArrayList<String> initSendDataAbs(){
@@ -287,7 +304,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         }else if(name.equals("course")) {
             studentsFilter.removeIf(student -> !student.getCours().contains(id));
         }
-        presentAdapter = new PresentAdapter(studentsFilter);
+        presentAdapter = new PresentAdapter(studentsFilter, getContext());
         listView.setAdapter(presentAdapter);
     }
 

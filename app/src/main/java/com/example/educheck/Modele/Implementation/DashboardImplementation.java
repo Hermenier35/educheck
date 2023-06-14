@@ -53,6 +53,21 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
+    public void justifyProf(String id_j, String token, String studentMail) {
+        Request request = new Request(this, "POST");
+        JSONObject body = new JSONObject();
+        try {
+
+            body.put("id_j",id_j);
+            body.put("studentEmail", studentMail);
+            request.setBody(body);
+            request.execute(HttpUrl.UrlJustifyProf + "/" + token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void getAllJust(String token){
         Request request=new Request(this,"GET");
         request.execute(HttpUrl.UrlGetAllJust+"/"+token);
