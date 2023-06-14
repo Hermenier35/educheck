@@ -13,6 +13,7 @@ public interface Dashboard {
     public void sendMessageTo(Message message, String token);
     public void sendMexTo(String token);
     void justify(String id_j, String token, String mail, String profMail, byte[] img);
+    void justifyProf(String id_j, String token, String Studentmail);
     void getAllJust(String token);
     public void retrieveMessages(String token);
     public void getCourses(String token);
