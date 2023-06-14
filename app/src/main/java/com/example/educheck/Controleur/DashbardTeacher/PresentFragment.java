@@ -53,7 +53,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TOKEN = "token";
     private static final String GET_ACADEMIC_BACKGROUNDS = "getAcademicBackground", ADD_ABS = "addAbsent",
-            GET_USERS = "getUsers";
+            GET_USERS = "getUsers", GET_ALL_JUST = "getAllJust";
     private static final String UNIVERSITY = "university";
 
     // TODO: Rename and change types of parameters
@@ -204,6 +204,8 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                 JSONObject response = items.getJSONObject(0);
                 Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                 break;
+            case GET_ALL_JUST:
+                break;
         }
     }
 
@@ -220,10 +222,13 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                 break;
             case ADD_ABS:
                 Calendar instance = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh/mm" );
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm" );
                 String formattedDate = sdf.format(instance.getTime());
                 ArrayList mail = initSendDataAbs();
                 dashboardImplementation.addAbs(token, mail, spinnerCourses.getSelectedItem().toString(), formattedDate);
+                break;
+            case GET_ALL_JUST:
+                dashboardImplementation.getAllJust(token);
                 break;
         }
     }
@@ -232,20 +237,15 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         ArrayList<String> mails = new ArrayList<>();
         ArrayList<PresentAdapter.StudentViewHolder> studentViewHolders = presentAdapter.getViewHolders();
         for(int i =0; i <studentViewHolders.size(); i++){
-            if(studentViewHolders.get(i).checkBox.isChecked())
-                mails.add(studentViewHolders.get(i).textViewMail.toString());
+            if(studentViewHolders.get(i).checkBox.isChecked()) {
+                mails.add(studentViewHolders.get(i).textViewMail.getText().toString());
+            }
         }
 
         return mails;
     }
 
-    private Student seekByMail(String mail){
-        for(Student s : students){
-            if(s.getMail().equals(mail))
-                return s;
-        }
-        return null;
-    }
+
 
     private void initialisationSpinnerPath(String typePath) {
         dataCareer.clear();

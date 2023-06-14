@@ -28,6 +28,14 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btnDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:textSize="10sp"
+        android:text="Details"/>
+
     <CheckBox
         android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
@@ -35,6 +43,22 @@
         android:layout_gravity="right"
         android:layout_marginEnd="20sp"
         android:text="Absent" />
+
+    <ScrollView
+        android:id="@+id/scrollViewDetail"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:layout_marginTop="60sp"
+        android:layout_marginEnd="10sp"
+        android:layout_gravity="bottom"
+        android:background="#e1e1fc"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test d'affichage"/>
+    </ScrollView>
 
 
 </androidx.cardview.widget.CardView>
