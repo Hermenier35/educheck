@@ -134,6 +134,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         academicBackgrounds = new ArrayList<>();
         students = new ArrayList<>();
         mails = new ArrayList<>();
+
         dashboardImplementation = new DashboardImplementation(this);
         allCourse = new HashMap<>();
         dataParcours.add("Select");
