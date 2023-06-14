@@ -12,8 +12,8 @@ import java.util.Date;
 public interface Dashboard {
     public void sendMessageTo(Message message, String token);
     public void sendMexTo(String token);
-    void Justify(String id_j, String token, String mail, String profMail, byte[] img);
-    void getAllJust(String token);
+    public void Justify(String id_j, String token, String mail, String profMail, byte[] img);
+    public void getAllJust(String token);
     public void retrieveMessages(String token);
     public void getCourses(String token);
     public void postUniversity(String token, University university);
@@ -30,5 +30,5 @@ public interface Dashboard {
     public void getMarks(String token, String _idCour);
     public void addMark(String token, String email, Marks mark, String courseName );
     public void getUsers(String token);
-    public void addAbs(String Token, ArrayList<String> mailStudent, String nameCourse, String date);
+    public void addAbs(String token, ArrayList<String> mailStudent, String nameCourse, String date);
 }

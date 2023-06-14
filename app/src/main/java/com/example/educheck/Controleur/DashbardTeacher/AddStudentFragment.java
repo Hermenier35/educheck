@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -47,6 +48,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -66,14 +68,16 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
     // TODO: Rename and change types of parameters
     private String token;
     private University university;
-    private EditText emailStudent, eType, eTeacher, eMark;
+    private EditText eType, eTeacher, eMark;
+    private AutoCompleteTextView emailStudent;
     private TextView filecsv;
     private Button btnAddStudent, btnAddFile, btnAddMark;
     private String request, idPath, idCourse, mailStudent;
     private Spinner spnType, spnAcaB, spnCour, spnStudent;
-    private ArrayList<String> dataParcours, dataCourse, dataStudent;
+    private ArrayList<String> dataParcours, dataCourse, dataStudent, allStudent;
     private ArrayList<AcademicBackground> academicBackgrounds;
     private ArrayList<Student> students;
+    private ArrayAdapter<String> adapterAutoComplete;
     private Map<String, ArrayList<Cours>> allCourse;
     private DashboardImplementation dashboardImplementation;
     private ArrayList<String> mails;
@@ -134,12 +138,15 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         academicBackgrounds = new ArrayList<>();
         students = new ArrayList<>();
         mails = new ArrayList<>();
-
+        allStudent = new ArrayList<>();
         dashboardImplementation = new DashboardImplementation(this);
         allCourse = new HashMap<>();
         dataParcours.add("Select");
         dataCourse.add("Select");
         dataStudent.add("Select");
+
+        adapterAutoComplete = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, allStudent);
+        emailStudent.setAdapter(adapterAutoComplete);
 
         ArrayAdapter<String> adapterDataParcour = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, dataParcours);
         adapterDataParcour.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -245,6 +252,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                         students.add(student);
                         dataStudent.add(student.getMail());
                     }
+                    getAllMailStudentUniversity();
                 }
                 break;
         }
@@ -290,6 +298,12 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
             for(Student s : students)
                 dataStudent.add(s.getMail());
         }
+
+    }
+
+    private void getAllMailStudentUniversity(){
+        for(Student s : students)
+            allStudent.add(s.getMail());
 
     }
 
@@ -339,6 +353,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
             mails.add(emailStudent.getText().toString());
         }
         sendRequest(POST_COURSES_STUDENT);
+        spnCour.setSelection(0);
     }
 
     private void setAddFile(){
@@ -437,7 +452,17 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String text = charSequence.toString();
+            List<String> suggestions = new ArrayList<>();
+            for (String word : allStudent) {
+                if (word.startsWith(text)) {
+                    suggestions.add(word);
+                }
+            }
 
+            adapterAutoComplete.clear();
+            adapterAutoComplete.addAll(suggestions);
+            adapterAutoComplete.notifyDataSetChanged();
         }
 
         @Override

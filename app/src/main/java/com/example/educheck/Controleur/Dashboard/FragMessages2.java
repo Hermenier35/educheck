@@ -175,10 +175,11 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
                 messageAdapter.delete();
                 JSONObject mailJson = items.getJSONObject(0);
                 String[] receivers = mailJson.getString("mailRecipients").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
+                String[] senders = mailJson.getString("mailSenders").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
                 String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]", "");
                 String[] messages = mex.split(",");
                 ArrayList<String> messageClear = new ArrayList<>();
-                updateIndex(receivers, messageClear, messages);
+                updateIndex(receivers, senders,messageClear, messages);
                 updateScreenMessenger(messageClear);
                 messagesView.setSelection(messagesView.getCount() - 1);
                 break;
@@ -189,12 +190,12 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         }
     }
 
-    private void updateIndex(String[] receivers, ArrayList<String> messageClear ,String[] messages){
+    private void updateIndex(String[] receivers, String [] senders,ArrayList<String> messageClear ,String[] messages){
         for (int i = 0; i < receivers.length; i++) {
-            if (receivers[i].equals(mailRecipient)) {
+            if (receivers[i].equals(mailRecipient) && senders[i].equals(mailSender)) {
                 index.add(0);
                 messageClear.add(messages[i]);
-            } else if(receivers[i].equals(mailSender)) {
+            } else if(receivers[i].equals(mailSender) && senders[i].equals(mailRecipient)) {
                 index.add(1);
                 messageClear.add(messages[i]);
             }

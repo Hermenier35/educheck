@@ -73,6 +73,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
     private DashboardImplementation dashboardImplementation;
     private TextView week, date;
     private EditText ade;
+    private String request;
 
     @Nullable
     @Override
@@ -117,7 +118,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         adapterDataParcour.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinYears.setAdapter(adapterDataParcour);
         seek.setOnClickListener(v -> updateSchedule());
-        go.setOnClickListener(v -> dashboardImplementation.getSchedule(ade.getText().toString()));
+        go.setOnClickListener(v -> sendRequest("getSchedule"));
 
         createPlanningCells();
         return view;
@@ -142,6 +143,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
                         getWeekNumberDate(getDateFromDate2(cellule.getDate()))!= this.weekNumber;});
             createPlanningCells();
         }
+        avg.setSelection(0);
     }
 
     private void updateAvg(){
@@ -156,7 +158,6 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         gridLayout.removeAllViews();
         gridLayout.setRowCount(rowCount);
         gridLayout.setColumnCount(columnCount);
-
        for(int row = 0; row < rowCount; row++){
            for (int column = 0; column < columnCount; column++){
                if (row==0){
@@ -175,8 +176,6 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
 
            }
        }
-
-        // Ajouter les cellules du planning modifiables
     }
 
     private TextView createCellTextView(String text) {
@@ -209,8 +208,9 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         int horaireIndex = position / (horaires.length + 1);
         for (Cellule cellule : filter) {
             Date day = getDateFromDate2(cellule.getDate());
-            if (horaireIndex != 0 && jourIndex != 0 && joursSemaine[(jourIndex)].equals(getDayOfWeekFromDate(day)) &&
+            if (horaireIndex != 0 && jourIndex != 0 && joursSemaine[jourIndex].equals(getDayOfWeekFromDate(day)) &&
                     betweenTimeSlot(row,column, cellule)) {
+                System.out.println(cellule.getSummary());
                 return cellule;
             }
         }
@@ -226,7 +226,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
     }
 
     private String getDayOfWeekFromDate(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.ENGLISH);
         return sdf.format(date).substring(0, 3);
     }
 
@@ -262,18 +262,42 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
     }
 
     @Override
-    public void onTaskCompleted(JSONArray items) throws JSONException {
-        schedule.clear();
-        for(int i=0; i< items.length(); i++){
-            JSONObject jsonObject = items.getJSONObject(i);
-            String dtStart = jsonObject.getString("DTSTART");
-            String dtEnd = jsonObject.getString("DTEND");
-            Cellule cellule = new Cellule(jsonObject.getString("SUMMARY"), jsonObject.getString("LOCATION"), cleanHour(dtStart),
-                    cleanHour(dtEnd),getDateFromData(dtStart, getDuringFromData(dtStart,dtEnd)), Color.parseColor("#"+randomColor()) );
-            schedule.add(cellule);
+    public void onTaskCompleted(JSONArray items){
+
+        switch (request){
+            case "getSchedule":
+                schedule.clear();
+                for(int i=0; i< items.length(); i++){
+                    JSONObject jsonObject = null;
+                    try {
+                        jsonObject = items.getJSONObject(i);
+                        String dtStart = jsonObject.getString("DTSTART");
+                        String dtEnd = jsonObject.getString("DTEND");
+                        Cellule cellule = new Cellule(jsonObject.getString("SUMMARY"), jsonObject.getString("LOCATION"), cleanHour(dtStart),
+                                cleanHour(dtEnd),getDateFromData(dtStart, getDuringFromData(dtStart,dtEnd)), Color.parseColor("#"+randomColor()) );
+                        schedule.add(cellule);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Toast.makeText(getContext(), "Schedule update !", Toast.LENGTH_SHORT).show();
+                break;
+            case "update":
+                updateSchedule();
+                break;
         }
-        updateSchedule();
-        Toast.makeText(getContext(), "Schedule update !", Toast.LENGTH_SHORT).show();
+    }
+
+    private void sendRequest(String name ){
+        request = name;
+        switch (request){
+            case "getSchedule":
+                dashboardImplementation.getSchedule(ade.getText().toString());
+                break;
+            case "update":
+                onTaskCompleted(null);
+                break;
+        }
     }
 
     private String cleanHour(String eventHour){

@@ -217,14 +217,16 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
     }
 
     @Override
-    public void addAbs(String Token, ArrayList<String> mailStudent, String nameCourse, String date) {
+    public void addAbs(String token, ArrayList<String> mailStudent, String nameCourse, String date) {
         Request request = new Request(this, "POST");
         JSONObject body = new JSONObject();
         JSONArray array = JsonUtils.arrayListToJson(mailStudent);
         try {
-            body.put("mailStudent", mailStudent);
+            body.put("mailStudents", array);
             body.put("nameCours", nameCourse);
             body.put("date", date);
+            request.setBody(body);
+            request.execute(HttpUrl.UrlAddAbs + "/" + token);
         } catch (JSONException e) {
             e.printStackTrace();
         }
