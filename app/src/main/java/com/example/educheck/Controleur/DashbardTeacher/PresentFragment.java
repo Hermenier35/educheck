@@ -1,24 +1,23 @@
 package com.example.educheck.Controleur.DashbardTeacher;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,8 +25,8 @@ import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Cours;
 import com.example.educheck.Modele.Implementation.DashboardImplementation;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
+import com.example.educheck.Modele.Interface.ButtonListenerCallBack;
 import com.example.educheck.Modele.Justify;
-import com.example.educheck.Modele.Marks;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
@@ -36,10 +35,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,13 +50,13 @@ import java.util.Map;
  * Use the {@link PresentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PresentFragment extends Fragment implements AsyncTaskcallback {
+public class PresentFragment extends Fragment implements AsyncTaskcallback, ButtonListenerCallBack {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TOKEN = "token";
     private static final String GET_ACADEMIC_BACKGROUNDS = "getAcademicBackground", ADD_ABS = "addAbsent",
-            GET_USERS = "getUsers", GET_ALL_JUST = "getAllJust";
+            GET_USERS = "getUsers", GET_ALL_JUST = "getAllJust", ACCEPT = "accept";
     private static final String UNIVERSITY = "university";
 
     // TODO: Rename and change types of parameters
@@ -64,7 +66,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
     private University university;
     private String request;
 
-    private String  idPath, idCourse, mailStudent;
+    private String  idPath, idCourse, mailStudent, idJustify;
     private Spinner spinnerDegree;
     private Spinner spinnerCareer;
     private Spinner spinnerCourses;
@@ -135,7 +137,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         dataCourses.add("Select");
         layoutManager = new LinearLayoutManager(getContext());
         listView.setLayoutManager(layoutManager);
-        presentAdapter = new PresentAdapter(studentsFilter, getContext());
+        presentAdapter = new PresentAdapter(studentsFilter, getContext(), this);
         listView.setAdapter(presentAdapter);
 
         ArrayAdapter<String> adapterDataCareer = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, dataCareer);
@@ -203,6 +205,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                 sendRequest(GET_ALL_JUST);
                 break;
             case ADD_ABS:
+            case ACCEPT:
                 JSONObject response = items.getJSONObject(0);
                 Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                 break;
@@ -243,6 +246,9 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                 break;
             case GET_ALL_JUST:
                 dashboardImplementation.getAllJust(token);
+                break;
+            case ACCEPT:
+                dashboardImplementation.justifyProf(this.idJustify, this.token, this.mailStudent);
                 break;
         }
     }
@@ -306,7 +312,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
         }else if(name.equals("course")) {
             studentsFilter.removeIf(student -> !student.getCours().contains(id));
         }
-        presentAdapter = new PresentAdapter(studentsFilter, getContext());
+        presentAdapter = new PresentAdapter(studentsFilter, getContext(), this);
         listView.setAdapter(presentAdapter);
     }
 
@@ -388,4 +394,53 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
 
         }
     };
+
+    @Override
+    public void callBackListener(String request) {
+        String data[];
+        if(request.startsWith("accept")) {
+             data = request.split(" ");
+             this.mailStudent = data[2];
+             this.idJustify = data[1];
+            sendRequest(ACCEPT);
+        }
+        else if(request.startsWith("openFile")){
+            data = request.split(" ");
+            String pdf = data[1];
+            openPdfFile(Base64.getDecoder().decode(pdf));
+        }
+    }
+
+    private void openPdfFile(byte[] pdfByteArray) {
+        try {
+            // Create a temporary file to save the PDF
+            File pdfFile = File.createTempFile("temp", ".pdf", getActivity().getCacheDir());
+
+            // Write the byte array to the temporary file
+            FileOutputStream fos = new FileOutputStream(pdfFile);
+            fos.write(pdfByteArray);
+            fos.close();
+
+            // Generate a content URI for the file using FileProvider
+            Uri contentUri = FileProvider.getUriForFile(requireContext(), requireContext().getPackageName() + ".fileprovider", pdfFile);
+
+            // Create an intent to open the PDF file
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(contentUri, "application/pdf");
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            try {
+                // Grant read permissions to the receiving app
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                // Attempt to open the PDF file using an external PDF viewer app
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                // If no PDF viewer app is available, show an error message
+                Toast.makeText(getActivity(), "No PDF viewer app found.", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

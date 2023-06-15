@@ -263,6 +263,7 @@ public class FragJustification2 extends Fragment implements AsyncTaskcallback {
         if (!items.getJSONObject(0).has("code_retour")) {
             JSONObject response = items.getJSONObject(0);
             System.out.println(response.toString());
+            Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
         }
     }
 }

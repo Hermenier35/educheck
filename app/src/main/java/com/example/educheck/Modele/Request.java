@@ -2,6 +2,7 @@ package com.example.educheck.Modele;
 
 import android.os.AsyncTask;
 import android.os.Debug;
+import android.util.Log;
 
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
 import com.example.educheck.Utils.JsonUtils;
@@ -116,13 +117,12 @@ public class Request extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
-        System.out.println("requete fini :" +  this.code_retour);
+        Log.d("REQUETE","requete fini :" +  this.code_retour);
         try{
             if (jsonObject != null) {
                 res = jsonObject.getJSONArray("items");
                 asyncTaskcallback.onTaskCompleted(res);
             }else{
-                System.out.println("code retour error :" + this.code_retour);
                 JSONObject response_request = new JSONObject().put("code_retour", this.code_retour);
                 res = new JSONArray();
                 res.put(response_request);

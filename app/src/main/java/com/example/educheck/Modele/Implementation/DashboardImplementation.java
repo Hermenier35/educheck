@@ -44,7 +44,6 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             body.put("studentEmail", mail);
             body.put("professorEmail", profMail);
             body.put("imagePath", Base64.getEncoder().encodeToString(img));
-            System.out.println(Base64.getEncoder().encodeToString(img));
             request.setBody(body);
             request.execute(HttpUrl.UrlJustify + "/" + token);
         } catch (JSONException e) {
