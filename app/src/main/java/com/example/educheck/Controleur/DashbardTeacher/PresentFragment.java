@@ -294,7 +294,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
     }
     private void initIdPath(String acaName){
         for (AcademicBackground aca : academicBackgrounds){
-            if(aca.getName().equals(acaName))
+            if(aca.getName().equals(acaName) && aca.getType().equals(spinnerDegree.getSelectedItem().toString()))
                 idPath = aca.get_id();
         }
     }

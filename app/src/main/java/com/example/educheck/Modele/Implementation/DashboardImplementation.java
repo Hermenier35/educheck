@@ -1,5 +1,7 @@
 package com.example.educheck.Modele.Implementation;
 
+import android.util.Log;
+
 import com.example.educheck.Modele.AcademicBackground;
 import com.example.educheck.Modele.Cours;
 import com.example.educheck.Modele.Interface.AsyncTaskcallback;
@@ -159,9 +161,7 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             body.put("_idCourse", idCourse);
             body.put("_idPath", idPath);
             request.setBody(body);
-            System.out.println(JsonUtils.arrayListToJson(mailStudent));
-            System.out.println(idCourse);
-            System.out.println(idPath);
+            Log.d("TEST",JsonUtils.arrayListToJson(mailStudent).toString());
             request.execute(HttpUrl.UrlPostCourseStudent + "/" + token);
         } catch (JSONException e) {
             e.printStackTrace();
