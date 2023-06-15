@@ -56,7 +56,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
     private ArrayList<MessageLayout> users_messages;
 
     private ArrayList<Integer> index;
-
+    private String idLastMex;
     private static final long REQUEST_DELAY_MS = 5000; // 30 seconds
 
     private Handler requestHandler;
@@ -157,6 +157,10 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
             case "getMex":
                 requestMessage.retrieveMessages(token);
                 break;
+
+            case "recMex":
+                System.out.println("token: "+token+" idMex: "+idLastMex+" mailRep "+mailRecipient);
+                requestMessage.recMex(token,idLastMex,mailRecipient);
             default: System.err.println("No request Found");
         }
     }
@@ -176,21 +180,26 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
                 JSONObject mailJson = items.getJSONObject(0);
                 String[] receivers = mailJson.getString("mailRecipients").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
                 String[] senders = mailJson.getString("mailSenders").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
+                String[] id = mailJson.getString("ids").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
                 String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]", "");
                 String[] messages = mex.split(",");
                 ArrayList<String> messageClear = new ArrayList<>();
-                updateIndex(receivers, senders,messageClear, messages);
+                updateIndex(receivers, senders,messageClear, messages,id);
                 updateScreenMessenger(messageClear);
                 messagesView.setSelection(messagesView.getCount() - 1);
+                sendRequest("recMex");
                 break;
 
             case "sendMex":
                 sendRequest("getMex");
                 break;
+
+            case "recMex":
+                sendRequest("recMex");
         }
     }
 
-    private void updateIndex(String[] receivers, String [] senders,ArrayList<String> messageClear ,String[] messages){
+    private void updateIndex(String[] receivers, String [] senders,ArrayList<String> messageClear ,String[] messages,String[] id){
         for (int i = 0; i < receivers.length; i++) {
             if (receivers[i].equals(mailRecipient) && senders[i].equals(mailSender)) {
                 index.add(0);
@@ -199,8 +208,8 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
                 index.add(1);
                 messageClear.add(messages[i]);
             }
-
         }
+        idLastMex= id[receivers.length-1];
     }
 
     private void updateScreenMessenger(ArrayList<String> messages){

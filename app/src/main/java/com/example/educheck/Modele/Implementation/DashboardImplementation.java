@@ -264,4 +264,16 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
         }
     }
 
+    public void recMex(String token, String idLastMex,String mailRecipient) {
+        Request request = new Request(this, "POST");
+        JSONObject body = new JSONObject();
+        try {
+            body.put("idMex", idLastMex);
+            body.put("mailRecipient",mailRecipient);
+            request.setBody(body);
+            request.execute(HttpUrl.UrlRecMex + "/" + token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -72,20 +72,21 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         JSONObject receiveJson= items.getJSONObject(1);
         String mail = mailJson.getString("mail").replaceAll("[\\[\\]\" ]" , "");
         String receive= receiveJson.getString("received").replaceAll("[\\[\\]\" ]" , "");
+        System.out.println(mail);
         String[] rcs= receive.split(",");
         String[] mails= mail.split(",");
         for (int j=0;j<mails.length;j++) {
-            if(!mails[j].equals(users_mail)) {
+            if(!mails[j].equals(users_mail)&&!mails[j].equals("")) {
+                System.out.println("i m here");
                 users_mail.add(new Pair(mails[j],rcs[j]));
-                if(j<rcs.length) {
-                    System.out.println("received??????????????" + rcs[j]);
-                }
             }
         }
 
         System.out.println(users_mail.size()+ " : " + users_mail.stream().map(s -> s.toString()));
-        adapter_card = new MailAdapterCard(users_mail);
-        recyclerView.setAdapter(adapter_card);
+        if(!users_mail.isEmpty()) {
+            adapter_card = new MailAdapterCard(users_mail);
+            recyclerView.setAdapter(adapter_card);
+        }
     }
 
     private class MyOnClickListener implements View.OnClickListener {
