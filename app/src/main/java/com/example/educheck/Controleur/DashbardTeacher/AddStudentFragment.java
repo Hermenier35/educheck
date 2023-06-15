@@ -15,6 +15,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -222,6 +223,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                             Cours cc = new Cours(c.getString("name"), c.getString("profName"), Integer.parseInt(c.getString("credit")), c.getString("_id"));
                             cours.add(cc);
                         }
+                        Log.d("TEST", json.getString("_id") + " nbrCour :" + cours.size());
                         allCourse.put(json.getString("_id"), cours);
                         academicBackgrounds.add(parcour);
                     }
@@ -327,14 +329,17 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         dataCourse.clear();
         dataCourse.add("Select");
         if(allCourse.size()>0)
+            Log.d("TEST", "idPath :" + idPath);
             for (Cours cour : allCourse.get(idPath)){
+                Log.d("TEST", cour.getName());
                 dataCourse.add(cour.getName());
             }
+
     }
 
     private void initIdPath(String acaName){
         for (AcademicBackground aca : academicBackgrounds){
-            if(aca.getName().equals(acaName))
+            if(aca.getName().equals(acaName) && spnType.getSelectedItem().toString().equals(aca.getType()))
                 idPath = aca.get_id();
         }
     }

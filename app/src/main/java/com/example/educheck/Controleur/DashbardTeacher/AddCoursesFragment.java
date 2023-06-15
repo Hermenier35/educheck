@@ -132,6 +132,7 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
         path.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("TEST", type.getSelectedItem().toString());
                 initIdPath(path.getSelectedItem().toString());
             }
 
@@ -200,10 +201,12 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
     }
 
     private void initIdPath(String acaName){
-        if(!acaName.equals("Select"))
+        Log.d("TEST", type.getSelectedItem().toString());
+        if(!acaName.equals("Select") && !type.getSelectedItem().toString().equals("Select"))
             for (AcademicBackground aca : academicBackgrounds){
-                if(aca.getName().equals(acaName))
+                if(aca.getName().equals(acaName) && aca.getType().equals(type.getSelectedItem().toString())) {
                     idPath = aca.get_id();
+                }
             }
     }
 

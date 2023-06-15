@@ -121,6 +121,8 @@ public class AbsentAdapter extends RecyclerView.Adapter<AbsentAdapter.AbsentView
                     request = request + " " + justify.getPdf();
                     buttonListenerCallBack.callBackListener(request);
                     break;
+                case"circleStatus":
+                    buttonListenerCallBack.callBackListener(request + " " + justify.getJustifie());
             }
         }
     }

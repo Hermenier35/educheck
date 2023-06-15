@@ -1,12 +1,14 @@
 package com.example.educheck.Controleur.DashbardTeacher;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -60,6 +62,7 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
     public class StudentViewHolder extends RecyclerView.ViewHolder implements ButtonListenerCallBack{
 
         public TextView textViewName, textViewMail;
+        public ImageView imageView;
         public Button detail;
         public ScrollView scrollView;
         public CheckBox checkBox;
@@ -80,6 +83,7 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
             scrollView = itemView.findViewById(R.id.scrollViewDetail);
             checkBox = itemView.findViewById(R.id.checkBox1);
             recyclerView = itemView.findViewById(R.id.listViewAbs);
+            imageView = itemView.findViewById(R.id.circleStatus);
         }
 
         public void bind(Student student) {
@@ -111,20 +115,31 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
             else {
                 this.scrollView.setVisibility(View.GONE);
                 this.detail.setText("Details");
+                this.detail.setVisibility(View.VISIBLE);
             }
         }
 
         @Override
         public void callBackListener(String request) {
-            Log.d("TEST","Present : test callBack");
             if(request.startsWith("accept")) {
                 request = request + " " + student.getMail();
                 this.buttonListenerCallBack.callBackListener(request);
-                Log.d("TEST",request);
             }
             else if(request.startsWith("openFile")){
                 this.buttonListenerCallBack.callBackListener(request);
             }
+            else if(request.startsWith("circleStatus")){
+                String data[] = request.split(" ");
+                String value = data[1];
+                initSatus(value);
+            }
+        }
+
+        private void initSatus(String value){
+            if(value.equals("True"))
+                this.imageView.setVisibility(View.VISIBLE);
+            else
+                this.imageView.setVisibility(View.GONE);
         }
     }
 
