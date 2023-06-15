@@ -3,9 +3,11 @@ package com.example.educheck.Utils;
 public class HttpUrl {
 
 
+
     private static String ip = "http://10.41.35.238:3000/api/";
     public static String UrlPostOnUniversity = ip + "addUser";
     public static String UrlJustify=ip+"justify";
+    public static String UrljustifyProf=ip+"justifyProf";
     public static String UrlGetAllJust= ip+"getAllJust";
     public static String UrlGetUniversity = ip + "getUniversity";
     public static String UrlPostUniversity = ip + "addUni";
