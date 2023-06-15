@@ -10,12 +10,23 @@ public class Justify implements Serializable {
     private String nameCours;
     private String justifie;
 
+    private String pdf;
+
     public Justify(String id, String mailStudent, String date, String nameCours, String justifie) {
         this.id = id;
         this.mailStudent = mailStudent;
         this.date = date;
         this.nameCours = nameCours;
         this.justifie = justifie;
+    }
+
+    public Justify(String id, String mailStudent, String date, String nameCours, String justifie, String pdf) {
+        this.id = id;
+        this.mailStudent = mailStudent;
+        this.date = date;
+        this.nameCours = nameCours;
+        this.justifie = justifie;
+        this.pdf = pdf;
     }
 
     public String getId() {
@@ -30,7 +41,7 @@ public class Justify implements Serializable {
         return mailStudent;
     }
 
-    public void setMailProf(String mailStudent) {
+    public void setMailStudent(String mailStudent) {
         this.mailStudent = mailStudent;
     }
 
@@ -56,5 +67,13 @@ public class Justify implements Serializable {
 
     public void setJustifie(String justifie) {
         this.justifie = justifie;
+    }
+
+    public String getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(String pdf) {
+        this.pdf = pdf;
     }
 }

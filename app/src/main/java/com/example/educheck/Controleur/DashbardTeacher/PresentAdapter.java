@@ -1,6 +1,7 @@
 package com.example.educheck.Controleur.DashbardTeacher;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.educheck.Modele.Interface.ButtonListenerCallBack;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.R;
 
@@ -25,19 +27,21 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
     private int position;
     private ArrayList<StudentViewHolder> viewHolders;
     private Context context;
+    private ButtonListenerCallBack buttonListenerCallBack;
 
-    public PresentAdapter(List<Student> students, Context context) {
+    public PresentAdapter(List<Student> students, Context context, ButtonListenerCallBack buttonListenerCallBack) {
         this.students = students;
         this.position =0;
         this.viewHolders = new ArrayList<>();
         this.context = context;
+        this.buttonListenerCallBack = buttonListenerCallBack;
     }
 
     @NonNull
     @Override
     public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_present, parent, false);
-        StudentViewHolder studentViewHolder = new StudentViewHolder(view, this.context);
+        StudentViewHolder studentViewHolder = new StudentViewHolder(view, this.context, this.buttonListenerCallBack);
         return studentViewHolder;
     }
 
@@ -53,7 +57,7 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
         return students.size();
     }
 
-    public class StudentViewHolder extends RecyclerView.ViewHolder {
+    public class StudentViewHolder extends RecyclerView.ViewHolder implements ButtonListenerCallBack{
 
         public TextView textViewName, textViewMail;
         public Button detail;
@@ -63,10 +67,13 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
         private AbsentAdapter absentAdapter;
         private RecyclerView.LayoutManager layoutManager;
         private Context context;
+        private ButtonListenerCallBack buttonListenerCallBack;
+        private Student student;
 
-        public StudentViewHolder(@NonNull View itemView, Context context) {
+        public StudentViewHolder(@NonNull View itemView, Context context, ButtonListenerCallBack buttonListenerCallBack) {
             super(itemView);
             this.context = context;
+            this.buttonListenerCallBack = buttonListenerCallBack;
             textViewName = itemView.findViewById(R.id.textViewName);
             textViewMail = itemView.findViewById(R.id.textViewMail);
             detail = itemView.findViewById(R.id.btnDetail);
@@ -76,13 +83,13 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
         }
 
         public void bind(Student student) {
+            this.student = student;
             textViewName.setText(student.getFirstName() + " " + student.getLastName());
             textViewMail.setText(student.getMail());
             checkBox.setChecked(checkBox.isChecked());
             itemView.setVerticalScrollbarPosition(position++);
             initListenerButtonDetail();
             initViewAbs(student);
-
         }
 
         private void initListenerButtonDetail(){
@@ -91,7 +98,7 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
 
         private void initViewAbs(Student student){
             layoutManager = new LinearLayoutManager(this.context);
-            absentAdapter = new AbsentAdapter(student.getJustifies());
+            absentAdapter = new AbsentAdapter(student.getJustifies(), this);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(absentAdapter);
         }
@@ -104,6 +111,19 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
             else {
                 this.scrollView.setVisibility(View.GONE);
                 this.detail.setText("Details");
+            }
+        }
+
+        @Override
+        public void callBackListener(String request) {
+            Log.d("TEST","Present : test callBack");
+            if(request.startsWith("accept")) {
+                request = request + " " + student.getMail();
+                this.buttonListenerCallBack.callBackListener(request);
+                Log.d("TEST",request);
+            }
+            else if(request.startsWith("openFile")){
+                this.buttonListenerCallBack.callBackListener(request);
             }
         }
     }
