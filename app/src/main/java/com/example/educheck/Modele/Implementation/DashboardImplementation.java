@@ -61,7 +61,7 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             body.put("id_j",id_j);
             body.put("studentEmail", studentMail);
             request.setBody(body);
-            request.execute(HttpUrl.UrlJustifyProf + "/" + token);
+            request.execute(HttpUrl.UrljustifyProf + "/" + token);
         } catch (JSONException e) {
             e.printStackTrace();
         }

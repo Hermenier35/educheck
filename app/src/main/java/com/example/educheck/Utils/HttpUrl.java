@@ -27,5 +27,6 @@ public class HttpUrl {
     public static String UrlGetUsers = ip + "users";
     public static String UrlAddNotes = ip + "addNotes";
     public static String UrlAddAbs = ip + "addAbs";
+    public static String UrljustifyProf =ip+"justifyProf";
 
 }
