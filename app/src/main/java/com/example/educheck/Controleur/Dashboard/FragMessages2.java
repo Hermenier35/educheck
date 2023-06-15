@@ -1,5 +1,7 @@
 package com.example.educheck.Controleur.Dashboard;
 
+import static java.lang.Thread.sleep;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -57,7 +59,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
     private ArrayList<Integer> index;
     private String idLastMex;
-    private static final long REQUEST_DELAY_MS = 5000; // 30 seconds
+    private static final long REQUEST_DELAY_MS = 3000; // 30 seconds
 
     private Handler requestHandler;
     private Runnable requestRunnable;
@@ -78,13 +80,10 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         messageAdapter = new MessageAdapter(getContext());
         messagesView = (ListView) view.findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
-
-
-
         requestMessage = new DashboardImplementation(this);
         users_messages = new ArrayList<>();
         index= new ArrayList<>();
-        sendRequest("getMex");
+        sendRequest("recMex");
         requestHandler = new Handler(Looper.getMainLooper());
         requestRunnable = new Runnable() {
             @Override
@@ -114,20 +113,22 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
 
     public void send_message(){
-        String text = messageToSend.getText().toString();
-        Date date = new Date();
-        Instant instant= date.toInstant();
 
-        System.out.println("Current date and time: " + instant);
-        System.out.println("Current mailRecipient: " + mailRecipient);
-        System.out.println("Current mailSender: " + mailSender);
-        System.out.println("Current message: " + text);
+            String text = messageToSend.getText().toString();
+            Date date = new Date();
+            Instant instant = date.toInstant();
 
-        if(text.length() > 0 ) {
-            Message mess = new Message(mailRecipient, mailSender, text, date);
-            requestMessage.sendMessageTo(mess, token);
-            messageToSend.getText().clear();
-        }
+            System.out.println("Current date and time: " + instant);
+            System.out.println("Current mailRecipient: " + mailRecipient);
+            System.out.println("Current mailSender: " + mailSender);
+            System.out.println("Current message: " + text);
+
+            if (text.length() > 0) {
+                Message mess = new Message(mailRecipient, mailSender, text, date);
+                requestMessage.sendMessageTo(mess, token);
+                messageToSend.getText().clear();
+            }
+
     }
 
 
@@ -160,7 +161,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
             case "recMex":
                 System.out.println("token: "+token+" idMex: "+idLastMex+" mailRep "+mailRecipient);
-                requestMessage.recMex(token,idLastMex,mailRecipient);
+                requestMessage.recMex(token,mailRecipient);
             default: System.err.println("No request Found");
         }
     }
@@ -187,7 +188,6 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
                 updateIndex(receivers, senders,messageClear, messages,id);
                 updateScreenMessenger(messageClear);
                 messagesView.setSelection(messagesView.getCount() - 1);
-                sendRequest("recMex");
                 break;
 
             case "sendMex":
