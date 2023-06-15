@@ -1,5 +1,7 @@
 package com.example.educheck.Controleur.Dashboard;
 
+import static java.util.Arrays.stream;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -27,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class FragMessages1 extends Fragment implements AsyncTaskcallback {
@@ -36,6 +40,8 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter_card;
     private ArrayList<Pair> users_mail;
+
+    private ArrayList<String> mailRec;
     private String token;
     private Fragment parentFragment;
     private FragmentManager fm;
@@ -47,6 +53,7 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         View view = inflater.inflate(R.layout.fragment_messages1, container, false);
         layoutManager = new LinearLayoutManager(getContext());
         users_mail = new ArrayList<>();
+        mailRec=new ArrayList<>();
         token = getActivity().getIntent().getStringExtra("token");
         myOnClickListener = new FragMessages1.MyOnClickListener(getContext(), recyclerView);
 
@@ -72,13 +79,21 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         JSONObject receiveJson= items.getJSONObject(1);
         String mail = mailJson.getString("mail").replaceAll("[\\[\\]\" ]" , "");
         String receive= receiveJson.getString("received").replaceAll("[\\[\\]\" ]" , "");
-        System.out.println(mail);
-        String[] rcs= receive.split(",");
+        String[] rec= receive.split(",");
+        System.out.println(receive);
         String[] mails= mail.split(",");
+        for(int i=0;i<rec.length;i++){
+            mailRec.add(rec[i]);
+        }
+
         for (int j=0;j<mails.length;j++) {
             if(!mails[j].equals(users_mail)&&!mails[j].equals("")) {
-                System.out.println("i m here");
-                users_mail.add(new Pair(mails[j],rcs[j]));
+                System.out.println(mails[j]);
+                if(mailRec.contains(mails[j])) {
+                    users_mail.add(new Pair(mails[j], "true"));
+                }else{
+                    users_mail.add(new Pair(mails[j], "false"));
+                }
             }
         }
 
