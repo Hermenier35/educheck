@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/Mail_Name"
-            android:layout_width="match_parent"
+            android:layout_width="350sp"
             android:layout_height="50sp"
             android:layout_gravity="center"
             android:layout_margin="10sp"
@@ -25,5 +25,11 @@
             android:textSize="20sp"
             android:textStyle="italic"
             />
+        <ImageView
+            android:id="@+id/circle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/circle_background"
+            android:scaleType="fitCenter" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

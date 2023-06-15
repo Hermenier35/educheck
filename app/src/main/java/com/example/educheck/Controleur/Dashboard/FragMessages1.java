@@ -35,7 +35,7 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
     public static View.OnClickListener myOnClickListener;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter_card;
-    private ArrayList<String> users_mail;
+    private ArrayList<Pair> users_mail;
     private String token;
     private Fragment parentFragment;
     private FragmentManager fm;
@@ -69,11 +69,17 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
         if (items.getJSONObject(0).has("code_retour"))
             System.out.println("code_retour: " + items.getJSONObject(0).get("code_retour") + " retour users-mails");
         JSONObject mailJson = items.getJSONObject(0);
+        JSONObject receiveJson= items.getJSONObject(1);
         String mail = mailJson.getString("mail").replaceAll("[\\[\\]\" ]" , "");
+        String receive= receiveJson.getString("received").replaceAll("[\\[\\]\" ]" , "");
+        String[] rcs= receive.split(",");
         String[] mails= mail.split(",");
         for (int j=0;j<mails.length;j++) {
             if(!mails[j].equals(users_mail)) {
-                users_mail.add(mails[j]);
+                users_mail.add(new Pair(mails[j],rcs[j]));
+                if(j<rcs.length) {
+                    System.out.println("received??????????????" + rcs[j]);
+                }
             }
         }
 
@@ -93,7 +99,7 @@ public class FragMessages1 extends Fragment implements AsyncTaskcallback {
 
         @Override
         public void onClick(View v) {
-            String mailRecipient = users_mail.get(v.getVerticalScrollbarPosition());
+            String mailRecipient = users_mail.get(v.getVerticalScrollbarPosition()).getMail();
             Fragment fragMessages2 = FragMessages2.newInstance(mailRecipient,token);
             if(parentFragment.getId()!=0)
                 replaceFragment(fragMessages2);
