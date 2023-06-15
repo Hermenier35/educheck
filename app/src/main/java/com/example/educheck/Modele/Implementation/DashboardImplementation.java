@@ -44,7 +44,6 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             body.put("studentEmail", mail);
             body.put("professorEmail", profMail);
             body.put("imagePath", Base64.getEncoder().encodeToString(img));
-            System.out.println(Base64.getEncoder().encodeToString(img));
             request.setBody(body);
             request.execute(HttpUrl.UrlJustify + "/" + token);
         } catch (JSONException e) {
@@ -61,7 +60,7 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
             body.put("id_j",id_j);
             body.put("studentEmail", studentMail);
             request.setBody(body);
-            request.execute(HttpUrl.UrlJustifyProf + "/" + token);
+            request.execute(HttpUrl.UrljustifyProf + "/" + token);
         } catch (JSONException e) {
             e.printStackTrace();
         }

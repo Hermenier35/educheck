@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FAF3FE">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +15,8 @@
         <TextView
             android:id="@+id/main_textviewAddInformation"
             android:layout_width="match_parent"
-            android:layout_height="98dp"
+            android:background="#D0B0F3"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:gravity="center"
             android:padding="8dp"

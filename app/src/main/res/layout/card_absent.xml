@@ -4,10 +4,9 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/linearMail"
+        android:id="@+id/linearabsent"
         android:layout_width="match_parent"
         android:layout_height="60sp"
-        android:layout_marginEnd="10sp"
         android:orientation="vertical"
         android:background="#CCCCFF"
         android:layout_marginBottom="5sp">
@@ -26,6 +25,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="5sp"
+        android:id="@+id/linearLayoutButtons">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnWatch"
+            android:text="Watch"
+            android:background="#00FFFFFF"
+            android:layout_marginEnd="2sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAccept"
+            android:background="#00FFFFFF"
+            android:text="Accept"/>
     </LinearLayout>
 
 
