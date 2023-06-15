@@ -184,7 +184,6 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
                 Cours cour = new Cours(this.name.getText().toString(), this.teacher.getText().toString(), credit);
                 dashboardImplementation.addCourse(token, cour, idPath);
                 ects.setText("");
-                teacher.setText("");
                 this.name.setText("");
                 break;
         }

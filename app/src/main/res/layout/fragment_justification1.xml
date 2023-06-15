@@ -18,10 +18,7 @@
         android:textSize="22sp"
         android:background="#D0B0F3"
         android:textStyle="bold|italic"
-        android:text="A Justifier :"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="A Justifier :" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_just"

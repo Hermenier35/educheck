@@ -212,8 +212,10 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback {
                     JSONArray justifs = marksJson.getJSONArray("justif");
                     for (int i = 0; i < justifs.length(); i++) {
                         JSONObject abences = justifs.getJSONObject(i);
-                        System.out.println(abences.toString());
-                        Justify justify = new Justify(abences.getString("id_j"), abences.getString("mailStudent"), abences.getString("date"), abences.getString("nameCours"), abences.getString("justifie"));
+                        String pdf = "";
+                        if(abences.has("image"))
+                            pdf = abences.getString("image");
+                        Justify justify = new Justify(abences.getString("id_j"), abences.getString("mailStudent"), abences.getString("date"), abences.getString("nameCours"), abences.getString("justifie"), pdf);
                         students.forEach(student -> addJustify(student, justify));
                     }
                 }

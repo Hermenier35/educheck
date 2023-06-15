@@ -100,7 +100,6 @@ public class FragJustification2 extends Fragment implements AsyncTaskcallback {
         view = inflater.inflate(R.layout.fragment_justification, container, false);
 
         btnSelectFile = view.findViewById(R.id.btnSelectFile);
-        image = view.findViewById(R.id.imgJ);
         btnUploadFile = view.findViewById(R.id.btnUpload); // Initialize the btnUploadFile button
 
         btnSelectFile.setOnClickListener(new View.OnClickListener() {

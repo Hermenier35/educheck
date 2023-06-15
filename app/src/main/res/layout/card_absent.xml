@@ -4,10 +4,9 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/linearMail"
+        android:id="@+id/linearabsent"
         android:layout_width="match_parent"
         android:layout_height="60sp"
-        android:layout_marginEnd="10sp"
         android:orientation="vertical"
         android:background="#CCCCFF"
         android:layout_marginBottom="5sp">

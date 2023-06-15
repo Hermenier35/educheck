@@ -1,10 +1,12 @@
 package com.example.educheck.Controleur.DashbardTeacher;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -53,16 +55,26 @@ public class AbsentAdapter extends RecyclerView.Adapter<AbsentAdapter.AbsentView
     public class AbsentViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textViewDate, textViewJustify;
+        public LinearLayout linearLayout;
 
         public AbsentViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewDate = itemView.findViewById(R.id.textViewDate);
             textViewJustify = itemView.findViewById(R.id.textViewBoolJustify);
+            linearLayout = itemView.findViewById(R.id.linearabsent);
         }
 
         public void bind(Justify justify) {
             textViewDate.setText(justify.getDate() + " : " + justify.getNameCours());
-            textViewJustify.setText(justify.getJustifie());
+            String justif = justify.getJustifie();
+            if(justif.equals("False")) {
+                linearLayout.setBackgroundColor(Color.parseColor("#FDE1B7"));
+                textViewJustify.setText("Unjustify");
+            }
+            else {
+                linearLayout.setBackgroundColor(Color.parseColor("#DAFEA5"));
+                textViewJustify.setText("Justify");
+            }
         }
     }
 }
