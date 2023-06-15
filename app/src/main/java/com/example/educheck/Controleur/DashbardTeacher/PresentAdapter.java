@@ -92,6 +92,7 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
             textViewMail.setText(student.getMail());
             checkBox.setChecked(checkBox.isChecked());
             itemView.setVerticalScrollbarPosition(position++);
+            this.imageView.setVisibility(View.GONE);
             initListenerButtonDetail();
             initViewAbs(student);
         }
@@ -109,6 +110,8 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
 
         private void showOrHideDetail(){
             if (this.scrollView.getVisibility()==View.GONE) {
+                ViewGroup.LayoutParams params = scrollView.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 this.scrollView.setVisibility(View.VISIBLE);
                 this.detail.setText("Hide");
             }
@@ -138,8 +141,8 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
         private void initSatus(String value){
             if(value.equals("True"))
                 this.imageView.setVisibility(View.VISIBLE);
-            else
-                this.imageView.setVisibility(View.GONE);
+
+            this.scrollView.setVisibility(View.GONE);
         }
     }
 

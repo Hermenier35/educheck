@@ -15,7 +15,7 @@ public interface Dashboard {
     void justify(String id_j, String token, String mail, String profMail, byte[] img);
     void justifyProf(String id_j, String token, String Studentmail);
     void getAllJust(String token);
-    public void retrieveMessages(String token);
+    public void retrieveMessages(String token, String mail, String mailDest);
     public void getCourses(String token);
     public void postUniversity(String token, University university);
     public void changePassword(String token, String password, String newPassword);

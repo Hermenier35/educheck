@@ -74,9 +74,9 @@ public class DashboardImplementation implements Dashboard, AsyncTaskcallback {
         request.execute(HttpUrl.UrlGetAllJust+"/"+token);
     }
     @Override
-    public void retrieveMessages(String token) {
+    public void retrieveMessages(String token, String mail, String mailDest) {
         Request request = new Request(this, "GET");
-        request.execute(HttpUrl.UrlRetrieveMessages + "/" + token);
+        request.execute(HttpUrl.UrlRetrieveMessages + "/" + token + "/" + mail + "/" + mailDest);
     }
 
     @Override

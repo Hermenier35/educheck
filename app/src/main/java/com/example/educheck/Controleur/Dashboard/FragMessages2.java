@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,11 +132,6 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
     }
 
 
-    private void updateMessages() {
-        // Appeler la méthode pour récupérer les messages"
-        sendRequest("getMex");
-    }
-
     public FragMessages2() {
     }
 
@@ -153,15 +149,17 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
         switch(name){
             case "sendMex":
                 send_message();
+                Log.d("TEST", "SendMessage()");
                 break;
             case "getMex":
-                requestMessage.retrieveMessages(token);
+                requestMessage.retrieveMessages(token, mailSender, mailRecipient);
+                Log.d("TEST", "getMessage()");
                 break;
 
             case "recMex":
-                System.out.println("token: "+token+" idMex: "+idLastMex+" mailRep "+mailRecipient);
+                Log.d("TEST","token: "+token+" idMex: "+idLastMex+" mailRep "+mailRecipient);
                 requestMessage.recMex(token,idLastMex,mailRecipient);
-            default: System.err.println("No request Found");
+            default: Log.d("TEST","No request Found");
         }
     }
 
@@ -169,37 +167,48 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
     public void onTaskCompleted(JSONArray items) throws JSONException {
 
         if (items.getJSONObject(0).has("code_retour")) {
-            System.err.println("code_retour: " + items.getJSONObject(0).get("code_retour"));
+            Log.d("TEST","code_retour: " + items.getJSONObject(0).get("code_retour"));
             return;
         }
-
+        Log.d("TEST", items.getJSONObject(0).toString());
         switch(request){
             case "getMex" :
+                Log.d("TEST","traitement getMessage()");
                 index.clear();
+                Log.d("TEST","fini10");
                 messageAdapter.delete();
+                Log.d("TEST","fini11");
                 JSONObject mailJson = items.getJSONObject(0);
+                Log.d("TEST","fini12");
+                JSONArray messages = mailJson.getJSONArray("messages");
+                for(int i = 0; i < messages.length(); i++){
+
+                }
                 String[] receivers = mailJson.getString("mailRecipients").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
+                Log.d("TEST","fini13");
                 String[] senders = mailJson.getString("mailSenders").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
-                String[] id = mailJson.getString("ids").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
+                Log.d("TEST","fini14");
+                //String[] id = mailJson.getString("ids").replaceAll("[\\[\\]\"\\{\\}]", "").split(",");
+                Log.d("TEST","fini15");
                 String mex = mailJson.getString("messages").replaceAll("[\\[\\]\"\\{\\}]", "");
                 String[] messages = mex.split(",");
                 ArrayList<String> messageClear = new ArrayList<>();
-                updateIndex(receivers, senders,messageClear, messages,id);
+                updateIndex(receivers, senders,messageClear, messages);
                 updateScreenMessenger(messageClear);
                 messagesView.setSelection(messagesView.getCount() - 1);
-                sendRequest("recMex");
+                Log.d("TEST","fini");
+                //sendRequest("recMex");
                 break;
-
             case "sendMex":
                 sendRequest("getMex");
                 break;
 
             case "recMex":
-                sendRequest("recMex");
+                break;
         }
     }
 
-    private void updateIndex(String[] receivers, String [] senders,ArrayList<String> messageClear ,String[] messages,String[] id){
+    private void updateIndex(String[] receivers, String [] senders,ArrayList<String> messageClear ,String[] messages){
         for (int i = 0; i < receivers.length; i++) {
             if (receivers[i].equals(mailRecipient) && senders[i].equals(mailSender)) {
                 index.add(0);
@@ -209,13 +218,13 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
                 messageClear.add(messages[i]);
             }
         }
-        idLastMex= id[receivers.length-1];
+       // idLastMex= id[receivers.length-1];
     }
 
     private void updateScreenMessenger(ArrayList<String> messages){
         MessageLayout message;
         boolean isUser;
-        System.out.println();
+        Log.d("TEST", "size message : " + messages.size());
         for (int i = 0; i < index.size(); i++) {
             int pair = index.get(i);
             isUser = pair == 0;

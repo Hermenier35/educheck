@@ -102,6 +102,8 @@ public class AbsentAdapter extends RecyclerView.Adapter<AbsentAdapter.AbsentView
                 linearLayout.setBackgroundColor(Color.parseColor("#DAFEA5"));
                 accept.setVisibility(View.GONE);
             }
+
+            callBackListener("circleStatus");
         }
 
         private void initListenerButton(){
