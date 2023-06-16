@@ -22,6 +22,15 @@
 - Etudiants: 
      Peut justifier leur absences, consulter l'emploi du temps et leurs notes, envoyer des messages aux enseignants.
 
+## Amélioration:
+- Cours:
+     Possibilité aux enseignants d'upload l'évaluation pour que l'étudiant puisse la consulter en même temps que sa note.
+     Possibilité aux enseignants d'editer les cours ou de les supprimer.
+     Possibilité d'ajouter à une liste de cours via un fichier .csv
+
+-Comptes:
+     Modificaion du mot de passe, parcours etc..
+
 
 Serveur: NodeJs(API REST)</br>
 BDD: MongoDB/ NoSQL </br>
