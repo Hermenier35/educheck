@@ -28,7 +28,7 @@
      Possibilité aux enseignants d'editer les cours ou de les supprimer.
      Possibilité d'ajouter à une liste de cours via un fichier .csv
 
--Comptes:
+- Comptes:
      Modificaion du mot de passe, parcours etc..
 
 
