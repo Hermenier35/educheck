@@ -1,5 +1,8 @@
 package com.example.educheck.Modele;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Date2 {
     private int hours;
     private int minutes;
@@ -11,6 +14,19 @@ public class Date2 {
         this.minutes = minutes;
         this.date = date;
         this.during = during;
+    }
+
+    public JSONObject convertToJSONObject(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("hours", getHours());
+            jsonObject.put("minutes", getMinutes());
+            jsonObject.put("date", getDate());
+            jsonObject.put("during", getDuring());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     public int getYear(){

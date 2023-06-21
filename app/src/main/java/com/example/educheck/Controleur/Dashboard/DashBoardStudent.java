@@ -16,47 +16,31 @@ import com.example.educheck.R;
 
 public class DashBoardStudent extends AppCompatActivity {
 
-    String token;
+    private String token;
     private Toolbar toolbar;
-    //TextView textView;
+    private ImageView menu1, menu2, menu3, menu4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_student);
-        ImageView menu1 = findViewById(R.id.menu1);
-        ImageView menu2 = findViewById(R.id.menu2);
-        ImageView menu3 = findViewById(R.id.menu3);
-        ImageView menu4 = findViewById(R.id.menu4);
+        menu1 = findViewById(R.id.menu1);
+        menu2 = findViewById(R.id.menu2);
+        menu3 = findViewById(R.id.menu3);
+        menu4 = findViewById(R.id.menu4);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         token = getIntent().getStringExtra("token");
 
 
-        menu1.setOnClickListener(v -> replaceFragment(new Schedule()));
+        menu1.setOnClickListener(v -> imageMenuAllBlackExcept("menu1"));
 
+        menu2.setOnClickListener(v -> imageMenuAllBlackExcept("menu2"));
 
-        menu2.setOnClickListener(v -> replaceFragment(new FragGetCourses()));
+        menu3.setOnClickListener(v -> imageMenuAllBlackExcept("menu3"));
 
-        /*
-        menu2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pass the marks data to FragMarks
-                List<Integer> marksList = new ArrayList<>();
-                marksList.add(18);
-                marksList.add(19);
-                marksList.add(10);
-                FragMarks fragMarks = FragMarks.newInstance("Course Name", marksList);
-
-                replaceFragment(fragMarks);
-            }
-        });
-
-         */
-        menu3.setOnClickListener(v -> replaceFragment(new FragMessages1()));
-
-        menu4.setOnClickListener(v -> replaceFragment(new FragJustification1()));
+        menu4.setOnClickListener(v -> imageMenuAllBlackExcept("menu4"));
         replaceFragment(new Schedule());
     }
 
@@ -66,10 +50,45 @@ public class DashBoardStudent extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
+
     private void replaceFragment(Fragment fragment){
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame1,fragment);
             fragmentTransaction.commit();
+    }
+
+    public void imageMenuAllBlackExcept(String menu){
+        switch(menu){
+            case "menu1":
+                this.menu1.setImageResource(R.drawable.ic_schedule_selected);
+                this.menu2.setImageResource(R.drawable.ic_addcourse);
+                this.menu3.setImageResource(R.drawable.ic_messenger);
+                this.menu4.setImageResource(R.drawable.ic_present);
+                replaceFragment(new Schedule());
+                break;
+            case "menu2":
+                this.menu1.setImageResource(R.drawable.ic_schedule);
+                this.menu2.setImageResource(R.drawable.ic_addcourse_selected);
+                this.menu3.setImageResource(R.drawable.ic_messenger);
+                this.menu4.setImageResource(R.drawable.ic_present);
+                replaceFragment(new FragGetCourses());
+                break;
+            case "menu3":
+                this.menu1.setImageResource(R.drawable.ic_schedule);
+                this.menu2.setImageResource(R.drawable.ic_addcourse);
+                this.menu3.setImageResource(R.drawable.ic_messenger_selected);
+                this.menu4.setImageResource(R.drawable.ic_present);
+                replaceFragment(new FragMessages1());
+                break;
+            case "menu4":
+                this.menu1.setImageResource(R.drawable.ic_schedule);
+                this.menu2.setImageResource(R.drawable.ic_addcourse);
+                this.menu3.setImageResource(R.drawable.ic_messenger);
+                this.menu4.setImageResource(R.drawable.ic_present_selected);
+                replaceFragment(new FragJustification1());
+                break;
+        }
     }
 }

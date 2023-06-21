@@ -1,7 +1,12 @@
 package com.example.educheck.Controleur.Dashboard;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,6 +18,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -69,7 +75,7 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
     private LinearLayout LinearLayoutView;
     private int weekNumber;
     private int year;
-    private Button seek, go;
+    private ImageButton seek, go;
     private DashboardImplementation dashboardImplementation;
     private TextView week, date;
     private EditText ade;
@@ -119,11 +125,51 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         spinYears.setAdapter(adapterDataParcour);
         seek.setOnClickListener(v -> updateSchedule());
         go.setOnClickListener(v -> sendRequest("getSchedule"));
+        ade.addTextChangedListener(watcher);
 
         createPlanningCells();
         return view;
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        JSONArray array = new JSONArray();
+        filter.forEach(cellule -> array.put(cellule.convertToJSONObject()));
+        editor.putString("cellules", array.toString());
+        editor.apply();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String s = preferences.getString("cellules", "");
+        if (s.length()>0)
+            reinitializeValueFilter(s);
+    }
+
+    private void reinitializeValueFilter(String save){
+        Log.d("TEST", "taille filter : " + filter.size());
+        try {
+            JSONArray array = new JSONArray(save);
+            for(int i = 0; i < array.length(); i++){
+                JSONObject celluleJson = array.getJSONObject(i);
+                JSONObject dateJson = celluleJson.getJSONObject("date");
+                Date2 date = new Date2(dateJson.getInt("hours"), dateJson.getInt("minutes"), dateJson.getInt("date"), dateJson.getInt("during"));
+                Cellule cellule = new Cellule(celluleJson.getString("summary"), celluleJson.getString("location"), celluleJson.getString("startHour"),
+                        celluleJson.getString("endHour"), date, celluleJson.getInt("color"));
+                filter.add(cellule);
+            }
+            createPlanningCells();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void saveParamSchedule(String week){
         String dataWeek[] = week.split(" ");
         this.weekNumber = Integer.parseInt(dataWeek[1]);
@@ -293,6 +339,9 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         switch (request){
             case "getSchedule":
                 dashboardImplementation.getSchedule(ade.getText().toString());
+                ade.setText("");
+                go.setBackgroundResource(R.drawable.shape_button_custom_desactived);
+                go.setEnabled(false);
                 break;
             case "update":
                 onTaskCompleted(null);
@@ -330,7 +379,6 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         Calendar instance = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy  'week :' ww");
         String formattedDate = sdf.format(instance.getTime());
-
         this.date.setText(formattedDate);
     }
     private int getWeekNumberDate(Date date){
@@ -338,4 +386,25 @@ public class Schedule extends Fragment implements AsyncTaskcallback {
         calendar.setTime(date);
         return calendar.get(Calendar.WEEK_OF_YEAR);
     }
+
+    private final TextWatcher watcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            go.setEnabled(ade.getText().length() > 7 && ade.getText().toString().startsWith("https//"));
+            if(go.isEnabled()){
+                go.setBackgroundResource(R.drawable.shape_button_custom);
+            }else{
+                go.setBackgroundResource(R.drawable.shape_button_custom_desactived);
+            }
+        }
+    };
 }

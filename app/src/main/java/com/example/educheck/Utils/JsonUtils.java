@@ -1,5 +1,7 @@
 package com.example.educheck.Utils;
 
+import com.example.educheck.Modele.Cours;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,5 +79,18 @@ public class JsonUtils {
             jsonArray.put(s);
         }
         return jsonArray;
+    }
+
+    public static JSONObject mapToJSONObject(String key, ArrayList<Cours> cours){
+        JSONArray array = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+        cours.forEach(cour -> array.put(cour.convertToJSONObject()));
+        try {
+            jsonObject.put(key, array);
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        return jsonObject;
     }
 }

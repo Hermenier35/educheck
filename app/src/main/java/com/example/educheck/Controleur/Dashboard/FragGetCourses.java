@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +77,7 @@ public class FragGetCourses extends Fragment implements AsyncTaskcallback {
             Cours course = new Cours(name, prof, credit);
             courseList.add(course);
         }
-        courseList.forEach(cours -> System.out.println(cours.toString()));
+        courseList.forEach(cours -> Log.d("COURS",cours.toString()));
         adapter_card = new CoursesAdapterCard(courseList);
         recyclerView.setAdapter(adapter_card);
     }

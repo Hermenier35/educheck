@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -34,7 +35,7 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
     private static final int NUM_PAGES = 2;
     public static ViewPager2 viewPager;
     public static FragmentStateAdapter pagerAdapter;
-    private String token;
+    public String token;
     private String request;
     private boolean valide;
     public static FragmentManager fragmentManager;
@@ -65,8 +66,7 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
             request = "getUniversity";
             dashboardRequest.getUniversity(token);
         }else{
-            pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this, AddUniversityFragment.newInstance(token, "p2"),
-                    DefaultPageFragment.newInstance(token, "p2"));
+            pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this, false, token);
             viewPager.setAdapter(pagerAdapter);
         }
 
@@ -99,8 +99,7 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
                     university = new University(response.getString("name"), response.getString("suffixe_student"),
                             response.getString("suffixe_teacher"), Base64.getDecoder().decode(response.getString("image")),
                             response.getString("_id"));
-                    pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this,
-                            ManagerUniversityFragment.newInstance(token, university), ManagerAcademicBackgroundsFragment.newInstance(token, university));
+                    pagerAdapter = new DashboardAdmin.ScreenSlidePagerAdapter(this,true ,token, university);
                     viewPager.setAdapter(pagerAdapter);
                     break;
                 default: System.err.println("Request not find");
@@ -124,19 +123,37 @@ public class DashboardAdmin extends AppCompatActivity implements AsyncTaskcallba
     }
 
     public static class ScreenSlidePagerAdapter extends FragmentStateAdapter {
-        private Fragment firstPage, secondPage;
-        public ScreenSlidePagerAdapter(FragmentActivity fa, Fragment page1, Fragment page2) {
+        Boolean valide;
+        String token;
+        University university;
+        public ScreenSlidePagerAdapter(FragmentActivity fa, Boolean valide, String token) {
             super(fa);
-            firstPage = page1;
-            secondPage = page2;
+            this.valide = valide;
+            this.token = token;
+        }
+
+        public ScreenSlidePagerAdapter(FragmentActivity fa, Boolean valide, String token, University university) {
+            super(fa);
+            this.valide = valide;
+            this.token = token;
+            this.university = university;
         }
 
         @Override
         public Fragment createFragment(int position) {
-            if(position==0)
-                return firstPage;
-            else
-                return secondPage;
+            if(valide) {
+                if (position == 0) {
+                    return ManagerUniversityFragment.newInstance(token, university);
+                } else {
+                    return ManagerAcademicBackgroundsFragment.newInstance(token, university);
+                }
+            }else{
+                if (position == 0) {
+                    return AddUniversityFragment.newInstance(token, "");
+                } else {
+                    return DefaultPageFragment.newInstance(token,"");
+                }
+            }
         }
 
         @Override

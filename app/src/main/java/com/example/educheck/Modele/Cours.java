@@ -28,6 +28,7 @@ public class Cours implements Serializable {
             jsonObject.put("name", getName());
             jsonObject.put("profName", getProfName());
             jsonObject.put("credit", getCredit());
+            jsonObject.put("_id",get_id());
         } catch (JSONException e) {
             e.printStackTrace();
         }

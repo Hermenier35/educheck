@@ -63,7 +63,7 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
 
         public TextView textViewName, textViewMail;
         public ImageView imageView;
-        public Button detail;
+        public ImageView detail;
         public ScrollView scrollView;
         public CheckBox checkBox;
         private RecyclerView recyclerView;
@@ -113,11 +113,11 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.StudentV
                 ViewGroup.LayoutParams params = scrollView.getLayoutParams();
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 this.scrollView.setVisibility(View.VISIBLE);
-                this.detail.setText("Hide");
+                this.detail.setImageResource(R.drawable.arrow_drop_up);
             }
             else {
                 this.scrollView.setVisibility(View.GONE);
-                this.detail.setText("Details");
+                this.detail.setImageResource(R.drawable.arrow_drop_down);
                 this.detail.setVisibility(View.VISIBLE);
             }
         }

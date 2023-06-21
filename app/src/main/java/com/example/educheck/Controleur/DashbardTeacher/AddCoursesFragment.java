@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,7 +39,8 @@ import java.util.ArrayList;
  * Use the {@link AddCoursesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
+public class
+AddCoursesFragment extends Fragment implements AsyncTaskcallback {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,7 +55,7 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
     private Spinner type, path;
     private String idPath;
     private EditText ects, teacher, name;
-    private Button add;
+    private ImageButton add;
     private DashboardImplementation dashboardImplementation;
     private ArrayList<AcademicBackground> academicBackgrounds;
     private ArrayList<String> dataParcours;
@@ -148,6 +150,7 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
 
         add.setOnClickListener(v -> sendRequest(ADD_COURSES));
         add.setEnabled(false);
+        add.setBackgroundResource(R.drawable.shape_button_custom_desactived);
 
         sendRequest(GET_ACADEMIC_BACKGROUNDS);
         return view;
@@ -190,6 +193,12 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        type.setSelection(0);
+    }
+
     private void initialisationSpinnerPath(String type){
         dataParcours.clear();
         dataParcours.add("Select");
@@ -227,6 +236,10 @@ public class AddCoursesFragment extends Fragment implements AsyncTaskcallback {
             if(ects.getText().length()>0)
                 credit = Integer.parseInt(ects.getText().toString());
             add.setEnabled(valueSpin && name.getText().length() > 2 && teacher.getText().length() > 3 && credit!=-1);
+            if(add.isEnabled())
+                add.setBackgroundResource(R.drawable.shape_button_custom);
+            else
+                add.setBackgroundResource(R.drawable.shape_button_custom_desactived);
         }
     };
 }

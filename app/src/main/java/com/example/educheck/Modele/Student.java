@@ -1,5 +1,11 @@
 package com.example.educheck.Modele;
 
+import com.example.educheck.Utils.JsonUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Student extends Users {
@@ -14,6 +20,31 @@ public class Student extends Users {
         this.justifies = new ArrayList<>();
     }
 
+
+    public JSONObject convertToJSONObject(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("paths", arrayListToJSONArray(getPaths()));
+            jsonObject.put("cours", arrayListToJSONArray(getCours()));
+            jsonObject.put("justifies", arrayListTJSONArray(getJustifies()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return JsonUtils.mergeJSONObjects(jsonObject, super.convertToJSONObject());
+    }
+
+
+    private JSONArray arrayListToJSONArray(ArrayList<String> object){
+        JSONArray array = new JSONArray();
+        object.forEach(s -> array.put(s));
+        return array;
+    }
+
+    private JSONArray arrayListTJSONArray(ArrayList<Justify> object){
+        JSONArray array = new JSONArray();
+        object.forEach(justify -> array.put(justify.convertToJSONObject()));
+        return array;
+    }
     public void addPath(String id){
         this.paths.add(id);
     }

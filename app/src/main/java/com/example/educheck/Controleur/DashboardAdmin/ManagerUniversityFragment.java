@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,8 +61,8 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
     private EditText NewSuffixStudent;
     private EditText NewSuffixTeacher;
     private ImageView NewLogo;
-    private Button btnSave;
-    private Button btnImportImage;
+    private ImageButton btnSave;
+    private ImageButton btnImportImage;
     private TextView NameOfUniversity;
 
     private ActivityResultLauncher<Void> galleryLauncher;
@@ -162,6 +163,17 @@ public class ManagerUniversityFragment extends Fragment implements AsyncTaskcall
         });
         return viewInflate;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
     private final TextWatcher  NameWatcher= new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

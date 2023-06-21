@@ -16,8 +16,10 @@
         android:gravity="center_horizontal"
         android:padding="10sp"
         android:textSize="22sp"
-        android:background="#D0B0F3"
+        android:background="@drawable/shape"
+        android:typeface="serif"
         android:textStyle="bold|italic"
+        android:textColor="@color/material_dynamic_neutral50"
         android:text="Check Presence Student" />
     <LinearLayout
             android:layout_width="match_parent"
@@ -28,15 +30,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30sp"
-                android:textSize="20sp"
-                android:text="Degree :" />
+                android:typeface="serif"
+                android:textSize="18sp"
+                android:text="Degree " />
 
             <Spinner
                 android:id="@+id/spinnerDegreeChoice"
-                android:layout_width="wrap_content"
+                android:layout_width="150sp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="150sp"
-                android:background="@color/gray_400"
+                android:layout_marginStart="120sp"
+                android:background="@drawable/shapespinner"
                 android:entries="@array/choices" />
     </LinearLayout>
     <LinearLayout
@@ -48,14 +51,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30sp"
-            android:textSize="20sp"
-            android:text="Career :"/>
+            android:textSize="18sp"
+            android:typeface="serif"
+            android:text="Career "/>
         <Spinner
             android:id="@+id/spinnerCareerChoice"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="153sp"
-            android:background="@color/gray_400"/>
+            android:layout_marginStart="123sp"
+            android:background="@drawable/shapespinner"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,19 +70,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30sp"
-            android:textSize="20sp"
-            android:text="Courses :"/>
+            android:textSize="18sp"
+            android:typeface="serif"
+            android:text="Courses "/>
         <Spinner
             android:id="@+id/spinnerCoursesChoice"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="140sp"
-            android:background="@color/gray_400"/>
+            android:layout_marginStart="112sp"
+            android:background="@drawable/shapespinner"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="320sp"
         android:layout_marginTop="15sp"
+        android:background="@drawable/shape_background_list_empty"
         android:layout_marginBottom="5sp">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -86,16 +92,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10sp"
-            android:layout_marginTop="24sp" />
+            android:layout_marginTop="24sp"
+            android:paddingBottom="20dp"/>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnAbsence"
-        android:layout_width="127dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12sp"
-        android:layout_marginEnd="100sp"
-        android:layout_marginStart="130sp"
-        android:text="Send" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ImageButton
+            android:id="@+id/btnSend"
+            android:layout_height="35dp"
+            android:layout_width="70sp"
+            android:layout_marginTop="12sp"
+            android:layout_marginEnd="100sp"
+            android:layout_marginStart="100sp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/send"
+            android:background="@drawable/shape_button_custom"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Controleur.DashboardAdmin.DefaultPageFragment"
-    android:background="?attr/colorPrimary">
+    android:background="@drawable/shape_dash">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -12,6 +12,8 @@
         android:layout_height="match_parent"
         android:text="You must add your university to access the courses page"
         android:textSize="25sp"
+        android:layout_margin="10sp"
+        android:typeface="serif"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:gravity="center"/>

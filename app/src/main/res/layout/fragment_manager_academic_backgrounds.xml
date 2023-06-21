@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -21,16 +21,18 @@
             android:textStyle="bold|italic"
             android:text="Add academic backgrounds"
             android:padding="10sp"
-            android:background="#D0B0F3"/>
+            android:background="@drawable/shape"/>
 
 
         <Spinner
             android:id="@+id/spinner_type_choice"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
             android:layout_marginTop="25sp"
             android:entries="@array/choices"
-            android:background="@color/gray_400"/>
+            android:background="@drawable/shapespinner"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,14 +45,18 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginStart="10sp"
+                android:typeface="serif"
                 android:textStyle="italic|bold"
-                android:text="Name :     " />
+                android:text="Name      " />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/addpathname"
+                android:textAlignment="center"
                 android:autofillHints="name"
+                android:layout_marginEnd="10sp"
+                android:background="@drawable/shapespinner"
                 android:hint="Name of academic background"
                 android:textSize="12sp"/>
 
@@ -59,6 +65,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
             android:orientation="horizontal">
 
             <TextView
@@ -66,7 +73,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="italic|bold"
-                android:text="Referent :"
+                android:typeface="serif"
+                android:text="Referent "
                 android:layout_marginStart="10sp"/>
 
 
@@ -75,23 +83,28 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/addpathreferentname"
                 android:autofillHints="emailAddress"
+                android:background="@drawable/shapespinner"
+                android:layout_marginEnd="10sp"
                 android:hint="referent email"
+                android:textAlignment="center"
                 android:textSize="12sp"/>
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/addpathbutton"
-            android:text="Add Path" />
+            android:layout_marginTop="10sp"
+            android:background="@drawable/shape_button_custom"
+            android:src="@drawable/add_circle" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50sp"
-            android:background="#D0B0F3"
+            android:background="@drawable/shape"
             android:gravity="center"
             android:padding="10sp"
             android:text="Settings academic backgrounds"
@@ -102,8 +115,10 @@
             android:id="@+id/spinner_acaback_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
             android:layout_marginTop="25sp"
-            android:background="@color/gray_400"/>
+            android:background="@drawable/shapespinner"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,7 +130,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="italic|bold"
-                android:text="Name :     "
+                android:typeface="serif"
+                android:text="Name      "
                 android:layout_marginStart="10sp"/>
 
             <EditText
@@ -123,6 +139,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editpathname"
                 android:autofillHints="name"
+                android:textAlignment="center"
+                android:background="@drawable/shapespinner"
+                android:layout_marginEnd="10sp"
                 android:hint="Name of academic background"
                 android:textSize="12sp"/>
 
@@ -131,14 +150,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="5sp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="italic|bold"
-                android:text="Referent :"
+                android:typeface="serif"
+                android:text="Referent "
                 android:layout_marginStart="10sp"/>
 
 
@@ -148,28 +169,37 @@
                 android:id="@+id/editpathreferentname"
                 android:autofillHints="emailAddress"
                 android:hint="referent email"
+                android:textAlignment="center"
+                android:background="@drawable/shapespinner"
+                android:layout_marginEnd="10sp"
                 android:textSize="12sp"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+            android:gravity="center|top"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10sp">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="35dp"
                 android:id="@+id/editpathbutton"
-                android:text="Edit Path"
+                android:src="@drawable/edit"
+                android:background="@drawable/shape_button_custom"
+                android:layout_marginBottom="130sp"
                 android:layout_marginEnd="5sp"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="35dp"
                 android:id="@+id/deletepathbutton"
-                android:text="Delete"
+                android:layout_marginBottom="130sp"
+                android:src="@drawable/delete"
+                android:background="@drawable/shape_button_custom"
                 android:layout_marginStart="5sp"/>
 
         </LinearLayout>

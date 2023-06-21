@@ -14,6 +14,7 @@
         android:gravity="center"
         android:padding="8dp"
         android:text="Welcome to Educheck"
+        android:typeface="serif"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold" />

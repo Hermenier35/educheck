@@ -1,7 +1,9 @@
 package com.example.educheck.Controleur.DashbardTeacher;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,6 +34,7 @@ import com.example.educheck.Modele.Justify;
 import com.example.educheck.Modele.Student;
 import com.example.educheck.Modele.University;
 import com.example.educheck.R;
+import com.example.educheck.Utils.JsonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -78,7 +84,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
     private ArrayList<AcademicBackground> academicBackgrounds;
     private ArrayList<Student> students;
     private ArrayList<Student> studentsFilter;
-    private Button btnSend;
+    private ImageButton btnSend;
     private RecyclerView listView;
     private PresentAdapter presentAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -121,7 +127,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
         View view = inflater.inflate(R.layout.fragment_present, container, false);
         spinnerCareer = view.findViewById(R.id.spinnerCareerChoice);
         spinnerCourses = view.findViewById(R.id.spinnerCoursesChoice);
-        btnSend=view.findViewById(R.id.btnAbsence);
+        btnSend=view.findViewById(R.id.btnSend);
         spinnerDegree = view.findViewById(R.id.spinnerDegreeChoice);
         listView = view.findViewById(R.id.listViewStudent);
 
@@ -157,8 +163,127 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
         sendRequest(GET_ACADEMIC_BACKGROUNDS);
 
         btnSend.setOnClickListener(v -> sendRequest(ADD_ABS));
+        btnSend.setEnabled(false);
+        btnSend.setBackgroundResource(R.drawable.shape_button_custom_desactived);
 
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        JSONArray array = new JSONArray();
+        students.forEach(student -> array.put(student.convertToJSONObject()));
+        editor.putString("students", array.toString());
+        JSONArray array1 = new JSONArray();
+        academicBackgrounds.forEach(academicBackground -> array1.put(academicBackground.convertToJSONObject()));
+        editor.putString("academicBackgrounds", array1.toString());
+        JSONArray array2 = new JSONArray();
+        allCourse.forEach((s, cours) -> array2.put(JsonUtils.mapToJSONObject(s,cours)));
+        editor.putString("allCourse", array2.toString());
+        editor.apply();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String students = preferences.getString("students", "");
+        String aca = preferences.getString("academicBackgrounds","");
+        String allCourse = preferences.getString("allCourse", "");
+        reinitializeValueOnPause(students, aca, allCourse);
+    }
+
+    private void reinitializeValueOnPause(String students, String academicBackgrounds, String allCourse){
+        if(students.length() > 0)
+            reinitializeStudent(students);
+        if(academicBackgrounds.length() > 0)
+            reinitialyzeAcademics(academicBackgrounds);
+        if(allCourse.length() > 0)
+            reinitialyseAllCourse(allCourse);
+        studentsFilter.addAll(this.students);
+        String typePath = spinnerDegree.getSelectedItem().toString();
+        if(!typePath.equals("Select")) {
+            initialisationSpinnerPath(typePath);
+            filterStudent("type", "");
+        }
+    }
+
+    private void reinitializeStudent(String students){
+        try {
+            JSONArray jsonArray = new JSONArray(students);
+            for(int i = 0; i< jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                JSONArray paths = jsonObject.getJSONArray("paths");
+                JSONArray cours = jsonObject.getJSONArray("cours");
+                JSONArray justifies = jsonObject.getJSONArray("justifies");
+                Student student = new Student(jsonObject.getString("firstName"), jsonObject.getString("lastName"), jsonObject.getString("mail"),
+                        jsonObject.getString("ine"), jsonObject.getString("ine"));
+                ArrayList<String> addPaths = new ArrayList<>();
+                ArrayList<String> addCours = new ArrayList<>();
+                ArrayList<Justify> addJustifies = new ArrayList<>();
+                for (int j = 0; j< paths.length(); j++){
+                    addPaths.add(paths.getString(j));
+                }
+                for (int j = 0; j< cours.length(); j++){
+                    addCours.add(cours.getString(0));
+                }
+                for (int j = 0; j< justifies.length(); j++){
+                    JSONObject justify = justifies.getJSONObject(j);
+                    Log.d("TEST", "justify number : " + j + " " + justify);
+                    if(justify.has("justifie"))
+                        addJustifies.add(new Justify(justify.getString("id"), justify.getString("mailStudent"), justify.getString("date"),
+                                justify.getString("nameCours"), justify.getString("justifie")));
+                    else
+                        addJustifies.add(new Justify(justify.getString("id"), justify.getString("mailStudent"), justify.getString("date"),
+                                justify.getString("nameCours"), ""));
+                }
+                student.getPaths().addAll(addPaths);
+                student.getCours().addAll(addCours);
+                student.getJustifies().addAll(addJustifies);
+                this.students.add(student);
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void reinitialyzeAcademics(String academicBackgrounds){
+        try {
+            JSONArray array = new JSONArray(academicBackgrounds);
+            for(int i = 0; i < array.length(); i++){
+                JSONObject object = array.getJSONObject(i);
+                Log.d("TEST", object.toString());
+                AcademicBackground academicBackground = new AcademicBackground(object.getString("pathName"), object.getString("type"), null,
+                        object.getString("_idPath"),"");
+                this.academicBackgrounds.add(academicBackground);
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void reinitialyseAllCourse(String allCourse){
+        try {
+            JSONArray array = new JSONArray(allCourse);
+            for(int i = 0; i < array.length(); i++){
+                JSONObject object = array.getJSONObject(i);
+                Iterator<String> keys = object.keys();
+                String key = keys.next();
+                JSONArray cours = object.getJSONArray(key);
+                ArrayList<Cours> listCours = new ArrayList<>();
+                for(int j = 0; j < cours.length(); j++){
+                    JSONObject courJson = cours.getJSONObject(j);
+                    Cours cour = new Cours(courJson.getString("name"), courJson.getString("profName"), courJson.getInt("credit"), courJson.getString("_id"));
+                    listCours.add(cour);
+                }
+                this.allCourse.put(key, listCours);
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -219,7 +344,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
                         if(abences.has("image"))
                             pdf = abences.getString("image");
                         Justify justify = new Justify(abences.getString("id_j"), abences.getString("mailStudent"), abences.getString("date"), abences.getString("nameCours"), abences.getString("justifie"), pdf);
-                        students.forEach(student -> addJustify(student, justify));
+                        students.stream().filter(student -> student.getMail().equals(justify.getMailStudent())).allMatch(student -> student.getJustifies().add(justify));
                     }
                 }
                 break;
@@ -252,12 +377,6 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
                 break;
         }
     }
-
-    private void addJustify(Student s, Justify justify){
-        if(s.getMail().equals(justify.getMailStudent()))
-            s.getJustifies().add(justify);
-    }
-
     private ArrayList<String> initSendDataAbs(){
         ArrayList<String> mails = new ArrayList<>();
         ArrayList<PresentAdapter.StudentViewHolder> studentViewHolders = presentAdapter.getViewHolders();
@@ -322,6 +441,13 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
                 !spinnerCourses.getSelectedItem().toString().equals("Select");
     }
 
+    private void changeDrawableButton(){
+        if(btnSend.isEnabled())
+            btnSend.setBackgroundResource(R.drawable.shape_button_custom);
+        else
+            btnSend.setBackgroundResource(R.drawable.shape_button_custom_desactived);
+    }
+
     private void setOnItemSelectedSpinnerListener(){
 
         spinnerDegree.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -334,6 +460,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
                 }
 
                 btnSend.setEnabled(isCourseSelected());
+                changeDrawableButton();
             }
 
             @Override
@@ -352,6 +479,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
                     filterStudent("path", idPath);
                 }
                 btnSend.setEnabled(isCourseSelected());
+                changeDrawableButton();
             }
 
             @Override
@@ -368,7 +496,7 @@ public class PresentFragment extends Fragment implements AsyncTaskcallback, Butt
                     filterStudent("course", idCourse);
                 }
                 btnSend.setEnabled(isCourseSelected());
-
+                changeDrawableButton();
             }
 
             @Override

@@ -40,11 +40,12 @@
             android:paddingHorizontal="10sp"
             android:text="" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send" />
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:src="@drawable/send"
+            android:background="@drawable/shape_button_custom"/>
 
         </LinearLayout>
 </LinearLayout>

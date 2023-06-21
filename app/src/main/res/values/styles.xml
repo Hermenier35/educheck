@@ -8,6 +8,7 @@
     <style name="TextAppearance.Randoomz.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">21sp</item>
         <item name="android:textStyle">italic</item>
+        <item name="android:typeface">serif</item>
     </style>
 
     <style name="ThemeOverlay.Randoomz.Toolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">

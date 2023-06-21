@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FAF3FE"
-    tools:context=".Controleur.Dashboard.FragJustification">
+    tools:context=".Controleur.Dashboard.DashBoardStudent">
 
     <TextView
         android:id="@+id/courseName"
@@ -18,9 +18,11 @@
         android:padding="10sp"
         android:layout_marginBottom="10sp"
         android:textSize="22sp"
-        android:background="#D0B0F3"
+        android:background="@drawable/shape"
         android:textStyle="bold|italic"
-        android:text=" Marks :"
+        android:text=" Marks "
+        android:textColor="@color/material_dynamic_neutral50"
+        android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -29,6 +31,7 @@
         android:id="@+id/marksTextView"
         android:layout_width="400sp"
         android:layout_height="491sp"
+        android:background="@drawable/shape_background_list_empty"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -1,5 +1,8 @@
 package com.example.educheck.Modele;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 public class Justify implements Serializable {
@@ -27,6 +30,21 @@ public class Justify implements Serializable {
         this.nameCours = nameCours;
         this.justifie = justifie;
         this.pdf = pdf;
+    }
+
+    public JSONObject convertToJSONObject(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id", getId());
+            jsonObject.put("mailStudent", getMailStudent());
+            jsonObject.put("date", getDate());
+            jsonObject.put("nameCours", getNameCours());
+            jsonObject.put("pdf", getPdf());
+            jsonObject.put("justifie", getJustifie());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     public String getId() {

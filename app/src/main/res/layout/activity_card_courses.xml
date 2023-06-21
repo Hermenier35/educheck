@@ -3,16 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="60dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginStart="10sp">
 
 
     <LinearLayout
         android:id="@+id/linearMail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="vertical"
-        android:background="#CCCCFF"
-        android:layout_margin="10sp">
+        android:background="@drawable/shape_card"
+        android:layout_marginBottom="5dp">
 
 
         <TextView
@@ -23,8 +25,9 @@
             android:layout_gravity="center"
             android:layout_toEndOf="@id/idIVCourseImage"
             android:text="visu"
+            android:typeface="serif"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:gravity="center"
             android:textStyle="italic" />
 
@@ -34,9 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:text="visu"
+            android:typeface="serif"
             android:layout_margin="2sp"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:gravity="center"
             android:textStyle="italic"/>
     </LinearLayout>

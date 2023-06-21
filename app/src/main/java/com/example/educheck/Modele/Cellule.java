@@ -2,6 +2,9 @@ package com.example.educheck.Modele;
 
 import android.graphics.Color;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Cellule {
     private String summary;
     private String location;
@@ -17,6 +20,21 @@ public class Cellule {
         this.endHour = endHour;
         this.date = date;
         this.color = color;
+    }
+
+    public JSONObject convertToJSONObject(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("summary", getSummary());
+            jsonObject.put("location", getLocation());
+            jsonObject.put("startHour", getStartHour());
+            jsonObject.put("endHour", getEndHour());
+            jsonObject.put("date", getDate().convertToJSONObject());
+            jsonObject.put("color", getColor());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     public void setAverageHour(int add){

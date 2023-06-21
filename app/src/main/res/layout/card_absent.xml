@@ -15,12 +15,14 @@
             android:id="@+id/textViewDate"
             android:layout_marginStart="15sp"
             android:layout_marginTop="1sp"
+            android:typeface="serif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textViewBoolJustify"
             android:layout_marginStart="15sp"
+            android:typeface="serif"
             android:layout_marginTop="1sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -40,6 +42,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnWatch"
             android:text="Watch"
+            android:typeface="serif"
             android:background="#00FFFFFF"
             android:layout_marginEnd="2sp"/>
 
@@ -47,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnAccept"
+            android:typeface="serif"
             android:background="#00FFFFFF"
             android:text="Accept"/>
     </LinearLayout>

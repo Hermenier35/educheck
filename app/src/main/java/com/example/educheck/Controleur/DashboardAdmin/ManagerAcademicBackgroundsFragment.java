@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -49,7 +50,7 @@ public class ManagerAcademicBackgroundsFragment extends Fragment implements Asyn
     private University university;
     private EditText nameAcaBackground, editNameAcaBackground;
     private EditText mailReferent, editMailReferent;
-    private Button buttonAddPath, editPath, delete;
+    private ImageButton buttonAddPath, editPath, delete;
     private Spinner spinner, spinChoiceParcour;
     private DashboardImplementation dashboardImplementation;
     private String request;

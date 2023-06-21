@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#CCCCFF"
+    android:background="@drawable/shape_card"
     android:padding="16sp"
     android:layout_margin="10sp">
 
@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:typeface="serif"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -23,12 +24,14 @@
             android:id="@+id/textDate"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
+            android:typeface="serif"
             android:layout_weight="1"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textTeacher"
             android:layout_width="0sp"
+            android:typeface="serif"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="14sp" />

@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +73,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
     private EditText eType, eTeacher, eMark;
     private AutoCompleteTextView emailStudent;
     private TextView filecsv;
-    private Button btnAddStudent, btnAddFile, btnAddMark;
+    private ImageButton btnAddStudent, btnAddFile, btnAddMark;
     private String request, idPath, idCourse, mailStudent;
     private Spinner spnType, spnAcaB, spnCour, spnStudent;
     private ArrayList<String> dataParcours, dataCourse, dataStudent, allStudent;
@@ -127,7 +128,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         spnType = view.findViewById(R.id.spinner_type_choice_teacher);
         spnAcaB = view.findViewById(R.id.spinner_acaback_name_teacher);
         spnCour = view.findViewById(R.id.spinner_course_name_teacher);
-        filecsv = view.findViewById(R.id.filecsv);
+        filecsv = view.findViewById(R.id.filecsvname);
         spnStudent = view.findViewById(R.id.spinner_type_choice_students);
         eType = view.findViewById(R.id.edittype);
         eTeacher = view.findViewById(R.id.editteacher);
@@ -183,7 +184,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                                 mails.add(line);
                         }
                         // Utilisez filePath comme chemin du fichier
-                        filecsv.setText("File .csv : " + documentFile.getName());
+                        filecsv.setText(" "+documentFile.getName());
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -199,6 +200,9 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         btnAddStudent.setEnabled(false);
         btnAddFile.setEnabled(false);
         btnAddMark.setEnabled(false);
+        btnAddStudent.setBackgroundResource(R.drawable.shape_button_custom_desactived);
+        btnAddFile.setBackgroundResource(R.drawable.shape_button_custom_desactived);
+        btnAddMark.setBackgroundResource(R.drawable.shape_button_custom_desactived);
         btnAddStudent.setOnClickListener(v -> initMails("btnAddStudent"));
         btnAddFile.setOnClickListener(v -> setAddFile());
         btnAddMark.setOnClickListener(v -> sendRequest(ADD_MARK));
@@ -285,6 +289,12 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        spnType.setSelection(0);
+    }
+
     private void filterStudent(String name, String id){
         dataStudent.clear();
         dataStudent.add("Select");
@@ -329,7 +339,6 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         dataCourse.clear();
         dataCourse.add("Select");
         if(allCourse.size()>0)
-            Log.d("TEST", "idPath :" + idPath);
             for (Cours cour : allCourse.get(idPath)){
                 Log.d("TEST", cour.getName());
                 dataCourse.add(cour.getName());
@@ -364,6 +373,7 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
     private void setAddFile(){
         if(mails.size()>0 && filecsv.getText().length()>15){
             sendRequest(POST_COURSES_STUDENT);
+            spnCour.setSelection(0);
         }else
             galleryLauncher.launch(null);
     }
@@ -391,6 +401,15 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
 
                 btnAddFile.setEnabled(isCourseSelected());
                 btnAddMark.setEnabled(isEnableAddMark());
+
+                if(btnAddFile.isEnabled())
+                    btnAddFile.setBackgroundResource(R.drawable.shape_button_custom);
+                else
+                    btnAddFile.setBackgroundResource(R.drawable.shape_button_custom_desactived);
+                if (btnAddMark.isEnabled())
+                    btnAddMark.setBackgroundResource(R.drawable.shape_button_custom);
+                else
+                    btnAddMark.setBackgroundResource(R.drawable.shape_button_custom_desactived);
             }
 
             @Override
@@ -410,6 +429,15 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                 }
                 btnAddFile.setEnabled(isCourseSelected());
                 btnAddMark.setEnabled(isEnableAddMark());
+
+                if(btnAddFile.isEnabled())
+                    btnAddFile.setBackgroundResource(R.drawable.shape_button_custom);
+                else
+                    btnAddFile.setBackgroundResource(R.drawable.shape_button_custom_desactived);
+                if (btnAddMark.isEnabled())
+                    btnAddMark.setBackgroundResource(R.drawable.shape_button_custom);
+                else
+                    btnAddMark.setBackgroundResource(R.drawable.shape_button_custom_desactived);
             }
 
             @Override
@@ -428,6 +456,15 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
                 spnStudent.setSelection(0);
                 btnAddFile.setEnabled(isCourseSelected());
                 btnAddMark.setEnabled(isEnableAddMark());
+
+                if(btnAddFile.isEnabled())
+                    btnAddFile.setBackgroundResource(R.drawable.shape_button_custom);
+                else
+                    btnAddFile.setBackgroundResource(R.drawable.shape_button_custom_desactived);
+                if (btnAddMark.isEnabled())
+                    btnAddMark.setBackgroundResource(R.drawable.shape_button_custom);
+                else
+                    btnAddMark.setBackgroundResource(R.drawable.shape_button_custom_desactived);
 
             }
 
@@ -474,6 +511,14 @@ public class AddStudentFragment extends Fragment implements AsyncTaskcallback {
         public void afterTextChanged(Editable editable) {
             btnAddStudent.setEnabled(Patterns.EMAIL_ADDRESS.matcher(emailStudent.getText()).matches());
             btnAddMark.setEnabled(isEnableAddMark());
+            if(btnAddStudent.isEnabled())
+                btnAddStudent.setBackgroundResource(R.drawable.shape_button_custom);
+            else
+                btnAddStudent.setBackgroundResource(R.drawable.shape_button_custom_desactived);
+            if (btnAddMark.isEnabled())
+                btnAddMark.setBackgroundResource(R.drawable.shape_button_custom);
+            else
+                btnAddMark.setBackgroundResource(R.drawable.shape_button_custom_desactived);
         }
     };
 }

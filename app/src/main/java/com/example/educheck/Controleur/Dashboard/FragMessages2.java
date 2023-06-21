@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.educheck.Modele.AcademicBackground;
@@ -37,7 +38,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
     private View view;
     private EditText messageToSend;
-    private Button buttonSend;
+    private ImageButton buttonSend;
 
     private Message message;
 
@@ -196,6 +197,7 @@ public class FragMessages2 extends Fragment implements AsyncTaskcallback {
 
             case "recMex":
                 sendRequest("recMex");
+                break;
         }
     }
 

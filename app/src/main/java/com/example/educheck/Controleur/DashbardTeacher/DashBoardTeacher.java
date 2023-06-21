@@ -11,9 +11,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.Switch;
 
 import com.example.educheck.Controleur.Dashboard.FragMessages1;
 import com.example.educheck.Controleur.Dashboard.FragMessages2;
@@ -38,7 +40,7 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
     public static FragmentStateAdapter pagerAdapter, pagerAdapter2;
     public static FragmentActivity fa;
     private DashboardImplementation dashboardImplementation;
-    private ImageView imgAddStudent, imgAddCourse, imgMessenger, imgPresent, imgSchedule;
+    private static ImageView imgAddStudent, imgAddCourse, imgMessenger, imgPresent, imgSchedule;
     private String request;
     private final String GET_UNIVERSITY = "getUniversity";
     private University university;
@@ -80,6 +82,7 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
 
     private void setCurrentItemAndAdapter(int position){
         viewPager.setCurrentItem(position);
+        ScreenSlidePagerAdapter.imageMenuAllBlackExcept("menu" + (position+1));
         viewPager.setAdapter(pagerAdapter);
     }
 
@@ -141,6 +144,7 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
 
         @Override
         public Fragment createFragment(int position) {
+            Log.d("POSITION", "position :" + position);
             switch(position){
                 case 0: return addStudentFragment;
                 case 1: return addCourseFragment;
@@ -153,6 +157,46 @@ public class DashBoardTeacher extends AppCompatActivity implements AsyncTaskcall
         @Override
         public int getItemCount() {
             return NUM_PAGES;
+        }
+
+        public static void imageMenuAllBlackExcept(String menu){
+            switch(menu){
+                case "menu1":
+                    imgAddStudent.setImageResource(R.drawable.ic_add_selected);
+                    imgAddCourse.setImageResource(R.drawable.ic_addcourse);
+                    imgMessenger.setImageResource(R.drawable.ic_messenger);
+                    imgPresent.setImageResource(R.drawable.ic_present);
+                    imgSchedule.setImageResource(R.drawable.ic_schedule);
+                    break;
+                case "menu2":
+                    imgAddStudent.setImageResource(R.drawable.ic_add);
+                    imgAddCourse.setImageResource(R.drawable.ic_addcourse_selected);
+                    imgMessenger.setImageResource(R.drawable.ic_messenger);
+                    imgPresent.setImageResource(R.drawable.ic_present);
+                    imgSchedule.setImageResource(R.drawable.ic_schedule);
+                    break;
+                case "menu3":
+                    imgAddStudent.setImageResource(R.drawable.ic_add);
+                    imgAddCourse.setImageResource(R.drawable.ic_addcourse);
+                    imgMessenger.setImageResource(R.drawable.ic_messenger_selected);
+                    imgPresent.setImageResource(R.drawable.ic_present);
+                    imgSchedule.setImageResource(R.drawable.ic_schedule);
+                    break;
+                case "menu4":
+                    imgAddStudent.setImageResource(R.drawable.ic_add);
+                    imgAddCourse.setImageResource(R.drawable.ic_addcourse);
+                    imgMessenger.setImageResource(R.drawable.ic_messenger);
+                    imgPresent.setImageResource(R.drawable.ic_present_selected);
+                    imgSchedule.setImageResource(R.drawable.ic_schedule);
+                    break;
+                case "menu5":
+                    imgAddStudent.setImageResource(R.drawable.ic_add);
+                    imgAddCourse.setImageResource(R.drawable.ic_addcourse);
+                    imgMessenger.setImageResource(R.drawable.ic_messenger);
+                    imgPresent.setImageResource(R.drawable.ic_present);
+                    imgSchedule.setImageResource(R.drawable.ic_schedule_selected);
+                    break;
+            }
         }
 
     }
