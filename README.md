@@ -1,4 +1,4 @@
-# Nom du projet: EduCheck
+# EduCheck
 
 ## Participants:
 - Pierre-Edouard Hermenier
@@ -9,9 +9,11 @@
 - Boumediene Islem Kara Ali
 
 ## Description:
-      EduCheck est une application android destinée aux étudiants et enseignants souhaitant regrouper
-      et simplifier leur relation sur des tâches communes telle qu'un accès rapide au planning,
-      consultation des notes, envoyer un justificatif d'absence, envoyer des messages entre enseignants-étudiants etc..
+      EduCheck est une application android destinée aux étudiants et <br />
+      enseignants souhaitant regrouper et simplifier leur relation sur <br />
+      des tâches communes telle qu'un accès rapide au planning,<br />
+      consultation des notes, envoyer un justificatif d'absence, <br /> 
+      envoyer des messages entre enseignants-étudiants etc..
 
 
 ## Fonctionnalités:
@@ -34,8 +36,8 @@
 ## Presentation:
 [EduCheck en vidéo](https://youtu.be/4HdhSxYarcI)
 
-
-Serveur: NodeJs(API REST)</br>
-BDD: MongoDB/ NoSQL </br>
-Application: Java </br>
-IDE: Android Studio </br>
+## Competences
+Serveur: NodeJs(API REST)<br />
+BDD: MongoDB/ NoSQL <br />
+Application: Java <br />
+IDE: Android Studio <br />
