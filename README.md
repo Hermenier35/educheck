@@ -9,9 +9,11 @@
 - Boumediene Islem Kara Ali
 
 ## Description
-      EduCheck est une application android destinée aux étudiants et enseignants souhaitant regrouper <br />
-      et simplifier leur relation sur des tâches communes telle qu'un accès rapide au planning,<br />
-      consultation des notes, envoyer un justificatif d'absence,  envoyer des messages entre enseignants-étudiants etc..
+      EduCheck est une application android destinée aux étudiants <br />
+      et enseignants souhaitant regrouper et simplifier leur relation <br />
+      sur des tâches communes telle qu'un accès rapide au planning,<br />
+      consultation des notes, envoyer un justificatif d'absence, <br />  
+      envoyer des messages entre enseignants-étudiants etc..
 
 
 ## Fonctionnalités:
