@@ -8,7 +8,7 @@
 - Meryem Berkaoui
 - Boumediene Islem Kara Ali
 
-## Description:
+## Description
       EduCheck est une application android destinée aux étudiants et <br />
       enseignants souhaitant regrouper et simplifier leur relation sur <br />
       des tâches communes telle qu'un accès rapide au planning,<br />
